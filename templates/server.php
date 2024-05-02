@@ -3,8 +3,8 @@
 <script>
 
 </script>
-<section>
-    <div class="server-header">
+<section class="server-container">
+    <div class="server-container__header">
         <div id="server-heading">
             <h1>Manage Servers</h1>
         </div>
