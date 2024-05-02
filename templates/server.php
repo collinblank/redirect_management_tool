@@ -1,5 +1,4 @@
-<?php
-?>
+<?php /* Template Name: Server */?>
 <script>
 
 </script>
