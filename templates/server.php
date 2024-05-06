@@ -8,10 +8,10 @@
         <button id="add-server-btn" class="display-modal-btn">Add Server</button>
     </div>
     <div class="modal">
-        <?php echo get_template_part('parts/forms/server-form'); ?>
-        <?php include 'server-form.php' ?>
+        <?php get_template_part('parts/forms/server-form'); ?>
     </div>
 </section>
+
 </html>
 
 <script>
