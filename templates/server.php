@@ -9,6 +9,7 @@
     </div>
     <div class="modal">
         <?php echo get_template_part('parts/forms/server-form'); ?>
+        <?php include 'server-form.php' ?>
     </div>
 </section>
 
