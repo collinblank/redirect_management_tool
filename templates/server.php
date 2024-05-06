@@ -12,7 +12,6 @@
         <?php include 'server-form.php' ?>
     </div>
 </section>
-
 </html>
 
 <script>
