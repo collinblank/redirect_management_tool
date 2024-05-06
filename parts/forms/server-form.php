@@ -46,17 +46,8 @@ try {
             </li>
         </ul>
         <div class="form__btns-container">
-            <button class="form__cancel-btn">Cancel</button>
+            <button class="form__cancel-btn toggle-modal-btn">Cancel</button>
             <button type="submit" class="form__submit-btn">Create</button>
         </div>
     </form>
 </div>
-
-<script>
-    const cancelBtn = document.querySelector('.form__cancel-btn');
-    const modal = document.querySelector('.modal')
-
-    cancelBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-    })
-</script>
