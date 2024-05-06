@@ -1,5 +1,5 @@
 <?php /* Template Name: Server */ ?>
-
+<html>
 <section class="server-container">
     <div class="server-container__header">
         <div id="server-heading">
@@ -11,6 +11,8 @@
         <?php echo get_template_part('parts/forms/server-form'); ?>
     </div>
 </section>
+
+</html>
 
 <script>
     const addServerBtn = document.getElementById('add-server-btn');
