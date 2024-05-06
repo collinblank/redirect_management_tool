@@ -18,11 +18,12 @@ $myUpdateChecker->setBranch('main');
 
 <?php
 // Enque custom Javascript functions to header
-function redirect_manager_custom_scripts()
+function redirect_manager_scripts_styles()
 {
-	wp_enqueue_script('custom', get_template_directory_uri() . '/src/js/custom.js');
+	wp_enqueue_style('custom-style', get_template_directory_uri() . '/src/css/custom-style.css');
+	wp_enqueue_script('custom-scripts', get_template_directory_uri() . '/src/js/custom-scripts.js');
 }
-add_action('wp_enqueue_scripts', 'redirect_manager_custom_scripts');
+add_action('wp_enqueue_scripts', 'redirect_manager_scripts_styles');
 
 
 

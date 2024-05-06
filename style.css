@@ -304,13 +304,3 @@ section {
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap;
 }
-
-.modal {
-  display: none;
-  border: 1px solid red;
-}
-
-.modal.active {
-  display: block;
-  border: 1px solid blue;
-}
