@@ -2,7 +2,12 @@
 global $wpdb;
 $results = $wpdb->get_results("SELECT * FROM Servers");
 
-echo $results;
+if ($results) {
+    echo "<script>console.log('Successfully retrieved results.');</script>";
+    echo "<script>console.log($results);</script>";
+} else {
+    echo "<script>console.log('Unable to retrieve results.');</script>";
+}
 ?>
 
 <ul class="server-list-view list-view">
