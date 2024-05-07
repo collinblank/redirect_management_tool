@@ -11,4 +11,3 @@
         <?php get_template_part('parts/forms/server-form'); ?>
     </div>
 </section>
-<?php get_footer(); ?>
