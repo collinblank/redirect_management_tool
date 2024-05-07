@@ -1,7 +1,7 @@
 
 <div class="form-container">
     <h3 class="form-container__title">Add Server</h3>
-    <form action="parts/forms/insert.php" method="post" class="form-container__form">
+    <form action="<?php echo get_template_directory_uri(); ?>/parts/forms/insert.php" method="post" class="form-container__form">
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name"><span>*</span>Server Name</label>
