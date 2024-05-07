@@ -1,10 +1,12 @@
 const modal = document.querySelector(".modal");
-const toggleModalBtn = document.querySelector(".toggle-modal-btn");
+const toggleModalBtns = document.querySelectorAll(".toggle-modal-btn");
 console.log("script called!");
 
-toggleModalBtn.addEventListener("click", function () {
-  toggleModal(modal);
-  console.log("button click works!");
+toggleModalBtns.forEach((btn) => {
+  btn.addEventListener("click", function () {
+    toggleModal(modal);
+    console.log("button click works!");
+  });
 });
 
 function toggleModal(modal) {
