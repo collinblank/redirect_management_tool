@@ -216,7 +216,7 @@ if (isset($_POST['submitserver'])) {
     );
     $table_name = 'Servers';
 
-    $result = $wpdb->inser($table_name, $data, $format=NULL);
+    $result = $wpdb->insert($table_name, $data, $format=NULL);
 
     if($result==1){
         echo "<script>console.log('Server Saved');</script>";
