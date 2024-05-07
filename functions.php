@@ -25,28 +25,6 @@ function redirect_manager_scripts_styles()
 }
 add_action('wp_enqueue_scripts', 'redirect_manager_scripts_styles');
 
-function my_save_custom_form() {
-    global $wpdb;
-	$name = $_POST['server-name'];
-	$domain = $_POST['server-domain'];
-    $wpdb->insert(
-        'Servers',
-        array( 'server-name' => $name, 
-		'server-domain' => $domain ),
-        array( '%s', '%s' ),
-    );
-
-    wp_redirect( site_url('/index.php/server/') ); // <-- here goes address of site that user should be redirected after submitting that form
-    die;
-}
-
-add_action( 'admin_post_nopriv_save_my_custom_form', 'my_save_custom_form' );
-add_action( 'admin_post_save_my_custom_form', 'my_save_custom_form' );
-
-
-
-
-
 // Default functions with blankslate theme below
 add_action('after_setup_theme', 'blankslate_setup');
 function blankslate_setup()
