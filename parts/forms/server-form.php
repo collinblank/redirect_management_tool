@@ -1,7 +1,8 @@
 
 <div class="form-container">
     <h3 class="form-container__title">Add Server</h3>
-    <form action="<?php echo get_template_directory_uri(); ?>/parts/forms/insert.php" method="post" class="form-container__form">
+    <form action="<?php echo esc_attr( admin_url('admin-post.php') ); ?>" method="POST" class="form-container__form">
+    <input type="hidden" name="action" value="save_my_custom_form" />
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name"><span>*</span>Server Name</label>
