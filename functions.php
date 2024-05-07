@@ -208,3 +208,19 @@ function blankslate_comment_count($count)
 		return $count;
 	}
 }
+
+if (isset($_POST['submitserver'])) {
+    $data = array(
+        'Name' => $_POST['server-name'],
+        'Domain' => $_POST['server-domain'],
+    );
+    $table_name = 'Servers';
+
+    $result = $wpdb->insert($table_name, $data, $format=NULL);
+
+    if($result==1){
+        echo "<script>console.log('Server Saved');</script>";
+    }else{
+        echo "<script>console.log('Unable to save Server');</script>";
+    }
+}

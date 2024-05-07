@@ -1,7 +1,7 @@
 
 <div class="form-container">
     <h3 class="form-container__title">Add Server</h3>
-    <form action="insert.php" method="POST" class="form-container__form">
+    <form role="form" method="POST" class="form-container__form">
     <!-- <input type="hidden" name="action" value="save_my_custom_form" /> -->
         <ul class="form__inputs-container">
             <li class="form__input-item">
@@ -15,7 +15,7 @@
         </ul>
         <div class="form__btns-container">
             <button class="form__cancel-btn toggle-modal-btn">Cancel</button>
-            <input type="submit" class="form__submit-btn" name="submit" value="Create" />
+            <input type="submit" class="form__submit-btn" name="submitserver" value="Create" />
         </div>
     </form>
 </div>
