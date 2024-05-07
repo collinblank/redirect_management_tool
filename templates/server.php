@@ -1,5 +1,5 @@
 <?php /* Template Name: Server */ ?>
-<html>
+<?php get_header(); ?>
 <section class="server-container">
     <div class="server-container__header">
         <div id="server-heading">
@@ -11,5 +11,4 @@
         <?php get_template_part('parts/forms/server-form'); ?>
     </div>
 </section>
-
-</html>
+<?php get_footer(); ?>
