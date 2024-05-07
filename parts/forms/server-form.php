@@ -1,8 +1,6 @@
-
 <div class="form-container">
     <h3 class="form-container__title">Add Server</h3>
     <form role="form" method="POST" class="form-container__form">
-    <!-- <input type="hidden" name="action" value="save_my_custom_form" /> -->
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name"><span>*</span>Server Name</label>
