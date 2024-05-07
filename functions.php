@@ -21,7 +21,7 @@ $myUpdateChecker->setBranch('main');
 function redirect_manager_scripts_styles()
 {
 	wp_enqueue_style('styles', get_stylesheet_directory_uri() . '/src/css/custom-style.css', array(), false, 'screen');
-	wp_enqueue_script('scripts', get_template_directory_uri() . '/src/js/custom-scripts.js', array(), false, true);
+	wp_enqueue_script('scripts', get_template_directory_uri() . '/src/js/custom-scripts.js', array(), false, array('strategy' => 'defer'));
 }
 add_action('wp_enqueue_scripts', 'redirect_manager_scripts_styles');
 
@@ -210,17 +210,17 @@ function blankslate_comment_count($count)
 }
 
 if (isset($_POST['submitserver'])) {
-    $data = array(
-        'Name' => $_POST['server-name'],
-        'Domain' => $_POST['server-domain'],
-    );
-    $table_name = 'Servers';
+	$data = array(
+		'Name' => $_POST['server-name'],
+		'Domain' => $_POST['server-domain'],
+	);
+	$table_name = 'Servers';
 
-    $result = $wpdb->insert($table_name, $data, $format=NULL);
+	$result = $wpdb->insert($table_name, $data, $format = NULL);
 
-    if($result==1){
-        echo "<script>console.log('Server Saved');</script>";
-    }else{
-        echo "<script>console.log('Unable to save Server');</script>";
-    }
+	if ($result == 1) {
+		echo "<script>console.log('Server Saved');</script>";
+	} else {
+		echo "<script>console.log('Unable to save Server');</script>";
+	}
 }
