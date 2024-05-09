@@ -7,4 +7,4 @@ get_template_part('templates/home');
 //     endwhile;
 // endif;
 // get_template_part('nav', 'below');
-// get_footer();
+get_footer();
