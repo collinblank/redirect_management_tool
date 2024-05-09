@@ -1,4 +1,5 @@
 <section id="home-page" class="page-section">
+    <p>What would you like to work on?</p>
     <?php
     wp_nav_menu(
         array(
