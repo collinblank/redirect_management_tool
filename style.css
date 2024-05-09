@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.43
+Version: 2024.1.44
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -49,6 +49,48 @@ ul {
 
 .page-section {
   height: 100%;
+}
+
+body {
+  background-color: #fff;
+  color: #18181b;
+}
+
+#home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+#home-page .main-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#home-page .menu-item {
+  transition: 0.1s ease-out;
+  background-color: #e4e4e7;
+  border: 1px solid #d4d4d8;
+  border-radius: 4px;
+}
+
+#home-page .menu-item:hover {
+  transform: scale(1.05);
+  background-color: #d4d4d8;
+  border-color: #a3a3a3;
+}
+
+#home-page .menu-item a {
+  display: flex;
+  justify-content: center;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.025rem;
+  color: #18181b;
 }
 
 /* END CUSTOM STYLES */
