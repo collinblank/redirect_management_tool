@@ -1,4 +1,4 @@
-<?php /* Template Name: Server */ ?>
+<?php /* Template Name: Servers */ ?>
 <?php get_header(); ?>
 <section class="page-section">
     <div class="page-section__header">
