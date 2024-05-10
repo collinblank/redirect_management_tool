@@ -31,10 +31,41 @@ body {
   color: #18181b;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  letter-spacing: 0.025rem;
+}
+
 ul {
   list-style: none;
 }
 
+/* Default button styles */
+.default-btn {
+  font-family: "Inter", sans-serif;
+  padding: 6px 12px;
+  border: 1px solid #d4d4d8;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.025rem;
+  color: #18181b;
+  background-color: #e4e4e7;
+  transition: 0.1s ease-out;
+}
+
+.default-btn:hover {
+  cursor: pointer;
+  background-color: #d4d4d8;
+  border-color: #a3a3a3;
+}
+
+/* Universal page layout */
 #wrapper {
   height: 100%;
   display: flex;
@@ -51,6 +82,9 @@ ul {
 
 .page-section {
   height: 100%;
+  /* 	height: 100vh; */
+  /* Leave height: 100%; uncommented for now while the header and footer are on each page */
+  padding: 48px 96px;
 }
 
 /* Home page */
@@ -89,6 +123,143 @@ ul {
   font-weight: 500;
   letter-spacing: 0.025rem;
   color: #18181b;
+}
+
+/* List view pages (Servers, Websites, Redirects, Redirect Flags) */
+.list-view-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list-view-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-view-container {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.list-view__item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d4d4d8;
+  border-radius: 4px;
+  padding: 12px 8px;
+  transition: 0.2s ease-out;
+}
+
+.list-view__item:hover {
+  background-color: #fafafa;
+  border-color: #a1a1aa;
+}
+
+.list-view__item__info {
+  flex-grow: 1;
+}
+/* give class of list-view__item__description */
+.list-view__item__description {
+  color: #71717a;
+}
+
+.modal {
+  display: none;
+}
+
+.modal.active {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+.form-container {
+  width: 480px;
+  min-height: 360px;
+  border: 1px solid #e4e4e7;
+  background-color: #fff;
+  padding: 48px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-container__title {
+  align-self: center;
+}
+
+.form,
+.form__inputs-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form__input-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.form__input-item label {
+  font-size: 0.8rem;
+  letter-spacing: 0.025rem;
+  font-weight: 600;
+}
+
+/* move the span after the label text */
+.form__input-item label span {
+  color: #ef4444;
+}
+
+.form__input-item input {
+  font-family: "Inter", sans-serif;
+  padding: 4px 2px;
+  border: 2px solid #e4e4e7;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #18181b;
+  outline: none;
+}
+
+.form__input-item input::placeholder {
+  color: #a1a1aa;
+}
+
+.form__input-item input:focus {
+  border: 2px solid #38bdf8;
+}
+
+.form__btns-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.form__submit-btn {
+  background-color: #e0f2fe;
+  border-color: #7dd3fc;
+  color: #0ea5e9;
+}
+
+.form__submit-btn:hover {
+  background-color: #bae6fd;
+  border-color: #38bdf8;
 }
 
 /* END CUSTOM STYLES */

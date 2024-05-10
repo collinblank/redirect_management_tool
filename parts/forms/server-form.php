@@ -1,19 +1,19 @@
 <div class="form-container">
     <h3 class="form-container__title">Add Server</h3>
-    <form role="form" method="POST" class="form-container__form">
+    <form role="form" method="POST" class="form">
         <ul class="form__inputs-container">
             <li class="form__input-item">
-                <label for="server-name"><span>*</span>Server Name</label>
+                <label for="server-name">Server Name<span>*</span></label>
                 <input type="text" id="server-name" name="server-name" placeholder="ex. Classical Conversations Production" required>
             </li>
             <li class="form__input-item">
-                <label for="server-domain"><span>*</span>Server Domain</label>
+                <label for="server-domain">Server Domain<span>*</span></label>
                 <input type="text" id="server-domain" name="server-domain" placeholder="ex. https://classicalconversations.com:7080/login.php" required>
             </li>
         </ul>
         <div class="form__btns-container">
-            <button class="form__cancel-btn toggle-modal-btn">Cancel</button>
-            <input type="submit" class="form__submit-btn" name="submitserver" value="Create" />
+            <button class="default-btn form__cancel-btn toggle-modal-btn">Cancel</button>
+            <input type="submit" class="default-btn form__submit-btn" name="submitserver" value="Create" />
         </div>
     </form>
 </div>
