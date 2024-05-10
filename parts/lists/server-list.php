@@ -19,9 +19,9 @@ if ($results) {
                 <p class="list-view__item__description"><?php echo $server->Domain; ?></p>
             </div>
             <div class="list-view__item__btns-container">
-                <button class="default-btn edit-btn"><img src="../../src/assets/icons/edit.svg" alt="edit icon"></button>
-                <button class="default-btn disable-btn"><img src="../../src/assets/icons/x-octagon.svg" alt="x stop sign icon"></button>
-                <button class="default-btn view-more-btn">View Sites<img src="../../src/assets/icons/arrow-right.svg" alt="right arrow icon"></button>
+                <button class="default-btn edit-btn"><img src="src/assets/icons/edit.svg" alt="edit icon"></button>
+                <button class="default-btn disable-btn"><img src="src/assets/icons/x-octagon.svg" alt="x stop sign icon"></button>
+                <button class="default-btn view-more-btn">View Sites<img src="src/assets/icons/arrow-right.svg" alt="right arrow icon"></button>
             </div>
         <?php } ?>
 </ul>
