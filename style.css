@@ -45,6 +45,10 @@ ul {
   list-style: none;
 }
 
+/* CSS global variables to go here */
+:root {
+}
+
 /* Default button styles */
 .default-btn {
   font-family: "Inter", sans-serif;
