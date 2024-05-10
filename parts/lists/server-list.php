@@ -10,19 +10,18 @@ if ($results) {
 }
 ?>
 
-<ul class="server-list-view list-view">
+<ul class="list-view">
     <?php
     foreach ($results as $server) { ?>
         <li class="list-view__item">
             <div class="list-view__item__info">
                 <h4><?php echo $server->Name; ?></h4>
-                <p><?php echo $server->Domain; ?></p>
+                <p class="list-view__item__description"><?php echo $server->Domain; ?></p>
             </div>
-            <!-- <div class="list-view__item__btns-container">
-                <button>Edit</button>
-                <button>Disable</button>
-                <button>View Sites</button>
-            </div> -->
-        </li>
-    <?php } ?>
+            <div class="list-view__item__btns-container">
+                <button class="default-btn edit-btn"><img src="../../src/assets/icons/edit.svg" alt="edit icon"></button>
+                <button class="default-btn disable-btn"><img src="../../src/assets/icons/x-octagon.svg" alt="x stop sign icon"></button>
+                <button class="default-btn view-more-btn">View Sites<img src="../../src/assets/icons/arrow-right.svg" alt="right arrow icon"></button>
+            </div>
+        <?php } ?>
 </ul>
