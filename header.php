@@ -25,10 +25,10 @@ if (str_contains($page_title, "Private: ")) {
     <div id="wrapper" class="hfeed">
         <header id="header" role="banner">
             <nav class="nav">
-                <a href="<?php echo get_home_url(); ?>"><i class="fa-solid fa-house"></i></a>
+                <a class="nav__link" href="<?php echo get_home_url(); ?>"><i class="fa-solid fa-house"></i></a>
                 <?php
                 if (!is_front_page()) { ?>
-                    <a class="nav-link" href="<?php echo get_page_link(); ?>"><?php echo $page_title; ?></a>
+                    <a class="nav__link" href="<?php echo get_page_link(); ?>"><?php echo $page_title; ?></a>
                 <?php }
                 ?>
             </nav>
