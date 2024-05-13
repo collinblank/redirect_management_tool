@@ -17,6 +17,7 @@ if ($results) {
             <div class="list-view__item__info">
                 <h4><?php echo $server->Name; ?></h4>
                 <p class="list-view__item__description"><?php echo $server->Domain; ?></p>
+                <p><?php echo get_template_directory_uri() ?></p>
             </div>
             <div class="list-view__item__btns-container">
                 <button class="default-btn edit-btn"><img src="../../src/assets/icons/edit.svg"></button>
