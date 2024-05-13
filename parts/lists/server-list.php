@@ -9,7 +9,7 @@ if ($results) {
     echo "<script>console.log('Unable to retrieve results.');</script>";
 }
 
-$icons_path = get_template_directory_uri() . '/redirect_management_tool/src/assets/icons/'
+$icons_path = '/redirect_management_tool/src/assets/icons/'
 ?>
 
 <ul class="list-view">
