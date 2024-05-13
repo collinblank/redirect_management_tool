@@ -9,7 +9,7 @@ if ($results) {
     echo "<script>console.log('Unable to retrieve results.');</script>";
 }
 
-$icons_path = '/redirect_management_tool/src/assets/icons/'
+$icons_path = 'redirect_management_tool/src/assets/icons/'
 ?>
 
 <ul class="list-view">
@@ -21,9 +21,9 @@ $icons_path = '/redirect_management_tool/src/assets/icons/'
                 <p class="list-view__item__description"><?php echo $server->Domain; ?></p>
             </div>
             <div class="list-view__item__btns-container">
-                <button class="default-btn edit-btn"><img src="<?php $icons_path . 'edit.svg' ?>"></button>
-                <button class="default-btn disable-btn"><img src="<?php $icons_path . 'x-octagon.svg' ?>" alt="x stop sign icon"></button>
-                <button class="default-btn view-more-btn">View Sites<img src="<?php $icons_path . 'right-arrow.svg' ?>" alt="right arrow icon"></button>
+                <button class="default-btn edit-btn"><img src="/redirect_management_tool/src/assets/icons/edit.svg"></button>
+                <button class="default-btn disable-btn"><img src="/wp-content/themes/redirect-management-tool/redirect_management_tool/src/assets/icons/x-octagon.svg" alt="x stop sign icon"></button>
+                <button class="default-btn view-more-btn">View Sites<img src="redirect_management_tool/src/assets/icons/edit.svg" alt="right arrow icon"></button>
             </div>
         <?php } ?>
 </ul>
