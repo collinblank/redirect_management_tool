@@ -20,8 +20,8 @@ if ($results) {
                 <p class="list-view__item__description"><?php echo $server->Domain; ?></p>
             </div>
             <div class="list-view__item__btns-container">
-                <button class="default-btn edit-btn"><i class="fa-regular fa-pen-to-square"></i></button>
-                <button class="default-btn disable-btn"><i class="fa-regular fa-circle-xmark"></i></button>
+                <button class="icon-btn"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="icon-btn disable-btn"><i class="fa-regular fa-circle-xmark"></i></button>
                 <button class="default-btn view-more-btn">View Sites<i class="fa-solid fa-arrow-right-long"></i></button>
             </div>
         <?php } ?>

@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.55
+Version: 2024.1.56
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -67,6 +67,25 @@ ul {
   cursor: pointer;
   background-color: #d4d4d8;
   border-color: #a3a3a3;
+}
+
+/* Icon button styles */
+.icon-btn {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 2px;
+  color: #71717a;
+  transition: 0.1s ease-out;
+}
+
+.icon-btn:hover {
+  background: none;
+  color: #18181b;
+}
+
+.icon-btn i {
+  font-size: 1.2rem;
 }
 
 /* Universal page layout */
@@ -139,7 +158,9 @@ ul {
 .list-view-page__header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: end;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d4d4d8;
 }
 
 .list-view-container {
@@ -174,6 +195,31 @@ ul {
 
 .list-view__item__description {
   color: #71717a;
+}
+
+.list-view__item__btns-container {
+  display: flex;
+  gap: 8px;
+}
+
+.list-view__item__btns-container .disable-btn:hover {
+  color: #ef4444;
+}
+
+.list-view__item__btns-container .view-more-btn {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.list-view__item__btns-container .view-more-btn i {
+  font-size: 1rem;
+  transition: transform 0.2s ease-out;
+}
+
+.list-view__item__btns-container .view-more-btn:hover i {
+  transform: translateX(2px);
 }
 
 .modal {
