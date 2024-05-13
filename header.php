@@ -17,34 +17,26 @@
     <?php wp_body_open(); ?>
     <div id="wrapper" class="hfeed">
         <header id="header" role="banner">
-            <div id="branding">
-                <div id="site-title" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-                    <?php
-                    if (is_front_page() || is_home() || is_front_page() && is_home()) {
-                        echo '<h1>';
-                    }
-                    echo '<a href="' . esc_url(home_url('/')) . '" title="' . esc_attr(get_bloginfo('name')) . '" rel="home" itemprop="url"><span itemprop="name">' . esc_html(get_bloginfo('name')) . '</span></a>';
-                    if (is_front_page() || is_home() || is_front_page() && is_home()) {
-                        echo '</h1>';
-                    }
-                    ?>
-                </div>
-                <div id="site-description" <?php if (!is_single()) {
-                                                echo ' itemprop="description"';
-                                            } ?>><?php bloginfo('description'); ?></div>
-            </div>
-            <nav id="menu" role="navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+            <nav class="nav">
+                <a href="<?php echo get_home_url(); ?>"><i class="fa-regular fa-house"></i></a>
                 <?php
-                wp_nav_menu(
-                    array(
-                        'menu' => 'Main Menu',
-                        'container' => 'div',
-                        'container_class' => 'main-menu-container',
-                        'menu_class' => 'main-menu'
-                    )
-                );
+                if (!is_front_page()) { ?>
+                    <a class="nav-link" href="<?php echo get_page_link() ?>"><?php echo get_the_title() ?></a>
+                <?php }
                 ?>
             </nav>
+            <!-- <nav id="menu" role="navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                <?php
+                // wp_nav_menu(
+                //     array(
+                //         'menu' => 'Main Menu',
+                //         'container' => 'div',
+                //         'container_class' => 'main-menu-container',
+                //         'menu_class' => 'main-menu'
+                //     )
+                // );
+                ?>
+            </nav> -->
         </header>
         <div id="container">
             <main id="content" role="main">
