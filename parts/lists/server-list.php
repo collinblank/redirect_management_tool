@@ -8,6 +8,8 @@ if ($results) {
 } else {
     echo "<script>console.log('Unable to retrieve results.');</script>";
 }
+
+$icons_path = get_template_directory_uri() . '/redirect_management_tool/src/assets/icons/'
 ?>
 
 <ul class="list-view">
@@ -17,12 +19,11 @@ if ($results) {
             <div class="list-view__item__info">
                 <h4><?php echo $server->Name; ?></h4>
                 <p class="list-view__item__description"><?php echo $server->Domain; ?></p>
-                <p><?php echo get_template_directory_uri() ?></p>
             </div>
             <div class="list-view__item__btns-container">
-                <button class="default-btn edit-btn"><img src="../../src/assets/icons/edit.svg"></button>
-                <button class="default-btn disable-btn"><img src="../../src/assets/icons//x-octagon.svg" alt="x stop sign icon"></button>
-                <button class="default-btn view-more-btn">View Sites<img src="../../src/assets/icons/arrow-right.svg" alt="right arrow icon"></button>
+                <button class="default-btn edit-btn"><img src="<?php $icons_path . 'edit.svg' ?>"></button>
+                <button class="default-btn disable-btn"><img src="<?php $icons_path . 'x-octagon.svg' ?>" alt="x stop sign icon"></button>
+                <button class="default-btn view-more-btn">View Sites<img src="<?php $icons_path . 'right-arrow.svg' ?>" alt="right arrow icon"></button>
             </div>
         <?php } ?>
 </ul>
