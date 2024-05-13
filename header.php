@@ -1,3 +1,10 @@
+<?php
+$page_title = get_the_title();
+if (str_contains($page_title, "Private: ")) {
+    $page_title = str_replace("Private: ", "", $page_title);
+}
+?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> <?php blankslate_schema_type(); ?>>
 
@@ -18,10 +25,10 @@
     <div id="wrapper" class="hfeed">
         <header id="header" role="banner">
             <nav class="nav">
-                <a href="<?php echo get_home_url(); ?>"><i class="fa-regular fa-house"></i></a>
+                <a href="<?php echo get_home_url(); ?>"><i class="fa-solid fa-house"></i></a>
                 <?php
                 if (!is_front_page()) { ?>
-                    <a class="nav-link" href="<?php echo get_page_link() ?>"><?php echo get_the_title() ?></a>
+                    <a class="nav-link" href="<?php echo get_page_link(); ?>"><?php echo $page_title; ?></a>
                 <?php }
                 ?>
             </nav>
