@@ -1,15 +1,16 @@
 <?php /* Template Name: Servers */ ?>
+<?php
+$success = isset($_GET['success']) && $_GET['success'] == 1;
+?>
+
 <?php get_header(); ?>
 <section class="page-section list-view-page">
-    <?php
-    if (isset($_GET['success']) && $_GET['success'] == 1) {
-    ?> <div class="success-msg-container">
-            <p>A new server has been successfully created.</p>
-            <button class="icon-btn">
-                <i class="fa-solid fa-x"></i>
-            </button>
-        </div>
-    <?php }; ?>
+    <div class="success-msg <?php if ($success) echo "active" ?>">
+        <p>A new server has been successfully created.</p>
+        <button class="icon-btn success-msg__x-btn">
+            <i class="fa-solid fa-x"></i>
+        </button>
+    </div>
     <div class="list-view-page__header">
         <h1>Manage Servers</h1>
         <button id="add-server-btn" class="default-btn toggle-modal-btn">Add Server</button>

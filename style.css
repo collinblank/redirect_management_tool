@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.61
+Version: 2024.1.62
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -184,6 +184,26 @@ i {
   font-weight: 500;
   letter-spacing: 0.025rem;
   color: #18181b;
+}
+
+/* Success message */
+.success-msg {
+  display: none;
+}
+
+.success-msg.active {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 8px;
+  border: 1px solid #86efac;
+  border-radius: 4px;
+  background-color: #dcfce7;
+  color: #22c55e;
+}
+
+.success-msg__x-btn i {
+  font-size: 1rem;
 }
 
 /* List view pages (Servers, Websites, Redirects, Redirect Flags) */
