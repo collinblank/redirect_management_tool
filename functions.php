@@ -224,6 +224,10 @@ if (isset($_POST['submitserver'])) {
 
 	if ($result == 1) {
 		echo "<script>console.log('Server Saved');</script>";
+		// Redirect to prevent form resubmission
+		$new_url = add_query_arg('success', $result, get_permalink());
+		wp_redirect($new_url, 303);
+		exit;
 	} else {
 		echo "<script>console.log('Unable to save Server');</script>";
 	}
