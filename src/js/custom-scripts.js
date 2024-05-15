@@ -25,3 +25,32 @@ successMsgXBtn.addEventListener("click", () => {
   // This may just need to refresh the page back to /servers/ without query parameters
   successMsg.classList.remove("active");
 });
+
+const disableBtns = document.querySelectorAll(".disable-btn");
+disableBtns.forEach((btn) => {
+  btn.addEventListener("click", showDisableModal);
+});
+
+// Just for servers right now
+function showDisableModal(e) {
+  const itemId = e.target.closest(".list-view__item").dataset.itemId;
+  const params = `item_id=${itemId}`;
+  console.log(itemId);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "/src/requests/get-server.php", true);
+  xhr.setRequestHeader("Content-type", "application/json");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const data = JSON.parse(xhr.responseText);
+      console.log(data);
+      const disableModal = document.querySelector(".disable-modal");
+      toggleModal(disableModal);
+    } else {
+      console.error("Error:", xhr.statusText);
+    }
+  };
+
+  xhr.send(params);
+}

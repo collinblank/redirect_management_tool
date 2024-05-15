@@ -18,8 +18,14 @@ $success = isset($_GET['success']) && $_GET['success'] == 1;
     <div class="list-view-container">
         <?php get_template_part('parts/lists/server-list'); ?>
     </div>
-    <div class="modal">
-        <?php get_template_part('parts/forms/server-form'); ?>
+    <!-- disabled the add modal while working on disable modal, just because I need to change the event listeners to be more specific for each modal type -->
+    <!-- <div class="modal add-modal">
+        <?php
+        // get_template_part('parts/forms/server-form'); 
+        ?>
+    </div> -->
+    <div class="modal disable-modal">
+        <?php get_template_part('parts/modals/disable-server-modal'); ?>
     </div>
 </section>
 <?php get_footer(); ?>
