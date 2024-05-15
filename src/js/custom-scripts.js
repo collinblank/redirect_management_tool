@@ -38,7 +38,11 @@ function showDisableModal(e) {
   console.log(itemId);
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "/src/requests/get-server.php", true);
+  xhr.open(
+    "POST",
+    "/redirect_management_tool/src/requests/get-server.php",
+    true
+  );
   xhr.setRequestHeader("Content-type", "application/json");
 
   xhr.onload = function () {
@@ -54,3 +58,7 @@ function showDisableModal(e) {
 
   xhr.send(params);
 }
+
+// Notes:
+// For some reason the open url path isn't being found. This is what the site says leads to a 404: https://redirectmanager.classicaltesting.net/src/requests/get-server.php
+// might be missing the redirect_management_tool part
