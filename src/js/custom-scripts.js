@@ -38,11 +38,7 @@ function showDisableModal(e) {
   console.log(itemId);
 
   const xhr = new XMLHttpRequest();
-  xhr.open(
-    "POST",
-    "/wp-content/themes/redirect-management-tool/src/requests/get-server.php",
-    true
-  );
+  xhr.open("POST", "get-server.php", true);
   xhr.setRequestHeader("Content-type", "application/json");
 
   xhr.onload = function () {
