@@ -52,8 +52,8 @@ function showDisableModal(e) {
         console.log("Status is 200");
         const data = JSON.parse(xhr.responseText);
         console.log(data);
-        const disableModal = document.querySelector(".disable-modal");
-        toggleModal(disableModal);
+        // const disableModal = document.querySelector(".disable-modal");
+        // toggleModal(disableModal);
       } else {
         console.error("Error:", xhr.statusText);
       }
