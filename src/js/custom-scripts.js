@@ -34,31 +34,46 @@ disableBtns.forEach((btn) => {
 // Just for servers right now
 function showDisableModal(e) {
   const itemId = e.target.closest(".list-view__item").dataset.itemId;
-  const params = `item_id=${itemId}`;
+  // const params = `item_id=${itemId}`;
   console.log(itemId);
 
   const xhr = new XMLHttpRequest();
+
   xhr.open(
-    "POST",
-    "/wp-content/themes/redirect-management-tool/get-server.php",
+    "GET",
+    "/wp-content/themes/redirect-management-tool/get-server.php?item_id=" +
+      itemId,
     true
   );
-  xhr.setRequestHeader("Content-Type", "application/json");
 
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      console.log("Ready State is DONE");
-      if (xhr.status === 200) {
-        console.log("Status is 200");
-        const data = JSON.parse(xhr.responseText);
-        console.log(data);
-        // const disableModal = document.querySelector(".disable-modal");
-        // toggleModal(disableModal);
-      } else {
-        console.error("Error:", xhr.statusText);
-      }
-    }
+  xhr.onload = function () {
+    console.log(this.responseText);
   };
+
+  xhr.send();
+
+  // POST REQUEST
+  // xhr.open(
+  //   "POST",
+  //   "/wp-content/themes/redirect-management-tool/get-server.php",
+  //   true
+  // );
+  // xhr.setRequestHeader("Content-Type", "application/json");
+
+  // xhr.onreadystatechange = function () {
+  //   if (xhr.readyState === XMLHttpRequest.DONE) {
+  //     console.log("Ready State is DONE");
+  //     if (xhr.status === 200) {
+  //       console.log("Status is 200");
+  //       const data = JSON.parse(xhr.responseText);
+  //       console.log(data);
+  //       // const disableModal = document.querySelector(".disable-modal");
+  //       // toggleModal(disableModal);
+  //     } else {
+  //       console.error("Error:", xhr.statusText);
+  //     }
+  //   }
+  // };
   // xhr.onload = function () {
   //   if (xhr.status === 200) {
   //     const data = JSON.parse(xhr.responseText);
@@ -70,7 +85,7 @@ function showDisableModal(e) {
   //   }
   // };
 
-  xhr.send(params);
+  // xhr.send(params);
 }
 
 // Notes:
