@@ -4,7 +4,6 @@ $results = $wpdb->get_results("SELECT * FROM Servers");
 
 if ($results) {
     echo "<script>console.log('Successfully retrieved results.');</script>";
-    echo "<script>console.log($results);</script>";
 } else {
     echo "<script>console.log('Unable to retrieve results.');</script>";
 }
