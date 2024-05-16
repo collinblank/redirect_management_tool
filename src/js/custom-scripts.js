@@ -43,18 +43,32 @@ function showDisableModal(e) {
     "/wp-content/themes/redirect-management-tool/get-server.php",
     true
   );
-  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.setRequestHeader("Content-Type", "application/json");
 
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const data = JSON.parse(xhr.responseText);
-      console.log(data);
-      const disableModal = document.querySelector(".disable-modal");
-      toggleModal(disableModal);
-    } else {
-      console.error("Error:", xhr.statusText);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      console.log("Ready State is DONE");
+      if (xhr.status === 200) {
+        console.log("Status is 200");
+        const data = JSON.parse(xhr.responseText);
+        console.log(data);
+        const disableModal = document.querySelector(".disable-modal");
+        toggleModal(disableModal);
+      } else {
+        console.error("Error:", xhr.statusText);
+      }
     }
   };
+  // xhr.onload = function () {
+  //   if (xhr.status === 200) {
+  //     const data = JSON.parse(xhr.responseText);
+  //     console.log(data);
+  //     const disableModal = document.querySelector(".disable-modal");
+  //     toggleModal(disableModal);
+  //   } else {
+  //     console.error("Error:", xhr.statusText);
+  //   }
+  // };
 
   xhr.send(params);
 }
