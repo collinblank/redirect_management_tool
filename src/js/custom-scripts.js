@@ -38,7 +38,7 @@ function showDisableModal(e) {
 
   const xhr = new XMLHttpRequest();
   const url =
-    "/wp-content/themes/redirect-management-tool/redirect_management_tool/get-server.php?item_id=" +
+    "/wp-content/themes/redirect-management-tool/get-server.php?item_id=" +
     itemId;
 
   xhr.open("GET", url, true);
