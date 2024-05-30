@@ -51,7 +51,12 @@ function showDisableModal(e) {
         const serverItem = JSON.parse(xhr.responseText);
         console.log(serverItem);
       } else {
-        console.error("Error: " + xhr.status);
+        // console.error("Error: " + xhr.status);
+        console.error("Request failed with status: " + xhr.status);
+        console.error("Status text: " + xhr.statusText);
+        console.error("Response text: " + xhr.responseText);
+        console.error("Ready state: " + xhr.readyState);
+        console.error("Response headers: " + xhr.getAllResponseHeaders());
       }
     }
   };
