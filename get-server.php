@@ -1,4 +1,5 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 if (isset($_GET['item_id'])) {
     global $wpdb;
