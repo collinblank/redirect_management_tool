@@ -80,7 +80,7 @@ function showDisableModal(item) {
         console.log("http request ok");
         const disableModal = xhr.responseText;
         console.log(disableModal);
-        mainContent.appendChild(disableModal);
+        mainContent.insertAdjacentHTML("beforeend", disableModal);
       } else {
         console.error("Request failed with status: " + xhr.status);
       }
