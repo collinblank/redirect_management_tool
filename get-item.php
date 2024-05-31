@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
-if (isset($_GET['table_name']) && isset($GET['item_id'])) {
+if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     global $wpdb;
 
     $item_id = intval($_GET['item_id']);
