@@ -24,8 +24,10 @@ $success = isset($_GET['success']) && $_GET['success'] == 1;
         // get_template_part('parts/forms/server-form'); 
         ?>
     </div> -->
-    <div class="modal disable-modal">
-        <?php get_template_part('parts/modals/disable-server-modal'); ?>
-    </div>
+    <!-- <div class="modal disable-modal">
+        <?php 
+        // get_template_part('parts/modals/disable-server-modal'); 
+        ?>
+    </div> -->
 </section>
 <?php get_footer(); ?>
