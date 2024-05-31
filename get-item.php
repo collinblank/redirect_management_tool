@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
-if (isset($_GET['item_id'])) {
+if (isset($_GET['table_name']) && isset($GET['item_id'])) {
     global $wpdb;
 
     $item_id = intval($_GET['item_id']);
@@ -14,8 +14,5 @@ if (isset($_GET['item_id'])) {
         echo json_encode($item);
     }
 } else {
-    echo "<script>console.log('Runs script but can't find the item id');</script>";
+    echo "Error: Runs script but can't find the item id";
 }
-
-
-
