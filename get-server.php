@@ -14,7 +14,7 @@ if (isset($_GET['item_id'])) {
         header('Content-Type: application/json');
         echo json_encode($server_item);
     }
-        echo "Error: Item not found."
+    echo "Error: Item not found.";
 } else {
     echo "<script>console.log('Runs script but can't find the item id');</script>";
 }
