@@ -4,8 +4,8 @@ $server_name = '';
 $server_domain = '';
 
 if (isset($_GET['server_name']) && isset($_GET['server_domain'])) {
-    $server_name = $GET['server_name'];
-    $server_domain = $GET['server_domain'];
+    $server_name = $_GET['server_name'];
+    $server_domain = $_GET['server_domain'];
 } else {
     $server_name = 'Cannot find server name';
     $server_domain = 'Cannot find server domain';
