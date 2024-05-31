@@ -35,7 +35,7 @@ disableBtns.forEach((btn) => {
 function handleDisableBtnClick(e) {
   const itemId = e.target.closest(".list-view__item").dataset.itemId;
   const tableName = "Servers";
-  const params = `?table_name=${tableName}&item_id${itemId}`;
+  const params = `?table_name=${tableName}&item_id=${itemId}`;
   const filePath = "/wp-content/themes/redirect-management-tool/get-item.php";
   const url = filePath + params;
   const xhr = new XMLHttpRequest();
