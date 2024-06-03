@@ -12,8 +12,8 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     $server = $wpdb->get_row($sql, ARRAY_A);
 
     if ($item) {
-        $server_name = $server->Name;
-        $server_domain = $server->Domain;
+        $server_name = $server['Name'];
+        $server_domain = $server['Domain'];
     }
 } else {
     echo "Error: Can't find item in database";
