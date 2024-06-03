@@ -9,21 +9,19 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     global $wpdb;
     $item_id = intval($_GET['item_id']);
     $table_name = $_GET['table_name'];
-    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE Id = %d", $item_id);
+    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
     $item = $wpdb->get_row($sql, ARRAY_A);
 
     if ($item) {
-        $item_name = $item['Name'];
-        if ($table_name == 'Servers' || $table_name == 'Websites') {
-            $item_info = $item['Domain'];
-            $item_type = strtolower(substr($table_name, 0, -1));
+        $item_name = $item['name'];
+        if ($table_name === 'servers' || $table_name === 'websites') {
+            $item_info = $item['domain'];
+            $item_type = substr($table_name, 0, -1);
         }
         // for websites and servers this is fine.
         // It'll be more complex logic to figure out what the item_info should be for redirect rules and redirect flags, 
         // and may involve connecting to multiple tables
     }
-} else {
-    echo "Error: can't connect to database";
 }
 ?>
 
