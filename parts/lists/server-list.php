@@ -10,7 +10,9 @@ if ($results) {
 
 ?>
 
-<ul class="list-view">
+<!-- try to refactor this to a generic list at some point -->
+
+<ul class="list-view" data-table-name="Servers">
     <?php
     foreach ($results as $server) { ?>
         <li class="list-view__item" data-item-id=<?php echo $server->Id; ?>>
@@ -19,7 +21,7 @@ if ($results) {
                 <p class="list-view__item__description"><?php echo $server->Domain; ?></p>
             </div>
             <div class="list-view__item__btns-container">
-                <button class="icon-btn edit-server-btn"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="icon-btn edit-btn"><i class="fa-regular fa-pen-to-square"></i></button>
                 <button class="icon-btn disable-btn"><i class="fa-regular fa-circle-xmark"></i></button>
                 <button class="default-btn view-more-btn">View Sites<i class="fa-solid fa-arrow-right-long"></i></button>
             </div>

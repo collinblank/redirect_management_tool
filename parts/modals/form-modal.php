@@ -3,19 +3,20 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 $form_file_path = 'parts/forms/';
 
-if (isset($_GET['item_type'])) {
-    $item_type = $_GET['item_type'];
-    switch ($item_type) {
-        case 'server':
+if (isset($_GET['table_name'])) {
+    $table_name = $_GET['table_name'];
+    switch ($table_name) {
+        case 'Servers':
             $form_file_path .= 'server-form';
             break;
-        case 'website':
+        case 'Websites':
             $form_file_path .= 'website-form';
             break;
-        case 'redirect_rule':
+            // below, not sure how these will be formatted yet, like with or without underscores
+        case 'Redirects':
             $form_file_path .= 'redirect-rule-form';
             break;
-        case 'redirect_flag':
+        case 'Redirect_Flags':
             $form_file_path .= 'redirect-flag-form';
             break;
         default:
@@ -27,9 +28,9 @@ if (isset($_GET['item_type'])) {
 
 <div class="modal add-modal">
     <?php
-    get_template_part('parts/forms/server-form');
+    // get_template_part('parts/forms/server-form');
     ?>
     <?php
-    // get_template_part($form_file_path); 
+    get_template_part($form_file_path);
     ?>
 </div>
