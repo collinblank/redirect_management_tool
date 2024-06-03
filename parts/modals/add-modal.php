@@ -25,7 +25,9 @@ if (isset($_GET['item_type'])) {
 
 <div class="modal add-modal">
     <?php
-    // get_template_part('parts/forms/server-form'); 
+    get_template_part('parts/forms/server-form');
     ?>
-    <?php get_template_part($form_file_path); ?>
+    <?php
+    // get_template_part($form_file_path); 
+    ?>
 </div>
