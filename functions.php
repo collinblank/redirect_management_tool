@@ -215,21 +215,21 @@ function blankslate_comment_count($count)
 // Submit server form data to database table
 if (isset($_POST['submitserver'])) {
 	$data = array(
-		'Name' => $_POST['server-name'],
-		'Domain' => $_POST['server-domain'],
+		'name' => $_POST['server-name'],
+		'domain' => $_POST['server-domain'],
 	);
-	$table_name = 'Servers';
+	$table_name = 'servers';
 
 	$result = $wpdb->insert($table_name, $data, $format = NULL);
 
 	if ($result == 1) {
-		echo "<script>console.log('Server Saved');</script>";
+		echo "<script>console.log('Server saved');</script>";
 		// Redirect to prevent form resubmission
 		$new_url = add_query_arg('success', $result, get_permalink());
 		wp_redirect($new_url, 303);
 		exit;
 	} else {
-		echo "<script>console.log('Unable to save Server');</script>";
+		echo "<script>console.log('Unable to save server');</script>";
 	}
 }
 

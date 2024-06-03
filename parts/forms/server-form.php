@@ -8,12 +8,12 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     global $wpdb;
     $item_id = intval($_GET['item_id']);
     $table_name = $_GET['table_name'];
-    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE Id = %d", $item_id);
+    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
     $server = $wpdb->get_row($sql, ARRAY_A);
 
     if ($server) {
-        $server_name = $server['Name'];
-        $server_domain = $server['Domain'];
+        $server_name = $server['name'];
+        $server_domain = $server['domain'];
     }
 }
 ?>
