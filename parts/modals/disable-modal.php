@@ -13,9 +13,9 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     $item = $wpdb->get_row($sql, ARRAY_A);
 
     if ($item) {
-        $item_name = $item->Name;
+        $item_name = $item['Name'];
         if ($table_name == 'Servers' || $table_name == 'Websites') {
-            $item_info = $item->Domain;
+            $item_info = $item['Domain'];
             $item_type = strtolower(substr($table_name, 0, -1));
         }
         // for websites and servers this is fine.

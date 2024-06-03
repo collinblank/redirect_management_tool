@@ -32,7 +32,7 @@ cancelBtns.forEach((btn) => {
 // EVENT HANDLERS
 
 function handleAddItemBtnClick(e) {
-  const tableName = e.target.closest(".list-view").dataset.tableName;
+  const tableName = e.target.querySelector(".list-view").dataset.tableName;
   const filePath = "parts/modals/form-modal.php";
   const params = `?table_name=${tableName}`;
   showModal(filePath, params);
