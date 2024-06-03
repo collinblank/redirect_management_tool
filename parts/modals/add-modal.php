@@ -1,4 +1,6 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
+
 $form_file_path = 'parts/forms/';
 
 if (isset($_GET['item_type'])) {
