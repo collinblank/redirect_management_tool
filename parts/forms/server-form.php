@@ -11,7 +11,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE Id = %d", $item_id);
     $server = $wpdb->get_row($sql, ARRAY_A);
 
-    if ($item) {
+    if ($server) {
         $server_name = $server['Name'];
         $server_domain = $server['Domain'];
     }
