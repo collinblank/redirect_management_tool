@@ -12,7 +12,7 @@
             </li>
         </ul>
         <div class="form__btns-container">
-            <button class="default-btn form__cancel-btn cancel-btn">Cancel</button>
+            <button class="default-btn cancel-btn">Cancel</button>
             <input type="submit" class="default-btn form__submit-btn" name="submitserver" value="Create" />
         </div>
     </form>

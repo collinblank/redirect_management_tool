@@ -1,3 +1,9 @@
+<!-- 
+    Eventually refactor this to an if/else to determine
+    which type of item is being disabled
+    (i.e., website, server, redirect, redirect flag) 
+-->
+
 <?php
 
 $server_name = '';
@@ -13,7 +19,7 @@ if (isset($_GET['server_name']) && isset($_GET['server_domain'])) {
 
 ?>
 
-<div class="modal disable-modal active">
+<div class="modal disable-modal">
     <div class="disable-modal__content-container">
         <h3>Are you sure you want to delete this server?</h3>
         <p>This action cannot be undone.</p>
@@ -22,8 +28,8 @@ if (isset($_GET['server_name']) && isset($_GET['server_domain'])) {
             <p><?php echo $server_domain; ?></p>
         </div>
         <div class="btns-container">
-            <button class="default-btn toggle-modal-btn">Cancel</button>
-            <button>Delete</button>
+            <button class="default-btn cancel-btn">Cancel</button>
+            <input type="submit" class="default-btn form__submit-btn" name="disable-server" value="Disable" />
         </div>
     </div>
 </div>
