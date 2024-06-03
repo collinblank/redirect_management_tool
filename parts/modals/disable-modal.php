@@ -22,8 +22,6 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
         // It'll be more complex logic to figure out what the item_info should be for redirect rules and redirect flags, 
         // and may involve connecting to multiple tables
     }
-} else {
-    echo "Error: can't connect to database";
 }
 ?>
 

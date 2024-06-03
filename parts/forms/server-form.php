@@ -15,8 +15,6 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
         $server_name = $server['Name'];
         $server_domain = $server['Domain'];
     }
-} else {
-    echo "Error: Can't find item in database";
 }
 ?>
 
