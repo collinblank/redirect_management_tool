@@ -1,4 +1,5 @@
 <?php
+// This may be what is slowing down the modal popup:
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 $item_name = '';
