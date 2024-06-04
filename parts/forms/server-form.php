@@ -36,7 +36,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
         </ul>
         <div class="form__btns-container">
             <button class="default-btn cancel-btn">Cancel</button>
-            <input type="submit" class="default-btn form__submit-btn" name="submitserver" value="Create" />
+            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action ?>-server" value="Create" />
         </div>
     </form>
 </div>

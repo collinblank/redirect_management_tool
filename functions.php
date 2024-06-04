@@ -213,7 +213,7 @@ function blankslate_comment_count($count)
 // CUSTOM FUNCTIONS BELOW THIS LINE
 
 // Submit server form data to database table
-if (isset($_POST['submitserver'])) {
+if (isset($_POST['add-server'])) {
 	$data = array(
 		'name' => $_POST['server-name'],
 		'domain' => $_POST['server-domain'],
