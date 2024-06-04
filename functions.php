@@ -235,7 +235,7 @@ if (isset($_POST['add_server'])) {
 
 if (isset($_POST['disable_server'])) {
 	$table_name = 'servers';
-	$item_id = $_GET['item_id'];
+	$item_id = $_POST['item_id'];
 	$data = array(
 		'disabled' => 1
 	);
