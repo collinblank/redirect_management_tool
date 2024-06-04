@@ -3,12 +3,12 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 $action = $_GET['action'];
+$item_id = intval($_GET['item_id']) ?? null;
 $server_name = "";
 $server_domain = "";
 
-if ($action === 'edit' && isset($_GET['table_name']) && isset($_GET['item_id'])) {
+if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     global $wpdb;
-    $item_id = intval($_GET['item_id']);
     $table_name = $_GET['table_name'];
     $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
     $server = $wpdb->get_row($sql, ARRAY_A);
@@ -38,6 +38,9 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($_GET['item_id']))
         </ul>
         <div class="form__btns-container">
             <button class="default-btn cancel-btn">Cancel</button>
+            <?php if ($item_id) : ?>
+                <input type="hidden" name="item_id" value=<?php echo $item_id ?>>
+            <?php endif; ?>
             <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" />
         </div>
     </form>
