@@ -233,6 +233,30 @@ if (isset($_POST['add_server'])) {
 	}
 }
 
+if (isset($_POST['edit_server'])) {
+	$table_name = 'servers';
+	$item_id = $_POST['item_id'];
+	$data = array(
+		'name' => $_POST['server_name'],
+		'domain' => $_POST['server_domain'],
+	);
+	$where = array(
+		'id' => $item_id
+	);
+
+	$result = $wpdb->update($table_name, $data, $where);
+
+	if ($result == 1) {
+		echo "<script>console.log('Server edited');</script>";
+		// Redirect to prevent form resubmission
+		$new_url = add_query_arg('disabled', $item_id, get_permalink());
+		wp_redirect($new_url, 303);
+		exit;
+	} else {
+		echo "<script>console.log('Unable to edit server');</script>";
+	}
+}
+
 if (isset($_POST['disable_server'])) {
 	$table_name = 'servers';
 	$item_id = $_POST['item_id'];
@@ -248,7 +272,7 @@ if (isset($_POST['disable_server'])) {
 	if ($result == 1) {
 		echo "<script>console.log('Server disabled');</script>";
 		// Redirect to prevent form resubmission
-		$new_url = add_query_arg('disabled', $result, get_permalink());
+		$new_url = add_query_arg('disabled', $item_id, get_permalink());
 		wp_redirect($new_url, 303);
 		exit;
 	} else {
