@@ -29,16 +29,16 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($_GET['item_id']))
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
-                <input type="text" id="server-name" name="server-name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" required>
+                <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" required>
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
-                <input type="text" id="server-domain" name="server-domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" required>
+                <input type="text" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" required>
             </li>
         </ul>
         <div class="form__btns-container">
             <button class="default-btn cancel-btn">Cancel</button>
-            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "-server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" />
+            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" />
         </div>
     </form>
 </div>

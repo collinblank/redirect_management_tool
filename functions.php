@@ -213,12 +213,12 @@ function blankslate_comment_count($count)
 // CUSTOM FUNCTIONS BELOW THIS LINE
 
 // Submit server form data to database table
-if (isset($_POST['add-server'])) {
-	$data = array(
-		'name' => $_POST['server-name'],
-		'domain' => $_POST['server-domain'],
-	);
+if (isset($_POST['add_server'])) {
 	$table_name = 'servers';
+	$data = array(
+		'name' => $_POST['server_name'],
+		'domain' => $_POST['server_domain'],
+	);
 
 	$result = $wpdb->insert($table_name, $data, $format = NULL);
 
@@ -230,6 +230,29 @@ if (isset($_POST['add-server'])) {
 		exit;
 	} else {
 		echo "<script>console.log('Unable to save server');</script>";
+	}
+}
+
+if (isset($_POST['disable_server'])) {
+	$table_name = 'servers';
+	$item_id = $_GET['item_id'];
+	$data = array(
+		'disabled' => 1
+	);
+	$where = array(
+		'id' => $item_id
+	);
+
+	$result = $wpdb->update($table_name, $data, $where);
+
+	if ($result == 1) {
+		echo "<script>console.log('Server disabled');</script>";
+		// Redirect to prevent form resubmission
+		$new_url = add_query_arg('disabled', $result, get_permalink());
+		wp_redirect($new_url, 303);
+		exit;
+	} else {
+		echo "<script>console.log('Unable to disable server');</script>";
 	}
 }
 
