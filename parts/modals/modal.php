@@ -51,7 +51,9 @@ if (isset($_GET['action'])) {
 <script>
     const cancelBtn = document.querySelector('.cancel-btn');
     cancelBtn.addEventListener('click', () => {
-        const modal = document.querySelector('modal');
+        const modal = document.querySelector('.modal');
+        console.log(modal);
+        console.log('attempt to remove');
         modal.remove();
     })
 </script>
