@@ -34,8 +34,7 @@ document.addEventListener("click", (e) => {
 });
 
 function removeModal() {
-  const modal = document.querySelector(".modal");
-  console.log("attempt to remove");
+  const modal = document.querySelector(".modal-overlay");
   modal.remove();
 }
 
@@ -46,9 +45,6 @@ function showModal(actionType, e) {
   const params = `?action=${actionType}&table_name=${tableName}${
     itemId ? `&item_id=${itemId}` : ""
   }`;
-  console.log(tableName);
-  console.log(itemId);
-  console.log(params);
   const modalPath =
     "/wp-content/themes/redirect-management-tool/parts/modals/modal.php";
   const url = modalPath + params;
@@ -60,7 +56,6 @@ function showModal(actionType, e) {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         const modal = xhr.responseText;
-        console.log(modal);
         mainContent.insertAdjacentHTML("beforeend", modal);
       } else {
         console.error("Request failed with status: " + xhr.status);

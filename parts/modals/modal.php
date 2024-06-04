@@ -40,10 +40,12 @@ if (isset($_GET['action'])) {
 }
 ?>
 
-<div class="modal">
-    <?php if (!$error_msg) : ?>
-        <?php get_template_part($modal_content_path); ?>
-    <?php else : ?>
-        <?php echo "<p>$error_msg</p>" ?>
-    <?php endif; ?>
+<div class="modal-overlay">
+    <div class="modal <?php echo $action . "-modal" ?>">
+        <?php if (!$error_msg) : ?>
+            <?php get_template_part($modal_content_path); ?>
+        <?php else : ?>
+            <?php echo "<p>$error_msg</p>" ?>
+        <?php endif; ?>
+    </div>
 </div>

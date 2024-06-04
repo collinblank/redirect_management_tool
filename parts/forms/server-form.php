@@ -2,10 +2,11 @@
 // This may be what is slowing down the modal popup:
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
+$action = $_GET['action'];
 $server_name = "";
 $server_domain = "";
 
-if ($_GET['action'] === 'edit' && isset($_GET['table_name']) && isset($_GET['item_id'])) {
+if ($action === 'edit' && isset($_GET['table_name']) && isset($_GET['item_id'])) {
     global $wpdb;
     $item_id = intval($_GET['item_id']);
     $table_name = $_GET['table_name'];
@@ -20,22 +21,24 @@ if ($_GET['action'] === 'edit' && isset($_GET['table_name']) && isset($_GET['ite
 ?>
 
 
-<div class="form-container">
-    <h3 class="form-container__title">Add New Server</h3>
+<div class="form-container server-form-container">
+    <div class="form-container__heading">
+        <h3 class="form-container__title"><?php echo ucfirst($action) . "Server" ?></h3>
+    </div>
     <form role="form" method="POST" class="form">
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
-                <input type="text" id="server-name" name="server-name" placeholder="Classical Conversations Production" value="<?php echo $server_name ?>" required>
+                <input type="text" id="server-name" name="server-name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" required>
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
-                <input type="text" id="server-domain" name="server-domain" placeholder="https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" required>
+                <input type="text" id="server-domain" name="server-domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" required>
             </li>
         </ul>
         <div class="form__btns-container">
             <button class="default-btn cancel-btn">Cancel</button>
-            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action ?>-server" value="Create" />
+            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "-server" ?>" value="<?php $action === 'edit' ? 'Done' : 'Create' ?>" />
         </div>
     </form>
 </div>
