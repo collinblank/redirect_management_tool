@@ -37,7 +37,10 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
             <p class="confirm-disable__item__description"><?php echo $item_info; ?></p>
         </div>
         <div class="confirm-disable__btns-container">
-            <input type="submit" class="default-btn confirm-disable-btn" name="disable_<?php echo $item_type ?>" value="Disable" />
+            <form role="form" method="POST">
+                <input type="submit" class="default-btn confirm-disable-btn" name="disable_<?php echo $item_type ?>" value="Disable" />
+                <input type="hidden" name="item_id" value=<?php echo $item_id ?>>
+            </form>
             <button class="default-btn cancel-btn">Cancel</button>
         </div>
     </div>
