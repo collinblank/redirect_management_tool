@@ -26,15 +26,19 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
 }
 ?>
 
-<div class="confirm-disable-content">
-    <h3>Are you sure you want to delete this <?php echo $item_type ?>?</h3>
-    <p>This action cannot be undone.</p>
-    <div>
-        <h4><?php echo $item_name; ?></h4>
-        <p><?php echo $item_info; ?></p>
+<div class="confirm-disable-container">
+    <div class="confirm-disable__heading">
+        <h3>Disable <?php echo ucfirst($item_type) ?></h3>
+        <p>You are about to disable this server. Do you want to proceed?</p>
     </div>
-    <div class="btns-container">
-        <button class="default-btn cancel-btn">Cancel</button>
-        <input type="submit" class="default-btn form__submit-btn" name="disable-<?php echo $item_type ?>" value="Disable" />
+    <div class="confirm-disable__content">
+        <div class="confirm-disable__list-item">
+            <h4><?php echo $item_name; ?></h4>
+            <p class="confirm-disable__list-item__description"><?php echo $item_info; ?></p>
+        </div>
+        <div class="confirm-disable__btns-container">
+            <button class="default-btn cancel-btn">Cancel</button>
+            <input type="submit" class="default-btn confirm-disable-btn" name="disable-<?php echo $item_type ?>" value="Disable" />
+        </div>
     </div>
 </div>

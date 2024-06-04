@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.98
+Version: 2024.1.99
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -236,10 +236,13 @@ i {
 .list-view__item {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   border: 1px solid #d4d4d8;
   border-radius: 4px;
-  padding: 12px 8px;
+  padding: 6px 8px;
   transition: 0.2s ease-out;
+  gap: 6px;
 }
 
 .list-view__item:hover {
@@ -247,17 +250,15 @@ i {
   border-color: #a1a1aa;
 }
 
-.list-view__item__info {
-  flex-grow: 1;
-}
-
 .list-view__item__description {
   color: #71717a;
+  word-wrap: break-word;
 }
 
 .list-view__item__btns-container {
   display: flex;
   gap: 8px;
+  margin-left: auto;
 }
 
 .list-view__item__btns-container .disable-btn:hover {
@@ -280,7 +281,7 @@ i {
   transform: translateX(2px);
 }
 
-.modal {
+/* .modal {
   position: fixed;
   inset: 0;
   display: flex;
@@ -363,7 +364,7 @@ i {
 .form__submit-btn:hover {
   background-color: #bae6fd;
   border-color: #38bdf8;
-}
+} */
 
 /* END CUSTOM STYLES */
 
