@@ -32,7 +32,7 @@ function showModal(actionType, e) {
   const tableName = document.querySelector(".list-view").dataset.tableName;
   const itemId = e ? e.target.closest(".list-view__item").dataset.itemId : "";
   const params = `?action=${actionType}&table_name=${tableName}${
-    itemId ? "" : `&item_id=${itemId}`
+    itemId ? `&item_id=${itemId}` : ""
   }`;
   console.log(tableName);
   console.log(itemId);
