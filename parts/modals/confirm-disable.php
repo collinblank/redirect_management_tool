@@ -25,17 +25,15 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
 }
 ?>
 
-<div class="modal disable-modal">
-    <div class="disable-modal__content-container">
-        <h3>Are you sure you want to delete this <?php echo $item_type ?>?</h3>
-        <p>This action cannot be undone.</p>
-        <div>
-            <h4><?php echo $item_name; ?></h4>
-            <p><?php echo $item_info; ?></p>
-        </div>
-        <div class="btns-container">
-            <button class="default-btn cancel-btn">Cancel</button>
-            <input type="submit" class="default-btn form__submit-btn" name="disable-<?php echo $item_type ?>" value="Disable" />
-        </div>
+<div class="confirm-disable-content">
+    <h3>Are you sure you want to delete this <?php echo $item_type ?>?</h3>
+    <p>This action cannot be undone.</p>
+    <div>
+        <h4><?php echo $item_name; ?></h4>
+        <p><?php echo $item_info; ?></p>
+    </div>
+    <div class="btns-container">
+        <button class="default-btn cancel-btn">Cancel</button>
+        <input type="submit" class="default-btn form__submit-btn" name="disable-<?php echo $item_type ?>" value="Disable" />
     </div>
 </div>

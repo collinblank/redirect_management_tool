@@ -9,61 +9,34 @@ successMsgXBtn.addEventListener("click", () => {
 });
 
 const addServerBtn = document.getElementById("add-server-btn");
-addServerBtn.addEventListener("click", handleAddItemBtnClick);
-
-const disableBtns = document.querySelectorAll(".disable-btn");
-disableBtns.forEach((btn) => {
-  btn.addEventListener("click", handleDisableItemBtnClick);
+addServerBtn.addEventListener("click", () => {
+  showModal("add");
 });
 
 const editBtns = document.querySelectorAll(".edit-btn");
 editBtns.forEach((btn) => {
-  btn.addEventListener("click", handleEditItemBtnClick);
+  btn.addEventListener("click", (e) => {
+    showModal("edit", e);
+  });
 });
 
-// this doesn't work cause the modal appears after document and script are loaded
-const cancelBtns = document.querySelectorAll(".cancel-btn");
-cancelBtns.forEach((btn) => {
-  btn.addEventListener("click", removeModal);
+const disableBtns = document.querySelectorAll(".disable-btn");
+disableBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    showModal("disable", e);
+  });
 });
 
-// --------
-
-// EVENT HANDLERS
-
-function handleAddItemBtnClick() {
-  const tableName = document.querySelector(".list-view").dataset.tableName;
-  const filePath = "parts/modals/form-modal.php";
-  const params = `?table_name=${tableName}`;
-  showModal(filePath, params);
-}
-
-function handleEditItemBtnClick(e) {
-  const tableName = e.target.closest(".list-view").dataset.tableName;
-  const itemId = e.target.closest(".list-view__item").dataset.itemId;
-  const filePath = "parts/modals/form-modal.php";
-  const params = `?table_name=${tableName}&item_id=${itemId}`;
-  showModal(filePath, params);
-}
-
-function handleDisableItemBtnClick(e) {
-  const tableName = e.target.closest(".list-view").dataset.tableName;
-  const itemId = e.target.closest(".list-view__item").dataset.itemId;
-  const filePath = "parts/modals/disable-modal.php";
-  const params = `?table_name=${tableName}&item_id=${itemId}`;
-  showModal(filePath, params);
-}
-
-// SHOW/REMOVE MODALS
-function removeModal() {
-  const modal = document.querySelector(".modal");
-  modal.remove();
-}
-
-function showModal(modalFilePath, params = "") {
+function showModal(actionType, e) {
   const mainContent = document.getElementById("content");
-  const rootDir = "/wp-content/themes/redirect-management-tool/";
-  const url = rootDir + modalFilePath + params;
+  const tableName = document.querySelector(".list-view").dataset.tableName;
+  const itemId = e ? e.target.closest(".list-view__item").dataset.itemId : "";
+  const params = `?action=${actionType}&table_name=${tableName}${
+    itemId ? "" : `&item_id=${itemId}`
+  }`;
+  const modalPath =
+    "/wp-content/themes/redirect-management-tool/parts/modals/modal.php";
+  const url = modalPath + params;
   const xhr = new XMLHttpRequest();
 
   xhr.open("GET", url, true);
