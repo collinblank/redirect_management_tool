@@ -46,14 +46,13 @@ if (isset($_GET['action'])) {
     <?php else : ?>
         <?php echo "<p>$error_msg</p>" ?>
     <?php endif; ?>
+    <script>
+        const cancelBtn = document.querySelector('.cancel-btn');
+        cancelBtn.addEventListener('click', () => {
+            const modal = document.querySelector('.modal');
+            console.log(modal);
+            console.log('attempt to remove');
+            modal.remove();
+        })
+    </script>
 </div>
-
-<script>
-    const cancelBtn = document.querySelector('.cancel-btn');
-    cancelBtn.addEventListener('click', () => {
-        const modal = document.querySelector('.modal');
-        console.log(modal);
-        console.log('attempt to remove');
-        modal.remove();
-    })
-</script>
