@@ -47,13 +47,3 @@ if (isset($_GET['action'])) {
         <?php echo "<p>$error_msg</p>" ?>
     <?php endif; ?>
 </div>
-
-<script>
-    const modal = document.querySelector('.modal');
-    modal.addEventListener('click', (e) => {
-        if (e.target.classList.contains('cancel-btn')) {
-            console.log('attempt to remove');
-            modal.remove();
-        }
-    })
-</script>
