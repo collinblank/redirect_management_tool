@@ -23,7 +23,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($_GET['item_id']))
 
 <div class="form-container server-form-container">
     <div class="form-container__heading">
-        <h3 class="form-container__title"><?php echo ucfirst($action) . "Server" ?></h3>
+        <h3 class="form-container__title"><?php echo ucfirst($action) . " Server" ?></h3>
     </div>
     <form role="form" method="POST" class="form">
         <ul class="form__inputs-container">
@@ -38,7 +38,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($_GET['item_id']))
         </ul>
         <div class="form__btns-container">
             <button class="default-btn cancel-btn">Cancel</button>
-            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "-server" ?>" value="<?php $action === 'edit' ? 'Done' : 'Create' ?>" />
+            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "-server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" />
         </div>
     </form>
 </div>
