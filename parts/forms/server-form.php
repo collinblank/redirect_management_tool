@@ -5,8 +5,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 $server_name = "";
 $server_domain = "";
 
-// $_GET['action'] === 'edit' && 
-if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
+if ($_GET['action'] === 'edit' && isset($_GET['table_name']) && isset($_GET['item_id'])) {
     global $wpdb;
     $item_id = intval($_GET['item_id']);
     $table_name = $_GET['table_name'];

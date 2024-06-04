@@ -27,6 +27,18 @@ disableBtns.forEach((btn) => {
   });
 });
 
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("cancel-btn")) {
+    removeModal();
+  }
+});
+
+function removeModal() {
+  const modal = document.querySelector(".modal");
+  console.log("attempt to remove");
+  modal.remove();
+}
+
 function showModal(actionType, e) {
   const mainContent = document.getElementById("content");
   const tableName = document.querySelector(".list-view").dataset.tableName;
@@ -48,7 +60,7 @@ function showModal(actionType, e) {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         const modal = xhr.responseText;
-        // console.log(modal);
+        console.log(modal);
         mainContent.insertAdjacentHTML("beforeend", modal);
       } else {
         console.error("Request failed with status: " + xhr.status);
