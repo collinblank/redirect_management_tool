@@ -249,7 +249,7 @@ if (isset($_POST['edit_server'])) {
 	if ($result == 1) {
 		echo "<script>console.log('Server edited');</script>";
 		// Redirect to prevent form resubmission
-		$new_url = add_query_arg('disabled', $item_id, get_permalink());
+		$new_url = add_query_arg('edited', $item_id, get_permalink());
 		wp_redirect($new_url, 303);
 		exit;
 	} else {
