@@ -38,11 +38,11 @@ function removeModal() {
   modal.remove();
 }
 
-function showModal(actionType, e) {
+function showModal(action, e) {
   const mainContent = document.getElementById("content");
   const tableName = document.querySelector(".list-view").dataset.tableName;
   const itemId = e ? e.target.closest(".list-view__item").dataset.itemId : "";
-  const params = `?action=${actionType}&table_name=${tableName}${
+  const params = `?action=${action}&table_name=${tableName}${
     itemId ? `&item_id=${itemId}` : ""
   }`;
   const modalPath =
@@ -57,6 +57,10 @@ function showModal(actionType, e) {
       if (xhr.status === 200) {
         const modal = xhr.responseText;
         mainContent.insertAdjacentHTML("beforeend", modal);
+        if (action === "add" || action === "edit") {
+          // init form validation logic
+          initFormValidation(tableName);
+        }
       } else {
         console.error("Request failed with status: " + xhr.status);
       }
@@ -64,4 +68,38 @@ function showModal(actionType, e) {
   };
 
   xhr.send();
+}
+
+// FORM VALIDATION
+
+function initFormValidation(tableName) {
+  if (tableName === "servers") {
+    initServerFormValidation();
+  }
+
+  function initServerFormValidation() {
+    const serverNameInput = document.getElementById("server-name");
+    const serverDomainInput = document.getElementById("server-domain");
+
+    function checkServerName() {
+      if (!serverNameInput.validity.valid) {
+        console.log("Invalid input");
+        if (serverNameInput.validity.patternMismatch) {
+          console.log("Pattern mismatch");
+        }
+        if (serverNameInput.validity.tooLong) {
+          console.log("Too long");
+        }
+        if (serverNameInput.validity.tooShort) {
+          console.log("Too short");
+        }
+        if (serverNameInput.validity.valueMissing) {
+          console.log("Value missing on required element");
+        }
+      } else {
+        console.log("Input valid!");
+      }
+    }
+    serverNameInput.addEventListener("input", checkServerName);
+  }
 }

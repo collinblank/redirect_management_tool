@@ -20,7 +20,6 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
 }
 ?>
 
-
 <div class="form-container server-form-container">
     <div class="form-container__heading">
         <h3 class="form-container__title"><?php echo ucfirst($action) . " Server" ?></h3>
@@ -29,7 +28,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
-                <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" minlength="4" maxlength="50" pattern="^[A-Za-z]+$" required>
+                <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
@@ -45,31 +44,3 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         </div>
     </form>
 </div>
-
-<script>
-    // Form validation
-    const serverNameInput = document.getElementById('server-name');
-    const serverDomainInput = document.getElementById('server-domain');
-
-    function checkServerName() {
-        if (!serverNameInput.validity.valid) {
-            console.log('Invalid input')
-            if (serverNameInput.validity.patternMismatch) {
-                console.log('Pattern mismatch');
-            }
-            if (serverNameInput.validity.tooLong) {
-                console.log('Too long');
-            }
-            if (serverNameInput.validity.tooShort) {
-                console.log('Too short');
-            }
-            if (serverNameInput.validity.valueMissing) {
-                console.log('Value missing on required element');
-            }
-        } else {
-            console.log('Input valid!')
-        }
-    }
-
-    serverNameInput.addEventListener('input', checkServerName)
-</script>
