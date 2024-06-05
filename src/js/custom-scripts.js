@@ -100,6 +100,9 @@ function initFormValidation(tableName) {
         console.log("Input valid!");
       }
     }
-    serverNameInput.addEventListener("input", checkServerName);
+    serverNameInput.addEventListener("blur", () => {
+      checkServerName();
+      serverNameInput.addEventListener("input", checkServerName);
+    });
   }
 }
