@@ -82,9 +82,7 @@ function initFormValidation(tableName) {
     const serverDomainInput = document.getElementById("server-domain");
 
     function checkServerName() {
-      const msg = document.createElement("p");
-      msg.classList.add("form__input-item__msg");
-      serverNameInput.insertAdjacentElement("afterend", msg);
+      const msg = serverNameInput.nextElementSibling;
 
       if (!serverNameInput.validity.valid) {
         if (serverNameInput.validity.valueMissing) {
