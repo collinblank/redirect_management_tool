@@ -83,25 +83,42 @@ function initFormValidation(tableName) {
 
     function checkServerName() {
       if (!serverNameInput.validity.valid) {
+        const errors = document.createElement("ul");
+        errors.classList.add("errors");
+        serverNameInput.insertAdjacentElement("afterend", errors);
         console.log("Invalid input");
         if (serverNameInput.validity.patternMismatch) {
+          const patternError = document.createElement("li");
+          patternError.textContent = "Must be just letters and spaces.";
+          errors.appendChild(patternError);
           console.log("Pattern mismatch");
         }
-        if (serverNameInput.validity.tooLong) {
-          console.log("Too long");
-        }
-        if (serverNameInput.validity.tooShort) {
-          console.log("Too short");
+        if (
+          serverNameInput.validity.tooShort ||
+          serverNameInput.validity.tooLong
+        ) {
+          const lengthError = document.createElement("li");
+          lengthError.textContent = "Must be between 4 and 50 characters long.";
+          errors.appendChild(lengthError);
+          console.log("Length error");
         }
         if (serverNameInput.validity.valueMissing) {
-          console.log("Value missing on required element");
+          const noValueError = document.createElement("li");
+          noValueError.textContent = "Must have a value.";
+          errors.appendChild(noValueError);
+          console.log("No value error");
         }
       } else {
         console.log("Input valid!");
       }
     }
+
+    // EVENT LISTENER
     serverNameInput.addEventListener("click", () => {
-      serverNameInput.addEventListener("input", checkServerName);
+      serverNameInput.addEventListener("blur", () => {
+        checkServerName();
+        serverNameInput.addEventListener("input", checkServerName);
+      });
     });
   }
 }
