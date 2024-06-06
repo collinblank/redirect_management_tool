@@ -82,7 +82,10 @@ function initFormValidation(tableName) {
     const serverDomainInput = document.getElementById("server-domain");
 
     function checkServerName() {
-      const msg = serverNameInput.nextElementSibling;
+      const msg = document.createElement("p");
+      msg.classList.add("form__input-item__msg");
+      serverNameInput.insertAdjacentElement("afterend", msg);
+
       if (!serverNameInput.validity.valid) {
         if (serverNameInput.validity.valueMissing) {
           msg.textContent = "Please enter a server name.";
@@ -90,14 +93,16 @@ function initFormValidation(tableName) {
           msg.textContent =
             "Please enter between 4 and 50 letters and spaces only (no spaces at either end!).";
         }
-        msg.classList.remove("form__input-item__success-msg", "active");
-        msg.classList.add("form__input-item__error-msg", "active");
-        console.log("incorrect input :(");
+        serverNameInput.classList.remove("valid");
+        serverNameInput.classList.add("invalid");
+        msg.classList.remove("success", "active");
+        msg.classList.add("error", "active");
       } else {
+        serverNameInput.classList.remove("invalid");
+        serverNameInput.classList.add("valid");
         msg.textContent = "Great!";
-        msg.classList.remove("form__input-item__error-msg", "active");
-        msg.classList.add("form__input-item__success-msg", "active");
-        console.log("correct input!");
+        msg.classList.remove("error", "active");
+        msg.classList.add("success", "active");
       }
     }
 
