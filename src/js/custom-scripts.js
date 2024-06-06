@@ -111,5 +111,34 @@ function initFormValidation(tableName) {
         serverNameInput.addEventListener("input", checkServerName);
       });
     });
+
+    function checkServerDomain() {
+      const msg = serverDomainInput.nextElementSibling;
+
+      if (!serverDomainInput.validity.valid) {
+        if (serverDomainInput.validity.valueMissing) {
+          msg.textContent = "Please enter a server name.";
+        } else {
+          msg.textContent = "Please enter a valid URL.";
+        }
+        serverDomainInput.classList.remove("valid");
+        serverDomainInput.classList.add("invalid");
+        msg.classList.remove("success", "active");
+        msg.classList.add("error", "active");
+      } else {
+        serverDomainInput.classList.remove("invalid");
+        serverDomainInput.classList.add("valid");
+        msg.textContent = "Great!";
+        msg.classList.remove("error", "active");
+        msg.classList.add("success", "active");
+      }
+    }
+
+    serverDomainInput.addEventListener("click", () => {
+      serverDomainInput.addEventListener("blur", () => {
+        checkServerName();
+        serverDomainInput.addEventListener("input", checkServerDomain);
+      });
+    });
   }
 }
