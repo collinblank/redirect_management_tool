@@ -82,34 +82,22 @@ function initFormValidation(tableName) {
     const serverDomainInput = document.getElementById("server-domain");
 
     function checkServerName() {
+      const msg = serverNameInput.nextElementSibling;
       if (!serverNameInput.validity.valid) {
-        const errors = document.createElement("ul");
-        errors.classList.add("errors");
-        serverNameInput.insertAdjacentElement("afterend", errors);
-        console.log("Invalid input");
-        if (serverNameInput.validity.patternMismatch) {
-          const patternError = document.createElement("li");
-          patternError.textContent = "Must be just letters and spaces.";
-          errors.appendChild(patternError);
-          console.log("Pattern mismatch");
-        }
-        if (
-          serverNameInput.validity.tooShort ||
-          serverNameInput.validity.tooLong
-        ) {
-          const lengthError = document.createElement("li");
-          lengthError.textContent = "Must be between 4 and 50 characters long.";
-          errors.appendChild(lengthError);
-          console.log("Length error");
-        }
         if (serverNameInput.validity.valueMissing) {
-          const noValueError = document.createElement("li");
-          noValueError.textContent = "Must have a value.";
-          errors.appendChild(noValueError);
-          console.log("No value error");
+          msg.textContent = "Please enter a server name.";
+        } else {
+          msg.textContent =
+            "Please enter between 4 and 50 letters and spaces only (no spaces at either end!).";
         }
+        msg.classList.remove("form__input-item__success-msg", "active");
+        msg.classList.add("form__input-item__error-msg", "active");
+        console.log("incorrect input :(");
       } else {
-        console.log("Input valid!");
+        msg.textContent = "Great!";
+        msg.classList.remove("form__input-item__error-msg", "active");
+        msg.classList.add("form__input-item__success-msg", "active");
+        console.log("correct input!");
       }
     }
 

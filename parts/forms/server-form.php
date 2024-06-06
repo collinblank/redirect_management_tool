@@ -29,9 +29,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
                 <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
-                <!-- <ul class="server-name-errors">
-
-                </ul> -->
+                <p class="form__input-item-msg"></p>
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
