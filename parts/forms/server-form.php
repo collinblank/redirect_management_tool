@@ -33,16 +33,16 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
-                <input type="text" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" minlength="5" maxlength="100" pattern="^(?!https?:\/\/)(www\.)?([a-zA-Z0-9-]+)(\.[a-zA-Z]{2,})+(:\d+)?(\/[^\s]*)?$" required>
+                <input type="text" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" tabindex="2" pattern="^(?!https?:\/\/)(www\.)?([a-zA-Z0-9-]+)(\.[a-zA-Z]{2,})+(:\d+)?(\/[^\s]*)?$" required>
                 <p class="form__input-item__msg"></p>
             </li>
         </ul>
         <div class="form__btns-container">
-            <button class="default-btn cancel-btn">Cancel</button>
+            <button class="default-btn cancel-btn" tabindex="3">Cancel</button>
             <?php if ($item_id) : ?>
                 <input type="hidden" name="item_id" value=<?php echo $item_id ?>>
             <?php endif; ?>
-            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" disabled />
+            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" disabled />
         </div>
     </form>
 </div>
