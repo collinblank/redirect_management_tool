@@ -77,68 +77,66 @@ function initFormValidation(tableName) {
     initServerFormValidation();
   }
 
+  const form = document.querySelector(".modal-form");
+  const submitBtn = form.querySelector('input[type="submit"]');
+  const inputs = form.querySelectorAll(".form__input-item input");
+
   function initServerFormValidation() {
     const serverNameInput = document.getElementById("server-name");
     const serverDomainInput = document.getElementById("server-domain");
+    // EVENT LISTENERS
+    initInputEvents(serverNameInput, checkServerName);
+    initInputEvents(serverDomainInput, checkServerDomain);
 
     function checkServerName() {
-      const msg = serverNameInput.nextElementSibling;
-
-      if (!serverNameInput.validity.valid) {
-        if (serverNameInput.validity.valueMissing) {
-          msg.textContent = "Please enter a server name.";
-        } else {
-          msg.textContent =
-            "Please enter between 4 and 50 letters and spaces only (no spaces at either end!).";
-        }
-        serverNameInput.classList.remove("valid");
-        serverNameInput.classList.add("invalid");
-        msg.classList.remove("success", "active");
-        msg.classList.add("error", "active");
-      } else {
-        serverNameInput.classList.remove("invalid");
-        serverNameInput.classList.add("valid");
-        msg.textContent = "Great!";
-        msg.classList.remove("error", "active");
-        msg.classList.add("success", "active");
-      }
+      checkServerInput(
+        serverNameInput,
+        "Please enter between 4 and 50 letters and spaces only (no spaces at either end!).",
+        "Awesome!"
+      );
     }
-
-    // EVENT LISTENER
-    serverNameInput.addEventListener("click", () => {
-      serverNameInput.addEventListener("blur", () => {
-        checkServerName();
-        serverNameInput.addEventListener("input", checkServerName);
-      });
-    });
 
     function checkServerDomain() {
-      const msg = serverDomainInput.nextElementSibling;
+      checkServerInput(serverDomainInput, "Please enter a valid URL", "Great!");
+    }
 
-      if (!serverDomainInput.validity.valid) {
-        if (serverDomainInput.validity.valueMissing) {
-          msg.textContent = "Please enter a server name.";
+    function checkServerInput(input, errorMsg, successMsg) {
+      const msg = input.nextElementSibling;
+
+      if (!input.validity.valid) {
+        if (input.validity.valueMissing) {
+          msg.textContent = "Please enter a value.";
         } else {
-          msg.textContent = "Please enter a valid URL.";
+          msg.textContent = errorMsg;
         }
-        serverDomainInput.classList.remove("valid");
-        serverDomainInput.classList.add("invalid");
+        input.classList.remove("valid");
+        input.classList.add("invalid");
         msg.classList.remove("success", "active");
         msg.classList.add("error", "active");
       } else {
-        serverDomainInput.classList.remove("invalid");
-        serverDomainInput.classList.add("valid");
-        msg.textContent = "Great!";
+        msg.textContent = successMsg;
+        input.classList.remove("invalid");
+        input.classList.add("valid");
         msg.classList.remove("error", "active");
         msg.classList.add("success", "active");
       }
     }
+  }
 
-    serverDomainInput.addEventListener("click", () => {
-      serverDomainInput.addEventListener("blur", () => {
-        checkServerName();
-        serverDomainInput.addEventListener("input", checkServerDomain);
+  function initInputEvents(input, checkInputFunc) {
+    // I don't think it needs initial click event...
+    // input.addEventListener("click", () => { //
+    input.addEventListener("blur", () => {
+      checkInputFunc();
+      input.addEventListener("input", () => {
+        checkInputFunc();
+        submitBtn.disabled = !allInputsValid();
       });
     });
+    // });
+  }
+
+  function allInputsValid() {
+    return Array.from(inputs).every((input) => input.validity.valid);
   }
 }
