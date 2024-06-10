@@ -92,12 +92,17 @@ function initFormValidation(tableName) {
       checkServerInput(
         serverNameInput,
         "Please enter between 4 and 50 letters and spaces only (no spaces at either end!).",
+        // can eventually get rid of the no spaces either end and just trim each edge on form submit
         "Awesome!"
       );
     }
 
     function checkServerDomain() {
-      checkServerInput(serverDomainInput, "Please enter a valid URL", "Great!");
+      checkServerInput(
+        serverDomainInput,
+        "Please enter a valid URL (without http(s)://)",
+        "Great!"
+      );
     }
 
     function checkServerInput(input, errorMsg, successMsg) {
@@ -143,18 +148,6 @@ function initFormValidation(tableName) {
       }
     });
   }
-
-  // what i want to happen
-
-  // input receives initial input (focus)
-  // individual input msg not shown until blur
-  // but the submit button status is confirmed
-  // input receives blur (blur)
-  // individual input msg is shown
-  // submit button status confirmed
-  // then, after blurred and after initial input, on each additional input (input)
-  // individual message shown
-  // button confirmed
 
   function allInputsValid() {
     return Array.from(inputs).every((input) => input.validity.valid);
