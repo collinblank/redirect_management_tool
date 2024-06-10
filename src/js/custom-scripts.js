@@ -124,23 +124,37 @@ function initFormValidation(tableName) {
   }
 
   function initInputEvents(input, checkInputFunc) {
-    // I don't think it needs initial click event...
+    let blurredOnce = false;
 
-    // when an input receives focus, it confirms state of btn
-    // when it is then blurred, it again confirms state of btn and shows message
-    // when it receives input, it again confirms state of btn and shows message
     input.addEventListener("focus", () => {
       submitBtn.disabled = !allInputsValid();
-      input.addEventListener("blur", () => {
+    });
+
+    input.addEventListener("blur", () => {
+      submitBtn.disabled = !allInputsValid();
+      checkInputFunc();
+      blurredOnce = true;
+    });
+
+    input.addEventListener("input", () => {
+      submitBtn.disabled = !allInputsValid();
+      if (blurredOnce) {
         checkInputFunc();
-        submitBtn.disabled = !allInputsValid();
-        input.addEventListener("input", () => {
-          checkInputFunc();
-          submitBtn.disabled = !allInputsValid();
-        });
-      });
+      }
     });
   }
+
+  // what i want to happen
+
+  // input receives initial input (focus)
+  // individual input msg not shown until blur
+  // but the submit button status is confirmed
+  // input receives blur (blur)
+  // individual input msg is shown
+  // submit button status confirmed
+  // then, after blurred and after initial input, on each additional input (input)
+  // individual message shown
+  // button confirmed
 
   function allInputsValid() {
     return Array.from(inputs).every((input) => input.validity.valid);
