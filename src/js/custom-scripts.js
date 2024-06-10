@@ -125,15 +125,21 @@ function initFormValidation(tableName) {
 
   function initInputEvents(input, checkInputFunc) {
     // I don't think it needs initial click event...
-    // input.addEventListener("click", () => { //
-    input.addEventListener("blur", () => {
-      checkInputFunc();
-      input.addEventListener("input", () => {
+
+    // when an input receives focus, it confirms state of btn
+    // when it is then blurred, it again confirms state of btn and shows message
+    // when it receives input, it again confirms state of btn and shows message
+    input.addEventListener("focus", () => {
+      submitBtn.disabled = !allInputsValid();
+      input.addEventListener("blur", () => {
         checkInputFunc();
         submitBtn.disabled = !allInputsValid();
+        input.addEventListener("input", () => {
+          checkInputFunc();
+          submitBtn.disabled = !allInputsValid();
+        });
       });
     });
-    // });
   }
 
   function allInputsValid() {
