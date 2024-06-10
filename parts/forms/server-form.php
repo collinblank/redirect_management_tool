@@ -33,7 +33,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
-                <input type="url" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" minlength="5" maxlength="100" pattern="^(?!https?:\/\/).*" required>
+                <input type="text" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" minlength="5" maxlength="100" pattern="^(?!https?:\/\/)(www\.)?([a-zA-Z0-9-]+)(\.[a-zA-Z]{2,})+(:\d+)?(\/[^\s]*)?$" required>
                 <p class="form__input-item__msg"></p>
             </li>
         </ul>
