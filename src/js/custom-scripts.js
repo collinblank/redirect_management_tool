@@ -110,7 +110,7 @@ function initFormValidation(tableName) {
       if (!input.validity.valid) {
         if (input.validity.valueMissing) {
           msg.textContent = "Please enter a value.";
-        } else if (pattern.test(input.value)) {
+        } else if (!pattern.test(input.value)) {
           msg.textContent = "Correct your pattern!";
         } else {
           msg.textContent = responseMsgs.error;
