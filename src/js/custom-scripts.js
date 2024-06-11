@@ -57,9 +57,12 @@ function showModal(action, e) {
       if (xhr.status === 200) {
         const modal = xhr.responseText;
         mainContent.insertAdjacentHTML("beforeend", modal);
+
+        // init form validation logic
         if (action === "add" || action === "edit") {
-          // init form validation logic
           initFormValidation(tableName);
+        } else if (action === "disable") {
+          initConfirmDisableFormValidation();
         }
       } else {
         console.error("Request failed with status: " + xhr.status);
@@ -154,4 +157,14 @@ function initFormValidation(tableName) {
   function allInputsValid() {
     return Array.from(inputs).every((input) => input.validity.valid);
   }
+}
+
+function initConfirmDisableFormValidation() {
+  const form = document.querySelector(".confirm-disable__form");
+  const checkbox = form.querySelector('input[type="checkbox"]');
+  const disableBtn = form.querySelector('input[type="submit"]');
+
+  checkbox.addEventListener("change", () => {
+    disableBtn.disabled = !checkbox.checked;
+  });
 }
