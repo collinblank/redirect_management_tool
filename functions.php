@@ -212,24 +212,43 @@ function blankslate_comment_count($count)
 
 // CUSTOM FUNCTIONS BELOW THIS LINE
 
+require 'validator.php';
+
 // Submit server form data to database table
 if (isset($_POST['add_server'])) {
-	$table_name = 'servers';
-	$data = array(
-		'name' => $_POST['server_name'],
-		'domain' => $_POST['server_domain'],
-	);
+	$server_name = $_POST['server_name'];
+	$server_domain = $_POST['server_domain'];
 
-	$result = $wpdb->insert($table_name, $data, $format = NULL);
+	// Validation
+	$errors = [];
 
-	if ($result == 1) {
-		echo "<script>console.log('Server saved');</script>";
-		// Redirect to prevent form resubmission
-		$new_url = add_query_arg('success', $result, get_permalink());
-		wp_redirect($new_url, 303);
-		exit;
-	} else {
-		echo "<script>console.log('Unable to save server');</script>";
+	if (!Validator::string($server_name, 4, 50)) {
+		$errors['server_name'] = 'The name format you provided is not valid. Ensure your name has only letters and spaces.';
+		echo "<script type='text/javascript'>alert('Invalid server domain format. Please correct.');</script>";
+	}
+
+	if (!Validator::string($server_domain, 6, 100) && !Validator::url($server_domain)) {
+		$errors['server_domain'] = 'The domain format you provided is not valid. Ensure your domain follows this example: https://example.com.';
+		echo "<script type='text/javascript'>alert('Invalid server domain format. Please correct.');</script>";
+	}
+
+	if (empty($errors)) {
+		$table_name = 'servers';
+		$data = array(
+			'name' => $server_name,
+			'domain' => $server_domain,
+		);
+		$result = $wpdb->insert($table_name, $data, $format = NULL);
+
+		if ($result == 1) {
+			echo "<script>console.log('Server saved');</script>";
+			// Redirect to prevent form resubmission
+			$new_url = add_query_arg('success', $result, get_permalink());
+			wp_redirect($new_url, 303);
+			exit;
+		} else {
+			echo "<script>console.log('Unable to save server');</script>";
+		}
 	}
 }
 

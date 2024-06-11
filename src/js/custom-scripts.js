@@ -60,7 +60,7 @@ function showModal(action, e) {
 
         // init form validation logic
         if (action === "add" || action === "edit") {
-          initFormValidation(tableName);
+          // initFormValidation(tableName);
         } else if (action === "disable") {
           initConfirmDisableFormValidation();
         }
@@ -92,7 +92,6 @@ function initFormValidation(tableName) {
     initInputEvents(serverDomainInput, checkServerDomain);
 
     function checkServerName() {
-      // const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/gi;
       const responseMsgs = {
         error: "Please enter between 4 and 50 letters and spaces only.",
         success: "Awesome!",
@@ -101,7 +100,6 @@ function initFormValidation(tableName) {
     }
 
     function checkServerDomain() {
-      // const pattern = /^(https?:\/\/)(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
       const responseMsgs = {
         error: "Please enter a valid URL (including http(s)://).",
         success: "Great!",
