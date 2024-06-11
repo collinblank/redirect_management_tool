@@ -89,37 +89,38 @@ function initFormValidation(tableName) {
     initInputEvents(serverDomainInput, checkServerDomain);
 
     function checkServerName() {
-      checkServerInput(
-        serverNameInput,
-        "Please enter between 4 and 50 letters and spaces only (no spaces at either end!).",
-        // can eventually get rid of the no spaces either end and just trim each edge on form submit
-        "Awesome!"
-      );
+      const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+      checkServerInput(serverNameInput, pattern, {
+        error: "Please enter between 4 and 50 letters and spaces only.",
+        success: "Awesome!",
+      });
     }
 
     function checkServerDomain() {
-      checkServerInput(
-        serverDomainInput,
-        "Please enter a valid URL (without http(s)://)",
-        "Great!"
-      );
+      const pattern = /^(https?:\/\/)(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      checkServerInput(serverDomainInput, pattern, {
+        error: "Please enter a valid URL (including http(s)://).",
+        success: "Great!",
+      });
     }
 
-    function checkServerInput(input, errorMsg, successMsg) {
+    function checkServerInput(input, pattern, responseMsgs) {
       const msg = input.nextElementSibling;
 
       if (!input.validity.valid) {
         if (input.validity.valueMissing) {
           msg.textContent = "Please enter a value.";
+        } else if (pattern.test(input.value)) {
+          msg.textContent = "Correct your pattern!";
         } else {
-          msg.textContent = errorMsg;
+          msg.textContent = responseMsgs.error;
         }
         input.classList.remove("valid");
         input.classList.add("invalid");
         msg.classList.remove("success", "active");
         msg.classList.add("error", "active");
       } else {
-        msg.textContent = successMsg;
+        msg.textContent = responseMsgs.success;
         input.classList.remove("invalid");
         input.classList.add("valid");
         msg.classList.remove("error", "active");
