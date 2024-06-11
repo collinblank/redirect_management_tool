@@ -89,7 +89,7 @@ function initFormValidation(tableName) {
     initInputEvents(serverDomainInput, checkServerDomain);
 
     function checkServerName() {
-      const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+      const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/gi;
       checkServerInput(serverNameInput, pattern, {
         error: "Please enter between 4 and 50 letters and spaces only.",
         success: "Awesome!",
@@ -97,7 +97,7 @@ function initFormValidation(tableName) {
     }
 
     function checkServerDomain() {
-      const pattern = /^(https?:\/\/)(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const pattern = /^(https?:\/\/)(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
       checkServerInput(serverDomainInput, pattern, {
         error: "Please enter a valid URL (including http(s)://).",
         success: "Great!",
@@ -106,11 +106,12 @@ function initFormValidation(tableName) {
 
     function checkServerInput(input, pattern, responseMsgs) {
       const msg = input.nextElementSibling;
+      const patternMismatch = !pattern.test(input.value);
 
-      if (!input.validity.valid) {
+      if (!input.validity.valid || patternMismatch) {
         if (input.validity.valueMissing) {
           msg.textContent = "Please enter a value.";
-        } else if (!pattern.test(input.value)) {
+        } else if (patternMismatch) {
           msg.textContent = "Correct your pattern!";
         } else {
           msg.textContent = responseMsgs.error;
