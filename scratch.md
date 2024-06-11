@@ -12,3 +12,14 @@ For server-side validation errors on server form.
     </div>
 <?php endif; ?>
 ```
+
+server-form.php server name input html validation:
+```
+minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required
+```
+
+server-form.php server domain input html validation:
+```
+maxlength="100" pattern="^https?://.*$" required 
+<!-- (could include optional minlength but not really necessary) -->
+```
