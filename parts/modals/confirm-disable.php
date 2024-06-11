@@ -42,7 +42,8 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
             <p class="confirm-disable__item__description"><?php echo $item_info; ?></p>
         </div>
         <form action="" class="confirm-disable__form">
-            <div class="confirm-disable__confirm-input">
+            <div class="confirm-disable__checkbox-container">
+                <h4>Confirm Disable</h4>
                 <input type="checkbox" class="confirm-disable__checkbox" id="confirm-disable__checkbox" tabindex="1" required>
                 <label for="confirm-disable__checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
             </div>
