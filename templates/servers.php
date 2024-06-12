@@ -3,7 +3,7 @@
 session_start(); // for errors (and maybe success if refactored)
 // $success = isset($_GET['success']) && $_GET['success'] == 1;
 $form_errors = $_SESSION['form_errors'];
-$form_success = $_SESSION['form_success']
+$form_success = $_SESSION['form_success'];
 ?>
 
 <?php get_header(); ?>
