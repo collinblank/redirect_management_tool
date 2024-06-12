@@ -11,7 +11,7 @@ $form_errors = $_SESSION['errors'];
         <?php if (isset($form_errors) && !empty($form_errors)) : ?>
             <div class="page__form-submission-msg error">
                 <div class="page__form-submission-msg__msgs-container">
-                    <p>Unable to save server. Please correct the following errors:</p>
+                    <p>Unable to create the server. Please try again and correct the following errors:</p>
                     <ul>
                         <?php
                         foreach ($form_errors as $error) {
