@@ -25,3 +25,8 @@ maxlength="100" pattern="^https?://.*$" required
 ```
 
 also removed the default disabled attr on server-form submit btn
+
+for server form:
+```
+ action="../../functions/form-handlers/<?php echo $action ?>-server.php"
+```
