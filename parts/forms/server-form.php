@@ -1,7 +1,6 @@
 <?php
 // This may be what is slowing down the modal popup:
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
-session_start();
 
 $action = $_GET['action'];
 $item_id = intval($_GET['item_id']) ?? null;
@@ -25,26 +24,16 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     <div class="form-container__heading">
         <h3 class="form-container__title"><?php echo ucfirst($action) . " Server" ?></h3>
     </div>
-    <?php
-    if (isset($_SESSION['errors']) && !empty($_SESSION['errors'])) {
-        echo '<ul>';
-        foreach ($_SESSION['errors'] as $error) {
-            echo '<li>' . htmlspecialchars($error) . '</li>';
-        }
-        echo '</ul>';
-        unset($_SESSION['errors']);
-    }
-    ?>
     <form role="form" method="POST" class="form modal-form">
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
-                <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" tabindex="1">
+                <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $_POST["server_name"] ?? $server_name ?>" tabindex="1">
                 <p class="form__input-item__msg"></p>
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
-                <input type="url" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" tabindex="2">
+                <input type="url" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $_POST["server_domain"] ?? $server_domain ?>" tabindex="2">
                 <p class="form__input-item__msg"></p>
             </li>
         </ul>
