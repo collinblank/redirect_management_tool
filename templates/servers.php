@@ -29,9 +29,9 @@ $form_success = $_SESSION['form_success']
                 </button>
             </div>
         <?php elseif ($form_success) : ?>
-            <div class="success-msg <?php if ($success) echo "active" ?> notice-banner success">
+            <div class="notice-banner success">
                 <p>A new server has been successfully created.</p>
-                <button class="icon-btn success-msg__x-btn notice-banner__x-btn">
+                <button class="icon-btn notice-banner__x-btn">
                     <i class="fa-solid fa-x"></i>
                 </button>
             </div>

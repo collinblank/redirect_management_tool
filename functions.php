@@ -254,10 +254,12 @@ if (isset($_POST['add_server'])) {
 		if ($result == 1) {
 
 			// Redirect to prevent form resubmission
-			// $new_url = add_query_arg('success', $result, get_permalink());
-			// wp_redirect($new_url, 303);
-			$_SESSION['form_success'] = true;
+
 			echo "<script>console.log('Server saved');</script>";
+			$_SESSION['form_success'] = true;
+
+			$new_url = add_query_arg('success', $result, get_permalink());
+			wp_redirect($new_url, 303);
 			exit;
 		} else {
 			echo "<script>console.log('Unable to save server');</script>";
