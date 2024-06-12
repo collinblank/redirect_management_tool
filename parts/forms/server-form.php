@@ -28,12 +28,13 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
-                <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $_POST["server_name"] ?? $server_name ?>" tabindex="1">
+                <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" tabindex="1">
                 <p class="form__input-item__msg"></p>
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
-                <input type="url" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $_POST["server_domain"] ?? $server_domain ?>" tabindex="2">
+                <!-- CHANGE BACK TO TYPE URL AFTER SERVER SIDE VALIDATION COMPLETE!: -->
+                <input type="text" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" tabindex="2">
                 <p class="form__input-item__msg"></p>
             </li>
         </ul>
