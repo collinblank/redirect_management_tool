@@ -8,11 +8,11 @@
 //   successMsg.classList.remove("active");
 // });
 
-const noticeBannerXBtn = document.querySelector(".notice-banner__x-btn");
-noticeBannerXBtn.addEventListener("click", () => {
-  const noticeBanner = document.querySelector(".notice-banner");
-  noticeBanner.remove();
-});
+// const noticeBannerXBtn = document.querySelector(".notice-banner__x-btn");
+// noticeBannerXBtn.addEventListener("click", () => {
+//   const noticeBanner = document.querySelector(".notice-banner");
+//   noticeBanner.remove();
+// });
 
 const addServerBtn = document.getElementById("add-server-btn");
 addServerBtn.addEventListener("click", () => {
