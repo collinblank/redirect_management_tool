@@ -328,7 +328,9 @@ if (isset($_POST['add_server'])) {
 			echo "<script>console.log('Server saved');</script>";
 
 			// attempt redirect!
-			$new_url = add_query_arg('success', $result, get_permalink());
+			$new_url = str_replace("?errors=1", "", get_permalink());
+			$new_url = str_replace("?errors=2", "", get_permalink());
+			$new_url = add_query_arg('success', $result, $new_url);
 			wp_redirect($new_url, 303);
 			exit;
 			return true;
@@ -355,9 +357,7 @@ if (isset($_POST['edit_server'])) {
 	if ($result == 1) {
 		echo "<script>console.log('Server edited');</script>";
 		// Redirect to prevent form resubmission
-		$new_url = str_replace("?errors=1", "", get_permalink());
-		$new_url = str_replace("?errors=2", "", get_permalink());
-		$new_url = add_query_arg('edited', $item_id, $new_url);
+		$new_url = add_query_arg('edited', $item_id, get_permalink());
 		wp_redirect($new_url, 303);
 		exit;
 	} else {
