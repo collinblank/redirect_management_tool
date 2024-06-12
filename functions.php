@@ -275,7 +275,8 @@ session_start();
 
 if (isset($_POST['add_server'])) {
 	add_server();
-	wp_redirect(home_url('servers'));
+	$new_url = add_query_arg('success', $result, get_permalink());
+	wp_redirect($new_url, 303);
 	exit;
 }
 
