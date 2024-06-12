@@ -215,6 +215,7 @@ function blankslate_comment_count($count)
 require 'validator.php';
 
 // Submit server form data to database table
+session_start();
 if (isset($_POST['add_server'])) {
 	$server_name = $_POST['server_name'];
 	$server_domain = $_POST['server_domain'];
@@ -224,15 +225,18 @@ if (isset($_POST['add_server'])) {
 
 	if (!Validator::string($server_name, 4, 50)) {
 		$errors['server_name'] = 'The name format you provided is not valid. Ensure your name has only letters and spaces.';
-		echo "<script type='text/javascript'>alert('Invalid server domain format. Please correct.');</script>";
+		// echo "<script type='text/javascript'>alert('Invalid server name format. Please correct.');</script>";
 	}
 
 	if (!Validator::string($server_domain, 6, 100) && !Validator::url($server_domain)) {
 		$errors['server_domain'] = 'The domain format you provided is not valid. Ensure your domain follows this example: https://example.com.';
-		echo "<script type='text/javascript'>alert('Invalid server domain format. Please correct.');</script>";
+		// echo "<script type='text/javascript'>alert('Invalid server domain format. Please correct.');</script>";
 	}
 
-	if (empty($errors)) {
+	if (!empty($errors)) {
+		$_SESSION['errors'] = $errors;
+		return false;
+	} else {
 		$table_name = 'servers';
 		$data = array(
 			'name' => $server_name,
@@ -249,6 +253,9 @@ if (isset($_POST['add_server'])) {
 		} else {
 			echo "<script>console.log('Unable to save server');</script>";
 		}
+
+		unset($_SESSION['errors']);
+		return true;
 	}
 }
 
