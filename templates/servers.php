@@ -28,7 +28,7 @@ $form_success = $_SESSION['form_success']
                     <i class="fa-solid fa-x"></i>
                 </button>
             </div>
-        <?php elseif ($form_success) : ?>
+        <?php elseif (isset($form_success) && $form_success) : ?>
             <div class="notice-banner success">
                 <p>A new server has been successfully created.</p>
                 <button class="icon-btn notice-banner__x-btn">
