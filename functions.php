@@ -309,8 +309,7 @@ if (isset($_POST['add_server'])) {
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		$referer = wp_get_referer();
-		wp_redirect($referer);
+		wp_redirect(home_url('servers'), 303);
 		exit;
 		return false;
 	} else {
