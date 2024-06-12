@@ -309,9 +309,10 @@ if (isset($_POST['add_server'])) {
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		$new_url = add_query_arg('errors', $count($errors), get_permalink());
+		$new_url = add_query_arg('errors', count($errors), get_permalink());
 		wp_redirect($new_url, 303);
 		exit;
+		return false;
 	} else {
 		$table_name = 'servers';
 		$data = array(
