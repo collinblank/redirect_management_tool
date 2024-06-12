@@ -309,7 +309,8 @@ if (isset($_POST['add_server'])) {
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		$new_url = add_query_arg('errors', count($errors), get_permalink());
+		$new_url = str_replace("?success=1", "", get_permalink());
+		$new_url = add_query_arg('errors', count($errors), $new_url);
 		wp_redirect($new_url, 303);
 		exit;
 		return false;
@@ -354,7 +355,9 @@ if (isset($_POST['edit_server'])) {
 	if ($result == 1) {
 		echo "<script>console.log('Server edited');</script>";
 		// Redirect to prevent form resubmission
-		$new_url = add_query_arg('edited', $item_id, get_permalink());
+		$new_url = str_replace("?errors=1", "", get_permalink());
+		$new_url = str_replace("?errors=2", "", get_permalink());
+		$new_url = add_query_arg('edited', $item_id, $new_url);
 		wp_redirect($new_url, 303);
 		exit;
 	} else {
