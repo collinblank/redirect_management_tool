@@ -8,16 +8,25 @@ $form_errors = $_SESSION['errors'];
 <?php get_header(); ?>
 <section class="page-section list-view-page">
     <div class="page-content-container">
-        <?php
-        if (isset($form_errors) && !empty($form_errors)) {
-            echo '<ul>';
-            foreach ($form_errors as $error) {
-                echo '<li>' . htmlspecialchars($error) . '</li>';
-            }
-            echo '</ul>';
-            unset($form_errors);
-        }
-        ?>
+        <?php if (isset($form_errors) && !empty($form_errors)) : ?>
+            <div class="page__form-submission-msg error">
+                <div class="page__form-submission-msg__msgs-container">
+                    <p>Unable to save server. Please correct the following errors:</p>
+                    <ul>
+                        <?php
+                        foreach ($form_errors as $error) {
+                            echo '<li>' . htmlspecialchars($error) . '</li>';
+                        }
+                        ?>
+                    </ul>
+                </div>
+                <!-- need to rename this class here: -->
+                <button class="icon-btn success-msg__x-btn">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+            </div>
+        <?php endif; ?>
+        <!-- figure this out better: -->
         <div class="success-msg <?php if ($success) echo "active" ?>">
             <p>A new server has been successfully created.</p>
             <button class="icon-btn success-msg__x-btn">
