@@ -23,3 +23,5 @@ server-form.php server domain input html validation:
 maxlength="100" pattern="^https?://.*$" required 
 <!-- (could include optional minlength but not really necessary) -->
 ```
+
+also removed the default disabled attr on server-form submit btn

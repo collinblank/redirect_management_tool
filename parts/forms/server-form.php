@@ -1,6 +1,7 @@
 <?php
 // This may be what is slowing down the modal popup:
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
+session_start();
 
 $action = $_GET['action'];
 $item_id = intval($_GET['item_id']) ?? null;
@@ -24,6 +25,16 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     <div class="form-container__heading">
         <h3 class="form-container__title"><?php echo ucfirst($action) . " Server" ?></h3>
     </div>
+    <?php
+    if (isset($_SESSION['errors']) && !empty($_SESSION['errors'])) {
+        echo '<ul>';
+        foreach ($_SESSION['errors'] as $error) {
+            echo '<li>' . htmlspecialchars($error) . '</li>';
+        }
+        echo '</ul>';
+        unset($_SESSION['errors']);
+    }
+    ?>
     <form role="form" method="POST" class="form modal-form">
         <ul class="form__inputs-container">
             <li class="form__input-item">
@@ -42,7 +53,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             <?php if ($item_id) : ?>
                 <input type="hidden" name="item_id" value=<?php echo $item_id ?>>
             <?php endif; ?>
-            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" disabled />
+            <input type="submit" class="default-btn form__submit-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" />
         </div>
     </form>
 </div>
