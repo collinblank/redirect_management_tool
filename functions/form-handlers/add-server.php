@@ -4,6 +4,13 @@ require 'validator.php';
 session_start();
 
 if (isset($_POST['add_server'])) {
+    add_server();
+    wp_redirect(home_url('servers'));
+    exit;
+}
+
+function add_server()
+{
     unset($_SESSION['errors']);
     unset($_SESSION['form_success']);
 
@@ -42,16 +49,14 @@ if (isset($_POST['add_server'])) {
 
         if ($result == 1) {
             // Redirect to prevent form resubmission
-
+            $_SESSION['form_success'] = 'A new server has been successfully created.';
             echo "<script>console.log('Server saved');</script>";
-            $_SESSION['form_success'] = true;
-
+            return true;
             // $new_url = add_query_arg('success', $result, get_permalink());
             // wp_redirect($new_url, 303);
-            exit;
+            // exit;
         } else {
             echo "<script>console.log('Unable to save server');</script>";
         }
-        return true;
     }
 }
