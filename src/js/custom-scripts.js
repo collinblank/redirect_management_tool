@@ -1,11 +1,17 @@
 // EVENT LISTENERS
 
 // Close success message
-const successMsg = document.querySelector(".success-msg");
-const successMsgXBtn = document.querySelector(".success-msg__x-btn");
-successMsgXBtn.addEventListener("click", () => {
-  // This may just need to refresh the page back to /servers/ without query parameters
-  successMsg.classList.remove("active");
+// const successMsg = document.querySelector(".success-msg");
+// const successMsgXBtn = document.querySelector(".success-msg__x-btn");
+// successMsgXBtn.addEventListener("click", () => {
+//   // This may just need to refresh the page back to /servers/ without query parameters
+//   successMsg.classList.remove("active");
+// });
+
+const noticeBannerXBtn = document.querySelector(".notice-banner__x-btn");
+noticeBannerXBtn.addEventListener("click", () => {
+  const noticeBanner = document.querySelector(".notice-banner");
+  noticeBanner.remove();
 });
 
 const addServerBtn = document.getElementById("add-server-btn");
