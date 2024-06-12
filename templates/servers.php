@@ -17,6 +17,7 @@ $form_errors = $_SESSION['errors'];
                         foreach ($form_errors as $error) {
                             echo '<li>' . htmlspecialchars($error) . '</li>';
                         }
+                        unset($_SESSION['errors']);
                         ?>
                     </ul>
                 </div>
