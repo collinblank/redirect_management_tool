@@ -273,17 +273,17 @@ function blankslate_comment_count($count)
 require 'functions/form-handlers/validator.php';
 session_start();
 
-if (isset($_POST['add_server'])) {
-	add_server();
-	$new_url = add_query_arg('success', $result, get_permalink());
-	wp_redirect($new_url, 303);
-	exit;
-}
+// if (isset($_POST['add_server'])) {
+// 	add_server();
+// 	$new_url = add_query_arg('success', $result, get_permalink());
+// 	wp_redirect($new_url, 303);
+// 	exit;
+// }
 
-function add_server()
-{
-	// unset($_SESSION['errors']);
-	// unset($_SESSION['form_success']);
+// function add_server()
+if (isset($_POST['add_server'])) {
+	unset($_SESSION['form_errors']);
+	unset($_SESSION['form_success']);
 
 	$server_name = $_POST['server_name'];
 	$server_domain = $_POST['server_domain'];
