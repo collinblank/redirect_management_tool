@@ -309,6 +309,9 @@ if (isset($_POST['add_server'])) {
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
+		$referer = wp_get_referer();
+		wp_redirect($referer);
+		exit;
 		return false;
 	} else {
 		$table_name = 'servers';
