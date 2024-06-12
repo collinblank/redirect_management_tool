@@ -281,8 +281,8 @@ if (isset($_POST['add_server'])) {
 
 function add_server()
 {
-	unset($_SESSION['errors']);
-	unset($_SESSION['form_success']);
+	// unset($_SESSION['errors']);
+	// unset($_SESSION['form_success']);
 
 	$server_name = $_POST['server_name'];
 	$server_domain = $_POST['server_domain'];
