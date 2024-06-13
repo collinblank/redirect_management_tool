@@ -47,10 +47,8 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
                 <label for="confirm-disable__checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
             </div>
             <div class="confirm-disable__btns-container">
-                <!-- <form role="form" method="POST"> -->
                 <input type="submit" class="default-btn confirm-disable-btn" name="disable_<?php echo $item_type ?>" value="Disable" tabindex="2" disabled />
                 <input type="hidden" name="item_id" value=<?php echo $item_id ?>>
-                <!-- </form> -->
                 <button class="default-btn cancel-btn" tabindex="3">Cancel</button>
             </div>
         </form>
