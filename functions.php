@@ -232,33 +232,9 @@ if (isset($_POST['add_server'])) {
 
 	$errors = get_server_form_errors();
 
-	// Validation
-	// $errors = [];
-
-	// if (!Validator::string($server_name, 4, 50) || !Validator::letters_and_spaces($server_name)) {
-	// 	if (strlen($server_name) == 0) {
-	// 		$errors['server_name'] = 'Please enter a value for your server name (including 4 to 50 letters and spaces).';
-	// 	} else {
-	// 		$errors['server_name'] = $server_name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.';
-	// 	}
-	// }
-
-	// if (!Validator::string($server_domain, 6, 100) || !Validator::url($server_domain)) {
-	// 	if (strlen($server_name) == 0) {
-	// 		$errors['server_domain'] = 'Please enter a value for your server domain.';
-	// 	} else {
-	// 		$errors['server_domain'] = $server_domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.';
-	// 	}
-	// }
-
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		add_query_redirect('errors', count($errors), 'added');
-		// $new_url = esc_url(remove_query_arg('success', get_permalink()));
-		// // $new_url = str_replace("?success=1", "", get_permalink());
-		// $new_url = add_query_arg('errors', count($errors), $new_url);
-		// wp_redirect($new_url, 303);
-		// exit;
+		add_query_redirect('errors', count($errors), 'add');
 		return false;
 	} else {
 		$table_name = 'servers';
@@ -271,7 +247,7 @@ if (isset($_POST['add_server'])) {
 		if ($result == 1) {
 			$_SESSION['form_success'] = 'A new server has been successfully created.';
 			// Redirect to prevent form resubmission
-			add_query_redirect('added', $result, 'errors');
+			add_query_redirect('add', $result, 'errors');
 			return true;
 		} else {
 			echo "<script>console.log('Unable to save server');</script>";
@@ -281,6 +257,9 @@ if (isset($_POST['add_server'])) {
 
 
 if (isset($_POST['edit_server'])) {
+	unset($_SESSION['form_errors']);
+	unset($_SESSION['form_success']);
+
 	$table_name = 'servers';
 	$item_id = $_POST['item_id'];
 	$data = array(
@@ -295,18 +274,13 @@ if (isset($_POST['edit_server'])) {
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		add_query_redirect('errors', count($errors), 'edited');
+		add_query_redirect('errors', count($errors), 'edit');
 		return false;
 	} else {
 		$result = $wpdb->update($table_name, $data, $where);
 		if ($result == 1) {
-			// Redirect to prevent form resubmission
-			// $new_url = add_query_arg('edited', $item_id, get_permalink());
-			// wp_redirect($new_url, 303);
-			// exit;
-
 			$_SESSION['form_success'] = 'The server was successfully edited.';
-			add_query_redirect('edited', $result, 'errors');
+			add_query_redirect('edit', $result, 'errors');
 			return true;
 		} else {
 			echo "<script>console.log('Unable to edit server');</script>";
