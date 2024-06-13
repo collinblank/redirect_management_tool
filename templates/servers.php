@@ -1,6 +1,6 @@
 <?php /* Template Name: Servers */ ?>
 <?php
-wp_cache_flush()
+wp_cache_flush();
 session_start();
 $form_errors = $_SESSION['form_errors'];
 $form_success = $_SESSION['form_success'];
