@@ -253,7 +253,7 @@ if (isset($_POST['add_server'])) {
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		add_query_redirect('errors', $result, 'added');
+		add_query_redirect('errors', count($errors), 'added');
 		// $new_url = esc_url(remove_query_arg('success', get_permalink()));
 		// // $new_url = str_replace("?success=1", "", get_permalink());
 		// $new_url = add_query_arg('errors', count($errors), $new_url);
@@ -269,19 +269,9 @@ if (isset($_POST['add_server'])) {
 		$result = $wpdb->insert($table_name, $data, $format = NULL);
 
 		if ($result == 1) {
-			// Redirect to prevent form resubmission
 			$_SESSION['form_success'] = 'A new server has been successfully created.';
-
-			// attempt redirect!
-
+			// Redirect to prevent form resubmission
 			add_query_redirect('added', $result, 'errors');
-
-			// $new_url = esc_url(remove_query_arg('errors', get_permalink()));
-			// // $new_url = str_replace("?errors=1", "", get_permalink());
-			// // $new_url = str_replace("?errors=2", "", get_permalink());
-			// $new_url = add_query_arg('success', $result, $new_url);
-			// wp_redirect($new_url, 303);
-			// exit;
 			return true;
 		} else {
 			echo "<script>console.log('Unable to save server');</script>";
@@ -305,7 +295,7 @@ if (isset($_POST['edit_server'])) {
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		add_query_redirect('errors', $result, 'edited');
+		add_query_redirect('errors', count($errors), 'edited');
 		return false;
 	} else {
 		$result = $wpdb->update($table_name, $data, $where);
