@@ -280,7 +280,7 @@ if (isset($_POST['edit_server'])) {
 		$result = $wpdb->update($table_name, $data, $where);
 		if ($result == 1) {
 			$_SESSION['form_success'] = 'The server was successfully edited.';
-			add_query_redirect('edit', $result);
+			add_query_redirect('edit', $item_id);
 			return true;
 		} else {
 			echo "<script>console.log('Unable to edit server');</script>";
@@ -324,9 +324,9 @@ function show_private_pages_menu_selection($args)
 
 function add_query_redirect($query, $value)
 {
-	$permalink = get_permalink();
-	// if ($permalink) {
-	$url_parts = explode('?', $permalink);
+	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
+	// if ($current_url) {
+	$url_parts = explode('?', $$current_url);
 	$new_url = add_query_arg($query, $value, $url_parts[0]);
 	wp_redirect($new_url, 303);
 	exit;
