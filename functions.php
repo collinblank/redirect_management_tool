@@ -234,7 +234,7 @@ if (isset($_POST['add_server'])) {
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		add_query_redirect('errors', count($errors), 'add');
+		add_query_redirect('errors', count($errors));
 		return false;
 	} else {
 		$table_name = 'servers';
@@ -247,7 +247,7 @@ if (isset($_POST['add_server'])) {
 		if ($result == 1) {
 			$_SESSION['form_success'] = 'A new server has been successfully created.';
 			// Redirect to prevent form resubmission
-			add_query_redirect('add', $result, 'errors');
+			add_query_redirect('add', $result);
 			return true;
 		} else {
 			echo "<script>console.log('Unable to save server');</script>";
@@ -274,13 +274,13 @@ if (isset($_POST['edit_server'])) {
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		add_query_redirect('errors', count($errors), 'edit');
+		add_query_redirect('errors', count($errors));
 		return false;
 	} else {
 		$result = $wpdb->update($table_name, $data, $where);
 		if ($result == 1) {
 			$_SESSION['form_success'] = 'The server was successfully edited.';
-			add_query_redirect('edit', $result, 'errors');
+			add_query_redirect('edit', $result);
 			return true;
 		} else {
 			echo "<script>console.log('Unable to edit server');</script>";
@@ -301,11 +301,7 @@ if (isset($_POST['disable_server'])) {
 	$result = $wpdb->update($table_name, $data, $where);
 
 	if ($result == 1) {
-		echo "<script>console.log('Server disabled');</script>";
-		// Redirect to prevent form resubmission
-		$new_url = add_query_arg('disabled', $item_id, get_permalink());
-		wp_redirect($new_url, 303);
-		exit;
+		add_query_redirect('disable', $item_id);
 	} else {
 		echo "<script>console.log('Unable to disable server');</script>";
 	}
@@ -326,15 +322,15 @@ function show_private_pages_menu_selection($args)
 }
 
 
-function add_query_redirect($query, $value, $query_to_remove = "")
+function add_query_redirect($query, $value)
 {
-	$new_url = get_permalink();
-	if ($query_to_remove) {
-		$new_url = esc_url(remove_query_arg($query_to_remove, $new_url));
+	$permalink = get_permalink();
+	if ($permalink) {
+		$url_parts = explode('?', $permalink);
+		$new_url = add_query_arg($query, $value, $url_parts[0]);
+		wp_redirect($new_url, 303);
+		exit;
 	}
-	$new_url = add_query_arg($query, $value, $new_url);
-	wp_redirect($new_url, 303);
-	exit;
 }
 
 function get_server_form_errors()
@@ -352,7 +348,7 @@ function get_server_form_errors()
 	}
 
 	if (!Validator::string($server_domain, 6, 100) || !Validator::url($server_domain)) {
-		if (strlen($server_name) == 0) {
+		if (strlen($server_domain) == 0) {
 			$errors['server_domain'] = 'Please enter a value for your server domain.';
 		} else {
 			$errors['server_domain'] = $server_domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.';

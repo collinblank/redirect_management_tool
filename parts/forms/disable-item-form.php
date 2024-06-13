@@ -26,11 +26,6 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
 }
 ?>
 
-<!-- 
-    this is now sort of a form. Maybe move to parts/forms/ and rename to disable-item-form.php
-    (will probably need to rework some of the functions to get this part)
--->
-
 <div class="confirm-disable-container">
     <div class="confirm-disable__heading">
         <h3>Disable <?php echo ucfirst($item_type) ?></h3>
@@ -41,7 +36,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
             <h4><?php echo $item_name; ?></h4>
             <p class="confirm-disable__item__description"><?php echo $item_info; ?></p>
         </div>
-        <form action="" class="confirm-disable__form">
+        <form class="confirm-disable__form">
             <div class="confirm-disable__checkbox-input">
                 <input type="checkbox" class="confirm-disable__checkbox" id="confirm-disable__checkbox" tabindex="1" required>
                 <label for="confirm-disable__checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
