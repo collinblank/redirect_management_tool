@@ -325,12 +325,12 @@ function show_private_pages_menu_selection($args)
 function add_query_redirect($query, $value)
 {
 	$permalink = get_permalink();
-	if ($permalink) {
-		$url_parts = explode('?', $permalink);
-		$new_url = add_query_arg($query, $value, $url_parts[0]);
-		wp_redirect($new_url, 303);
-		exit;
-	}
+	// if ($permalink) {
+	$url_parts = explode('?', $permalink);
+	$new_url = add_query_arg($query, $value, $url_parts[0]);
+	wp_redirect($new_url, 303);
+	exit;
+	// }
 }
 
 function get_server_form_errors()
