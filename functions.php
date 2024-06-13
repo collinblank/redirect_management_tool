@@ -212,64 +212,6 @@ function blankslate_comment_count($count)
 
 // CUSTOM FUNCTIONS BELOW THIS LINE
 
-// require 'validator.php';
-
-// // Submit server form data to database table
-// session_start();
-// if (isset($_POST['add_server'])) {
-// 	$server_name = $_POST['server_name'];
-// 	$server_domain = $_POST['server_domain'];
-
-// 	// Validation
-// 	$errors = [];
-
-// 	if (!Validator::string($server_name, 4, 50)) {
-// 		if (strlen($server_name) == 0) {
-// 			$errors['server_name'] = 'Please enter a value for your server name (including 4 to 50 letters and spaces).';
-// 		} else {
-// 			$errors['server_name'] = $server_name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.';
-// 		}
-// 	}
-
-// 	if (!Validator::string($server_domain, 6, 100) || !Validator::url($server_domain)) {
-// 		if (strlen($server_name) == 0) {
-// 			$errors['server_domain'] = 'Please enter a value for your server domain.';
-// 		} else {
-// 			$errors['server_domain'] = $server_domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.';
-// 		}
-// 	}
-
-// 	if (!empty($errors)) {
-// 		$_SESSION['form_errors'] = $errors;
-// 		unset($_SESSION['form_success']);
-// 		return false;
-// 	} else {
-// 		$table_name = 'servers';
-// 		$data = array(
-// 			'name' => $server_name,
-// 			'domain' => $server_domain,
-// 		);
-// 		$result = $wpdb->insert($table_name, $data, $format = NULL);
-
-// 		if ($result == 1) {
-
-// 			// Redirect to prevent form resubmission
-
-// 			echo "<script>console.log('Server saved');</script>";
-// 			$_SESSION['form_success'] = true;
-
-// 			$new_url = add_query_arg('success', $result, get_permalink());
-// 			wp_redirect($new_url, 303);
-// 			exit;
-// 		} else {
-// 			echo "<script>console.log('Unable to save server');</script>";
-// 		}
-// 		unset($_SESSION['errors']);
-// 		return true;
-// 	}
-// }
-
-
 require 'functions/form-handlers/validator.php';
 session_start();
 
@@ -288,31 +230,35 @@ if (isset($_POST['add_server'])) {
 	$server_name = $_POST['server_name'];
 	$server_domain = $_POST['server_domain'];
 
+	$errors = get_server_form_errors();
+
 	// Validation
-	$errors = [];
+	// $errors = [];
 
-	if (!Validator::string($server_name, 4, 50) || !Validator::letters_and_spaces($server_name)) {
-		if (strlen($server_name) == 0) {
-			$errors['server_name'] = 'Please enter a value for your server name (including 4 to 50 letters and spaces).';
-		} else {
-			$errors['server_name'] = $server_name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.';
-		}
-	}
+	// if (!Validator::string($server_name, 4, 50) || !Validator::letters_and_spaces($server_name)) {
+	// 	if (strlen($server_name) == 0) {
+	// 		$errors['server_name'] = 'Please enter a value for your server name (including 4 to 50 letters and spaces).';
+	// 	} else {
+	// 		$errors['server_name'] = $server_name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.';
+	// 	}
+	// }
 
-	if (!Validator::string($server_domain, 6, 100) || !Validator::url($server_domain)) {
-		if (strlen($server_name) == 0) {
-			$errors['server_domain'] = 'Please enter a value for your server domain.';
-		} else {
-			$errors['server_domain'] = $server_domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.';
-		}
-	}
+	// if (!Validator::string($server_domain, 6, 100) || !Validator::url($server_domain)) {
+	// 	if (strlen($server_name) == 0) {
+	// 		$errors['server_domain'] = 'Please enter a value for your server domain.';
+	// 	} else {
+	// 		$errors['server_domain'] = $server_domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.';
+	// 	}
+	// }
 
 	if (!empty($errors)) {
 		$_SESSION['form_errors'] = $errors;
-		$new_url = str_replace("?success=1", "", get_permalink());
-		$new_url = add_query_arg('errors', count($errors), $new_url);
-		wp_redirect($new_url, 303);
-		exit;
+		add_query_redirect('errors', $result, 'added');
+		// $new_url = esc_url(remove_query_arg('success', get_permalink()));
+		// // $new_url = str_replace("?success=1", "", get_permalink());
+		// $new_url = add_query_arg('errors', count($errors), $new_url);
+		// wp_redirect($new_url, 303);
+		// exit;
 		return false;
 	} else {
 		$table_name = 'servers';
@@ -325,14 +271,17 @@ if (isset($_POST['add_server'])) {
 		if ($result == 1) {
 			// Redirect to prevent form resubmission
 			$_SESSION['form_success'] = 'A new server has been successfully created.';
-			echo "<script>console.log('Server saved');</script>";
 
 			// attempt redirect!
-			$new_url = str_replace("?errors=1", "", get_permalink());
-			$new_url = str_replace("?errors=2", "", get_permalink());
-			$new_url = add_query_arg('success', $result, $new_url);
-			wp_redirect($new_url, 303);
-			exit;
+
+			add_query_redirect('added', $result, 'errors');
+
+			// $new_url = esc_url(remove_query_arg('errors', get_permalink()));
+			// // $new_url = str_replace("?errors=1", "", get_permalink());
+			// // $new_url = str_replace("?errors=2", "", get_permalink());
+			// $new_url = add_query_arg('success', $result, $new_url);
+			// wp_redirect($new_url, 303);
+			// exit;
 			return true;
 		} else {
 			echo "<script>console.log('Unable to save server');</script>";
@@ -352,16 +301,26 @@ if (isset($_POST['edit_server'])) {
 		'id' => $item_id
 	);
 
-	$result = $wpdb->update($table_name, $data, $where);
+	$errors = get_server_form_errors();
 
-	if ($result == 1) {
-		echo "<script>console.log('Server edited');</script>";
-		// Redirect to prevent form resubmission
-		$new_url = add_query_arg('edited', $item_id, get_permalink());
-		wp_redirect($new_url, 303);
-		exit;
+	if (!empty($errors)) {
+		$_SESSION['form_errors'] = $errors;
+		add_query_redirect('errors', $result, 'edited');
+		return false;
 	} else {
-		echo "<script>console.log('Unable to edit server');</script>";
+		$result = $wpdb->update($table_name, $data, $where);
+		if ($result == 1) {
+			// Redirect to prevent form resubmission
+			// $new_url = add_query_arg('edited', $item_id, get_permalink());
+			// wp_redirect($new_url, 303);
+			// exit;
+
+			$_SESSION['form_success'] = 'The server was successfully edited.';
+			add_query_redirect('edited', $result, 'errors');
+			return true;
+		} else {
+			echo "<script>console.log('Unable to edit server');</script>";
+		}
 	}
 }
 
@@ -400,4 +359,41 @@ function show_private_pages_menu_selection($args)
 		$args->_default_query['post_status'] = array('publish', 'private');
 	}
 	return $args;
+}
+
+
+function add_query_redirect($query, $value, $query_to_remove = "")
+{
+	$new_url = get_permalink();
+	if ($query_to_remove) {
+		$new_url = esc_url(remove_query_arg($query_to_remove, $new_url));
+	}
+	$new_url = add_query_arg($query, $value, $new_url);
+	wp_redirect($new_url, 303);
+	exit;
+}
+
+function get_server_form_errors()
+{
+	$server_name = $_POST['server_name'];
+	$server_domain = $_POST['server_domain'];
+	$errors = [];
+
+	if (!Validator::string($server_name, 4, 50) || !Validator::letters_and_spaces($server_name)) {
+		if (strlen($server_name) == 0) {
+			$errors['server_name'] = 'Please enter a value for your server name (including 4 to 50 letters and spaces).';
+		} else {
+			$errors['server_name'] = $server_name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.';
+		}
+	}
+
+	if (!Validator::string($server_domain, 6, 100) || !Validator::url($server_domain)) {
+		if (strlen($server_name) == 0) {
+			$errors['server_domain'] = 'Please enter a value for your server domain.';
+		} else {
+			$errors['server_domain'] = $server_domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.';
+		}
+	}
+
+	return $errors;
 }

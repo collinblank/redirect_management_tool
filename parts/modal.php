@@ -32,7 +32,7 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'disable':
-            $modal_content_path = 'parts/modals/confirm-disable';
+            $modal_content_path = 'parts/forms/disable-item-form';
             break;
         default:
             $error_msg = "Unable to $action item.";

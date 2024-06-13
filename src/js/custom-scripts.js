@@ -52,7 +52,7 @@ function showModal(action, e) {
     itemId ? `&item_id=${itemId}` : ""
   }`;
   const modalPath =
-    "/wp-content/themes/redirect-management-tool/parts/modals/modal.php";
+    "/wp-content/themes/redirect-management-tool/parts/modal.php";
   const url = modalPath + params;
   const xhr = new XMLHttpRequest();
 
