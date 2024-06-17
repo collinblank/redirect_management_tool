@@ -43,7 +43,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             <?php if ($item_id) : ?>
                 <input type="hidden" name="item_id" value=<?php echo $item_id ?>>
             <?php endif; ?>
-            <input type="submit" class="default-btn blue-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" />
+            <input type="submit" class="default-btn blue-btn" id="modal-cancel-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" />
         </div>
     </form>
 </div>

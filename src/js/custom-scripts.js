@@ -1,19 +1,4 @@
 // EVENT LISTENERS
-
-// Close success message
-// const successMsg = document.querySelector(".success-msg");
-// const successMsgXBtn = document.querySelector(".success-msg__x-btn");
-// successMsgXBtn.addEventListener("click", () => {
-//   // This may just need to refresh the page back to /servers/ without query parameters
-//   successMsg.classList.remove("active");
-// });
-
-const noticeBannerXBtn = document.querySelector(".notice-banner__x-btn");
-noticeBannerXBtn.addEventListener("click", () => {
-  const noticeBanner = document.querySelector(".notice-banner");
-  noticeBanner.remove();
-});
-
 const addServerBtn = document.getElementById("add-server-btn");
 addServerBtn.addEventListener("click", () => {
   showModal("add");
@@ -33,12 +18,20 @@ disableBtns.forEach((btn) => {
   });
 });
 
+// random events for elements loaded after initial page load
+// Just for now...
 document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("cancel-btn")) {
+  // probably should be added when the modal appears
+  if (e.target.id === "modal-cancel-btn") {
     removeModal();
+  }
+  if (e.target.classList.contains("notice-banner__x-btn")) {
+    const noticeBanner = document.querySelector(".notice-banner");
+    noticeBanner.remove();
   }
 });
 
+// FUNCTIONS
 function removeModal() {
   const modal = document.querySelector(".modal-overlay");
   modal.remove();
@@ -80,7 +73,6 @@ function showModal(action, e) {
 }
 
 // FORM VALIDATION
-
 function initFormValidation(tableName) {
   if (tableName === "servers") {
     initServerFormValidation();
