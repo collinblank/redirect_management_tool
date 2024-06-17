@@ -25,10 +25,10 @@ document.addEventListener("click", (e) => {
   if (e.target.id === "modal-cancel-btn") {
     removeModal();
   }
-  if (e.target.classList.contains("notice-banner__x-btn")) {
-    const noticeBanner = document.querySelector(".notice-banner");
-    noticeBanner.remove();
-  }
+  // if (e.target.classList.contains("notice-banner__x-btn")) {
+  //   const noticeBanner = document.querySelector(".notice-banner");
+  //   noticeBanner.remove();
+  // }
 });
 
 // FUNCTIONS
