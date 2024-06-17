@@ -29,7 +29,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
                 <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" tabindex="1">
-                <p class="form__input-item__msg"></p>
+                <p class="form__input-item__validation-msg"></p>
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
@@ -39,9 +39,9 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             </li>
         </ul>
         <div class="modal-content__btns-container">
-            <button class="default-btn" tabindex="3">Cancel</button>
+            <button type="button" class="default-btn" tabindex="3">Cancel</button>
             <?php if ($item_id) : ?>
-                <input type="hidden" name="item_id" value=<?php echo $item_id ?>>
+                <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
             <?php endif; ?>
             <input type="submit" class="default-btn blue-btn" id="modal-cancel-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" />
         </div>
