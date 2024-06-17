@@ -44,8 +44,8 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
             </div>
             <div class="modal-content__btns-container">
                 <input type="submit" class="default-btn red-btn" name="disable_<?php echo $item_type ?>" value="Disable" tabindex="2" disabled />
-                <input type="hidden" name="item_id" value=<?php echo $item_id ?>>
-                <button class="default-btn blue-btn" id="modal-cancel-btn" tabindex="3">Cancel</button>
+                <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
+                <button type="button" class="default-btn blue-btn" id="modal-cancel-btn" tabindex="3">Cancel</button>
             </div>
         </form>
     </div>
