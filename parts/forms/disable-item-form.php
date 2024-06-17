@@ -26,25 +26,26 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
 }
 ?>
 
-<div class="confirm-disable-container">
-    <div class="confirm-disable__heading">
+<div class="modal-content">
+    <div class="modal-content__header">
         <h3>Disable <?php echo ucfirst($item_type) ?></h3>
         <p><strong>Careful!</strong> You are about to disable this server. Do you still wish to proceed?</p>
     </div>
-    <div class="confirm-disable__content">
-        <div class="confirm-disable__item">
+    <div class="modal-content__section">
+        <div class="disable-item__list-item">
             <h4><?php echo $item_name; ?></h4>
-            <p class="confirm-disable__item__description"><?php echo $item_info; ?></p>
+            <p class="disable-item__list-item__description"><?php echo $item_info; ?></p>
         </div>
-        <form method="POST" class="confirm-disable__form">
-            <div class="confirm-disable__checkbox-input">
-                <input type="checkbox" class="confirm-disable__checkbox" id="confirm-disable__checkbox" tabindex="1" required>
-                <label for="confirm-disable__checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
+        <form method="POST" class="disable-item__form" id="disable-item__form">
+            <div class="disable-item__checkbox">
+                <!-- change id and for -->
+                <input type="checkbox" id="disable-item__checkbox" tabindex="1" required>
+                <label for="disable-item__checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
             </div>
-            <div class="confirm-disable__btns-container">
-                <input type="submit" class="default-btn confirm-disable-btn" name="disable_<?php echo $item_type ?>" value="Disable" tabindex="2" disabled />
+            <div class="modal-content__btns-container">
+                <input type="submit" class="default-btn red-btn" name="disable_<?php echo $item_type ?>" value="Disable" tabindex="2" disabled />
                 <input type="hidden" name="item_id" value=<?php echo $item_id ?>>
-                <button class="default-btn cancel-btn" tabindex="3">Cancel</button>
+                <button class="default-btn blue-btn" tabindex="3">Cancel</button>
             </div>
         </form>
     </div>
