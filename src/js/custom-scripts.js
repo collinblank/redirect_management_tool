@@ -1,8 +1,3 @@
-import {
-  initFormValidation,
-  initDisableItemFormValidation,
-} from "./form-validation";
-
 // EVENT LISTENERS
 const addServerBtn = document.getElementById("add-server-btn");
 addServerBtn.addEventListener("click", () => {
