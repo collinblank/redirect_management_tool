@@ -41,7 +41,7 @@ $form_success = $_SESSION['form_success'];
         <?php endif;  ?>
         <div class="list-view-page__header">
             <h1>Manage Servers</h1>
-            <button id="add-server-btn" class="default-btn">Add Server</button>
+            <button class="default-btn" id="add-server-btn">Add Server</button>
         </div>
         <div class="list-view-container">
             <?php get_template_part('parts/lists/server-list'); ?>
