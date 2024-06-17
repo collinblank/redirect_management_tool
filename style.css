@@ -81,33 +81,31 @@ button i {
   border-color: #a3a3a3;
 }
 
-.default-btn:disabled,
-.red-btn:disabled,
-.blue-btn:disabled {
+.default-btn:disabled {
   background-color: #f5f5f5;
   color: #d4d4d8;
   border-color: #d4d4d8;
   cursor: not-allowed;
 }
 
-.red-btn {
+.red-btn:not(:disabled) {
   color: #ef4444;
   background-color: #fecaca;
   border-color: #ef4444;
 }
 
-.red-btn:hover {
+.red-btn:not(:disabled):hover {
   background-color: #fca5a5;
   border-color: #ef4444;
 }
 
-.blue-btn {
+.blue-btn:not(:disabled) {
   background-color: #e0f2fe;
   border-color: #7dd3fc;
   color: #0ea5e9;
 }
 
-.blue-btn:hover {
+.blue-btn:not(:disabled):hover {
   background-color: #bae6fd;
   border-color: #38bdf8;
 }
