@@ -24,9 +24,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     <div class="form-container__heading">
         <h3 class="form-container__title"><?php echo ucfirst($action) . " Server" ?></h3>
     </div>
-    <form role="form" method="POST" 
-   
-     class="form modal-form">
+    <form method="POST" class="modal-form">
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
