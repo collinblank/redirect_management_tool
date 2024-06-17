@@ -61,7 +61,7 @@ function showModal(action, e) {
 
         // init form validation logic
         if (action === "add" || action === "edit") {
-          // initFormValidation(tableName);
+          initFormValidation(tableName);
         } else if (action === "disable") {
           initDisableItemFormValidation();
         }
