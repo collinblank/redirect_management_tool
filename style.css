@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.166
+Version: 2024.1.167
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -51,9 +51,13 @@ i {
 
 /* CSS global variables to go here */
 :root {
+  /* --primary-bg-color: ;
+  --secondary-bg-color: ;
+  --primary-txt-color: ;
+  --secondary-txt-color: ; */
 }
 
-/* Default button styles */
+/* Buttons */
 .default-btn {
   font-family: "Inter", sans-serif;
   padding: 6px 12px;
@@ -71,6 +75,68 @@ i {
   cursor: pointer;
   background-color: #d4d4d8;
   border-color: #a3a3a3;
+}
+
+.default-btn:disabled {
+  background-color: #f5f5f5;
+  color: #d4d4d8;
+  border-color: #d4d4d8;
+  cursor: not-allowed;
+}
+
+.default-btn.red-btn {
+  color: #ef4444;
+  background-color: #fecaca;
+  border-color: #ef4444;
+}
+
+.default-btn.red-btn:hover {
+  background-color: #fca5a5;
+  border-color: #ef4444;
+}
+
+.default-btn.blue-btn {
+  background-color: #e0f2fe;
+  border-color: #7dd3fc;
+  color: #0ea5e9;
+}
+
+.default-btn.blue-btn:hover {
+  background-color: #bae6fd;
+  border-color: #38bdf8;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: #fff;
+  border: 1px solid #d4d4d8;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #e0f2fe;
+  border-color: #7dd3fc;
+}
+
+/* Proabably should have this somewhere. From FontAwesome's site */
+/* .icon::before {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+} */
+
+input[type="checkbox"]:checked::before {
+  font: var(--fa-font-solid);
+  content: "\f00c";
+  color: #0ea5e9;
+  position: absolute;
+  top: 1px;
+  left: 1.5px;
 }
 
 /* Icon button styles */
@@ -186,6 +252,12 @@ i {
   color: #18181b;
 }
 
+.page-content-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 /* PAGE NOTICE BANNER */
 .notice-banner {
   display: flex;
@@ -244,6 +316,7 @@ i {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-top: 8px;
 }
 
 .list-view {
@@ -271,7 +344,22 @@ i {
 
 .list-view__item__description {
   color: #71717a;
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
+  /* ? */
+  word-break: break-word;
+}
+
+.list-view__item.disabled {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.list-view__item.disabled:hover {
+  background-color: #fef2f2;
+}
+
+.list-view__item.disabled .list-view__item__description {
+  color: #f87171;
 }
 
 .list-view__item__btns-container {
@@ -300,14 +388,102 @@ i {
   transform: translateX(2px);
 }
 
-/* .modal {
+/* MODAL */
+
+.modal-overlay {
   position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.4);
 }
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 680px;
+  min-width: 348px;
+  min-height: 348px;
+  border-radius: 4px;
+  border: 1px solid #e4e4e7;
+  background-color: #fff;
+  -webkit-box-shadow: -2px 4px 10px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: -2px 4px 10px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: -2px 4px 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 48px;
+  border-bottom: 1px solid #d4d4d8;
+}
+
+.modal-content__section {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 48px;
+}
+
+.modal-content__btns-container {
+  display: flex;
+  align-self: center;
+  margin-top: auto;
+  gap: 16px;
+}
+
+/* Disable Item Form */
+
+.disable-modal {
+  border: 1px solid #ef4444;
+  background-color: #fee2e2;
+}
+
+.disable-modal .modal-content__heading {
+  border-bottom: 1px solid #fca5a5;
+}
+
+.disable-modal .modal-content__heading strong {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.disable-item__list-item {
+  border: 1px solid #ef4444;
+  border-radius: 4px;
+  padding: 6px 8px;
+  background-color: #fff;
+}
+
+.disable-item__list-item__description {
+  color: #71717a;
+  word-wrap: break-word;
+}
+
+.disable-item__form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.disable-item__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 
 
 .form-container {
   width: 480px;

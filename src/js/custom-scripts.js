@@ -8,11 +8,11 @@
 //   successMsg.classList.remove("active");
 // });
 
-// const noticeBannerXBtn = document.querySelector(".notice-banner__x-btn");
-// noticeBannerXBtn.addEventListener("click", () => {
-//   const noticeBanner = document.querySelector(".notice-banner");
-//   noticeBanner.remove();
-// });
+const noticeBannerXBtn = document.querySelector(".notice-banner__x-btn");
+noticeBannerXBtn.addEventListener("click", () => {
+  const noticeBanner = document.querySelector(".notice-banner");
+  noticeBanner.remove();
+});
 
 const addServerBtn = document.getElementById("add-server-btn");
 addServerBtn.addEventListener("click", () => {
@@ -68,7 +68,7 @@ function showModal(action, e) {
         if (action === "add" || action === "edit") {
           // initFormValidation(tableName);
         } else if (action === "disable") {
-          initConfirmDisableFormValidation();
+          initDisableItemFormValidation();
         }
       } else {
         console.error("Request failed with status: " + xhr.status);
@@ -163,8 +163,8 @@ function initFormValidation(tableName) {
   }
 }
 
-function initConfirmDisableFormValidation() {
-  const form = document.querySelector(".confirm-disable__form");
+function initDisableItemFormValidation() {
+  const form = document.getElementById("disable-item__form");
   const checkbox = form.querySelector('input[type="checkbox"]');
   const disableBtn = form.querySelector('input[type="submit"]');
 
