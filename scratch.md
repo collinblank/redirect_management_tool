@@ -13,19 +13,6 @@ For server-side validation errors on server form.
 <?php endif; ?>
 ```
 
-server-form.php server name input html validation:
-```
-minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required
-```
-
-server-form.php server domain input html validation:
-```
-maxlength="100" pattern="^https?://.*$" required 
-<!-- (could include optional minlength but not really necessary) -->
-```
-
-also removed the default disabled attr on server-form submit btn
-
 for server form:
 ```
  action="../../functions/form-handlers/<?php echo $action ?>-server.php"
