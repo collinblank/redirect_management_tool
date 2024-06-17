@@ -30,22 +30,28 @@ if ($form_errors || $form_success) {
                             ?>
                         </ul>
                     </div>
-                    <form method="POST">
+                    <!-- <form method="POST">
                         <input type="hidden" name="notice_banner" value="0">
                         <button type="submit" class="icon-btn notice-banner__x-btn">
                             <i class="fa-solid fa-x"></i>
                         </button>
-                    </form>
+                    </form> -->
+                    <button class="icon-btn notice-banner__x-btn">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
                 </div>
             <?php elseif (isset($form_success)) : ?>
                 <div class="notice-banner success">
                     <p><?php echo $form_success ?></p>
-                    <form method="POST">
+                    <!-- <form method="POST">
                         <input type="hidden" name="notice_banner" value="0">
                         <button type="submit" class="icon-btn notice-banner__x-btn">
                             <i class="fa-solid fa-x"></i>
                         </button>
-                    </form>
+                    </form> -->
+                    <button class="icon-btn notice-banner__x-btn">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
                 </div>
                 <?php unset($_SESSION['form_success']); ?>
             <?php endif;  ?>

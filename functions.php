@@ -307,6 +307,13 @@ if (isset($_POST['disable_server'])) {
 	}
 }
 
+if (isset($_POST['notice_banner'])) {
+	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
+	$url_parts = explode('?', $current_url);
+	wp_redirect($url_parts[0], 303);
+	exit;
+}
+
 
 // Show private pages in menu builder
 add_filter('nav_menu_meta_box_object', 'show_private_pages_menu_selection');
