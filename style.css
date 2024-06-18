@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.180
+Version: 2024.1.181
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -62,7 +62,7 @@ BlankSlate is distributed under the terms of the GNU GPL
   --error-bg-color: #fecaca;
   --error-txt-color: #ef4444;
   --error-secondary-border-color: #fca5a5;
-  --error-secondary-bg-color: #fef2f2;
+  --error-secondary-bg-color: #fee2e2;
   --error-secondary-txt-color: #f87171;
 
   /* Success */
@@ -539,6 +539,30 @@ input[type="checkbox"]:checked::before {
 
 .form__input-item input:focus {
   border-color: var(--input-border-color-focus);
+}
+
+.form__input-item input.valid {
+  border-color: var(--success-border-color);
+}
+
+.form__input-item input.invalid {
+  border-color: var(--error-border-color);
+}
+
+.form__input-item__validation-msg {
+  padding: 6px 4px;
+  font-size: 0.8rem;
+  letter-spacing: 0.025rem;
+}
+
+.form__input-item__validation-msg.error {
+  background-color: var(--error-secondary-bg-color);
+  color: var(--error-txt-color);
+}
+
+.form__input-item__validation-msg.success {
+  background-color: var(--success-bg-color);
+  color: var(--success-txt-color);
 }
 
 /* Disable Item Form */
