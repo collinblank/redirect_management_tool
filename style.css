@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.179
+Version: 2024.1.180
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -17,6 +17,64 @@ BlankSlate WordPress Theme 2011-2024
 BlankSlate is distributed under the terms of the GNU GPL
 */
 
+/* CSS global variables to go here */
+:root {
+  --primary-bg-color: #fff;
+  --primary-txt-color: #18181b;
+  --primary-border-color: #d4d4d8;
+
+  --primary-link-color: #71717a;
+  --primary-link-color-hover: #18181b;
+
+  --secondary-border-color: #a1a1aa;
+  --secondary-bg-color: #fafafa;
+  --secondary-txt-color: #71717a;
+
+  /* Default Button Colors */
+  --default-btn-border-color: #d4d4d8;
+  --default-btn-bg-color: #e4e4e7;
+  --default-btn-txt-color: #18181b;
+  --default-btn-border-color-hover: #a3a3a3;
+  --default-btn-bg-color-hover: #d4d4d8;
+  /* --default-btn-txt-color-hover: ; */
+
+  /* Disabled */
+  --default-btn-border-color-disabled: #d4d4d8;
+  --default-btn-bg-color-disabled: #f5f5f5;
+  --default-btn-txt-color-disabled: #d4d4d8;
+
+  /* Red Button Colors */
+  --red-btn-border-color: #ef4444;
+  --red-btn-bg-color: #fecaca;
+  --red-btn-txt-color: #ef4444;
+  --red-btn-border-color-hover: #ef4444;
+  --red-btn-bg-color-hover: #fca5a5;
+
+  /* Blue Button Colors */
+  --blue-btn-border-color: #7dd3fc;
+  --blue-btn-bg-color: #e0f2fe;
+  --blue-btn-txt-color: #0ea5e9;
+  --blue-btn-border-color-hover: #38bdf8;
+  --blue-btn-bg-color-hover: #bae6fd;
+
+  /* Error  */
+  --error-border-color: #ef4444;
+  --error-bg-color: #fecaca;
+  --error-txt-color: #ef4444;
+  --error-secondary-border-color: #fca5a5;
+  --error-secondary-bg-color: #fef2f2;
+  --error-secondary-txt-color: #f87171;
+
+  /* Success */
+  --success-border-color: #86efac;
+  --success-bg-color: #dcfce7;
+  --success-txt-color: #22c55e;
+
+  --input-border-color: #e4e4e7;
+  --input-border-color-focus: #38bdf8;
+  --input-placeholder-txt-color: #a1a1aa;
+}
+
 /* START CUSTOM STYLES */
 * {
   margin: 0;
@@ -27,8 +85,8 @@ BlankSlate is distributed under the terms of the GNU GPL
 body {
   height: 100vh;
   font-family: "Inter", sans-serif;
-  background-color: #fff;
-  color: #18181b;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-txt-color);
 }
 
 h1,
@@ -53,61 +111,53 @@ button i {
   pointer-events: none;
 }
 
-/* CSS global variables to go here */
-:root {
-  /* --primary-bg-color: ;
-  --secondary-bg-color: ;
-  --primary-txt-color: ;
-  --secondary-txt-color: ; */
-}
-
 /* Buttons */
 .default-btn {
   font-family: "Inter", sans-serif;
   padding: 6px 12px;
-  border: 1px solid #d4d4d8;
+  border: 1px solid var(--default-btn-border-color);
   border-radius: 4px;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.025rem;
-  color: #18181b;
-  background-color: #e4e4e7;
+  color: var(--default-btn-txt-color);
+  background-color: var(--default-btn-bg-color);
   transition: 0.1s ease-out;
 }
 
 .default-btn:hover {
+  border-color: var(--default-btn-border-color-hover);
+  background-color: var(--default-btn-bg-color-hover);
   cursor: pointer;
-  background-color: #d4d4d8;
-  border-color: #a3a3a3;
 }
 
 .default-btn:disabled {
-  background-color: #f5f5f5;
-  color: #d4d4d8;
-  border-color: #d4d4d8;
+  border-color: var(--default-btn-border-color-disabled);
+  background-color: var(--default-btn-bg-color-disabled);
+  color: var(--default-btn-txt-color-disabled);
   cursor: not-allowed;
 }
 
 .red-btn:not(:disabled) {
-  color: #ef4444;
-  background-color: #fecaca;
-  border-color: #ef4444;
+  border-color: var(--red-btn-border-color);
+  background-color: var(--red-btn-bg-color);
+  color: var(--red-btn-txt-color);
 }
 
 .red-btn:not(:disabled):hover {
-  background-color: #fca5a5;
-  border-color: #ef4444;
+  border-color: var(--red-btn-border-color-hover);
+  background-color: var(--red-btn-bg-color-hover);
 }
 
 .blue-btn:not(:disabled) {
-  background-color: #e0f2fe;
-  border-color: #7dd3fc;
-  color: #0ea5e9;
+  border-color: var(--blue-btn-border-color);
+  background-color: var(--blue-btn-bg-color);
+  color: var(--blue-btn-txt-color);
 }
 
 .blue-btn:not(:disabled):hover {
-  background-color: #bae6fd;
-  border-color: #38bdf8;
+  border-color: var(--blue-btn-border-color-hover);
+  background-color: var(--blue-btn-bg-color-hover);
 }
 
 /* Checkbox */
@@ -115,16 +165,16 @@ input[type="checkbox"] {
   -webkit-appearance: none;
   height: 1rem;
   width: 1rem;
-  background-color: #fff;
-  border: 1px solid #d4d4d8;
+  background-color: var(--primary-bg-color);
+  border: 1px solid var(--primary-border-color);
   border-radius: 2px;
   position: relative;
   cursor: pointer;
 }
 
 input[type="checkbox"]:checked {
-  background-color: #e0f2fe;
-  border-color: #7dd3fc;
+  background-color: var(--blue-btn-bg-color);
+  border-color: var(--blue-btn-border-color);
 }
 
 /* Proabably should have this somewhere. From FontAwesome's site */
@@ -137,10 +187,10 @@ input[type="checkbox"]:checked {
 input[type="checkbox"]:checked::before {
   font: var(--fa-font-solid);
   content: "\f00c";
-  color: #0ea5e9;
   position: absolute;
   top: 1px;
   left: 1.5px;
+  color: var(--blue-btn-txt-color);
 }
 
 /* Icon button styles */
@@ -149,14 +199,14 @@ input[type="checkbox"]:checked::before {
   outline: none;
   background: none;
   padding: 2px;
-  color: #71717a;
+  color: var(--primary-link-color);
   transition: 0.1s ease-out;
 }
 
 .icon-btn:hover {
   background: none;
   cursor: pointer;
-  color: #18181b;
+  color: var(--primary-link-color-hover);
 }
 
 /* Universal page layout */
@@ -187,18 +237,18 @@ input[type="checkbox"]:checked::before {
   align-items: end;
   gap: 24px;
   padding: 16px 24px;
-  border-bottom: 1px solid #d4d4d8;
+  border-bottom: 1px solid var(--primary-border-color);
 }
 
 .nav__link {
   text-decoration: none;
-  color: #71717a;
+  color: var(--primary-link-color);
   font-size: 1.1rem;
   transition: 0.1s ease-out;
 }
 
 .nav__link:hover {
-  color: #18181b;
+  color: var(--primary-link-color-hover);
 }
 
 /* for home icon */
@@ -215,7 +265,7 @@ input[type="checkbox"]:checked::before {
   position: absolute;
   top: 0;
   left: -14px;
-  color: #71717a;
+  color: var(--primary-link-color);
 }
 
 /* Home page */
@@ -233,17 +283,18 @@ input[type="checkbox"]:checked::before {
   gap: 8px;
 }
 
+/* Probably just style as default btns */
 #home-page .menu-item {
   transition: 0.1s ease-out;
-  background-color: #e4e4e7;
-  border: 1px solid #d4d4d8;
+  background-color: var(--default-btn-bg-color);
+  border: 1px solid var(--default-btn-border-color);
   border-radius: 4px;
 }
 
 #home-page .menu-item:hover {
   transform: scale(1.05);
-  background-color: #d4d4d8;
-  border-color: #a3a3a3;
+  background-color: var(--default-btn-bg-color-hover);
+  border-color: var(--default-btn-border-color-hover);
 }
 
 #home-page .menu-item a {
@@ -253,7 +304,7 @@ input[type="checkbox"]:checked::before {
   text-decoration: none;
   font-weight: 500;
   letter-spacing: 0.025rem;
-  color: #18181b;
+  color: var(--default-btn-txt-color);
 }
 
 .page-content-container {
@@ -290,15 +341,15 @@ input[type="checkbox"]:checked::before {
 }
 
 .notice-banner.error {
-  background-color: #fecaca;
-  border-color: #ef4444;
-  color: #ef4444;
+  border-color: var(--error-border-color);
+  background-color: var(--error-bg-color);
+  color: var(--error-txt-color);
 }
 
 .notice-banner.success {
-  background-color: #dcfce7;
-  border-color: #86efac;
-  color: #22c55e;
+  border-color: var(--success-border-color);
+  background-color: var(--success-bg-color);
+  color: var(--success-txt-color);
 }
 
 /* List view pages (Servers, Websites, Redirects, Redirect Flags) */
@@ -313,7 +364,7 @@ input[type="checkbox"]:checked::before {
   justify-content: space-between;
   align-items: end;
   padding-bottom: 8px;
-  border-bottom: 1px solid #d4d4d8;
+  border-bottom: 1px solid var(--primary-border-color);
 }
 
 .list-view-container {
@@ -334,7 +385,7 @@ input[type="checkbox"]:checked::before {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  border: 1px solid #d4d4d8;
+  border: 1px solid var(--primary-border-color);
   border-radius: 4px;
   padding: 6px 8px;
   transition: 0.2s ease-out;
@@ -342,28 +393,28 @@ input[type="checkbox"]:checked::before {
 }
 
 .list-view__item:hover {
-  background-color: #fafafa;
-  border-color: #a1a1aa;
+  border-color: var(--secondary-border-color);
+  background-color: var(--secondary-bg-color);
 }
 
 .list-view__item__description {
-  color: #71717a;
+  color: var(--secondary-txt-color);
   /* word-wrap: break-word; */
   /* ? */
   word-break: break-word;
 }
 
 .list-view__item.disabled {
-  color: #ef4444;
-  border-color: #ef4444;
+  border-color: var(--error-border-color);
+  color: var(--error-txt-color);
 }
 
 .list-view__item.disabled:hover {
-  background-color: #fef2f2;
+  background-color: var(--error-secondary-bg-color);
 }
 
 .list-view__item.disabled .list-view__item__description {
-  color: #f87171;
+  color: var(--error-secondary-txt-color);
 }
 
 .list-view__item__btns-container {
@@ -373,7 +424,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .list-view__item__btns-container .disable-btn:hover {
-  color: #ef4444;
+  color: var(--error-txt-color);
 }
 
 .list-view__item__btns-container .view-more-btn {
@@ -411,8 +462,8 @@ input[type="checkbox"]:checked::before {
   min-width: 348px;
   min-height: 348px;
   border-radius: 4px;
-  border: 1px solid #e4e4e7;
-  background-color: #fff;
+  border: 1px solid var(--primary-border-color);
+  background-color: var(--primary-bg-color);
   -webkit-box-shadow: -2px 4px 10px 2px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: -2px 4px 10px 2px rgba(0, 0, 0, 0.2);
   box-shadow: -2px 4px 10px 2px rgba(0, 0, 0, 0.2);
@@ -429,7 +480,7 @@ input[type="checkbox"]:checked::before {
   flex-direction: column;
   gap: 4px;
   padding: 16px 48px;
-  border-bottom: 1px solid #d4d4d8;
+  border-bottom: 1px solid var(--primary-border-color);
 }
 
 .modal-content__section {
@@ -468,53 +519,53 @@ input[type="checkbox"]:checked::before {
 }
 
 .form__input-item label span {
-  color: #ef4444;
+  color: var(--error-txt-color);
 }
 
 .form__input-item input {
   font-family: "Inter", sans-serif;
   padding: 4px 2px;
-  border: 2px solid #e4e4e7;
+  border: 2px solid var(--input-border-color);
   border-radius: 4px;
   font-size: 0.9rem;
   font-weight: 500;
-  color: #18181b;
+  color: var(--primary-txt-color);
   outline: none;
 }
 
 .form__input-item input::placeholder {
-  color: #a1a1aa;
+  color: var(--input-placeholder-txt-color);
 }
 
 .form__input-item input:focus {
-  border-color: #38bdf8;
+  border-color: var(--input-border-color-focus);
 }
 
 /* Disable Item Form */
 
 .disable-modal {
-  border: 1px solid #ef4444;
-  background-color: #fee2e2;
+  border: 1px solid var(--error-border-color);
+  background-color: var(--error-secondary-bg-color);
 }
 
 .disable-modal .modal-content__header {
-  border-bottom: 1px solid #fca5a5;
+  border-bottom: 1px solid var(--error-secondary-border-color);
 }
 
 .disable-modal .modal-content__header strong {
-  color: #ef4444;
+  color: var(--error-txt-color);
   font-weight: 600;
 }
 
 .disable-item__list-item {
-  border: 1px solid #ef4444;
+  border: 1px solid var(--error-border-color);
   border-radius: 4px;
   padding: 6px 8px;
-  background-color: #fff;
+  background-color: var(--primary-bg-color);
 }
 
 .disable-item__list-item__description {
-  color: #71717a;
+  color: var(--secondary-txt-color);
   word-wrap: break-word;
 }
 
