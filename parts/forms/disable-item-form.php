@@ -29,7 +29,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
 <div class="modal-content">
     <div class="modal-content__header">
         <h3>Disable <?php echo ucfirst($item_type) ?></h3>
-        <p><strong>Careful!</strong> You are about to disable this server. Do you still wish to proceed?</p>
+        <p><strong>Careful!</strong> You are about to disable this <?php echo $item_type ?>. Do you still wish to proceed?</p>
     </div>
     <div class="modal-content__section">
         <div class="disable-item__list-item">
