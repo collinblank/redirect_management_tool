@@ -1,18 +1,18 @@
 // EVENT LISTENERS
-const addServerBtn = document.getElementById("add-server-btn");
-addServerBtn.addEventListener("click", () => {
-  showModal("add");
+const addItemBtn = document.querySelector(".add-item-btn");
+addItemBtn.addEventListener("click", (e) => {
+  showModal("edit", e);
 });
 
-const editBtns = document.querySelectorAll(".edit-btn");
-editBtns.forEach((btn) => {
+const editItemBtns = document.querySelectorAll(".edit-item-btn");
+editItemBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     showModal("edit", e);
   });
 });
 
-const disableBtns = document.querySelectorAll(".disable-btn");
-disableBtns.forEach((btn) => {
+const disableItemBtns = document.querySelectorAll(".disable-item-btn");
+disableItemBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     showModal("disable", e);
   });
@@ -166,9 +166,3 @@ function initDisableItemFormValidation() {
     disableBtn.disabled = !checkbox.checked;
   });
 }
-
-// websites
-const addWebsiteBtn = document.getElementById("add-website-btn");
-addWebsiteBtn.addEventListener("click", () => {
-  showModal("add");
-});

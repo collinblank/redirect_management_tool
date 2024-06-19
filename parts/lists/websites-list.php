@@ -13,11 +13,11 @@ $results = $wpdb->get_results("SELECT * FROM websites");
                     <p class="list-view__item__description"><?php echo $item->domain; ?></p>
                 </div>
                 <div class="list-view__item__btns-container">
-                    <button class="icon-btn edit-btn" title="Edit Website"><i class="fa-regular fa-pen-to-square"></i></button>
+                    <button class="icon-btn edit-item-btn" title="Edit Website"><i class="fa-regular fa-pen-to-square"></i></button>
                     <?php if ($item->disabled) : ?>
-                        <button class="icon-btn enable-btn" title="Enable Website"><i class="fa-regular fa-circle-check"></i></button>
+                        <button class="icon-btn enable-item-btn" title="Enable Website"><i class="fa-regular fa-circle-check"></i></button>
                     <?php else : ?>
-                        <button class="icon-btn disable-btn" title="Disable Website"><i class="fa-regular fa-circle-xmark"></i></button>
+                        <button class="icon-btn disable-item-btn" title="Disable Website"><i class="fa-regular fa-circle-xmark"></i></button>
                     <?php endif; ?>
                     <button class="default-btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></button>
                 </div>
