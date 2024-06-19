@@ -17,3 +17,9 @@ for server form:
 ```
  action="../../functions/form-handlers/<?php echo $action ?>-server.php"
 ```
+
+for website list search feature
+```
+            <?php if ($websites_search && (str_contains(strtolower($item['name']), $websites_search) || str_contains(strtolower($item['domain']), $websites_search))) : ?>
+<?php endif; ?>
+```
