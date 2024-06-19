@@ -14,7 +14,7 @@ $results = $wpdb->get_results("SELECT * FROM websites", ARRAY_A);
                 </div>
                 <div class="list-view__item__flags-container">
                     <div class="list-view__item__flag <?php echo ($item['isProd']) ? "production" : "test" ?>">
-                        <p><?php echo ($item['isProd']) ? "" : "Test" ?></p>
+                        <p><?php echo ($item['isProd']) ? "Production" : "Test" ?></p>
                     </div>
                 </div>
                 <div class="list-view__item__btns-container">
