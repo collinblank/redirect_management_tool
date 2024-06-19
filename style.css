@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.186
+Version: 2024.1.187
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -604,84 +604,6 @@ input[type="checkbox"]:checked::before {
   align-items: center;
   gap: 4px;
 }
-
-/* 
-
-.form-container {
-  width: 480px;
-  min-height: 360px;
-  border: 1px solid #e4e4e7;
-  background-color: #fff;
-  padding: 48px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.form-container__title {
-  align-self: center;
-}
-
-.form,
-.form__inputs-container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.form__input-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.form__input-item label {
-  font-size: 0.8rem;
-  letter-spacing: 0.025rem;
-  font-weight: 600;
-}
-
-.form__input-item label span {
-  color: #ef4444;
-}
-
-.form__input-item input {
-  font-family: "Inter", sans-serif;
-  padding: 4px 2px;
-  border: 2px solid #e4e4e7;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #18181b;
-  outline: none;
-}
-
-.form__input-item input::placeholder {
-  color: #a1a1aa;
-}
-
-.form__input-item input:focus {
-  border: 2px solid #38bdf8;
-}
-
-.form__btns-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-}
-
-.form__submit-btn {
-  background-color: #e0f2fe;
-  border-color: #7dd3fc;
-  color: #0ea5e9;
-}
-
-.form__submit-btn:hover {
-  background-color: #bae6fd;
-  border-color: #38bdf8;
-} */
 
 /* END CUSTOM STYLES */
 
