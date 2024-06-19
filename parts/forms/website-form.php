@@ -37,7 +37,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             <li class="form__input-item">
                 <label for="website-server">Server<span>*</span></label>
                 <select id="website-server" name="website_server" tabindex="3" required>
-                    <option disabled selected>Select host server</option>
+                    <option disabled selected>--Select host server--</option>
                     <?php
                     foreach ($servers as $server) { ?>
                         <option value="<?php echo $server['id'] ?>" <?php echo ($server['id'] == $website_to_edit['serverId']) ? "selected"  : "" ?>><?php echo $server['name'] ?></option>
@@ -46,9 +46,9 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <li class="form__input-item">
-                <label for="sandbox-website">Sandbox Website</label>
-                <select id="sandbox-website" name="sandbox_website" tabindex="4">
-                    <option disabled selected>Select the corresponding sandbox site</option>
+                <label for="website-sandbox">Sandbox Website</label>
+                <select id="website_sandbox" name="website_sandbox" tabindex="4">
+                    <option disabled selected>--Select the corresponding sandbox site--</option>
                     <?php
                     foreach ($sandbox_websites as $sandbox_website) { ?>
                         <option value="<?php echo $sandbox_website['id'] ?>" <?php echo ($sandbox_website['id'] == $website_to_edit['sandboxId']) ? "selected"  : "" ?>><?php echo $sandbox_website['name'] ?></option>

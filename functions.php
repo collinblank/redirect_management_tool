@@ -364,3 +364,44 @@ function get_server_form_errors()
 
 	return $errors;
 }
+
+
+// WEBSITE FUNCTIONS
+
+// add website
+if (isset($_POST['add_website'])) {
+	unset($_SESSION['form_errors']);
+	unset($_SESSION['form_success']);
+
+	$website_name = $_POST['website_name'];
+	$website_domain = $_POST['website_domain'];
+	$website_server = $_POST['website_server'];
+	$website_sandbox = $_POST['website_sandbox'];
+
+	// $errors = get_server_form_errors();
+	$errors = array();
+
+	if (!empty($errors)) {
+		$_SESSION['form_errors'] = $errors;
+		add_query_redirect('errors', count($errors));
+		return false;
+	} else {
+		$table_name = 'websites';
+		$data = array(
+			'name' => $website_name,
+			'domain' => $website_domain,
+			'serverId' => $website_server,
+			'sandboxId' => $website_sandbox,
+		);
+		$result = $wpdb->insert($table_name, $data, $format = NULL);
+
+		if ($result == 1) {
+			$_SESSION['form_success'] = 'A new website has been successfully created.';
+			// Redirect to prevent form resubmission
+			add_query_redirect('add', $result);
+			return true;
+		} else {
+			echo "<script>console.log('Unable to save website');</script>";
+		}
+	}
+}

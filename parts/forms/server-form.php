@@ -4,19 +4,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 $action = $_GET['action'];
 $item_id = intval($_GET['item_id']) ?? null;
-$server_name = "";
-$server_domain = "";
+$server_to_edit = array();
 
 if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     global $wpdb;
     $table_name = $_GET['table_name'];
-    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
-    $server = $wpdb->get_row($sql, ARRAY_A);
-
-    if ($server) {
-        $server_name = $server['name'];
-        $server_domain = $server['domain'];
-    }
+    $server_to_edit_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
+    $server_to_edit = $wpdb->get_row($server_to_edit_sql, ARRAY_A);
 }
 ?>
 
@@ -28,12 +22,12 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
-                <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_name ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
+                <input type="text" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_to_edit['name'] ?? "" ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <li class="form__input-item">
                 <label for="server-domain">Server Domain<span>*</span></label>
-                <input type="url" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_domain ?>" tabindex="2" maxlength="100" pattern="^https?://.*$" required>
+                <input type="url" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_to_edit['domain'] ?? "" ?>" tabindex="2" maxlength="100" pattern="^https?://.*$" required>
                 <p class="form__input-item__validation-msg"></p>
             </li>
         </ul>
