@@ -9,7 +9,7 @@
         ?>
         <div class="list-view-page__header">
             <h1>Manage Websites</h1>
-            <button class="default-btn" id="add-website-btn">Add Website</button>
+            <button class="default-btn add-item-btn">Add Website</button>
         </div>
         <div class="list-view-container">
             <?php get_template_part('parts/lists/websites-list'); ?>
