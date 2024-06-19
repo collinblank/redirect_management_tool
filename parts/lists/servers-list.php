@@ -22,7 +22,8 @@ $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
                     <?php endif; ?>
                     <button class="default-btn view-more-btn">View Sites<i class="fa-solid fa-arrow-right-long"></i></button>
                 </div>
-            <?php } ?>
+            </li>
+        <?php } ?>
     </ul>
 <?php else : ?>
     <p>Error: Unable to retrieve results from database.</p>
