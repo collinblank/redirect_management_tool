@@ -15,7 +15,6 @@ if ($websites_search) {
     <ul class="list-view" data-table-name="websites">
         <?php
         foreach ($results as $item) { ?>
-            <?php if ($websites_search && (str_contains(strtolower($item['name']), $websites_search) || str_contains(strtolower($item['domain']), $websites_search))) : ?>
                 <li class="list-view__item <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
                     <div class="list-view__item__info">
                         <h4><?php echo $item['name']; ?></h4>
@@ -36,7 +35,6 @@ if ($websites_search) {
                         <button class="default-btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></button>
                     </div>
                 </li>
-            <?php endif; ?>
         <?php } ?>
     </ul>
 <?php else : ?>
