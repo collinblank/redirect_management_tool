@@ -166,3 +166,9 @@ function initDisableItemFormValidation() {
     disableBtn.disabled = !checkbox.checked;
   });
 }
+
+// websites
+const addWebsiteBtn = document.getElementById("add-website-btn");
+addWebsiteBtn.addEventListener("click", () => {
+  showModal("add");
+});

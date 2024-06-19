@@ -43,7 +43,7 @@ $form_success = $_SESSION['form_success'];
             <button class="default-btn" id="add-server-btn">Add Server</button>
         </div>
         <div class="list-view-container">
-            <?php get_template_part('parts/lists/server-list'); ?>
+            <?php get_template_part('parts/lists/servers-list'); ?>
         </div>
     </div>
 </section>
