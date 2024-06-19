@@ -12,6 +12,11 @@ $results = $wpdb->get_results("SELECT * FROM websites", ARRAY_A);
                     <h4><?php echo $item['name']; ?></h4>
                     <p class="list-view__item__description"><?php echo $item['domain']; ?></p>
                 </div>
+                <div class="list-view__item__flags-container">
+                    <div class="list-view__item__flag <?php echo ($item['isProd']) ? "production" : "test" ?>">
+                        <p><?php echo ($item['isProd']) ? "" : "Test" ?></p>
+                    </div>
+                </div>
                 <div class="list-view__item__btns-container">
                     <button class="icon-btn edit-item-btn" title="Edit Website"><i class="fa-regular fa-pen-to-square"></i></button>
                     <?php if ($item['disabled']) : ?>
