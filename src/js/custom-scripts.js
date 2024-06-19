@@ -1,7 +1,7 @@
 // EVENT LISTENERS
 const addItemBtn = document.querySelector(".add-item-btn");
 addItemBtn.addEventListener("click", (e) => {
-  showModal("edit", e);
+  showModal("add");
 });
 
 const editItemBtns = document.querySelectorAll(".edit-item-btn");
