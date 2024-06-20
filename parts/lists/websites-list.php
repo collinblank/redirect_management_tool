@@ -3,17 +3,23 @@ global $wpdb;
 $results = $wpdb->get_results("SELECT * FROM websites", ARRAY_A);
 // ORDER BY isProd DESC
 
-
-$search_websites = $_POST['search_websites'] ?? "";
-if ($search_websites) {
-    $search_websites = htmlspecialchars(strtolower(trim($search_websites)));
+$websites_search_text = "";
+$show_production_websites = true;
+$show_test_websites = true;
+if (isset($_POST['search_websites'])) {
+    $websites_search_text = htmlspecialchars(strtolower(trim($_POST['websites_search_text'])));
+    // may need to do a redirect here... (in which case move to functions.php)
 }
-
-// may need to do a redirect here... (in which case move to functions.php)
+if (isset($_POST['filter_websites'])) {
+    $show_production_websites = $_POST['show_production_websites'];
+    $show_test_websites = $_POST['show_test_websites'];
+}
 ?>
 
 <p>
-    <?php $search_websites ? "You searched for " . $search_websites : "" ?>
+    <?php $websites_search_text ? "You searched for " . $websites_search_text : "" ?>
+    <?php $show_production_websites ? "You want to see production" : "" ?>
+    <?php $show_test_websites ? "You want to see test" : "" ?>
 </p>
 <?php if ($results) : ?>
     <ul class="list-view" data-table-name="websites">

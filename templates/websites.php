@@ -1,5 +1,10 @@
 <?php /* Template Name: Websites */ ?>
 
+<?php
+// get filter options values if inserted
+
+?>
+
 
 <?php get_header(); ?>
 <section class="page-section list-view-page">
@@ -13,19 +18,18 @@
         </div>
         <div class="list-view-page__filter-container">
             <form method="POST" class="list-view__page__search-form">
-                <input type="text" class="list-view__page__search-input" placeholder="Website name or domain...">
+                <input type="text" class="list-view__page__search-input" name="websites_search_text" placeholder="Website name or domain...">
                 <input type="submit" class="default-btn" name="search_websites" value="Search">
             </form>
             <form method="POST" class="list-view__page__filter-form">
-                <h3>Filter Options</h3>
                 <ul class="form__input-container form__checkbox-container">
                     <li class="form__checkbox-item">
-                        <input type="checkbox" id="show_production_websites">
-                        <label for="show_production_websites">Show Production</label>
+                        <input type="checkbox" id="show-production-websites" name="show_production_websites" checked>
+                        <label for="show-production-websites">Show Production</label>
                     </li>
                     <li class="form__checkbox-item">
-                        <input type="checkbox" id="show_test_websites">
-                        <label for="show_test_websites">Show Test</label>
+                        <input type="checkbox" id="show-test-websites" name="show_test_websites" checked>
+                        <label for="show-test-websites">Show Test</label>
                     </li>
                 </ul>
                 <input type="submit" class="default-btn" name="filter_websites" value="Filter">
