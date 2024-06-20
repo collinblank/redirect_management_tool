@@ -14,22 +14,22 @@
         <div class="list-view-page__filter-container">
             <form method="POST" class="list-view__page__search-form">
                 <input type="text" class="list-view__page__search-input" placeholder="Website name or domain...">
-                <input type="submit" class="default-btn" name="websites_search" value="Search">
+                <input type="submit" class="default-btn" name="search_websites" value="Search">
             </form>
-            <!-- <div>
+            <form method="POST" class="list-view__page__filter-form">
                 <h3>Filter Options</h3>
-                <form action="POST" class="list-view__page__checkbox-form">
-                    <div>
-                        <label for=""></label>
-                        <input type="checkbox" class="list-view__page__search-input">
-                    </div>
-                    <div>
-                        <label for=""></label>
-                        <input type="checkbox" class="list-view__page__search-input">
-                    </div>
-                    <button type="submit" name="">Filter</button>
-                </form>
-            </div> -->
+                <ul class="form__input-container form__checkbox-container">
+                    <li class="form__checkbox-item">
+                        <input type="checkbox" id="show_production_websites">
+                        <label for="show_production_websites">Show Production</label>
+                    </li>
+                    <li class="form__checkbox-item">
+                        <input type="checkbox" id="show_test_websites">
+                        <label for="show_test_websites">Show Test</label>
+                    </li>
+                </ul>
+                <input type="submit" class="default-btn" name="filter_websites" value="Filter">
+            </form>
         </div>
         <div class="list-view-container">
             <?php get_template_part('parts/lists/websites-list'); ?>
