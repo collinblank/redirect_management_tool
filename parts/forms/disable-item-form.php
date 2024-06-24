@@ -44,7 +44,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
             <input type="hidden" name="table_name" value="<?php echo $table_name ?>">
             <div class="disable-item__checkbox">
                 <!-- change id and for -->
-                <input type="checkbox" id="disable-item__checkbox" name="confirm_disable" value="1" tabindex="1" required>
+                <input type="checkbox" id="disable-item__checkbox" name="confirm_disable" tabindex="1" required>
                 <label for="disable-item__checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
             </div>
             <div class="modal-content__btns-container">
