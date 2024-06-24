@@ -1,6 +1,12 @@
 <?php /* Template Name: Websites */ ?>
 
 <?php
+
+
+$search_text = "";
+if (isset($_GET['search_websites'])) {
+    $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
+}
 // get filter options values if inserted
 
 ?>
@@ -18,7 +24,7 @@
         </div>
         <div class="list-view-page__filter-container">
             <form method="GET" class="list-view__page__search-form">
-                <input type="text" class="list-view__page__search-input" name="search_text" placeholder="Website name or domain...">
+                <input type="text" class="list-view__page__search-input" name="search_text" placeholder="Website name or domain..." value="<?php echo $search_text ?>">
                 <input type="submit" class="default-btn" name="search_websites" value="Search">
             </form>
             <form method="GET" class="list-view__page__filter-form">
