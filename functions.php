@@ -215,42 +215,46 @@ function blankslate_comment_count($count)
 require 'functions/form-handlers/validator.php';
 session_start();
 
-// if (isset($_POST['add_server'])) {
-// 	add_server();
-// 	$new_url = add_query_arg('success', $result, get_permalink());
-// 	wp_redirect($new_url, 303);
-// 	exit;
-// }
 
-// function add_server()
-if (isset($_POST['add_server'])) {
-	unset($_SESSION['form_errors']);
-	unset($_SESSION['form_success']);
+// ADD SERVER
+add_action('admin_post_add_server', 'handle_add_server');
+function handle_add_server()
+{
+	global $wpdb;
 
-	$server_name = $_POST['server_name'];
-	$server_domain = $_POST['server_domain'];
-
-	$errors = get_server_form_errors();
-
-	if (!empty($errors)) {
-		$_SESSION['form_errors'] = $errors;
-		add_query_redirect('errors', count($errors));
-		return false;
+	if (!isset($_POST['server_form_nonce_field']) || !wp_verify_nonce($_POST['server_form_nonce_field'], 'server_form_nonce')) {
+		wp_die('Error: Security check failed.');
 	} else {
-		$table_name = 'servers';
-		$data = array(
-			'name' => $server_name,
-			'domain' => $server_domain,
-		);
-		$result = $wpdb->insert($table_name, $data, $format = NULL);
+		unset($_SESSION['form_errors']);
+		unset($_SESSION['form_success']);
 
-		if ($result == 1) {
-			$_SESSION['form_success'] = 'A new server has been successfully created.';
-			// Redirect to prevent form resubmission
-			add_query_redirect('add', $result);
-			return true;
+		$server_name = $_POST['server_name'];
+		$server_domain = $_POST['server_domain'];
+
+		$errors = get_server_form_errors();
+
+		if (!empty($errors)) {
+			$_SESSION['form_errors'] = $errors;
+			wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
+			exit;
+			// add_query_redirect('errors', count($errors));
 		} else {
-			echo "<script>console.log('Unable to save server');</script>";
+			$table_name = 'servers';
+			$data = array(
+				'name' => $server_name,
+				'domain' => $server_domain,
+			);
+			$result = $wpdb->insert($table_name, $data);
+
+			if ($result) {
+				$_SESSION['form_success'] = 'A new server has been successfully created.';
+				wp_safe_redirect(add_query_arg('add', $result, home_url('/' . $table_name)), 303);
+				exit;
+				// Redirect to prevent form resubmission
+				// add_query_redirect('add', $result);
+			} else {
+				echo "<script>console.log('Unable to add new server');</script>";
+			}
 		}
 	}
 }
@@ -290,7 +294,7 @@ if (isset($_POST['edit_server'])) {
 
 
 // DISABLE ITEM
-
+add_action('admin_post_disable_item', 'handle_disable_item');
 function handle_disable_item()
 {
 	global $wpdb;
@@ -319,8 +323,6 @@ function handle_disable_item()
 		wp_die('Error: Unable to meet conditions to disable item. Please return to the previous page.');
 	}
 }
-
-add_action('admin_post_disable_item', 'handle_disable_item');
 // add_action('admin_post_nopriv_disable_item', 'handle_disable_item');
 // skip this above nopriv hook for non-logged in users, since users must be logged in to access these forms
 
