@@ -1,19 +1,26 @@
 <?php
 global $wpdb;
-$results = $wpdb->get_results("SELECT * FROM websites", ARRAY_A);
+$sql = "SELECT * FROM websites";
+
 // ORDER BY isProd DESC
 
 $websites_search_text = "";
-$show_production_websites = true;
-$show_test_websites = true;
+// $show_production_websites = true;
+// $show_test_websites = true;
 if (isset($_GET['search_websites'])) {
-    $websites_search_text = htmlspecialchars(strtolower(trim($_GET['websites_search_text'])));
+    $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
+    if (!empty($search_text)) {
+        $search_text = "%{$search_text}%";
+        $sql = "SELECT * FROM websites WHERE name LIKE $search_text || domain LIKE $search_text";
+    }
     // may need to do a redirect here... (in which case move to functions.php)
 }
-if (isset($_GET['filter_websites'])) {
-    $show_production_websites = $_GET['show_production_websites'];
-    $show_test_websites = $_GET['show_test_websites'];
-}
+// if (isset($_GET['filter_websites'])) {
+//     $show_production_websites = $_GET['show_production_websites'];
+//     $show_test_websites = $_GET['show_test_websites'];
+// }
+
+$results = $wpdb->get_results($sql, ARRAY_A);
 ?>
 
 <p>

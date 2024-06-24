@@ -18,7 +18,7 @@
         </div>
         <div class="list-view-page__filter-container">
             <form method="GET" class="list-view__page__search-form">
-                <input type="text" class="list-view__page__search-input" name="websites_search_text" placeholder="Website name or domain...">
+                <input type="text" class="list-view__page__search-input" name="search_text" placeholder="Website name or domain...">
                 <input type="submit" class="default-btn" name="search_websites" value="Search">
             </form>
             <form method="GET" class="list-view__page__filter-form">
