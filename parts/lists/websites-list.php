@@ -6,13 +6,13 @@ $results = $wpdb->get_results("SELECT * FROM websites", ARRAY_A);
 $websites_search_text = "";
 $show_production_websites = true;
 $show_test_websites = true;
-if (isset($_POST['search_websites'])) {
-    $websites_search_text = htmlspecialchars(strtolower(trim($_POST['websites_search_text'])));
+if (isset($_GET['search_websites'])) {
+    $websites_search_text = htmlspecialchars(strtolower(trim($_GET['websites_search_text'])));
     // may need to do a redirect here... (in which case move to functions.php)
 }
-if (isset($_POST['filter_websites'])) {
-    $show_production_websites = $_POST['show_production_websites'];
-    $show_test_websites = $_POST['show_test_websites'];
+if (isset($_GET['filter_websites'])) {
+    $show_production_websites = $_GET['show_production_websites'];
+    $show_test_websites = $_GET['show_test_websites'];
 }
 ?>
 
@@ -31,6 +31,11 @@ if (isset($_POST['filter_websites'])) {
                     <p class="list-view__item__description"><?php echo $item['domain']; ?></p>
                 </div>
                 <div class="list-view__item__flags-container">
+                    <?php if ($item['disabled']) : ?>
+                        <div class="list-view__item__flag red">
+                            <p>Disabled</p>
+                        </div>
+                    <?php endif; ?>
                     <div class="list-view__item__flag <?php echo ($item['isProd']) ? "green" : "yellow" ?>">
                         <p><?php echo ($item['isProd']) ? "Production" : "Test" ?></p>
                     </div>
