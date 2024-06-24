@@ -11,7 +11,7 @@ if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
     if (!empty($search_text)) {
         $search_text = "%{$search_text}%";
-        $sql = "SELECT * FROM websites WHERE name LIKE $search_text || domain LIKE $search_text";
+        $sql = "SELECT * FROM websites WHERE name LIKE '$search_text' OR domain LIKE '$search_text'";
     }
     // may need to do a redirect here... (in which case move to functions.php)
 }
