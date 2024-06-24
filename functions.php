@@ -297,7 +297,7 @@ function handle_disable_item()
 
 	if (!isset($_POST['disable_item_form_nonce_field']) || !wp_verify_nonce($_POST['disable_item_form_nonce_field'], 'disable_item_form_nonce')) {
 		wp_die('Error: Security check failed.');
-	} elseif (isset($_POST['confirm_disable'])) {
+	} elseif (isset($_POST['disable_item']) && isset($_POST['confirm_disable']) && $_POST['confirm_disable'] == 1) {
 		$table_name = sanitize_text_field($_POST['table_name']);
 		$item_id = intval($_POST['item_id']);
 		$data = array(
@@ -312,9 +312,6 @@ function handle_disable_item()
 		if ($result) {
 			wp_safe_redirect(add_query_arg('disable', $item_id, home_url('/' . $table_name)), 303);
 			exit;
-			// add_query_redirect('disable', $item_id);
-			// wp_safe_redirect(add_query_arg('disable', $item_id, home_url()));
-			// exit;
 		} else {
 			wp_die('Error: Unable to disable item. Please return to the previous page.');
 		}
