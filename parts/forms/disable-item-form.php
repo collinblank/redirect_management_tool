@@ -3,8 +3,9 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 $item_name = '';
-$item_info = '';
+$item_description = '';
 $item_type = '';
+$table_name = '';
 
 if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     global $wpdb;
@@ -16,12 +17,12 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     if ($item) {
         $item_name = $item['name'];
         if ($table_name === 'servers' || $table_name === 'websites') {
-            $item_info = $item['domain'];
+            $item_description = $item['domain'];
             $item_type = substr($table_name, 0, -1);
         }
-        // for websites and servers this is fine.
-        // It'll be more complex logic to figure out what the item_info should be for redirect rules and redirect flags, 
-        // and may involve connecting to multiple tables
+        /* for websites and servers this is fine.
+         It'll be more complex logic to figure out what the item_description should be for redirect rules and redirect flags, 
+         and may involve connecting to multiple tables */
     }
 }
 ?>
@@ -34,18 +35,21 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     <div class="modal-content__section">
         <div class="disable-item__list-item">
             <h4><?php echo $item_name; ?></h4>
-            <p class="disable-item__list-item__description"><?php echo $item_info; ?></p>
+            <p class="disable-item__list-item__description"><?php echo $item_description; ?></p>
         </div>
-        <form method="POST" class="disable-item__form" id="disable-item__form">
+        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="disable-item__form" id="disable-item__form">
+            <input type="hidden" name="action" value="disable_item">
+            <?php wp_nonce_field('disable_item_form_nonce', 'disable_item_form_nonce_field'); ?>
+            <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
+            <input type="hidden" name="table_name" value="<?php echo $table_name ?>">
             <div class="disable-item__checkbox">
                 <!-- change id and for -->
-                <input type="checkbox" id="disable-item__checkbox" tabindex="1" required>
+                <input type="checkbox" id="disable-item__checkbox" name="confirm_disable" tabindex="1" required>
                 <label for="disable-item__checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
             </div>
             <div class="modal-content__btns-container">
-                <input type="submit" class="default-btn red-btn" name="disable_<?php echo $item_type ?>" value="Disable" tabindex="2" disabled />
-                <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
                 <button type="button" class="default-btn blue-btn" id="modal-cancel-btn" tabindex="3">Cancel</button>
+                <input type="submit" class="default-btn red-btn" value="Disable" tabindex="2" disabled />
             </div>
         </form>
     </div>

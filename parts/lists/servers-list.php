@@ -13,6 +13,13 @@ $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
                     <h4><?php echo $item['name']; ?></h4>
                     <p class="list-view__item__description"><?php echo $item['domain']; ?></p>
                 </div>
+                <?php if ($item['disabled']) : ?>
+                    <div class="list-view__item__flags-container">
+                        <div class="list-view__item__flag red">
+                            <p>Disabled</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
                 <div class="list-view__item__btns-container">
                     <button class="icon-btn edit-item-btn" title="Edit Server"><i class="fa-regular fa-pen-to-square"></i></button>
                     <?php if ($item['disabled']) : ?>
