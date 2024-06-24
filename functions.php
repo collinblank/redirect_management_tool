@@ -212,49 +212,22 @@ function blankslate_comment_count($count)
 
 // CUSTOM FUNCTIONS BELOW THIS LINE
 
+// Show private pages in menu builder
+add_filter('nav_menu_meta_box_object', 'show_private_pages_menu_selection');
+/**
+ * Add query argument for selecting pages to add to a menu
+ */
+function show_private_pages_menu_selection($args)
+{
+	if ($args->name == 'page') {
+		$args->_default_query['post_status'] = array('publish', 'private');
+	}
+	return $args;
+}
+
+
 require 'functions/form-handlers/validator.php';
 session_start();
-
-
-// ADD SERVER
-// add_action('admin_post_add_server', 'handle_add_server');
-// function handle_add_server()
-// {
-// 	global $wpdb;
-
-// 	if (!isset($_POST['server_form_nonce_field']) || !wp_verify_nonce($_POST['server_form_nonce_field'], 'server_form_nonce')) {
-// 		wp_die('Error: Security check failed.');
-// 	} else {
-// 		unset($_SESSION['form_errors']);
-// 		unset($_SESSION['form_success']);
-
-// 		$server_name = $_POST['server_name'];
-// 		$server_domain = $_POST['server_domain'];
-
-// 		$errors = get_server_form_errors();
-
-// 		if (!empty($errors)) {
-// 			$_SESSION['form_errors'] = $errors;
-// 			wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
-// 			exit;
-// 		} else {
-// 			$table_name = 'servers';
-// 			$data = array(
-// 				'name' => $server_name,
-// 				'domain' => $server_domain,
-// 			);
-// 			$result = $wpdb->insert($table_name, $data);
-
-// 			if ($result) {
-// 				$_SESSION['form_success'] = 'A new server has been successfully created.';
-// 				wp_safe_redirect(add_query_arg('add', $result, home_url('/' . $table_name)), 303);
-// 				exit;
-// 			} else {
-// 				echo "<script>console.log('Unable to add new server');</script>";
-// 			}
-// 		}
-// 	}
-// }
 
 // HANDLE SERVER FORM SUBMISSIONS FOR ADDING AND EDITING
 add_action('admin_post_server_form', 'handle_server_form_submit');
@@ -338,49 +311,6 @@ function handle_disable_item()
 	}
 }
 
-// I don't think this is necessary
-// if (isset($_POST['notice_banner'])) {
-// 	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
-// 	$url_parts = explode('?', $current_url);
-// 	wp_redirect($url_parts[0], 303);
-// 	exit;
-// }
-
-
-// Show private pages in menu builder
-add_filter('nav_menu_meta_box_object', 'show_private_pages_menu_selection');
-/**
- * Add query argument for selecting pages to add to a menu
- */
-function show_private_pages_menu_selection($args)
-{
-	if ($args->name == 'page') {
-		$args->_default_query['post_status'] = array('publish', 'private');
-	}
-	return $args;
-}
-
-
-// function handle_form_submission_redirect($location, $query, $value)
-// {
-// 	// $current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
-// 	// $url_parts = explode('?', $current_url);
-// 	// $new_url = add_query_arg($query, $value, $url_parts[0]);
-// 	wp_safe_redirect(add_query_arg($query, $value, home_url('/' . $location)), 303);
-// 	exit;
-// }
-
-// function add_query_redirect($query, $value)
-// {
-// 	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
-// 	// if ($current_url) {
-// 	$url_parts = explode('?', $current_url);
-// 	$new_url = add_query_arg($query, $value, $url_parts[0]);
-// 	wp_redirect($new_url, 303);
-// 	exit;
-// 	// }
-// }
-
 function get_server_form_errors()
 {
 	$server_name = $_POST['server_name'];
@@ -408,7 +338,6 @@ function get_server_form_errors()
 
 
 // WEBSITE FUNCTIONS
-
 add_action('admin_post_website_form', 'handle_website_form_submit');
 function handle_website_form_submit()
 {

@@ -22,7 +22,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     <div class="modal-content__header">
         <h3><?php echo ucfirst($action) . " Website" ?></h3>
     </div>
-    <form method="POST" class="modal-content__section modal-form">
+    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-content__section modal-form">
         <input type="hidden" name="action" value="website_form">
         <?php wp_nonce_field('website_form_nonce', 'website_form_nonce_field'); ?>
         <?php if ($item_id) : ?>
