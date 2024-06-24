@@ -318,6 +318,8 @@ function handle_disable_item()
 		} else {
 			echo "<script>console.log('Unable to disable item');</script>";
 		}
+	} else {
+		echo "<script>console.log('If statement conditions not met');</script>";
 	}
 }
 
