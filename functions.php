@@ -310,7 +310,9 @@ function handle_disable_item()
 		$result = $wpdb->update($table_name, $data, $where);
 
 		if ($result) {
-			add_query_redirect('disable', $item_id);
+			wp_safe_redirect(add_query_arg('disable', $item_id, home_url('/' . $table_name)), 303);
+			exit;
+			// add_query_redirect('disable', $item_id);
 			// wp_safe_redirect(add_query_arg('disable', $item_id, home_url()));
 			// exit;
 		} else {
@@ -346,6 +348,15 @@ function show_private_pages_menu_selection($args)
 	return $args;
 }
 
+
+// function handle_form_submission_redirect($location, $query, $value)
+// {
+// 	// $current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
+// 	// $url_parts = explode('?', $current_url);
+// 	// $new_url = add_query_arg($query, $value, $url_parts[0]);
+// 	wp_safe_redirect(add_query_arg($query, $value, home_url('/' . $location)), 303);
+// 	exit;
+// }
 
 function add_query_redirect($query, $value)
 {
