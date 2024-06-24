@@ -17,18 +17,18 @@
             <button class="default-btn add-item-btn">Add Website</button>
         </div>
         <div class="list-view-page__filter-container">
-            <form method="POST" class="list-view__page__search-form">
+            <form method="GET" class="list-view__page__search-form">
                 <input type="text" class="list-view__page__search-input" name="websites_search_text" placeholder="Website name or domain...">
                 <input type="submit" class="default-btn" name="search_websites" value="Search">
             </form>
-            <form method="POST" class="list-view__page__filter-form">
+            <form method="GET" class="list-view__page__filter-form">
                 <ul class="form__input-container form__checkbox-container">
                     <li class="form__checkbox-item">
-                        <input type="checkbox" id="show-production-websites" name="show_production_websites" checked>
+                        <input type="checkbox" id="show-production-websites" name="show_production_websites">
                         <label for="show-production-websites">Show Production</label>
                     </li>
                     <li class="form__checkbox-item">
-                        <input type="checkbox" id="show-test-websites" name="show_test_websites" checked>
+                        <input type="checkbox" id="show-test-websites" name="show_test_websites">
                         <label for="show-test-websites">Show Test</label>
                     </li>
                 </ul>
