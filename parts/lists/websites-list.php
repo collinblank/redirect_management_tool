@@ -31,6 +31,11 @@ if (isset($_POST['filter_websites'])) {
                     <p class="list-view__item__description"><?php echo $item['domain']; ?></p>
                 </div>
                 <div class="list-view__item__flags-container">
+                    <?php if ($item['disabled']) : ?>
+                        <div class="list-view__item__flag red">
+                            <p>Disabled</p>
+                        </div>
+                    <?php endif; ?>
                     <div class="list-view__item__flag <?php echo ($item['isProd']) ? "green" : "yellow" ?>">
                         <p><?php echo ($item['isProd']) ? "Production" : "Test" ?></p>
                     </div>
