@@ -19,7 +19,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         <h3><?php echo ucfirst($action) . " Server" ?></h3>
     </div>
     <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-content__section modal-form">
-        <input type="hidden" name="action" value="<?php echo $action . "_server" ?>">
+        <input type="hidden" name="action" value="server_form">
         <?php wp_nonce_field('server_form_nonce', 'server_form_nonce_field'); ?>
         <?php if ($item_id) : ?>
             <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
