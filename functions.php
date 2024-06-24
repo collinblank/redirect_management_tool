@@ -217,8 +217,48 @@ session_start();
 
 
 // ADD SERVER
-add_action('admin_post_add_server', 'handle_add_server');
-function handle_add_server()
+// add_action('admin_post_add_server', 'handle_add_server');
+// function handle_add_server()
+// {
+// 	global $wpdb;
+
+// 	if (!isset($_POST['server_form_nonce_field']) || !wp_verify_nonce($_POST['server_form_nonce_field'], 'server_form_nonce')) {
+// 		wp_die('Error: Security check failed.');
+// 	} else {
+// 		unset($_SESSION['form_errors']);
+// 		unset($_SESSION['form_success']);
+
+// 		$server_name = $_POST['server_name'];
+// 		$server_domain = $_POST['server_domain'];
+
+// 		$errors = get_server_form_errors();
+
+// 		if (!empty($errors)) {
+// 			$_SESSION['form_errors'] = $errors;
+// 			wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
+// 			exit;
+// 		} else {
+// 			$table_name = 'servers';
+// 			$data = array(
+// 				'name' => $server_name,
+// 				'domain' => $server_domain,
+// 			);
+// 			$result = $wpdb->insert($table_name, $data);
+
+// 			if ($result) {
+// 				$_SESSION['form_success'] = 'A new server has been successfully created.';
+// 				wp_safe_redirect(add_query_arg('add', $result, home_url('/' . $table_name)), 303);
+// 				exit;
+// 			} else {
+// 				echo "<script>console.log('Unable to add new server');</script>";
+// 			}
+// 		}
+// 	}
+// }
+
+// HANDLE SERVER FORM SUBMISSIONS FOR ADDING AND EDITING
+add_action('admin_post_server_form', 'handle_server_form_submit');
+function handle_server_form_submit()
 {
 	global $wpdb;
 
@@ -228,8 +268,15 @@ function handle_add_server()
 		unset($_SESSION['form_errors']);
 		unset($_SESSION['form_success']);
 
-		$server_name = $_POST['server_name'];
-		$server_domain = $_POST['server_domain'];
+		$table_name = 'servers';
+		$data = array(
+			'name' => $_POST['server_name'],
+			'domain' => $_POST['server_domain'],
+		);
+		$item_id = $_POST['item_id'] ?? NULL;
+		$where = array(
+			'id' => $item_id
+		);
 
 		$errors = get_server_form_errors();
 
@@ -237,61 +284,29 @@ function handle_add_server()
 			$_SESSION['form_errors'] = $errors;
 			wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
 			exit;
-			// add_query_redirect('errors', count($errors));
-		} else {
-			$table_name = 'servers';
-			$data = array(
-				'name' => $server_name,
-				'domain' => $server_domain,
-			);
+		} elseif (!$item_id) {
+			// for adding...
 			$result = $wpdb->insert($table_name, $data);
-
 			if ($result) {
 				$_SESSION['form_success'] = 'A new server has been successfully created.';
 				wp_safe_redirect(add_query_arg('add', $result, home_url('/' . $table_name)), 303);
 				exit;
-				// Redirect to prevent form resubmission
-				// add_query_redirect('add', $result);
 			} else {
 				echo "<script>console.log('Unable to add new server');</script>";
+			}
+		} elseif ($item_id) {
+			// for editing...
+			$result = $wpdb->update($table_name, $data, $where);
+			if ($result) {
+				$_SESSION['form_success'] = 'The server was successfully edited.';
+				wp_safe_redirect(add_query_arg('edit', $item_id, home_url('/' . $table_name)), 303);
+				exit;
+			} else {
+				echo "<script>console.log('Unable to edit server');</script>";
 			}
 		}
 	}
 }
-
-
-if (isset($_POST['edit_server'])) {
-	unset($_SESSION['form_errors']);
-	unset($_SESSION['form_success']);
-
-	$table_name = 'servers';
-	$item_id = $_POST['item_id'];
-	$data = array(
-		'name' => $_POST['server_name'],
-		'domain' => $_POST['server_domain'],
-	);
-	$where = array(
-		'id' => $item_id
-	);
-
-	$errors = get_server_form_errors();
-
-	if (!empty($errors)) {
-		$_SESSION['form_errors'] = $errors;
-		add_query_redirect('errors', count($errors));
-		return false;
-	} else {
-		$result = $wpdb->update($table_name, $data, $where);
-		if ($result == 1) {
-			$_SESSION['form_success'] = 'The server was successfully edited.';
-			add_query_redirect('edit', $item_id);
-			return true;
-		} else {
-			echo "<script>console.log('Unable to edit server');</script>";
-		}
-	}
-}
-
 
 // DISABLE ITEM
 add_action('admin_post_disable_item', 'handle_disable_item');
