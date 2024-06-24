@@ -23,6 +23,11 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         <h3><?php echo ucfirst($action) . " Website" ?></h3>
     </div>
     <form method="POST" class="modal-content__section modal-form">
+        <input type="hidden" name="action" value="website_form">
+        <?php wp_nonce_field('website_form_nonce', 'website_form_nonce_field'); ?>
+        <?php if ($item_id) : ?>
+            <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
+        <?php endif; ?>
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="website-name">Name<span>*</span></label>
@@ -61,10 +66,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         </ul>
         <div class="modal-content__btns-container">
             <button type="button" class="default-btn" id="modal-cancel-btn" tabindex="5">Cancel</button>
-            <?php if ($item_id) : ?>
-                <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
-            <?php endif; ?>
-            <input type="submit" class="default-btn blue-btn" name="<?php echo $action . "_website" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="6" disabled />
+            <input type="submit" class="default-btn blue-btn" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="6" disabled />
         </div>
     </form>
 </div>

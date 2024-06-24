@@ -277,7 +277,6 @@ function handle_server_form_submit()
 		$where = array(
 			'id' => $item_id
 		);
-
 		$errors = get_server_form_errors();
 
 		if (!empty($errors)) {
@@ -285,7 +284,7 @@ function handle_server_form_submit()
 			wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
 			exit;
 		} elseif (!$item_id) {
-			// for adding...
+			// for adding
 			$result = $wpdb->insert($table_name, $data);
 			if ($result) {
 				$_SESSION['form_success'] = 'A new server has been successfully created.';
@@ -295,7 +294,7 @@ function handle_server_form_submit()
 				echo "<script>console.log('Unable to add new server');</script>";
 			}
 		} elseif ($item_id) {
-			// for editing...
+			// for editing
 			$result = $wpdb->update($table_name, $data, $where);
 			if ($result) {
 				$_SESSION['form_success'] = 'The server was successfully edited.';
@@ -338,15 +337,14 @@ function handle_disable_item()
 		wp_die('Error: Unable to meet conditions to disable item. Please return to the previous page.');
 	}
 }
-// add_action('admin_post_nopriv_disable_item', 'handle_disable_item');
-// skip this above nopriv hook for non-logged in users, since users must be logged in to access these forms
 
-if (isset($_POST['notice_banner'])) {
-	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
-	$url_parts = explode('?', $current_url);
-	wp_redirect($url_parts[0], 303);
-	exit;
-}
+// I don't think this is necessary
+// if (isset($_POST['notice_banner'])) {
+// 	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
+// 	$url_parts = explode('?', $current_url);
+// 	wp_redirect($url_parts[0], 303);
+// 	exit;
+// }
 
 
 // Show private pages in menu builder
@@ -372,16 +370,16 @@ function show_private_pages_menu_selection($args)
 // 	exit;
 // }
 
-function add_query_redirect($query, $value)
-{
-	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
-	// if ($current_url) {
-	$url_parts = explode('?', $current_url);
-	$new_url = add_query_arg($query, $value, $url_parts[0]);
-	wp_redirect($new_url, 303);
-	exit;
-	// }
-}
+// function add_query_redirect($query, $value)
+// {
+// 	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
+// 	// if ($current_url) {
+// 	$url_parts = explode('?', $current_url);
+// 	$new_url = add_query_arg($query, $value, $url_parts[0]);
+// 	wp_redirect($new_url, 303);
+// 	exit;
+// 	// }
+// }
 
 function get_server_form_errors()
 {
@@ -411,40 +409,85 @@ function get_server_form_errors()
 
 // WEBSITE FUNCTIONS
 
-// add website
-if (isset($_POST['add_website'])) {
-	unset($_SESSION['form_errors']);
-	unset($_SESSION['form_success']);
+add_action('admin_post_website_form', 'handle_website_form_submit');
+function handle_website_form_submit()
+{
+	global $wpdb;
 
-	$website_name = $_POST['website_name'];
-	$website_domain = $_POST['website_domain'];
-	$website_server = $_POST['website_server'];
-	$website_sandbox = $_POST['website_sandbox'];
-
-	// $errors = get_server_form_errors();
-	$errors = array();
-
-	if (!empty($errors)) {
-		$_SESSION['form_errors'] = $errors;
-		add_query_redirect('errors', count($errors));
-		return false;
+	if (!isset($_POST['website_form_nonce_field']) || !wp_verify_nonce($_POST['website_form_nonce_field'], 'website_form_nonce')) {
+		wp_die('Error: Security check failed.');
 	} else {
+		unset($_SESSION['form_errors']);
+		unset($_SESSION['form_success']);
+
 		$table_name = 'websites';
 		$data = array(
-			'name' => $website_name,
-			'domain' => $website_domain,
-			'serverId' => $website_server,
-			'sandboxId' => $website_sandbox,
+			'name' => $_POST['website_name'],
+			'domain' => $_POST['website_domain'],
+			'serverId' => $_POST['website_server'],
+			'sandboxId' => $_POST['website_sandbox'],
 		);
-		$result = $wpdb->insert($table_name, $data, $format = NULL);
+		$item_id = $_POST['item_id'] ?? NULL;
+		$where = array(
+			'id' => $item_id
+		);
 
-		if ($result == 1) {
-			$_SESSION['form_success'] = 'A new website has been successfully created.';
-			// Redirect to prevent form resubmission
-			add_query_redirect('add', $result);
-			return true;
-		} else {
-			echo "<script>console.log('Unable to save website');</script>";
+		// $errors = get_website_form_errors();
+		$errors = array();
+
+		if (!empty($errors)) {
+			$_SESSION['form_errors'] = $errors;
+			wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
+			exit;
+		} elseif (!$item_id) {
+			// for adding
+			$result = $wpdb->insert($table_name, $data);
+			if ($result) {
+				$_SESSION['form_success'] = 'A new website has been successfully created.';
+				wp_safe_redirect(add_query_arg('add', $result, home_url('/' . $table_name)), 303);
+				exit;
+			} else {
+				echo "<script>console.log('Unable to add website');</script>";
+			}
+		} elseif ($item_id) {
+			// for editing
+			$result = $wpdb->update($table_name, $data, $where);
+			if ($result) {
+				$_SESSION['form_success'] = 'The website was successfully edited.';
+				wp_safe_redirect(add_query_arg('edit', $item_id, home_url('/' . $table_name)), 303);
+				exit;
+			} else {
+				echo "<script>console.log('Unable to edit website');</script>";
+			}
 		}
 	}
 }
+
+
+// function get_website_form_errors()
+// {
+// 	$name = $_POST['server_name'];
+// 	$domain = $_POST['server_domain'];
+// 	$server_id = $_POST['website_server'];
+// 	$sandbox_id = $_POST['website_sandbox'];
+// 	$errors = [];
+
+// 	// hmm
+// 	if (!Validator::string($name, 4, 50) || !Validator::letters_and_spaces($name)) {
+// 		if (strlen($name) == 0) {
+// 			$errors['name'] = 'Please enter a value for your server name (including 4 to 50 letters and spaces).';
+// 		} else {
+// 			$errors['name'] = $name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.';
+// 		}
+// 	}
+
+// 	if (!Validator::string($domain, 6, 100) || !Validator::url($domain)) {
+// 		if (strlen($domain) == 0) {
+// 			$errors['domain'] = 'Please enter a value for your server domain.';
+// 		} else {
+// 			$errors['domain'] = $domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.';
+// 		}
+// 	}
+
+// 	return $errors;
+// }
