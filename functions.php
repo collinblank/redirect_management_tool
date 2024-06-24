@@ -288,24 +288,42 @@ if (isset($_POST['edit_server'])) {
 	}
 }
 
-if (isset($_POST['disable_server'])) {
-	$table_name = 'servers';
-	$item_id = $_POST['item_id'];
-	$data = array(
-		'disabled' => 1
-	);
-	$where = array(
-		'id' => $item_id
-	);
 
-	$result = $wpdb->update($table_name, $data, $where);
+// DISABLE ITEM
 
-	if ($result == 1) {
-		add_query_redirect('disable', $item_id);
-	} else {
-		echo "<script>console.log('Unable to disable server');</script>";
+function handle_disable_item()
+{
+	global $wpdb;
+
+	if (!isset($_POST['disable_item_form_nonce_field']) || !wp_verify_nonce($_POST['disable_item_form_nonce_field'], 'disable_item_form_nonce')) {
+		wp_die('Security check failed.');
+	}
+
+	if (isset($_POST['disable_item']) && (isset($_POST['confirm_disable']) && $_POST['confirm_disable'] == '1')) {
+		$table_name = sanitize_text_field($_POST['table_name']);
+		$item_id = intval($_POST['item_id']);
+		$data = array(
+			'disabled' => 1
+		);
+		$where = array(
+			'id' => $item_id
+		);
+
+		$result = $wpdb->update($table_name, $data, $where);
+
+		if ($result) {
+			add_query_redirect('disable', $item_id);
+			// wp_safe_redirect(add_query_arg('disable', $item_id, home_url()));
+			// exit;
+		} else {
+			echo "<script>console.log('Unable to disable item');</script>";
+		}
 	}
 }
+
+add_action('admin_post_disable_item', 'handle_disable_item');
+// add_action('admin_post_nopriv_disable_item', 'handle_disable_item');
+// skip this above nopriv hook for non-logged in users, since users must be logged in to access these forms
 
 if (isset($_POST['notice_banner'])) {
 	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
@@ -333,7 +351,7 @@ function add_query_redirect($query, $value)
 {
 	$current_url = esc_url(home_url($_SERVER['REQUEST_URI']));
 	// if ($current_url) {
-	$url_parts = explode('?', $$current_url);
+	$url_parts = explode('?', $current_url);
 	$new_url = add_query_arg($query, $value, $url_parts[0]);
 	wp_redirect($new_url, 303);
 	exit;
