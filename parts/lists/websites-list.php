@@ -4,7 +4,7 @@ $sql = "SELECT * FROM websites";
 
 // ORDER BY isProd DESC
 
-$websites_search_text = "";
+$search_text = "";
 // $show_production_websites = true;
 // $show_test_websites = true;
 if (isset($_GET['search_websites'])) {
@@ -24,7 +24,6 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 ?>
 
 <p>
-    <?php $websites_search_text ? "You searched for " . $websites_search_text : "" ?>
     <?php $show_production_websites ? "You want to see production" : "" ?>
     <?php $show_test_websites ? "You want to see test" : "" ?>
 </p>
