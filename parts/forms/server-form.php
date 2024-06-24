@@ -18,7 +18,12 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     <div class="modal-content__header">
         <h3><?php echo ucfirst($action) . " Server" ?></h3>
     </div>
-    <form method="POST" class="modal-content__section modal-form">
+    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-content__section modal-form">
+        <input type="hidden" name="action" value="<?php echo $action . "_server" ?>">
+        <?php wp_nonce_field('server_form_nonce', 'server_form_nonce_field'); ?>
+        <?php if ($item_id) : ?>
+            <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
+        <?php endif; ?>
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="server-name">Server Name<span>*</span></label>
@@ -33,10 +38,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         </ul>
         <div class="modal-content__btns-container">
             <button type="button" class="default-btn" id="modal-cancel-btn" tabindex="3">Cancel</button>
-            <?php if ($item_id) : ?>
-                <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
-            <?php endif; ?>
-            <input type="submit" class="default-btn blue-btn" name="<?php echo $action . "_server" ?>" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" disabled />
+            <input type="submit" class="default-btn blue-btn" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" disabled />
         </div>
     </form>
 </div>
