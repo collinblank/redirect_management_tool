@@ -28,7 +28,7 @@ if (isset($_GET['search_websites'])) {
                 <input type="submit" class="default-btn" name="search_websites" value="Search">
                 <!-- <input type="submit" class="default-btn" name="view_all_websites" value="View All"> -->
             </form>
-            <form method="GET" class="list-view__page__filter-form">
+            <!-- <form method="GET" class="list-view__page__filter-form">
                 <ul class="form__input-container form__checkbox-container">
                     <li class="form__checkbox-item">
                         <input type="checkbox" id="show-production-websites" name="show_prod_websites" value="1">
@@ -40,7 +40,7 @@ if (isset($_GET['search_websites'])) {
                     </li>
                 </ul>
                 <input type="submit" class="default-btn" name="filter_websites" value="Filter">
-            </form>
+            </form> -->
         </div>
         <div class="list-view-container">
             <?php get_template_part('parts/lists/websites-list'); ?>
