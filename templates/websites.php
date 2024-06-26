@@ -2,8 +2,6 @@
 
 <?php
 
-
-$search_text = "";
 if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
 }
