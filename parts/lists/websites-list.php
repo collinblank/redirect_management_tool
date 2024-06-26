@@ -8,8 +8,7 @@ if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
     $like = "LIKE '%" . $wpdb->esc_like($search_text) . "%'";
     if (!empty($search_text)) {
-        $where = " WHERE name $like OR domain $like";
-        // echo "<script>console.log('$search_text', '$like')</script>";
+        $where = $wpdb->prepare(" WHERE name %s OR domain %s", $like, $like);
     }
 }
 if (isset($_GET['view_all_websites'])) {
@@ -18,7 +17,7 @@ if (isset($_GET['view_all_websites'])) {
     $where = "";
 }
 
-$sql = $wpdb->prepare("SELECT * FROM websites" . $where);
+$sql = "SELECT * FROM websites" . $where;
 $results = $wpdb->get_results($sql, ARRAY_A);
 
 // if (isset($_GET['filter_websites'])) {
