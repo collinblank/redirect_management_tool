@@ -33,7 +33,9 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 
 ?>
 
+
 <?php if (!empty($search_text)) : ?>
+    <?php echo $like . ', ' . $where ?>
     <div class="list-view-page__results-shown">
         <p><?php echo empty($results) ? "No results found for" : "Showing all results for" ?> "<?php echo $search_text ?>".</p>
         <form method="GET">
