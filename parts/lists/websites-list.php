@@ -1,7 +1,6 @@
 <?php
 global $wpdb;
-$sql = "SELECT * FROM websites";
-$where = "";
+$select = "SELECT * FROM websites";
 $search_text = NULL;
 
 // ORDER BY isProd DESC
@@ -11,13 +10,15 @@ if (isset($_GET['search_websites'])) {
     if (!empty($search_text)) {
         $where = " WHERE name LIKE '%$search_text%' OR domain LIKE '%$search_text%'";
     }
-} elseif (isset($_GET['view_all_websites'])) {
+}
+if (isset($_GET['view_all_websites'])) {
     // could also just remove query params
-    $where = "";
     $search_text = NULL;
+    $where = "";
 }
 
-$results = $wpdb->get_results($sql . $where, ARRAY_A);
+$sql = $wpdb->prepare($select . $where);
+$results = $wpdb->get_results($sql, ARRAY_A);
 
 // if (isset($_GET['filter_websites'])) {
 //     if (!isset($_GET['show_prod_websites']) && !isset($_GET['show_test_websites'])) {
@@ -31,7 +32,7 @@ $results = $wpdb->get_results($sql . $where, ARRAY_A);
 
 ?>
 
-<?php if (isset($search_text)) : ?>
+<?php if (!empty($search_text)) : ?>
     <div class="list-view-page__results-shown">
         <p><?php echo empty($results) ? "No results found for" : "Showing all results for" ?> "<?php echo $search_text ?>".</p>
         <form method="GET">
@@ -39,7 +40,7 @@ $results = $wpdb->get_results($sql . $where, ARRAY_A);
         </form>
     </div>
 <?php endif; ?>
-<?php if ($results) : ?>
+<?php if (!empty($results)) : ?>
     <ul class="list-view" data-table-name="websites">
         <?php
         foreach ($results as $item) { ?>
@@ -70,6 +71,7 @@ $results = $wpdb->get_results($sql . $where, ARRAY_A);
             </li>
         <?php } ?>
     </ul>
-<?php else : ?>
+    <!-- if search text is null and there are no results -->
+<?php elseif (!isset($search_text) && empty($results)) : ?>
     <p>Error: Unable to retrieve results from database.</p>
 <?php endif; ?>
