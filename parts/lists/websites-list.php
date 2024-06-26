@@ -6,8 +6,10 @@ $search_text = NULL;
 
 if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
+    $like = "LIKE '%" . $wpdb->esc_sql($search_text) . "%'";
     if (!empty($search_text)) {
-        $where = " WHERE LOWER(name) LIKE '%$search_text%' OR LOWER(domain) LIKE '%$search_text%'";
+        $where = " WHERE name $like OR domain $like";
+        echo "<script>console.log($search_text, $like)</script>";
     }
 }
 if (isset($_GET['view_all_websites'])) {
