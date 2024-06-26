@@ -6,9 +6,9 @@ $search_text = NULL;
 
 if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
-    $like = "LIKE '%" . $wpdb->esc_like($search_text) . "%'";
+    $like = '%' . $wpdb->esc_like($search_text) . '%';
     if (!empty($search_text)) {
-        $where = $wpdb->prepare(" WHERE name %s OR domain %s", $like, $like);
+        $where = $wpdb->prepare(" WHERE name LIKE %s OR domain LIKE %s", $like, $like);
     }
 }
 if (isset($_GET['view_all_websites'])) {
