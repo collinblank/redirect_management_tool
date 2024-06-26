@@ -1,6 +1,5 @@
 <?php
 global $wpdb;
-$select = "SELECT * FROM websites";
 $search_text = NULL;
 
 // ORDER BY isProd DESC
@@ -8,7 +7,7 @@ $search_text = NULL;
 if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
     if (!empty($search_text)) {
-        $where = " WHERE name LIKE '%$search_text%' OR domain LIKE '%$search_text%'";
+        $where = " WHERE LOWER(name) LIKE '%$search_text%' OR LOWER(domain) LIKE '%$search_text%'";
     }
 }
 if (isset($_GET['view_all_websites'])) {
@@ -17,7 +16,7 @@ if (isset($_GET['view_all_websites'])) {
     $where = "";
 }
 
-$sql = $wpdb->prepare($select . $where);
+$sql = $wpdb->prepare("SELECT * FROM websites" . $where);
 $results = $wpdb->get_results($sql, ARRAY_A);
 
 // if (isset($_GET['filter_websites'])) {

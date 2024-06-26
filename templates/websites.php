@@ -3,7 +3,7 @@
 <?php
 
 if (isset($_GET['search_websites'])) {
-    $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
+    $search_text = htmlspecialchars((trim($_GET['search_text'])));
 }
 // get filter options values if inserted
 
