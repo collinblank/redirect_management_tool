@@ -50,6 +50,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                 </select>
                 <p class="form__input-item__validation-msg"></p>
             </li>
+            <!-- needs to be js to show this -->
             <li class="form__input-item">
                 <label for="website-sandbox">Sandbox Website</label>
                 <select id="website_sandbox" name="website_sandbox" tabindex="4">

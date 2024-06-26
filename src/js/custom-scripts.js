@@ -131,6 +131,10 @@ function initFormValidation(tableName) {
     }
   }
 
+  // function initWebsiteFormValidation() {
+
+  // }
+
   function initInputEvents(input, checkInputFunc) {
     let blurredOnce = false;
 

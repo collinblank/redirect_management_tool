@@ -361,8 +361,7 @@ function handle_website_form_submit()
 			'id' => $item_id
 		);
 
-		// $errors = get_website_form_errors();
-		$errors = array();
+		$errors = get_website_form_errors();
 
 		if (!empty($errors)) {
 			$_SESSION['form_errors'] = $errors;
@@ -393,30 +392,44 @@ function handle_website_form_submit()
 }
 
 
-// function get_website_form_errors()
-// {
-// 	$name = $_POST['server_name'];
-// 	$domain = $_POST['server_domain'];
-// 	$server_id = $_POST['website_server'];
-// 	$sandbox_id = $_POST['website_sandbox'];
-// 	$errors = [];
+function get_website_form_errors()
+{
+	$name = $_POST['website_name'];
+	$domain = $_POST['website_domain'];
+	$server_id = $_POST['website_server'];
+	$sandbox_id = $_POST['website_sandbox'];
+	$errors = [];
 
-// 	// hmm
-// 	if (!Validator::string($name, 4, 50) || !Validator::letters_and_spaces($name)) {
-// 		if (strlen($name) == 0) {
-// 			$errors['name'] = 'Please enter a value for your server name (including 4 to 50 letters and spaces).';
-// 		} else {
-// 			$errors['name'] = $name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.';
-// 		}
-// 	}
+	// hmm
+	if (!Validator::string($name, 4, 50) || !Validator::letters_and_spaces($name)) {
+		if (strlen($name) == 0) {
+			array_push($errors, 'Please enter a value for your server name (including 4 to 50 letters and spaces).');
+		} else {
+			array_push($errors, $name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.');
+		}
+	}
 
-// 	if (!Validator::string($domain, 6, 100) || !Validator::url($domain)) {
-// 		if (strlen($domain) == 0) {
-// 			$errors['domain'] = 'Please enter a value for your server domain.';
-// 		} else {
-// 			$errors['domain'] = $domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.';
-// 		}
-// 	}
+	if (!Validator::string($domain, 6, 100) || !Validator::url($domain)) {
+		if (strlen($domain) == 0) {
+			array_push($errors, 'Please enter a value for your server domain.');
+		} else {
+			array_push($errors, $domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.');
+		}
+	}
 
-// 	return $errors;
-// }
+	// server check
+	if (!Validator::item_exists_in_db($server_id, "servers")) {
+		array_push($errors, 'The server you assigned your website to does not exist. Please assign your website to an existing server.');
+	}
+
+	// sbx
+	if (isset($sandbox_id) && !Validator::item_exists_in_db($sandbox_id, "websites")) {
+		array_push($errors, 'The sandbox website you assigned your website to does not exist. Please assign your website to an existing sandbox website.');
+	}
+
+	if (Validator::name_or_domain_taken($name, $domain)) {
+		array_push($errors, 'A website with the name ' . $name . 'or domain ' . $domain . ' already exists. Please choose a different name and/or domain.')
+	}
+
+	return $errors;
+}

@@ -12,7 +12,6 @@ if (isset($_GET['search_websites'])) {
     }
 }
 if (isset($_GET['view_all_websites'])) {
-    // could also just remove query params
     $search_text = NULL;
     $where = "";
 }
@@ -34,7 +33,6 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 
 
 <?php if (!empty($search_text)) : ?>
-    <?php echo $like . ', ' . $where ?>
     <div class="list-view-page__results-shown">
         <p><?php echo empty($results) ? "No results found for" : "Showing all results for" ?> "<?php echo $search_text ?>".</p>
         <form method="GET">
