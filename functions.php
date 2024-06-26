@@ -428,7 +428,7 @@ function get_website_form_errors()
 	}
 
 	if (Validator::name_or_domain_taken($name, $domain)) {
-		array_push($errors, 'A website with the name ' . $name . 'or domain ' . $domain . ' already exists. Please choose a different name and/or domain.')
+		array_push($errors, 'A website with the name ' . $name . 'or domain ' . $domain . ' already exists. Please choose a different name and/or domain.');
 	}
 
 	return $errors;
