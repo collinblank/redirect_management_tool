@@ -9,7 +9,7 @@ if (isset($_GET['search_websites'])) {
     $like = "LIKE '%" . $wpdb->esc_sql($search_text) . "%'";
     if (!empty($search_text)) {
         $where = " WHERE name $like OR domain $like";
-        echo "<script>console.log($search_text, $like)</script>";
+        echo "<script>console.log('$search_text', '$like')</script>";
     }
 }
 if (isset($_GET['view_all_websites'])) {
