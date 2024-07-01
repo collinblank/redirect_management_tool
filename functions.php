@@ -226,121 +226,23 @@ function show_private_pages_menu_selection($args)
 }
 
 
-require 'functions/form-handlers/validator.php';
-session_start();
+require 'functions/form-handlers/validation/validator.php';
+// session_start();
 
 // HANDLE SERVER FORM SUBMISSIONS FOR ADDING AND EDITING
+require 'functions/form-handlers/server-form-submit.php';
 add_action('admin_post_server_form', 'handle_server_form_submit');
-function handle_server_form_submit()
-{
-	global $wpdb;
-
-	if (!isset($_POST['server_form_nonce_field']) || !wp_verify_nonce($_POST['server_form_nonce_field'], 'server_form_nonce')) {
-		wp_die('Error: Security check failed.');
-	} else {
-		unset($_SESSION['form_errors']);
-		unset($_SESSION['form_success']);
-
-		$table_name = 'servers';
-		$data = array(
-			'name' => $_POST['server_name'],
-			'domain' => $_POST['server_domain'],
-		);
-		$item_id = $_POST['item_id'] ?? NULL;
-		$where = array(
-			'id' => $item_id
-		);
-		$errors = get_server_form_errors();
-
-		if (!empty($errors)) {
-			$_SESSION['form_errors'] = $errors;
-			wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
-			exit;
-		} elseif (!$item_id) {
-			// for adding
-			$result = $wpdb->insert($table_name, $data);
-			if ($result) {
-				$_SESSION['form_success'] = 'A new server has been successfully created.';
-				wp_safe_redirect(add_query_arg('add', $result, home_url('/' . $table_name)), 303);
-				exit;
-			} else {
-				echo "<script>console.log('Unable to add new server');</script>";
-			}
-		} elseif ($item_id) {
-			// for editing
-			$result = $wpdb->update($table_name, $data, $where);
-			if ($result) {
-				$_SESSION['form_success'] = 'The server was successfully edited.';
-				wp_safe_redirect(add_query_arg('edit', $item_id, home_url('/' . $table_name)), 303);
-				exit;
-			} else {
-				echo "<script>console.log('Unable to edit server');</script>";
-			}
-		}
-	}
-}
 
 // DISABLE ITEM
+require 'functions/form-handlers/disable-item.php';
 add_action('admin_post_disable_item', 'handle_disable_item');
-function handle_disable_item()
-{
-	global $wpdb;
-
-	if (!isset($_POST['disable_item_form_nonce_field']) || !wp_verify_nonce($_POST['disable_item_form_nonce_field'], 'disable_item_form_nonce')) {
-		wp_die('Error: Security check failed.');
-	} elseif (isset($_POST['confirm_disable'])) {
-		$table_name = sanitize_text_field($_POST['table_name']);
-		$item_id = intval($_POST['item_id']);
-		$data = array(
-			'disabled' => 1
-		);
-		$where = array(
-			'id' => $item_id
-		);
-
-		$result = $wpdb->update($table_name, $data, $where);
-
-		if ($result) {
-			wp_safe_redirect(add_query_arg('disable', $item_id, home_url('/' . $table_name)), 303);
-			exit;
-		} else {
-			wp_die('Error: Unable to disable item. Please return to the previous page.');
-		}
-	} else {
-		wp_die('Error: Unable to meet conditions to disable item. Please return to the previous page.');
-	}
-}
-
-function get_server_form_errors()
-{
-	$server_name = $_POST['server_name'];
-	$server_domain = $_POST['server_domain'];
-	$errors = [];
-
-	if (!Validator::string($server_name, 4, 50) || !Validator::letters_and_spaces($server_name)) {
-		if (strlen($server_name) == 0) {
-			$errors['server_name'] = 'Please enter a value for your server name (including 4 to 50 letters and spaces).';
-		} else {
-			$errors['server_name'] = $server_name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.';
-		}
-	}
-
-	if (!Validator::string($server_domain, 6, 100) || !Validator::url($server_domain)) {
-		if (strlen($server_domain) == 0) {
-			$errors['server_domain'] = 'Please enter a value for your server domain.';
-		} else {
-			$errors['server_domain'] = $server_domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.';
-		}
-	}
-
-	return $errors;
-}
 
 
 // WEBSITE FUNCTIONS
 add_action('admin_post_website_form', 'handle_website_form_submit');
 function handle_website_form_submit()
 {
+	session_start();
 	global $wpdb;
 
 	if (!isset($_POST['website_form_nonce_field']) || !wp_verify_nonce($_POST['website_form_nonce_field'], 'website_form_nonce')) {
@@ -390,7 +292,6 @@ function handle_website_form_submit()
 		}
 	}
 }
-
 
 function get_website_form_errors()
 {
