@@ -403,7 +403,7 @@ function get_website_form_errors()
 	// hmm
 	if (!Validator::string($name, 4, 50) || !Validator::letters_and_spaces($name)) {
 		if (strlen($name) == 0) {
-			array_push($errors, 'Please enter a value for your server name (including 4 to 50 letters and spaces).');
+			array_push($errors, 'Please enter a value for your website name (including 4 to 50 letters and spaces).');
 		} else {
 			array_push($errors, $name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.');
 		}
@@ -411,7 +411,7 @@ function get_website_form_errors()
 
 	if (!Validator::string($domain, 6, 100) || !Validator::url($domain)) {
 		if (strlen($domain) == 0) {
-			array_push($errors, 'Please enter a value for your server domain.');
+			array_push($errors, 'Please enter a value for your website domain.');
 		} else {
 			array_push($errors, $domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.');
 		}
