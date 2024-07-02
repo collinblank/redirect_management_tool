@@ -67,7 +67,8 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         </ul>
         <div class="modal-content__btns-container">
             <button type="button" class="default-btn" id="modal-cancel-btn" tabindex="5">Cancel</button>
-            <input type="submit" class="default-btn blue-btn" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="6" disabled />
+            <!-- NOTE: re-add disabled below after finishing server-side validation -->
+            <input type="submit" class="default-btn blue-btn" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="6" />
         </div>
     </form>
 </div>
