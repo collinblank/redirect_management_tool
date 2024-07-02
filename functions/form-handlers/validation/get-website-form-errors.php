@@ -25,26 +25,50 @@ function get_website_form_errors()
         }
     }
 
-    // server check
-    // FIX: error shows when no server is selected 
-    // SOLVE: should be fixed now with isset
-    if (isset($server_id) && !Validator::item_in_table($server_id, "servers")) {
-        array_push($errors, 'The server you selected does not exist. Please assign your website to an existing server.');
-    }
-
-    // sbx
-    if (isset($sandbox_id) && !Validator::item_in_table($sandbox_id, "websites")) {
-        array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
-    }
-
-    // FIX: error shows when no sandbox is selected
-    // SOLVE: should be fixed with isset
-    if (isset($sandbox_id) && !Validator::new_name_and_domain($name, $domain)) {
+    // FIX: name can be duplicate
+    // SOLVE: removed isset
+    if (!Validator::new_name_and_domain($name, $domain)) {
         array_push($errors, 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.');
     }
 
+    // server and sandbox checks
+    // FIX: error shows when no server is selected 
+    // SOLVE: should be fixed now with isset
+    if (!isset($server_id)) {
+        array_push($errors, 'Please select a server to host your website.');
+    } else {
+        if (!Validator::item_in_table($server_id, "servers")) {
+            array_push($errors, 'The server you selected does not exist. Please assign your website to an existing server.');
+        } else {
+            // if it is a production server...
+            if (($server_id == 1 || $server_id == 5)) {
+                // ...require a sandbox website to be selected
+                if (!isset($sandbox_id)) {
+                    array_push($errors, 'Please assign a sandbox website to your production website.');
+                    // if there is a sandbox id selected when it is a prod server...
+                } else {
+                    // ...but it does not actually exist
+                    if (!Validator::item_in_table($sandbox_id, "websites")) {
+                        array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
+                    }
+                }
+            }
+        }
+    }
+
+    // sbx
+    // if (isset($sandbox_id) && !Validator::item_in_table($sandbox_id, "websites")) {
+    //     array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
+    // }
+
+
+    // TO DO:
+    // - show error if no server is selected !isset($server_id) or something
+    // - probably need something about only selecting one sandbox site per prod site
+
     // NOTES:
     // Do we need to verify if a server id is 1 or 5 (a production server) to select a sandbox id?
+    // Currently the script does require this
 
     return $errors;
 }
