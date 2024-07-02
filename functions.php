@@ -225,112 +225,17 @@ function show_private_pages_menu_selection($args)
 	return $args;
 }
 
-
+// FORM ACTIONS
 require 'functions/form-handlers/validation/validator.php';
-// session_start();
 
-// HANDLE SERVER FORM SUBMISSIONS FOR ADDING AND EDITING
+// Handle form submissions (adding/edting) for servers 
 require 'functions/form-handlers/server-form-submit.php';
 add_action('admin_post_server_form', 'handle_server_form_submit');
 
-// DISABLE ITEM
+// Handle form submissions (adding/edting) for websites 
+require 'functions/form-handlers/website-form-submit.php';
+add_action('admin_post_website_form', 'handle_website_form_submit');
+
+// Handle disabling any item
 require 'functions/form-handlers/disable-item.php';
 add_action('admin_post_disable_item', 'handle_disable_item');
-
-
-// WEBSITE FUNCTIONS
-add_action('admin_post_website_form', 'handle_website_form_submit');
-function handle_website_form_submit()
-{
-	session_start();
-	global $wpdb;
-
-	if (!isset($_POST['website_form_nonce_field']) || !wp_verify_nonce($_POST['website_form_nonce_field'], 'website_form_nonce')) {
-		wp_die('Error: Security check failed.');
-	} else {
-		unset($_SESSION['form_errors']);
-		unset($_SESSION['form_success']);
-
-		$table_name = 'websites';
-		$data = array(
-			'name' => $_POST['website_name'],
-			'domain' => $_POST['website_domain'],
-			'serverId' => $_POST['website_server'],
-			'sandboxId' => $_POST['website_sandbox'],
-		);
-		$item_id = $_POST['item_id'] ?? NULL;
-		$where = array(
-			'id' => $item_id
-		);
-
-		$errors = get_website_form_errors();
-
-		if (!empty($errors)) {
-			$_SESSION['form_errors'] = $errors;
-			wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
-			exit;
-		} elseif (!$item_id) {
-			// for adding
-			$result = $wpdb->insert($table_name, $data);
-			if ($result) {
-				$_SESSION['form_success'] = 'A new website has been successfully created.';
-				wp_safe_redirect(add_query_arg('add', $result, home_url('/' . $table_name)), 303);
-				exit;
-			} else {
-				echo "<script>console.log('Unable to add website');</script>";
-			}
-		} elseif ($item_id) {
-			// for editing
-			$result = $wpdb->update($table_name, $data, $where);
-			if ($result) {
-				$_SESSION['form_success'] = 'The website was successfully edited.';
-				wp_safe_redirect(add_query_arg('edit', $item_id, home_url('/' . $table_name)), 303);
-				exit;
-			} else {
-				echo "<script>console.log('Unable to edit website');</script>";
-			}
-		}
-	}
-}
-
-function get_website_form_errors()
-{
-	$name = $_POST['website_name'];
-	$domain = $_POST['website_domain'];
-	$server_id = $_POST['website_server'];
-	$sandbox_id = $_POST['website_sandbox'];
-	$errors = [];
-
-	// hmm
-	if (!Validator::string($name, 4, 50) || !Validator::letters_and_spaces($name)) {
-		if (strlen($name) == 0) {
-			array_push($errors, 'Please enter a value for your website name (including 4 to 50 letters and spaces).');
-		} else {
-			array_push($errors, $name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.');
-		}
-	}
-
-	if (!Validator::string($domain, 6, 100) || !Validator::url($domain)) {
-		if (strlen($domain) == 0) {
-			array_push($errors, 'Please enter a value for your website domain.');
-		} else {
-			array_push($errors, $domain . ' is not a valid URL. Please correct your domain to follow this format (including http(s)://): https://example.com.');
-		}
-	}
-
-	// server check
-	if (!Validator::item_exists_in_db($server_id, "servers")) {
-		array_push($errors, 'The server you assigned your website to does not exist. Please assign your website to an existing server.');
-	}
-
-	// sbx
-	if (isset($sandbox_id) && !Validator::item_exists_in_db($sandbox_id, "websites")) {
-		array_push($errors, 'The sandbox website you assigned your website to does not exist. Please assign your website to an existing sandbox website.');
-	}
-
-	if (Validator::name_or_domain_taken($name, $domain)) {
-		array_push($errors, 'A website with the name ' . $name . 'or domain ' . $domain . ' already exists. Please choose a different name and/or domain.');
-	}
-
-	return $errors;
-}

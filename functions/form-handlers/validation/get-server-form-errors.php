@@ -1,5 +1,4 @@
 <?php
-require 'functions/form-handlers/validation/validator.php';
 
 function get_server_form_errors()
 {

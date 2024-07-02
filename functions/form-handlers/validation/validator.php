@@ -22,13 +22,14 @@ class Validator
         return preg_match($pattern, $str);
     }
 
-    public static function item_exists_in_db($item_id, $table_name)
+    public static function item_in_table($item_id, $table_name)
     {
         global $wpdb;
         $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id), ARRAY_A);
-        return !empty($results);
+        return !empty($results); // true if item id exists in db
     }
 
+    // done nothing with yet
     public static function sandbox_taken($item_id)
     {
         global $wpdb;
@@ -36,12 +37,13 @@ class Validator
         return !empty($results);
     }
 
-    public static function name_or_domain_taken($name, $domain)
+    public static function new_name_and_domain($name, $domain)
     {
         global $wpdb;
-        $name_like = '%' . $wpdb->esc_like($name) . '%';
+        // $name_like = '%' . $wpdb->esc_like($name) . '%';
+        // no name_like 
         $domain_like = '%' . $wpdb->esc_like($domain) . '%';
-        $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM websites WHERE name LIKE %s OR domain LIKE %s", $name_like, $domain_like), ARRAY_A);
-        return !empty($results);
+        $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM websites WHERE name = %s OR domain = %s", $name, $domain_like), ARRAY_A);
+        return empty($results);
     }
 }
