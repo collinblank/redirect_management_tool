@@ -1,7 +1,7 @@
 <?php
 global $wpdb;
 $search_text = NULL;
-$order = $wpdb->prepare(" ORDER BY isProd");
+$order = $wpdb->prepare(" ORDER BY isProd, name");
 
 // ORDER BY isProd DESC
 

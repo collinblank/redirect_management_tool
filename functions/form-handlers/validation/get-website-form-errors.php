@@ -49,7 +49,7 @@ function get_website_form_errors()
             // } else {
             // ...but it does not actually exist
             // FIX: This is running when a prod server selected but no sandbox. Need to make exception for TMM type sites
-            if (!Validator::item_in_table($sandbox_id, "websites")) {
+            if (isset($sandbox_id) && !Validator::item_in_table($sandbox_id, "websites")) {
                 array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
             }
             // }
