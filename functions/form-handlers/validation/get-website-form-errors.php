@@ -41,19 +41,19 @@ function get_website_form_errors()
             array_push($errors, 'The server you selected does not exist. Please assign your website to an existing server.');
         } else {
             // if it is a production server...
-            if (($server_id == 1 || $server_id == 5)) {
-                // ...require a sandbox website to be selected
-                if (!isset($sandbox_id)) {
-                    array_push($errors, 'Please assign a sandbox website to your production website.');
-                    // if there is a sandbox id selected when it is a prod server...
-                } else {
-                    // ...but it does not actually exist
-                    // FIX: This is running when a prod server selected but no sandbox. Need to make exception for TMM type sites
-                    if (!Validator::item_in_table($sandbox_id, "websites")) {
-                        array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
-                    }
-                }
+            // if (($server_id == 1 || $server_id == 5)) {
+            // ...require a sandbox website to be selected
+            // if (!isset($sandbox_id)) {
+            //     array_push($errors, 'Please assign a sandbox website or choose None.');
+            //     // if there is a sandbox id selected when it is a prod server...
+            // } else {
+            // ...but it does not actually exist
+            // FIX: This is running when a prod server selected but no sandbox. Need to make exception for TMM type sites
+            if (!Validator::item_in_table($sandbox_id, "websites")) {
+                array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
             }
+            // }
+            // }
         }
     }
 
