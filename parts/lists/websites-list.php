@@ -2,6 +2,7 @@
 global $wpdb;
 $search_text = NULL;
 $order = $wpdb->prepare(" ORDER BY isProd, name");
+$disabled_where = $wpdb->prepare(" AND disabled = %d", 1);
 
 // ORDER BY isProd DESC
 
@@ -9,7 +10,7 @@ if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
     $like = '%' . $wpdb->esc_like($search_text) . '%';
     if (!empty($search_text)) {
-        $where = $wpdb->prepare(" WHERE name LIKE %s OR domain LIKE %s", $like, $like);
+        $where = $wpdb->prepare(" WHERE (name LIKE %s OR domain LIKE %s)", $like, $like);
     }
 }
 if (isset($_GET['view_all_websites'])) {
@@ -17,7 +18,14 @@ if (isset($_GET['view_all_websites'])) {
     $where = "";
 }
 
-$sql = "SELECT * FROM websites" . $where . $order;
+if (isset($_GET['show_disabled_websites'])) {
+    $disabled_where = "";
+}
+if (isset($_GET['hide_disabled_websites'])) {
+    $disabled_where = $wpdb->prepare(" AND disabled = %d", 1);
+}
+
+$sql = "SELECT * FROM websites" . $where . $disabled_where . $order;
 $results = $wpdb->get_results($sql, ARRAY_A);
 
 // if (isset($_GET['filter_websites'])) {
