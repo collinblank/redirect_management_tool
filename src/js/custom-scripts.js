@@ -78,6 +78,18 @@ function showModal(action, e) {
 function initFormValidation(tableName) {
   if (tableName === "servers") {
     initServerFormValidation();
+  } else if (tableName === "websites") {
+    // just for showing correct colors on selects for now... could probably use some cleaning up
+    const selects = document.querySelectorAll(".form__input-item select");
+    selects.forEach((select) => {
+      select.addEventListener("change", () => {
+        if (select.value) {
+          select.classList.add("active");
+        } else {
+          select.classList.remove("active");
+        }
+      });
+    });
   }
 
   const form = document.querySelector(".modal-form");

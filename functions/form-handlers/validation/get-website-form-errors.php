@@ -25,8 +25,8 @@ function get_website_form_errors()
         }
     }
 
-    // FIX: name can be duplicate
-    // SOLVE: removed isset
+    // FIX: domain can be duplicated (maybe.. only when edited?)
+    // SOLVE: ?
     if (!Validator::new_name_and_domain($name, $domain)) {
         array_push($errors, 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.');
     }
