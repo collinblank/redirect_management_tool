@@ -1,6 +1,7 @@
 <?php
 global $wpdb;
 $search_text = NULL;
+$order = $wpdb->prepare(" ORDER BY isProd");
 
 // ORDER BY isProd DESC
 
@@ -9,13 +10,11 @@ if (isset($_GET['search_websites'])) {
     $like = '%' . $wpdb->esc_like($search_text) . '%';
     if (!empty($search_text)) {
         $where = $wpdb->prepare(" WHERE name LIKE %s OR domain LIKE %s", $like, $like);
-        $order = "";
     }
 }
 if (isset($_GET['view_all_websites'])) {
     $search_text = NULL;
     $where = "";
-    $order = $wpdb->prepare(" ORDER BY isProd");
 }
 
 $sql = "SELECT * FROM websites" . $where . $order;
