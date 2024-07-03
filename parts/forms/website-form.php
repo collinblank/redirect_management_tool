@@ -57,7 +57,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             <li class="form__input-item">
                 <label for="website-sandbox">Sandbox Website</label>
                 <select id="website_sandbox" name="website_sandbox" tabindex="4">
-                    <option disabled selected>--Select the corresponding sandbox site--</option>
+                    <option disabled selected>--Select corresponding sandbox site--</option>
                     <option value="">None (e.g., themathmap.com)</option>
                     <?php
                     foreach ($available_sandbox_websites as $sandbox_website) { ?>

@@ -4,8 +4,8 @@ function get_website_form_errors()
 {
     $name = $_POST['website_name'];
     $domain = $_POST['website_domain'];
-    $server_id = $_POST['website_server'];
-    $sandbox_id = $_POST['website_sandbox'];
+    $server_id = $_POST['website_server'] == '' ? NULL : intval($_POST['website_server']);
+    $sandbox_id = $_POST['website_sandbox'] == '' ? NULL : intval($_POST['website_sandbox']);
     $errors = [];
 
     // hmm
@@ -26,7 +26,7 @@ function get_website_form_errors()
     }
 
     // FIX: domain can be duplicated (maybe.. only when edited?)
-    // SOLVE: ?
+    // SOLVE: ? -- how to get site id???
     if (!Validator::new_name_and_domain($name, $domain)) {
         array_push($errors, 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.');
     }
@@ -48,6 +48,7 @@ function get_website_form_errors()
                     // if there is a sandbox id selected when it is a prod server...
                 } else {
                     // ...but it does not actually exist
+                    // FIX: This is running when a prod server selected but no sandbox. Need to make exception for TMM type sites
                     if (!Validator::item_in_table($sandbox_id, "websites")) {
                         array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
                     }
