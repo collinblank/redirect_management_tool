@@ -63,7 +63,6 @@ function get_website_form_errors()
 
 
     // TO DO:
-    // - show error if no server is selected !isset($server_id) or something
     // - probably need something about only selecting one sandbox site per prod site
 
     // NOTES:

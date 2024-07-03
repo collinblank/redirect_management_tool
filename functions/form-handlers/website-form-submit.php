@@ -19,6 +19,7 @@ function handle_website_form_submit()
             'domain' => $_POST['website_domain'],
             'serverId' => $_POST['website_server'],
             'sandboxId' => $_POST['website_sandbox'],
+            'isProd' => $_POST['website_server'] == 3 ? 0 : 1,
         );
         $item_id = $_POST['item_id'] ?? NULL;
         $where = array(
