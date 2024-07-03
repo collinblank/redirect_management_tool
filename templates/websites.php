@@ -54,6 +54,13 @@ $form_success = $_SESSION['form_success'];
                 <input type="submit" class="default-btn" name="search_websites" value="Search">
                 <!-- <input type="submit" class="default-btn" name="view_all_websites" value="View All"> -->
             </form>
+            <form action="GET" class="list-view__page__filter-form">
+                <?php if (isset($_GET['show_disabled_websites'])) : ?>
+                    <input type="submit" class="default-btn ghost-btn" name="show_disabled_websites" value="Show Disabled Websites">
+                <?php else : ?>
+                    <input type="submit" class="default-btn ghost-btn" name="hide_disabled_websites" value="Hide Disabled Websites">
+                <?php endif; ?>
+            </form>
             <!-- <form method="GET" class="list-view__page__filter-form">
                 <ul class="form__input-container form__checkbox-container">
                     <li class="form__checkbox-item">
