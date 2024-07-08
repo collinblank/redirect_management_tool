@@ -32,7 +32,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 
 ?>
 
-
+<?php echo $sql ?>
 <?php if (!empty($search_text)) : ?>
     <div class="list-view-page__results-shown">
         <p><?php echo empty($results) ? "No results found for" : "Showing all results for" ?> "<?php echo $search_text ?>".</p>
