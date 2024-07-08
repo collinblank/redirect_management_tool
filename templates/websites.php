@@ -55,7 +55,24 @@ $form_success = $_SESSION['form_success'];
                 <!-- <input type="submit" class="default-btn" name="view_all_websites" value="View All"> -->
             </form>
             <form action="GET" class="list-view__page__filter-form">
+                <ul class="form__input-container form__checkbox-container">
+                    <li class="form__checkbox-item">
+                        <input type="checkbox" id="show-disabled" name="hide_disabled" value="1">
+                        <label for="show-disabled">Show Production</label>
+                    </li>
+                    <!-- <li class="form__checkbox-item">
+                        <input type="checkbox" id="show-test-websites" name="show_test_websites" value="1">
+                        <label for="show-test-websites">Show Test</label>
+                    </li> -->
+                </ul>
+                <input type="submit" class="default-btn" name="filter_websites" value="Filter">
+
+
+
+
+
                 <?php if (isset($_GET['show_disabled_websites'])) : ?>
+                    <input type="checkbox">
                     <input type="submit" class="default-btn ghost-btn" name="hide_disabled_websites" value="Hide Disabled Websites">
                 <?php else : ?>
                     <input type="submit" class="default-btn ghost-btn" name="show_disabled_websites" value="Show Disabled Websites">
