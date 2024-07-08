@@ -57,7 +57,7 @@ $form_success = $_SESSION['form_success'];
             <form method="GET" class="list-view__page__filter-form">
                 <ul class="form__input-container form__checkbox-container">
                     <li class="form__checkbox-item">
-                        <input type="checkbox" id="hide-disabled" name="hide_disabled" value="1">
+                        <input type="checkbox" id="hide-disabled" name="hide_disabled" value="1" <?php isset($_GET['hide_disabled']) ? "checked" : "" ?>>
                         <label for="hide-disabled">Hide Disabled</label>
                     </li>
                 </ul>
