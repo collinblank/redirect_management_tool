@@ -17,10 +17,21 @@ if (isset($_GET['view_all_websites'])) {
 
 // THIS NEEDS HELP TO FILTER WEBSITES
 if (isset($_GET['filter_websites'])) {
+    $where = "";
+    $prefix = "";
     if (isset($_GET['hide_disabled'])) {
-        $where = $wpdb->prepare(" WHERE disabled = %d", 0);
-    } else {
-        $where = "";
+        $prefix = empty($where) ? " WHERE" : " OR";
+        $where .= $wpdb->prepare("$prefix disabled = %d", 0);
+    }
+
+    if (isset($_GET['hide_production'])) {
+        $prefix = empty($where) ? " WHERE" : " OR";
+        $where .= $wpdb->prepare("$prefix isProd != %d", 1);
+    }
+
+    if (isset($_GET['hide_test'])) {
+        $prefix = empty($where) ? " WHERE" : " OR";
+        $where .= $wpdb->prepare("$prefix isProd != %d", 0);
     }
 }
 
@@ -64,7 +75,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                     <?php else : ?>
                         <button class="icon-btn disable-item-btn" title="Disable Website"><i class="fa-regular fa-circle-xmark"></i></button>
                     <?php endif; ?>
-                    <button class="default-btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></button>
+                    <button class="default-btn ghost-btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></button>
                 </div>
             </li>
         <?php } ?>
