@@ -54,7 +54,7 @@ $form_success = $_SESSION['form_success'];
                 <input type="submit" class="default-btn" name="search_websites" value="Search">
                 <!-- <input type="submit" class="default-btn" name="view_all_websites" value="View All"> -->
             </form>
-            <form action="GET" class="list-view__page__filter-form">
+            <form method="GET" class="list-view__page__filter-form">
                 <ul class="form__input-container form__checkbox-container">
                     <li class="form__checkbox-item">
                         <input type="checkbox" id="hide-disabled" name="hide_disabled" value="1">
