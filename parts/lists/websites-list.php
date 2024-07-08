@@ -2,6 +2,7 @@
 global $wpdb;
 $search_text = NULL;
 $order = $wpdb->prepare(" ORDER BY isProd, name");
+$where = "";
 
 // ORDER BY isProd DESC
 
@@ -18,24 +19,16 @@ if (isset($_GET['view_all_websites'])) {
 }
 
 // THIS NEEDS HELP TO FILTER WEBSITES
-// if (isset($_GET['show_disabled_websites'])) {
-//     $disabled_where = "";
-// } elseif (isset($_GET['hide_disabled_websites'])) {
-//     $disabled_where = $wpdb->prepare(" AND disabled = %d", 1);
-// }
+if (isset($_GET['filter_websites'])) {
+    if (isset($_GET['hide_disabled'])) {
+        $where = $wpdb->prepare(" WHERE disabled = %d", 0);
+    } else {
+        $where = "";
+    }
+}
 
 $sql = "SELECT * FROM websites" . $where . $order;
 $results = $wpdb->get_results($sql, ARRAY_A);
-
-// if (isset($_GET['filter_websites'])) {
-//     if (!isset($_GET['show_prod_websites']) && !isset($_GET['show_test_websites'])) {
-//         $where = "";
-//     } elseif (isset($_GET['show_prod_websites']) && !isset($_GET['show_test_websites'])) {
-//         $where = " WHERE isProd = 1";
-//     } elseif (!isset($_GET['show_prod_websites']) && isset($_GET['show_test_websites'])) {
-//         $where = " WHERE isProd = 0";
-//     }
-// }
 
 ?>
 
