@@ -2,7 +2,7 @@
 global $wpdb;
 $search_text = NULL;
 $order = $wpdb->prepare(" ORDER BY isProd, name");
-$where = "";
+// $where = "";
 
 // ORDER BY isProd DESC
 
@@ -20,6 +20,7 @@ if (isset($_GET['view_all_websites'])) {
 
 // THIS NEEDS HELP TO FILTER WEBSITES
 if (isset($_GET['filter_websites'])) {
+    echo "Attempted to hide disabled";
     if (isset($_GET['hide_disabled'])) {
         $where = $wpdb->prepare(" WHERE disabled = %d", 0);
     } else {
