@@ -27,7 +27,7 @@ $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
                     <?php else : ?>
                         <button class="icon-btn disable-item-btn" title="Disable Server"><i class="fa-regular fa-circle-xmark"></i></button>
                     <?php endif; ?>
-                    <button class="default-btn view-more-btn">View Sites<i class="fa-solid fa-arrow-right-long"></i></button>
+                    <button class="default-btn ghost-btn view-more-btn">View Sites<i class="fa-solid fa-arrow-right-long"></i></button>
                 </div>
             </li>
         <?php } ?>
