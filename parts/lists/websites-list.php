@@ -23,7 +23,7 @@ if (isset($_GET['view_all_websites'])) {
 
 if (isset($_GET['show_production'])) {
     $prefix = " WHERE";
-    $where .= $wpdb->prepare("WHERE isProd = %d", 1);
+    $where .= $wpdb->prepare("$prefix isProd = %d", 1);
 }
 
 if (isset($_GET['show_test'])) {
@@ -32,7 +32,7 @@ if (isset($_GET['show_test'])) {
 }
 
 if (isset($_GET['hide_disabled'])) {
-    $prefix = empty($where) ? " WHERE" : " OR";
+    $prefix = empty($where) ? " WHERE" : " AND";
     $where .= $wpdb->prepare("$prefix disabled = %d", 0);
 }
 // }
