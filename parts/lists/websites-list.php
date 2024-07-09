@@ -2,6 +2,7 @@
 global $wpdb;
 $search_text = NULL;
 $order = $wpdb->prepare(" ORDER BY isProd, name");
+$where = "";
 
 if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
@@ -16,24 +17,22 @@ if (isset($_GET['view_all_websites'])) {
 }
 
 // THIS NEEDS HELP TO FILTER WEBSITES
-if (isset($_GET['filter_websites'])) {
-    $where = "";
-    $prefix = "";
-    if (isset($_GET['hide_disabled'])) {
-        $prefix = empty($where) ? " WHERE" : " OR";
-        $where .= $wpdb->prepare("$prefix disabled = %d", 0);
-    }
-
-    if (isset($_GET['hide_production'])) {
-        $prefix = empty($where) ? " WHERE" : " OR";
-        $where .= $wpdb->prepare("$prefix isProd != %d", 1);
-    }
-
-    if (isset($_GET['hide_test'])) {
-        $prefix = empty($where) ? " WHERE" : " OR";
-        $where .= $wpdb->prepare("$prefix isProd != %d", 0);
-    }
+// if (isset($_GET['filter_websites'])) {
+if (isset($_GET['hide_disabled'])) {
+    $prefix = empty($where) ? " WHERE" : " OR";
+    $where .= $wpdb->prepare("$prefix disabled = %d", 0);
 }
+
+if (isset($_GET['hide_production'])) {
+    $prefix = empty($where) ? " WHERE" : " OR";
+    $where .= $wpdb->prepare("$prefix isProd != %d", 1);
+}
+
+if (isset($_GET['hide_test'])) {
+    $prefix = empty($where) ? " WHERE" : " OR";
+    $where .= $wpdb->prepare("$prefix isProd != %d", 0);
+}
+// }
 
 $sql = "SELECT * FROM websites" . $where . $order;
 $results = $wpdb->get_results($sql, ARRAY_A);
