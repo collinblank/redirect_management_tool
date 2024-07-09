@@ -35,7 +35,7 @@ if (!isset($_GET['show_disabled'])) {
 }
 
 if (!empty($conditions)) {
-    $where = " WHERE " . implode(" OR ", $conditions);
+    $where = " WHERE " . implode(" AND ", $conditions);
 }
 // }
 
