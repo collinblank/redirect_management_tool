@@ -24,11 +24,15 @@ $form_success = $_SESSION['form_success'];
                     <p>Unable to create the website. Please try again and correct the following errors:</p>
                     <ul class="notice-banner__msgs-list">
                         <?php
+                        // remove this later
+                        echo '<li>' . $wpdb->last_error . '</li>';
+
                         foreach ($form_errors as $error) {
                             echo '<li>' . htmlspecialchars($error) . '</li>';
                         }
                         unset($_SESSION['form_errors']);
                         ?>
+
                     </ul>
                 </div>
                 <button class="icon-btn notice-banner__x-btn">
