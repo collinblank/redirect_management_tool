@@ -11,10 +11,12 @@ $servers = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
 $available_sandbox_websites_sql = $wpdb->prepare("SELECT * FROM websites WHERE isProd = %d AND disabled = %d AND id NOT IN (SELECT sandboxId FROM websites WHERE isProd = %d)", 0, 0, 1);
 $available_sandbox_websites = $wpdb->get_results($available_sandbox_websites_sql, ARRAY_A);
 
+
 if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     $table_name = $_GET['table_name'];
     $website_to_edit_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
     $website_to_edit = $wpdb->get_row($website_to_edit_sql, ARRAY_A);
+    $selected_sandbox_website = $wpdb->get_row($wpdb->prepare("SELECT * FROM websites where id = %d", $website_to_edit["sandboxId"]), ARRAY_A);
 }
 ?>
 
@@ -58,6 +60,9 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                 <label for="website-sandbox">Sandbox Website</label>
                 <select id="website_sandbox" name="website_sandbox" tabindex="4">
                     <option disabled selected>--Select corresponding sandbox site--</option>
+                    <?php if (isset($selected_sandbox_website)) : ?>
+                        <option value="<?php echo $selected_sandbox_website['id'] ?>" selected><?php echo $selected_sandbox_website['name'] ?></option>
+                    <?php endif; ?>
                     <option value="">None (e.g., themathmap.com)</option>
                     <?php
                     foreach ($available_sandbox_websites as $sandbox_website) { ?>

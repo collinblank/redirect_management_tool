@@ -26,7 +26,7 @@ function handle_website_form_submit()
             'id' => $item_id
         );
 
-        $errors = get_website_form_errors();
+        $errors = get_website_form_errors($item_id);
 
         if (!empty($errors)) {
             $_SESSION['form_errors'] = $errors;
