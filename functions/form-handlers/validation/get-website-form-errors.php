@@ -28,7 +28,8 @@ function get_website_form_errors($website_id)
     // FIX: domain can be duplicated (maybe.. only when edited?)
     // SOLVE: pass site id as param
     // if website id is null (i.e., trying to create a new website, and the name and domain are not new...)
-    if (!isset($website_id) && !Validator::new_name_and_domain($name, $domain)) {
+    // validator method now does not select currently edited item 
+    if (!Validator::new_name_and_domain($name, $domain, $website_id)) {
         array_push($errors, 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.');
     }
 
