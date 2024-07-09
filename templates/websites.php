@@ -60,20 +60,20 @@ $form_success = $_SESSION['form_success'];
             </form>
             <form method="GET" class="list-view__page__filter-form">
                 <ul class="form__input-container form__checkbox-container">
-                    <li class="form__checkbox-item">
+                    <!-- <li class="form__checkbox-item">
                         <input type="checkbox" id="hide-production" name="hide_production" value="1" <?php echo isset($_GET['hide_production']) ? "checked" : "" ?>>
                         <label for="hide-production">Hide Production</label>
-                    </li>
-                    <li class="form__checkbox-item">
-                        <input type="checkbox" id="hide-test" name="hide_test" value="1" <?php echo isset($_GET['hide_test']) ? "checked" : "" ?>>
+                    </li> -->
+                    <!-- <li class="form__checkbox-item">
+                        <input type="checkbox" id="hide-test" name="hide_test" value="1" <?php echo isset($_GET['hide_test']) ? "checked" : "" ?> onchange="this.form.submit()">
                         <label for="hide-test">Hide Test</label>
-                    </li>
+                    </li> -->
                     <li class="form__checkbox-item">
-                        <input type="checkbox" id="hide-disabled" name="hide_disabled" value="1" <?php echo isset($_GET['hide_disabled']) ? "checked" : "" ?>>
+                        <input type="checkbox" id="hide-disabled" name="hide_disabled" value="1" <?php echo isset($_GET['hide_disabled']) ? "checked" : "" ?> onchange="this.form.submit()">
                         <label for="hide-disabled">Hide Disabled</label>
                     </li>
                 </ul>
-                <input type="submit" class="default-btn ghost-btn" name="filter_websites" value="Filter">
+                <!-- <input type="submit" class="default-btn ghost-btn" name="filter_websites" value="Filter"> -->
             </form>
             <!-- <form method="GET" class="list-view__page__filter-form">
                 <ul class="form__input-container form__checkbox-container">
