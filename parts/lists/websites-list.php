@@ -18,19 +18,22 @@ if (isset($_GET['view_all_websites'])) {
 
 // THIS NEEDS HELP TO FILTER WEBSITES
 // if (isset($_GET['filter_websites'])) {
+
+// $where = "";
+
+if (isset($_GET['show_production'])) {
+    $prefix = " WHERE";
+    $where .= $wpdb->prepare("WHERE isProd = %d", 1);
+}
+
+if (isset($_GET['show_test'])) {
+    $prefix = empty($where) ? " WHERE" : " OR";
+    $where .= $wpdb->prepare("$prefix isProd = %d", 0);
+}
+
 if (isset($_GET['hide_disabled'])) {
     $prefix = empty($where) ? " WHERE" : " OR";
     $where .= $wpdb->prepare("$prefix disabled = %d", 0);
-}
-
-if (isset($_GET['hide_production'])) {
-    $prefix = empty($where) ? " WHERE" : " OR";
-    $where .= $wpdb->prepare("$prefix isProd != %d", 1);
-}
-
-if (isset($_GET['hide_test'])) {
-    $prefix = empty($where) ? " WHERE" : " OR";
-    $where .= $wpdb->prepare("$prefix isProd != %d", 0);
 }
 // }
 
