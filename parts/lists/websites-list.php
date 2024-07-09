@@ -17,27 +17,27 @@ if (isset($_GET['view_all_websites'])) {
 }
 
 // THIS NEEDS HELP TO FILTER WEBSITES
-if (isset($_GET['filter_websites'])) {
-    $conditions = [];
+// if (isset($_GET['filter_websites'])) {
+$conditions = [];
 
-    if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
-        $conditions[] = "isProd = 1";
-    } elseif (isset($_GET['show_test']) && !isset($_GET['show_production'])) {
-        $conditions[] = "isProd = 0";
-    } elseif (!isset($_GET['show_production']) && !isset($_GET['show_test'])) {
-        $conditions[] = "(isProd != 1 AND isProd != 0)";
-    }
-
-    if (!isset($_GET['show_disabled'])) {
-        // $prefix = empty($where) ? " WHERE" : " AND";
-        // $where .= $wpdb->prepare("disabled = %d", 0);
-        $conditions[] = "disabled = 0";
-    }
-
-    if (!empty($conditions)) {
-        $where = " WHERE " . implode(" AND ", $conditions);
-    }
+if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
+    $conditions[] = "isProd = 1";
+} elseif (isset($_GET['show_test']) && !isset($_GET['show_production'])) {
+    $conditions[] = "isProd = 0";
+} elseif (!isset($_GET['show_production']) && !isset($_GET['show_test'])) {
+    $conditions[] = "(isProd != 1 AND isProd != 0)";
 }
+
+if (!isset($_GET['show_disabled'])) {
+    // $prefix = empty($where) ? " WHERE" : " AND";
+    // $where .= $wpdb->prepare("disabled = %d", 0);
+    $conditions[] = "disabled = 0";
+}
+
+if (!empty($conditions)) {
+    $where = " WHERE " . implode(" AND ", $conditions);
+}
+// }
 
 
 
