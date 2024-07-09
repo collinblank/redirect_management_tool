@@ -58,7 +58,7 @@ $form_success = $_SESSION['form_success'];
                 <input type="submit" class="default-btn" name="search_websites" value="Search">
                 <!-- <input type="submit" class="default-btn" name="view_all_websites" value="View All"> -->
             </form>
-            <form method="GET" class="list-view__page__filter-form">
+            <form method="GET" class="list-view__page__filter-form" name="filter_websites">
                 <ul class="form__input-container form__checkbox-container">
                     <li class="form__checkbox-item">
                         <input type="checkbox" id="show-production" name="show_production" value="1" <?php echo isset($_GET['show_production']) ? "checked" : "" ?> onchange="this.form.submit()">
@@ -69,8 +69,8 @@ $form_success = $_SESSION['form_success'];
                         <label for="show-test">Show Test</label>
                     </li>
                     <li class="form__checkbox-item">
-                        <input type="checkbox" id="hide-disabled" name="hide_disabled" value="1" <?php echo isset($_GET['hide_disabled']) ? "checked" : "" ?> onchange="this.form.submit()">
-                        <label for="hide-disabled">Hide Disabled</label>
+                        <input type="checkbox" id="show-disabled" name="show_disabled" value="1" <?php echo isset($_GET['show_disabled']) ? "checked" : "" ?> onchange="this.form.submit()">
+                        <label for="show-disabled">Show Disabled</label>
                     </li>
                 </ul>
                 <!-- <input type="submit" class="default-btn ghost-btn" name="filter_websites" value="Filter"> -->
