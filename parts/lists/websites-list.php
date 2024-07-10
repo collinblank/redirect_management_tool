@@ -1,40 +1,37 @@
 <?php
 global $wpdb;
 $search_text = NULL;
-// IT IS NOT WORKING BECAUSE OF THE DEFAULT WHERE
-// $where = $wpdb->prepare(" WHERE disabled = %d", 0);
 $order = $wpdb->prepare(" ORDER BY isProd, name");
 
-if (isset($_GET['search_websites'])) {
-    $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
-    $like = '%' . $wpdb->esc_like($search_text) . '%';
-    if (!empty($search_text)) {
-        $where = $wpdb->prepare(" WHERE name LIKE %s OR domain LIKE %s", $like, $like);
+if (!empty($_GET)) {
+    // Search
+    if (isset($_GET['search_websites'])) {
+        $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
+        $like = '%' . $wpdb->esc_like($search_text) . '%';
+        if (!empty($search_text)) {
+            $where = $wpdb->prepare(" WHERE name LIKE %s OR domain LIKE %s", $like, $like);
+        }
     }
-}
-if (isset($_GET['view_all_websites'])) {
-    $search_text = NULL;
-    $where = "";
-}
+    if (isset($_GET['view_all_websites'])) {
+        $search_text = NULL;
+        $where = "";
+    }
+    // Filters
+    $conditions = [];
+    if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
+        $conditions[] = "isProd = 1";
+    } elseif (isset($_GET['show_test']) && !isset($_GET['show_production'])) {
+        $conditions[] = "isProd = 0";
+    } elseif (!isset($_GET['show_production']) && !isset($_GET['show_test'])) {
+        $conditions[] = "(isProd != 1 AND isProd != 0)";
+    }
+    if (!isset($_GET['show_disabled'])) {
 
-
-$conditions = [];
-
-if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
-    $conditions[] = "isProd = 1";
-} elseif (isset($_GET['show_test']) && !isset($_GET['show_production'])) {
-    $conditions[] = "isProd = 0";
-} elseif (!isset($_GET['show_production']) && !isset($_GET['show_test'])) {
-    $conditions[] = "(isProd != 1 AND isProd != 0)";
-}
-
-if (!isset($_GET['show_disabled'])) {
-
-    $conditions[] = "disabled = 0";
-}
-
-if (!empty($conditions)) {
-    $where = " WHERE " . implode(" AND ", $conditions);
+        $conditions[] = "disabled = 0";
+    }
+    if (!empty($conditions)) {
+        $where = " WHERE " . implode(" AND ", $conditions);
+    }
 }
 
 $sql = "SELECT * FROM websites" . $where . $order;
