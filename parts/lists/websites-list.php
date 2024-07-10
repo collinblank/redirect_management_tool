@@ -41,7 +41,6 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 
 ?>
 
-<?php echo $sql ?>
 <?php if (!empty($search_text)) : ?>
     <div class="list-view-page__results-shown">
         <p><?php echo empty($results) ? "No results found for" : "Showing all results for" ?> "<?php echo $search_text ?>".</p>
@@ -81,7 +80,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
             </li>
         <?php } ?>
     </ul>
-    <!-- if search text is null and there are no results -->
-<?php elseif (!isset($search_text) && empty($results)) : ?>
+    <!-- if no filter, no search, but there are no results -->
+<?php elseif ($_SERVER['REQUEST_METHOD'] != 'GET' && !isset($search_text) && empty($results)) : ?>
     <p>Error: Unable to retrieve results from database.</p>
 <?php endif; ?>
