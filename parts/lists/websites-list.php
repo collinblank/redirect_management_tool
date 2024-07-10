@@ -3,7 +3,7 @@ global $wpdb;
 $search_text = NULL;
 $order = $wpdb->prepare(" ORDER BY isProd, name");
 
-if (!empty($_GET)) {
+if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
     // Search
     if (isset($_GET['search_websites'])) {
         $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
@@ -17,20 +17,22 @@ if (!empty($_GET)) {
         $where = "";
     }
     // Filters
-    $conditions = [];
-    if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
-        $conditions[] = "isProd = 1";
-    } elseif (isset($_GET['show_test']) && !isset($_GET['show_production'])) {
-        $conditions[] = "isProd = 0";
-    } elseif (!isset($_GET['show_production']) && !isset($_GET['show_test'])) {
-        $conditions[] = "(isProd != 1 AND isProd != 0)";
-    }
-    if (!isset($_GET['show_disabled'])) {
+    if (isset($_GET['filter_form_submitted'])) {
+        $conditions = [];
+        if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
+            $conditions[] = "isProd = 1";
+        } elseif (isset($_GET['show_test']) && !isset($_GET['show_production'])) {
+            $conditions[] = "isProd = 0";
+        } elseif (!isset($_GET['show_production']) && !isset($_GET['show_test'])) {
+            $conditions[] = "(isProd != 1 AND isProd != 0)";
+        }
+        if (!isset($_GET['show_disabled'])) {
 
-        $conditions[] = "disabled = 0";
-    }
-    if (!empty($conditions)) {
-        $where = " WHERE " . implode(" AND ", $conditions);
+            $conditions[] = "disabled = 0";
+        }
+        if (!empty($conditions)) {
+            $where = " WHERE " . implode(" AND ", $conditions);
+        }
     }
 }
 
