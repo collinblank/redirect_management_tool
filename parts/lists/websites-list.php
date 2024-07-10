@@ -1,7 +1,8 @@
 <?php
 global $wpdb;
 $search_text = NULL;
-$where = $wpdb->prepare(" WHERE disabled = %d", 0);
+// IT IS NOT WORKING BECAUSE OF THE DEFAULT WHERE
+// $where = $wpdb->prepare(" WHERE disabled = %d", 0);
 $order = $wpdb->prepare(" ORDER BY isProd, name");
 
 if (isset($_GET['search_websites'])) {
@@ -16,8 +17,7 @@ if (isset($_GET['view_all_websites'])) {
     $where = "";
 }
 
-// THIS NEEDS HELP TO FILTER WEBSITES
-// if (isset($_GET['filter_websites'])) {
+
 $conditions = [];
 
 if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
@@ -29,18 +29,13 @@ if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
 }
 
 if (!isset($_GET['show_disabled'])) {
-    // $prefix = empty($where) ? " WHERE" : " AND";
-    // $where .= $wpdb->prepare("disabled = %d", 0);
+
     $conditions[] = "disabled = 0";
 }
 
 if (!empty($conditions)) {
     $where = " WHERE " . implode(" AND ", $conditions);
 }
-// }
-
-
-
 
 $sql = "SELECT * FROM websites" . $where . $order;
 $results = $wpdb->get_results($sql, ARRAY_A);
