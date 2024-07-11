@@ -29,11 +29,9 @@ function get_website_form_errors($website_id)
     // SOLVE: pass site id as param
     // if website id is null (i.e., trying to create a new website, and the name and domain are not new...)
     // validator method now does not select currently edited item 
-
-    // Commenting out for now
-    // if (!Validator::new_name_and_domain($name, $domain, $website_id)) {
-    //     array_push($errors, 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.');
-    // }
+    if (!Validator::unique_record($name, $domain, $website_id)) {
+        array_push($errors, 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.');
+    }
 
     // server and sandbox checks
     // FIX: error shows when no server is selected 
