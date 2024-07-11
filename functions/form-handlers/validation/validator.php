@@ -41,7 +41,8 @@ class Validator
     {
         global $wpdb;
         $name_like = '%' . $wpdb->esc_like($name) . '%';
-        $domain_like = '%' . $wpdb->esc_like($domain) . '%';
+        $stripped_domain = rtrim(parse_url($domain)['host'], '/');
+        $domain_like = '%' . $wpdb->esc_like($stripped_domain) . '%';
 
         if (!$item_id) {
             // when creating a new site

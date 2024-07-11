@@ -8,7 +8,6 @@ function get_website_form_errors($website_id)
     $sandbox_id = $_POST['website_sandbox'] == '' ? NULL : intval($_POST['website_sandbox']);
     $errors = [];
 
-    // hmm
     if (!Validator::string($name, 4, 50) || !Validator::letters_and_spaces($name)) {
         if (strlen($name) == 0) {
             array_push($errors, 'Please enter a value for your website name (including 4 to 50 letters and spaces).');
@@ -25,10 +24,6 @@ function get_website_form_errors($website_id)
         }
     }
 
-    // FIX: domain can be duplicated (maybe.. only when edited?)
-    // SOLVE: pass site id as param
-    // if website id is null (i.e., trying to create a new website, and the name and domain are not new...)
-    // validator method now does not select currently edited item 
     if (!Validator::unique_record($name, $domain, $website_id)) {
         array_push($errors, 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.');
     }
