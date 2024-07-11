@@ -22,7 +22,7 @@ class Validator
         return preg_match($pattern, $str);
     }
 
-    public static function item_in_table($item_id, $table_name)
+    public static function record_in_table($item_id, $table_name)
     {
         global $wpdb;
         $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id), ARRAY_A);
@@ -40,15 +40,15 @@ class Validator
     public static function unique_record($name, $domain, $item_id)
     {
         global $wpdb;
-        // $name_like = '%' . $wpdb->esc_like($name) . '%';
+        $name_like = '%' . $wpdb->esc_like($name) . '%';
         $domain_like = '%' . $wpdb->esc_like($domain) . '%';
 
         if (!$item_id) {
             // when creating a new site
-            $where = $wpdb->prepare(" WHERE name = %s OR domain = %s", $name, $domain_like);
+            $where = $wpdb->prepare(" WHERE name LIKE %s OR domain LIKE %s", $name_like, $domain_like);
         } else {
             // when editing a site
-            $where = $wpdb->prepare(" WHERE (name = %s OR domain = %s) AND id != %d", $name, $domain_like, $item_id);
+            $where = $wpdb->prepare(" WHERE (name LIKE %s OR domain LIKE %s) AND id != %d", $name_like, $domain_like, $item_id);
         }
         $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM websites" . $where), ARRAY_A);
         return empty($results);
