@@ -25,7 +25,7 @@ $form_success = $_SESSION['form_success'];
                     <ul class="notice-banner__msgs-list">
                         <?php
                         // remove this later
-                        echo '<li>' . $wpdb->last_error . '</li>';
+                        // echo '<li>' . $wpdb->last_error . '</li>';
 
                         foreach ($form_errors as $error) {
                             echo '<li>' . htmlspecialchars($error) . '</li>';
