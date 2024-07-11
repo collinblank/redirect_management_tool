@@ -45,7 +45,7 @@ class Validator
 
         if (!$item_id) {
             // when creating a new site
-            $results = $wpdb->prepare(" WHERE name = %s OR domain = %s", $name, $domain_like);
+            $where = $wpdb->prepare(" WHERE name = %s OR domain = %s", $name, $domain_like);
         } else {
             // when editing a site
             $where = $wpdb->prepare(" WHERE (name = %s OR domain = %s) AND id != %d", $name, $domain_like, $item_id);
