@@ -82,6 +82,9 @@ function initFormValidation(tableName) {
     // just for showing correct colors on selects for now... could probably use some cleaning up
     const selects = document.querySelectorAll(".form__input-item select");
     selects.forEach((select) => {
+      if (select.value) {
+        select.classList.add("active");
+      }
       select.addEventListener("change", () => {
         if (select.value) {
           select.classList.add("active");
