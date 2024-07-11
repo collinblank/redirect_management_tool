@@ -39,7 +39,7 @@ function get_website_form_errors($website_id)
     if (!isset($server_id)) {
         array_push($errors, 'Please select a server to host your website.');
     } else {
-        if (!Validator::item_in_table($server_id, "servers")) {
+        if (!Validator::record_in_table($server_id, "servers")) {
             array_push($errors, 'The server you selected does not exist. Please assign your website to an existing server.');
         } else {
             // if it is a production server...
@@ -51,7 +51,7 @@ function get_website_form_errors($website_id)
             // } else {
             // ...but it does not actually exist
             // FIX: This is running when a prod server selected but no sandbox. Need to make exception for TMM type sites
-            if (isset($sandbox_id) && !Validator::item_in_table($sandbox_id, "websites")) {
+            if (isset($sandbox_id) && !Validator::record_in_table($sandbox_id, "websites")) {
                 array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
             }
             // }
