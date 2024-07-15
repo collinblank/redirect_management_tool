@@ -296,12 +296,12 @@ function setSuccessMsg(input, successMsg) {
 class Validator {
   static checkName(name, min = 4, max = 50) {
     const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
-    return pattern.test(name) && name.length > min && name.length < max;
+    return pattern.test(name) && name.length >= min && name.length <= max;
   }
 
   static checkDomain(domain, min = 6, max = 100) {
     const pattern = /^https?:\/\/.*$/;
-    return pattern.test(domain) && domain.length > min && domain.length < max;
+    return pattern.test(domain) && domain.length >= min && domain.length <= max;
   }
 }
 
