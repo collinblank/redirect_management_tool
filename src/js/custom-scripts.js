@@ -113,11 +113,6 @@ function initSelectEvents(select, handler) {
   select.addEventListener("change", handler);
 }
 
-function allInputsValid() {
-  const inputs = form.querySelectorAll(".form__input-item input");
-  return Array.from(inputs).every((input) => input.validity.valid);
-}
-
 function initDisableItemFormValidation() {
   const form = document.getElementById("disable-item__form");
   const checkbox = form.querySelector('input[type="checkbox"]');
@@ -129,6 +124,7 @@ function initDisableItemFormValidation() {
 }
 
 function initServerFormValidation() {
+  const submitBtn = document.getElementById("server-form-submit-btn");
   const name = document.getElementById("server-name");
   const domain = document.getElementById("server-domain");
 
