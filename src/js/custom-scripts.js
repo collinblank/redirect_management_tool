@@ -128,23 +128,23 @@ function initInputEvents(input, validateFunc) {
 
 function initSelectEvents(select, validateFunc) {
   // const submitBtn = form.querySelector('input[type="submit"]');
-  let blurredOnce = false;
+  // let blurredOnce = false;
 
   // select.addEventListener("focus", () => {
   //   // submitBtn.disabled = !allInputsValid();
   // });
 
-  select.addEventListener("blur", () => {
-    // submitBtn.disabled = !allInputsValid();
-    validateFunc();
-    blurredOnce = true;
-  });
+  // select.addEventListener("blur", () => {
+  //   // submitBtn.disabled = !allInputsValid();
+  //   validateFunc();
+  //   blurredOnce = true;
+  // });
 
   select.addEventListener("change", () => {
     // submitBtn.disabled = !allInputsValid();
-    if (blurredOnce) {
-      validateFunc();
-    }
+    // if (blurredOnce) {
+    validateFunc();
+    // }
   });
 }
 
@@ -221,7 +221,8 @@ function initWebsiteFormValidation() {
   // EVENT LISTENERS
   initInputEvents(name, validateName);
   initInputEvents(domain, validateDomain);
-  initSelectEvents(server, validateServer);
+  // initSelectEvents(server, validateServer);
+  server.addEventListener("change", validateServer);
 
   function validateName() {
     if (name.validity.valueMissing) {
