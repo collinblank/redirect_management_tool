@@ -260,7 +260,8 @@ function initWebsiteFormValidation() {
 
   function toggleSandbox() {
     const sandboxField = document.getElementById("website-sandbox-list-item");
-    const isProdServer = server.value === 1 || server.value === 5;
+    const isProdServer = server.value === "1" || server.value === "5";
+    console.log(server.value);
     console.log("isProdServer: " + isProdServer);
     if (server.validity.valid && isProdServer) {
       sandboxField.classList.remove("hidden");
