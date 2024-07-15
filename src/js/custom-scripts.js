@@ -194,6 +194,7 @@ function initServerFormValidation() {
 }
 
 function initWebsiteFormValidation() {
+  const submitBtn = document.getElementById("website-form-submit-btn");
   const name = document.getElementById("website-name");
   const domain = document.getElementById("website-domain");
   const server = document.getElementById("website-server");
@@ -208,15 +209,18 @@ function initWebsiteFormValidation() {
 
   function handleNameEvents() {
     Validator.checkName(name);
+    toggleSubmitBtn();
   }
 
   function handleDomainEvents() {
     Validator.checkDomain(domain);
+    toggleSubmitBtn();
   }
 
   function handleServerEvents() {
     Validator.checkSelect(server);
     toggleSandbox();
+    toggleSubmitBtn();
   }
 
   function toggleSandbox() {
@@ -228,6 +232,10 @@ function initWebsiteFormValidation() {
     } else {
       sandboxField.classList.add("hidden");
     }
+  }
+
+  function toggleSubmitBtn() {
+    submitBtn.disabled = !Validator.checkAllFields([name, domain, server]);
   }
 }
 
@@ -275,7 +283,7 @@ class Validator {
     }
   }
 
-  static _checkAllFields(fields = []) {
+  static checkAllFields(fields = []) {
     return fields.every((field) => field.validity.valid);
   }
 
