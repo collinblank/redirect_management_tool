@@ -261,10 +261,13 @@ function initWebsiteFormValidation() {
   function toggleSandbox() {
     const sandboxField = document.getElementById("website-sandbox-list-item");
     const isProdServer = server.value === 1 || server.value === 5;
+    console.log("isProdServer: " + isProdServer);
     if (server.validity.valid && isProdServer) {
-      sandboxField.classList.add("active");
+      sandboxField.classList.remove("hidden");
+      console.log("Yes: sandbox select shown.");
     } else {
-      sandboxField.classList.remove("active");
+      sandboxField.classList.add("hidden");
+      console.log("No: sandbox select not shown.");
     }
   }
 }
