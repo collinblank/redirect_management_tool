@@ -33,13 +33,13 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             <li class="form__input-item">
                 <label for="website-name">Name<span>*</span></label>
                 <!-- Add back the following constraints after SS PHP validation: minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required -->
-                <input type="text" id="website-name" name="website_name" placeholder="ex. Classical Conversations Production" value="<?php echo $website_to_edit['name'] ?? "" ?>" tabindex="1">
+                <input type="text" id="website-name" name="website_name" placeholder="ex. Classical Conversations Production" value="<?php echo $website_to_edit['name'] ?? "" ?>" tabindex="1" required>
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <li class="form__input-item">
                 <label for="website-domain">Domain<span>*</span></label>
                 <!-- Change back to type="url" and add the following constraints: maxlength="100" pattern="^https?://.*$" required -->
-                <input type="text" id="website-domain" name="website_domain" placeholder="ex. https://classicalconversations.com/" value="<?php echo $website_to_edit['domain'] ?? "" ?>" tabindex="2">
+                <input type="text" id="website-domain" name="website_domain" placeholder="ex. https://classicalconversations.com/" value="<?php echo $website_to_edit['domain'] ?? "" ?>" tabindex="2" required>
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <li class="form__input-item">
@@ -55,7 +55,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <!-- needs to be js to show this -->
-            <li class="form__input-item">
+            <li id="website-sandbox-list-item" class="form__input-item">
                 <label for="website-sandbox">Sandbox Website</label>
                 <select id="website-sandbox" name="website_sandbox" tabindex="4">
                     <option value="" disabled selected>--Select corresponding sandbox site--</option>

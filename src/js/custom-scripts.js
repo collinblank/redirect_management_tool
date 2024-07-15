@@ -248,10 +248,10 @@ function initWebsiteFormValidation() {
 
   function validateServer() {
     if (server.validity.valueMissing) {
-      setErrorMsg(domain, "Please select a value.");
+      setErrorMsg(server, "Please select a value.");
       toggleSandbox();
     } else {
-      setSuccessMsg(domain, "Looking good!");
+      setSuccessMsg(server, "Looking good!");
       toggleSandbox();
     }
   }
@@ -259,7 +259,7 @@ function initWebsiteFormValidation() {
   // don't need a validateSandbox because the field isn't required
 
   function toggleSandbox() {
-    const sandboxField = sandbox.parentElement;
+    const sandboxField = document.getElementById("website-sandbox-list-item");
     const isProdServer = server.value === 1 || server.value === 5;
     if (server.validity.valid && isProdServer) {
       sandboxField.classList.add("active");
