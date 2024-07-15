@@ -618,12 +618,8 @@ input[type="checkbox"]:checked::before {
   color: var(--primary-txt-color);
 }
 
-#website-sandbox-list-item {
+#website-sandbox-list-item.hidden {
   display: none;
-}
-
-#website-sandbox-list-item.active {
-  display: flex;
 }
 
 /* END CUSTOM STYLES */
