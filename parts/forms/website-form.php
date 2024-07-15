@@ -55,7 +55,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <!-- needs to be js to show this -->
-            <li id="website-sandbox-list-item" class="form__input-item <?php echo $action == 'add' ? 'hidden' : '' ?>">
+            <li id="website-sandbox-list-item" class="form__input-item <?php echo $action == 'edit' && $website_to_edit['serverId'] != 3  ? '' : 'hidden' ?>">
                 <label for="website-sandbox">Sandbox Website</label>
                 <select id="website-sandbox" name="website_sandbox" tabindex="4">
                     <option value="" disabled selected>--Select corresponding sandbox site--</option>

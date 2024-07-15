@@ -214,7 +214,7 @@ function initWebsiteFormValidation() {
   const name = document.getElementById("website-name");
   const domain = document.getElementById("website-domain");
   const server = document.getElementById("website-server");
-  const sandbox = document.getElementById("website-sandbox");
+  // const sandbox = document.getElementById("website-sandbox");
 
   setSelectStyles();
 
@@ -260,15 +260,12 @@ function initWebsiteFormValidation() {
 
   function toggleSandbox() {
     const sandboxField = document.getElementById("website-sandbox-list-item");
-    const isProdServer = server.value === "1" || server.value === "5";
-    console.log(server.value);
-    console.log("isProdServer: " + isProdServer);
+    const isProdServer = server.value !== "3";
+
     if (server.validity.valid && isProdServer) {
       sandboxField.classList.remove("hidden");
-      console.log("Yes: sandbox select shown.");
     } else {
       sandboxField.classList.add("hidden");
-      console.log("No: sandbox select not shown.");
     }
   }
 }
