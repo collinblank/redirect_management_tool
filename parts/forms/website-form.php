@@ -32,14 +32,12 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         <ul class="form__inputs-container">
             <li class="form__input-item">
                 <label for="website-name">Name<span>*</span></label>
-                <!-- Add back the following constraints after SS PHP validation: minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required -->
-                <input type="text" id="website-name" name="website_name" placeholder="ex. Classical Conversations Production" value="<?php echo $website_to_edit['name'] ?? "" ?>" tabindex="1" required>
+                <input type="text" id="website-name" name="website_name" placeholder="ex. Classical Conversations Production" value="<?php echo $website_to_edit['name'] ?? "" ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <li class="form__input-item">
                 <label for="website-domain">Domain<span>*</span></label>
-                <!-- Change back to type="url" and add the following constraints: maxlength="100" pattern="^https?://.*$" required -->
-                <input type="text" id="website-domain" name="website_domain" placeholder="ex. https://classicalconversations.com/" value="<?php echo $website_to_edit['domain'] ?? "" ?>" tabindex="2" required>
+                <input type="url" id="website-domain" name="website_domain" placeholder="ex. https://classicalconversations.com/" value="<?php echo $website_to_edit['domain'] ?? "" ?>" tabindex="2" maxlength="100" pattern="^https?://.*$" required>
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <li class="form__input-item">
@@ -51,10 +49,8 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                         <option value="<?php echo $server['id'] ?>" <?php echo ($server['id'] == $website_to_edit['serverId']) ? "selected"  : "" ?>><?php echo $server['name'] ?></option>
                     <?php } ?>
                 </select>
-                <!-- NOTE: Probably not needed for validation -->
                 <p class="form__input-item__validation-msg"></p>
             </li>
-            <!-- needs to be js to show this -->
             <li id="website-sandbox-list-item" class="form__input-item <?php echo $action == 'edit' && $website_to_edit['serverId'] != 3  ? '' : 'hidden' ?>">
                 <label for="website-sandbox">Sandbox Website</label>
                 <select id="website-sandbox" name="website_sandbox" tabindex="4">
@@ -69,7 +65,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                     <?php } ?>
                 </select>
                 <!-- NOTE: Probably not needed for validation -->
-                <p class="form__input-item__validation-msg"></p>
+                <!-- <p class="form__input-item__validation-msg"></p> -->
             </li>
 
         </ul>

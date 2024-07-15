@@ -104,7 +104,7 @@ function setSelectStyles() {
   });
 }
 
-function initInputEvents(input, validateFunc) {
+function initInputEvents(input, handler) {
   // const submitBtn = form.querySelector('input[type="submit"]');
   let blurredOnce = false;
 
@@ -114,38 +114,21 @@ function initInputEvents(input, validateFunc) {
 
   input.addEventListener("blur", () => {
     // submitBtn.disabled = !allInputsValid();
-    validateFunc();
+    handler(input);
     blurredOnce = true;
   });
 
   input.addEventListener("input", () => {
     // submitBtn.disabled = !allInputsValid();
     if (blurredOnce) {
-      validateFunc();
+      handler(input);
     }
   });
 }
 
-function initSelectEvents(select, validateFunc) {
-  // const submitBtn = form.querySelector('input[type="submit"]');
-  // let blurredOnce = false;
-
-  // select.addEventListener("focus", () => {
-  //   // submitBtn.disabled = !allInputsValid();
-  // });
-
-  // select.addEventListener("blur", () => {
-  //   // submitBtn.disabled = !allInputsValid();
-  //   validateFunc();
-  //   blurredOnce = true;
-  // });
-
-  select.addEventListener("change", () => {
-    // submitBtn.disabled = !allInputsValid();
-    // if (blurredOnce) {
-    validateFunc();
-    // }
-  });
+function initSelectEvents(select, handler) {
+  select.addEventListener("blur", handler);
+  select.addEventListener("change", handler);
 }
 
 function allInputsValid() {
@@ -219,45 +202,22 @@ function initWebsiteFormValidation() {
   setSelectStyles();
 
   // EVENT LISTENERS
-  initInputEvents(name, validateName);
-  initInputEvents(domain, validateDomain);
-  // initSelectEvents(server, validateServer);
-  server.addEventListener("change", validateServer);
+  initInputEvents(name, handleNameEvents);
+  initInputEvents(domain, handleDomainEvents);
+  initSelectEvents(server, handleServerEvents);
 
-  function validateName() {
-    if (name.validity.valueMissing) {
-      setErrorMsg(name, "Please enter a value.");
-    } else if (!Validator.checkName(name.value)) {
-      setErrorMsg(
-        name,
-        "Please enter between 4 and 50 letters and spaces only."
-      );
-    } else {
-      setSuccessMsg(name, "Awesome!");
-    }
+  function handleNameEvents() {
+    Validator.checkName(name);
   }
 
-  function validateDomain() {
-    if (domain.validity.valueMissing) {
-      setErrorMsg(domain, "Please enter a value.");
-    } else if (!Validator.checkDomain(domain.value)) {
-      setErrorMsg(domain, "Please enter a valid URL (including http(s)://).");
-    } else {
-      setSuccessMsg(domain, "Great!");
-    }
+  function handleDomainEvents() {
+    Validator.checkDomain(domain);
   }
 
-  function validateServer() {
-    if (server.validity.valueMissing) {
-      setErrorMsg(server, "Please select a value.");
-      toggleSandbox();
-    } else {
-      setSuccessMsg(server, "Looking good!");
-      toggleSandbox();
-    }
+  function handleServerEvents() {
+    Validator.checkSelect(server);
+    toggleSandbox();
   }
-
-  // don't need a validateSandbox because the field isn't required
 
   function toggleSandbox() {
     const sandboxField = document.getElementById("website-sandbox-list-item");
@@ -271,35 +231,72 @@ function initWebsiteFormValidation() {
   }
 }
 
-function setErrorMsg(input, errorMsg) {
-  const msg = input.nextElementSibling;
-  msg.textContent = errorMsg;
-
-  input.classList.remove("valid");
-  input.classList.add("invalid");
-  msg.classList.remove("success", "active");
-  msg.classList.add("error", "active");
-}
-
-function setSuccessMsg(input, successMsg) {
-  const msg = input.nextElementSibling;
-  msg.textContent = successMsg;
-
-  input.classList.remove("invalid");
-  input.classList.add("valid");
-  msg.classList.remove("error", "active");
-  msg.classList.add("success", "active");
-}
-
 class Validator {
-  static checkName(name, min = 4, max = 50) {
-    const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
-    return pattern.test(name) && name.length >= min && name.length <= max;
+  static checkName(name) {
+    // const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+    // return pattern.test(name) && name.length >= min && name.length <= max;
+    if (!name.validity.valid) {
+      if (name.validity.valueMissing) {
+        this._setErrorMsg(name, "Please enter a value.");
+      } else {
+        this._setErrorMsg(
+          name,
+          "Please enter between 4 and 50 letters and spaces only."
+        );
+      }
+    } else {
+      this._setSuccessMsg(name, "Awesome!");
+    }
   }
 
-  static checkDomain(domain, min = 6, max = 100) {
-    const pattern = /^https?:\/\/.*$/;
-    return pattern.test(domain) && domain.length >= min && domain.length <= max;
+  static checkDomain(domain) {
+    // const pattern = /^https?:\/\/.*$/;
+    // return pattern.test(domain) && domain.length >= min && domain.length <= max;
+
+    if (!domain.validity.valid) {
+      if (domain.validity.valueMissing) {
+        this._setErrorMsg(domain, "Please enter a value.");
+      } else {
+        this._setErrorMsg(
+          domain,
+          "Please enter a valid URL (including http(s)://)."
+        );
+      }
+    } else {
+      this._setSuccessMsg(domain, "Looking good!");
+    }
+  }
+
+  static checkSelect(select) {
+    if (select.validity.valueMissing) {
+      this._setErrorMsg(select, "Please select a value.");
+    } else {
+      this._setSuccessMsg(select, "Great!");
+    }
+  }
+
+  _checkAllFields(fields = []) {
+    return fields.every((field) => field.validity.valid);
+  }
+
+  _setErrorMsg(input, errorMsg) {
+    const msg = input.nextElementSibling;
+    msg.textContent = errorMsg;
+
+    input.classList.remove("valid");
+    input.classList.add("invalid");
+    msg.classList.remove("success", "active");
+    msg.classList.add("error", "active");
+  }
+
+  _setSuccessMsg(input, successMsg) {
+    const msg = input.nextElementSibling;
+    msg.textContent = successMsg;
+
+    input.classList.remove("invalid");
+    input.classList.add("valid");
+    msg.classList.remove("error", "active");
+    msg.classList.add("success", "active");
   }
 }
 
