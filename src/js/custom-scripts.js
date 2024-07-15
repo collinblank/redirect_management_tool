@@ -237,15 +237,15 @@ class Validator {
     // return pattern.test(name) && name.length >= min && name.length <= max;
     if (!name.validity.valid) {
       if (name.validity.valueMissing) {
-        this._setErrorMsg(name, "Please enter a value.");
+        _setErrorMsg(name, "Please enter a value.");
       } else {
-        this._setErrorMsg(
+        _setErrorMsg(
           name,
           "Please enter between 4 and 50 letters and spaces only."
         );
       }
     } else {
-      this._setSuccessMsg(name, "Awesome!");
+      _setSuccessMsg(name, "Awesome!");
     }
   }
 
@@ -255,23 +255,23 @@ class Validator {
 
     if (!domain.validity.valid) {
       if (domain.validity.valueMissing) {
-        this._setErrorMsg(domain, "Please enter a value.");
+        _setErrorMsg(domain, "Please enter a value.");
       } else {
-        this._setErrorMsg(
+        _setErrorMsg(
           domain,
           "Please enter a valid URL (including http(s)://)."
         );
       }
     } else {
-      this._setSuccessMsg(domain, "Looking good!");
+      _setSuccessMsg(domain, "Looking good!");
     }
   }
 
   static checkSelect(select) {
     if (select.validity.valueMissing) {
-      this._setErrorMsg(select, "Please select a value.");
+      _setErrorMsg(select, "Please select a value.");
     } else {
-      this._setSuccessMsg(select, "Great!");
+      _setSuccessMsg(select, "Great!");
     }
   }
 
