@@ -86,24 +86,6 @@ function initFormValidation(tableName) {
   }
 }
 
-// const form = document.querySelector(".modal-form");
-
-function setSelectStyles() {
-  const selects = document.querySelectorAll(".form__input-item select");
-  selects.forEach((select) => {
-    if (select.value) {
-      select.classList.add("active");
-    }
-    select.addEventListener("change", () => {
-      if (select.value) {
-        select.classList.add("active");
-      } else {
-        select.classList.remove("active");
-      }
-    });
-  });
-}
-
 function initInputEvents(input, handler) {
   // const submitBtn = form.querySelector('input[type="submit"]');
   let blurredOnce = false;
@@ -147,49 +129,24 @@ function initDisableItemFormValidation() {
 }
 
 function initServerFormValidation() {
-  const nameInput = document.getElementById("server-name");
-  const domainInput = document.getElementById("server-domain");
-  // EVENT LISTENERS
-  initInputEvents(nameInput, checkServerName);
-  initInputEvents(domainInput, checkServerDomain);
+  const name = document.getElementById("server-name");
+  const domain = document.getElementById("server-domain");
 
-  function checkServerName() {
-    const responseMsgs = {
-      error: "Please enter between 4 and 50 letters and spaces only.",
-      success: "Awesome!",
-    };
-    checkServerInput(nameInput, responseMsgs);
+  initInputEvents(name, handleNameEvents);
+  initInputEvents(domain, handleDomainEvents);
+
+  function handleNameEvents() {
+    Validator.checkName(name);
+    toggleSubmitBtn();
   }
 
-  function checkServerDomain() {
-    const responseMsgs = {
-      error: "Please enter a valid URL (including http(s)://).",
-      success: "Great!",
-    };
-    checkServerInput(domainInput, responseMsgs);
+  function handleDomainEvents() {
+    Validator.checkDomain(domain);
+    toggleSubmitBtn();
   }
 
-  function checkServerInput(input, responseMsgs) {
-    const msg = input.nextElementSibling;
-    // const patternMismatch = !pattern.test(input.value);
-
-    if (!input.validity.valid) {
-      if (input.validity.valueMissing) {
-        msg.textContent = "Please enter a value.";
-      } else {
-        msg.textContent = responseMsgs.error;
-      }
-      input.classList.remove("valid");
-      input.classList.add("invalid");
-      msg.classList.remove("success", "active");
-      msg.classList.add("error", "active");
-    } else {
-      msg.textContent = responseMsgs.success;
-      input.classList.remove("invalid");
-      input.classList.add("valid");
-      msg.classList.remove("error", "active");
-      msg.classList.add("success", "active");
-    }
+  function toggleSubmitBtn() {
+    submitBtn.disabled = !Validator.checkAllFields([name, domain]);
   }
 }
 
@@ -198,11 +155,8 @@ function initWebsiteFormValidation() {
   const name = document.getElementById("website-name");
   const domain = document.getElementById("website-domain");
   const server = document.getElementById("website-server");
-  // const sandbox = document.getElementById("website-sandbox");
 
   setSelectStyles();
-
-  // EVENT LISTENERS
   initInputEvents(name, handleNameEvents);
   initInputEvents(domain, handleDomainEvents);
   initSelectEvents(server, handleServerEvents);
@@ -236,6 +190,22 @@ function initWebsiteFormValidation() {
 
   function toggleSubmitBtn() {
     submitBtn.disabled = !Validator.checkAllFields([name, domain, server]);
+  }
+
+  function setSelectStyles() {
+    const selects = document.querySelectorAll(".form__input-item select");
+    selects.forEach((select) => {
+      if (select.value) {
+        select.classList.add("active");
+      }
+      select.addEventListener("change", () => {
+        if (select.value) {
+          select.classList.add("active");
+        } else {
+          select.classList.remove("active");
+        }
+      });
+    });
   }
 }
 
