@@ -275,11 +275,11 @@ class Validator {
     }
   }
 
-  _checkAllFields(fields = []) {
+  static _checkAllFields(fields = []) {
     return fields.every((field) => field.validity.valid);
   }
 
-  _setErrorMsg(input, errorMsg) {
+  static _setErrorMsg(input, errorMsg) {
     const msg = input.nextElementSibling;
     msg.textContent = errorMsg;
 
@@ -289,7 +289,7 @@ class Validator {
     msg.classList.add("error", "active");
   }
 
-  _setSuccessMsg(input, successMsg) {
+  static _setSuccessMsg(input, successMsg) {
     const msg = input.nextElementSibling;
     msg.textContent = successMsg;
 
