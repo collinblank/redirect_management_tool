@@ -76,104 +76,81 @@ function showModal(action, e) {
 
 // FORM VALIDATION
 function initFormValidation(tableName) {
-  if (tableName === "servers") {
-    initServerFormValidation();
-  } else if (tableName === "websites") {
-    // just for showing correct colors on selects for now... could probably use some cleaning up
-    const selects = document.querySelectorAll(".form__input-item select");
-    selects.forEach((select) => {
+  switch (tableName) {
+    case "servers":
+      initServerFormValidation();
+      break;
+    case "websites":
+      initWebsiteFormValidation();
+      break;
+  }
+}
+
+// const form = document.querySelector(".modal-form");
+
+function setSelectStyles() {
+  const selects = document.querySelectorAll(".form__input-item select");
+  selects.forEach((select) => {
+    if (select.value) {
+      select.classList.add("active");
+    }
+    select.addEventListener("change", () => {
       if (select.value) {
         select.classList.add("active");
-      }
-      select.addEventListener("change", () => {
-        if (select.value) {
-          select.classList.add("active");
-        } else {
-          select.classList.remove("active");
-        }
-      });
-    });
-  }
-
-  const form = document.querySelector(".modal-form");
-  const submitBtn = form.querySelector('input[type="submit"]');
-  const inputs = form.querySelectorAll(".form__input-item input");
-
-  function initServerFormValidation() {
-    const serverNameInput = document.getElementById("server-name");
-    const serverDomainInput = document.getElementById("server-domain");
-    // EVENT LISTENERS
-    initInputEvents(serverNameInput, checkServerName);
-    initInputEvents(serverDomainInput, checkServerDomain);
-
-    function checkServerName() {
-      const responseMsgs = {
-        error: "Please enter between 4 and 50 letters and spaces only.",
-        success: "Awesome!",
-      };
-      checkServerInput(serverNameInput, responseMsgs);
-    }
-
-    function checkServerDomain() {
-      const responseMsgs = {
-        error: "Please enter a valid URL (including http(s)://).",
-        success: "Great!",
-      };
-      checkServerInput(serverDomainInput, responseMsgs);
-    }
-
-    function checkServerInput(input, responseMsgs) {
-      const msg = input.nextElementSibling;
-      // const patternMismatch = !pattern.test(input.value);
-
-      if (!input.validity.valid) {
-        if (input.validity.valueMissing) {
-          msg.textContent = "Please enter a value.";
-        } else {
-          msg.textContent = responseMsgs.error;
-        }
-        input.classList.remove("valid");
-        input.classList.add("invalid");
-        msg.classList.remove("success", "active");
-        msg.classList.add("error", "active");
       } else {
-        msg.textContent = responseMsgs.success;
-        input.classList.remove("invalid");
-        input.classList.add("valid");
-        msg.classList.remove("error", "active");
-        msg.classList.add("success", "active");
+        select.classList.remove("active");
       }
+    });
+  });
+}
+
+function initInputEvents(input, validateFunc) {
+  // const submitBtn = form.querySelector('input[type="submit"]');
+  let blurredOnce = false;
+
+  // input.addEventListener("focus", () => {
+  //   // submitBtn.disabled = !allInputsValid();
+  // });
+
+  input.addEventListener("blur", () => {
+    // submitBtn.disabled = !allInputsValid();
+    validateFunc();
+    blurredOnce = true;
+  });
+
+  input.addEventListener("input", () => {
+    // submitBtn.disabled = !allInputsValid();
+    if (blurredOnce) {
+      validateFunc();
     }
-  }
+  });
+}
 
-  // function initWebsiteFormValidation() {
+function initSelectEvents(select, validateFunc) {
+  // const submitBtn = form.querySelector('input[type="submit"]');
+  let blurredOnce = false;
 
-  // }
+  // select.addEventListener("focus", () => {
+  //   // submitBtn.disabled = !allInputsValid();
+  // });
 
-  function initInputEvents(input, checkInputFunc) {
-    let blurredOnce = false;
+  select.addEventListener("blur", () => {
+    // submitBtn.disabled = !allInputsValid();
+    validateFunc();
+    blurredOnce = true;
+  });
 
-    input.addEventListener("focus", () => {
-      submitBtn.disabled = !allInputsValid();
-    });
+  select.addEventListener("change", () => {
+    // submitBtn.disabled = !allInputsValid();
+    if (blurredOnce) {
+      validateFunc();
+    }
+  });
+}
 
-    input.addEventListener("blur", () => {
-      submitBtn.disabled = !allInputsValid();
-      checkInputFunc();
-      blurredOnce = true;
-    });
-
-    input.addEventListener("input", () => {
-      submitBtn.disabled = !allInputsValid();
-      if (blurredOnce) {
-        checkInputFunc();
-      }
-    });
-  }
-
-  function allInputsValid() {
-    return Array.from(inputs).every((input) => input.validity.valid);
-  }
+function allInputsValid() {
+  const inputs = form.querySelectorAll(".form__input-item input");
+  return Array.from(inputs).every((input) => input.validity.valid);
 }
 
 function initDisableItemFormValidation() {
@@ -185,3 +162,154 @@ function initDisableItemFormValidation() {
     disableBtn.disabled = !checkbox.checked;
   });
 }
+
+function initServerFormValidation() {
+  const nameInput = document.getElementById("server-name");
+  const domainInput = document.getElementById("server-domain");
+  // EVENT LISTENERS
+  initInputEvents(nameInput, checkServerName);
+  initInputEvents(domainInput, checkServerDomain);
+
+  function checkServerName() {
+    const responseMsgs = {
+      error: "Please enter between 4 and 50 letters and spaces only.",
+      success: "Awesome!",
+    };
+    checkServerInput(nameInput, responseMsgs);
+  }
+
+  function checkServerDomain() {
+    const responseMsgs = {
+      error: "Please enter a valid URL (including http(s)://).",
+      success: "Great!",
+    };
+    checkServerInput(domainInput, responseMsgs);
+  }
+
+  function checkServerInput(input, responseMsgs) {
+    const msg = input.nextElementSibling;
+    // const patternMismatch = !pattern.test(input.value);
+
+    if (!input.validity.valid) {
+      if (input.validity.valueMissing) {
+        msg.textContent = "Please enter a value.";
+      } else {
+        msg.textContent = responseMsgs.error;
+      }
+      input.classList.remove("valid");
+      input.classList.add("invalid");
+      msg.classList.remove("success", "active");
+      msg.classList.add("error", "active");
+    } else {
+      msg.textContent = responseMsgs.success;
+      input.classList.remove("invalid");
+      input.classList.add("valid");
+      msg.classList.remove("error", "active");
+      msg.classList.add("success", "active");
+    }
+  }
+}
+
+function initWebsiteFormValidation() {
+  const name = document.getElementById("website-name");
+  const domain = document.getElementById("website-domain");
+  const server = document.getElementById("website-server");
+  const sandbox = document.getElementById("website-sandbox");
+
+  setSelectStyles();
+
+  // EVENT LISTENERS
+  initInputEvents(name, validateName);
+  initInputEvents(domain, validateDomain);
+  initSelectEvents(server, validateServer);
+
+  function validateName() {
+    if (name.validity.valueMissing) {
+      setErrorMsg(name, "Please enter a value.");
+    } else if (!Validator.checkName(name.value)) {
+      setErrorMsg(
+        name,
+        "Please enter between 4 and 50 letters and spaces only."
+      );
+    } else {
+      setSuccessMsg(name, "Awesome!");
+    }
+  }
+
+  function validateDomain() {
+    if (domain.validity.valueMissing) {
+      setErrorMsg(domain, "Please enter a value.");
+    } else if (!Validator.checkDomain(domain.value)) {
+      setErrorMsg(domain, "Please enter a valid URL (including http(s)://).");
+    } else {
+      setSuccessMsg(domain, "Great!");
+    }
+  }
+
+  function validateServer() {
+    if (server.validity.valueMissing) {
+      setErrorMsg(domain, "Please select a value.");
+      toggleSandbox();
+    } else {
+      setSuccessMsg(domain, "Looking good!");
+      toggleSandbox();
+    }
+  }
+
+  // don't need a validateSandbox because the field isn't required
+
+  function toggleSandbox() {
+    const sandboxField = sandbox.parentElement;
+    const isProdServer = server.value === 1 || server.value === 5;
+    if (server.validity.valid && isProdServer) {
+      sandboxField.classList.add("active");
+    } else {
+      sandboxField.classList.remove("active");
+    }
+  }
+}
+
+function setErrorMsg(input, errorMsg) {
+  const msg = input.nextElementSibling;
+  msg.textContent = errorMsg;
+
+  input.classList.remove("valid");
+  input.classList.add("invalid");
+  msg.classList.remove("success", "active");
+  msg.classList.add("error", "active");
+}
+
+function setSuccessMsg(input, successMsg) {
+  const msg = input.nextElementSibling;
+  msg.textContent = successMsg;
+
+  input.classList.remove("invalid");
+  input.classList.add("valid");
+  msg.classList.remove("error", "active");
+  msg.classList.add("success", "active");
+}
+
+class Validator {
+  static checkName(name, min = 4, max = 50) {
+    const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+    return pattern.test(name) && name.length > min && name.length < max;
+  }
+
+  static checkDomain(domain, min = 6, max = 100) {
+    const pattern = /^https?:\/\/.*$/;
+    return pattern.test(domain) && domain.length > min && domain.length < max;
+  }
+}
+
+/* Organization
+
+Class Validator
+ - All input check methods (domain, server, name, etc.)
+
+
+Individual Init fns for forms
+ - 
+
+
+
+ */

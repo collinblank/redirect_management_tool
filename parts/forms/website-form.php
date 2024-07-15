@@ -4,7 +4,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 $action = $_GET['action'];
 $item_id = intval($_GET['item_id']) ?? null;
-// Don't think this is needed since variables in if statements can be read outside of them: $website_to_edit = array(); 
 
 global $wpdb;
 $servers = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
@@ -58,7 +57,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             <!-- needs to be js to show this -->
             <li class="form__input-item">
                 <label for="website-sandbox">Sandbox Website</label>
-                <select id="website_sandbox" name="website_sandbox" tabindex="4">
+                <select id="website-sandbox" name="website_sandbox" tabindex="4">
                     <option value="" disabled selected>--Select corresponding sandbox site--</option>
                     <?php if (isset($selected_sandbox_website)) : ?>
                         <option value="<?php echo $selected_sandbox_website['id'] ?>" selected><?php echo $selected_sandbox_website['name'] ?></option>
