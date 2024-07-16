@@ -34,15 +34,6 @@ function handle_website_form_submit()
             exit;
         } elseif (!$item_id) {
             // for adding
-            // $result = $wpdb->insert($table_name, $data);
-            // if ($result) {
-            //     $_SESSION['form_success'] = 'A new website has been successfully created.';
-            //     wp_safe_redirect(add_query_arg('add', $result, home_url('/' . $table_name)), 303);
-            //     exit;
-            // } else {
-            //     echo "<script>console.log('Unable to add website');</script>";
-            // }
-
             $result = $wpdb->insert($table_name, $data);
             if ($wpdb->last_error) {
                 // Handle the error
@@ -56,16 +47,6 @@ function handle_website_form_submit()
             exit;
         } elseif ($item_id) {
             // for editing
-            // $result = $wpdb->update($table_name, $data, $where);
-
-            // if ($result) {
-            //     $_SESSION['form_success'] = 'The website was successfully edited.';
-            //     wp_safe_redirect(add_query_arg('edit', $item_id, home_url('/' . $table_name)), 303);
-            //     exit;
-            // } else {
-            //     echo "<script>console.log('Unable to edit website');</script>";
-            // }
-
             $wpdb->update($table_name, $data, $where);
             if ($wpdb->last_error) {
                 // Handle the error
