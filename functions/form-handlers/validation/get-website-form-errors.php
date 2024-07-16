@@ -28,44 +28,21 @@ function get_website_form_errors($website_id)
         array_push($errors, 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.');
     }
 
-    // server and sandbox checks
-    // FIX: error shows when no server is selected 
-    // SOLVE: should be fixed now with isset
+
     if (!isset($server_id)) {
         array_push($errors, 'Please select a server to host your website.');
     } else {
         if (!Validator::record_in_table($server_id, "servers")) {
             array_push($errors, 'The server you selected does not exist. Please assign your website to an existing server.');
         } else {
-            // if it is a production server...
-            // if (($server_id == 1 || $server_id == 5)) {
-            // ...require a sandbox website to be selected
-            // if (!isset($sandbox_id)) {
-            //     array_push($errors, 'Please assign a sandbox website or choose None.');
-            //     // if there is a sandbox id selected when it is a prod server...
-            // } else {
-            // ...but it does not actually exist
-            // FIX: This is running when a prod server selected but no sandbox. Need to make exception for TMM type sites
-            if (isset($sandbox_id) && !Validator::record_in_table($sandbox_id, "websites")) {
+            if (!empty($sandbox_id) && !Validator::record_in_table($sandbox_id, "websites")) {
                 array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
             }
-            // }
-            // }
         }
     }
 
-    // sbx
-    // if (isset($sandbox_id) && !Validator::item_in_table($sandbox_id, "websites")) {
-    //     array_push($errors, 'The sandbox website you selected does not exist. Please assign your website to an existing sandbox website.');
-    // }
-
-
     // TO DO:
-    // - probably need something about only selecting one sandbox site per prod site
-
-    // NOTES:
-    // Do we need to verify if a server id is 1 or 5 (a production server) to select a sandbox id?
-    // Currently the script does require this
+    //
 
     return $errors;
 }
