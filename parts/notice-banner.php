@@ -7,7 +7,7 @@ $form_success = $_SESSION['form_success'];
 <?php if (isset($form_errors) && !empty($form_errors)) : ?>
     <div class="notice-banner error">
         <div class="notice-banner__msgs-container">
-            <p>Unable to create the server. Please try again and correct the following errors:</p>
+            <p>Unable to create item. Please try again and correct the following errors:</p>
             <ul class="notice-banner__msgs-list">
                 <?php
                 foreach ($form_errors as $error) {
