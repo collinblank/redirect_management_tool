@@ -1,6 +1,5 @@
 <?php /* Template Name: Servers */ ?>
 <?php
-// require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 session_start();
 $form_errors = $_SESSION['form_errors'];

@@ -28,7 +28,6 @@ function get_website_form_errors($website_id)
         array_push($errors, 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.');
     }
 
-
     if (!isset($server_id)) {
         array_push($errors, 'Please select a server to host your website.');
     } else {
@@ -40,9 +39,6 @@ function get_website_form_errors($website_id)
             }
         }
     }
-
-    // TO DO:
-    //
 
     return $errors;
 }

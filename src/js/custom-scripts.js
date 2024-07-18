@@ -86,6 +86,16 @@ function initFormValidation(tableName) {
   }
 }
 
+function initDisableItemFormValidation() {
+  const form = document.getElementById("disable-item__form");
+  const checkbox = form.querySelector('input[type="checkbox"]');
+  const disableBtn = form.querySelector('input[type="submit"]');
+
+  checkbox.addEventListener("change", () => {
+    disableBtn.disabled = !checkbox.checked;
+  });
+}
+
 function initInputEvents(input, handler) {
   // const submitBtn = form.querySelector('input[type="submit"]');
   let blurredOnce = false;
@@ -111,16 +121,6 @@ function initInputEvents(input, handler) {
 function initSelectEvents(select, handler) {
   select.addEventListener("blur", handler);
   select.addEventListener("change", handler);
-}
-
-function initDisableItemFormValidation() {
-  const form = document.getElementById("disable-item__form");
-  const checkbox = form.querySelector('input[type="checkbox"]');
-  const disableBtn = form.querySelector('input[type="submit"]');
-
-  checkbox.addEventListener("change", () => {
-    disableBtn.disabled = !checkbox.checked;
-  });
 }
 
 function initServerFormValidation() {
@@ -207,8 +207,6 @@ function initWebsiteFormValidation() {
 
 class Validator {
   static checkName(name) {
-    // const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
-    // return pattern.test(name) && name.length >= min && name.length <= max;
     if (!name.validity.valid) {
       if (name.validity.valueMissing) {
         this._setErrorMsg(name, "Please enter a value.");
@@ -224,9 +222,6 @@ class Validator {
   }
 
   static checkDomain(domain) {
-    // const pattern = /^https?:\/\/.*$/;
-    // return pattern.test(domain) && domain.length >= min && domain.length <= max;
-
     if (!domain.validity.valid) {
       if (domain.validity.valueMissing) {
         this._setErrorMsg(domain, "Please enter a value.");
@@ -273,16 +268,3 @@ class Validator {
     msg.classList.add("success", "active");
   }
 }
-
-/* Organization
-
-Class Validator
- - All input check methods (domain, server, name, etc.)
-
-
-Individual Init fns for forms
- - 
-
-
-
- */

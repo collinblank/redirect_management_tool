@@ -1,7 +1,6 @@
 <?php /* Template Name: Websites */ ?>
 
 <?php
-// require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars((trim($_GET['search_text'])));
@@ -11,7 +10,6 @@ session_start();
 $form_errors = $_SESSION['form_errors'];
 $form_success = $_SESSION['form_success'];
 ?>
-
 
 <?php get_header(); ?>
 <section class="page-section list-view-page">

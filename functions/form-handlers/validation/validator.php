@@ -29,14 +29,6 @@ class Validator
         return !empty($results); // true if item id exists in db
     }
 
-    // done nothing with yet
-    public static function sandbox_taken($item_id)
-    {
-        global $wpdb;
-        $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM websites WHERE isProd = 1 AND sandboxId = %d", $item_id), ARRAY_A);
-        return !empty($results);
-    }
-
     public static function unique_record($name, $domain, $item_id)
     {
         global $wpdb;

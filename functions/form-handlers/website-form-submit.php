@@ -37,7 +37,7 @@ function handle_website_form_submit()
             $result = $wpdb->insert($table_name, $data);
             if ($wpdb->last_error) {
                 // Handle the error
-                $_SESSION['form_errors'] = $wpdb->last_error;
+                $_SESSION['form_errors'] = "Insert error: " . $wpdb->last_error;
                 wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
             } else {
                 // Redirect on success
@@ -50,7 +50,7 @@ function handle_website_form_submit()
             $wpdb->update($table_name, $data, $where);
             if ($wpdb->last_error) {
                 // Handle the error
-                $_SESSION['form_errors'] = "Database error: " . $wpdb->last_error;
+                $_SESSION['form_errors'] = "Update error: " . $wpdb->last_error;
                 wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
             } else {
                 // Redirect on success
