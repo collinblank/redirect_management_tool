@@ -1,11 +1,12 @@
 <?php /* Template Name: Websites */ ?>
 
 <?php
+// require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars((trim($_GET['search_text'])));
 }
-// get filter options values if inserted
+
 session_start();
 $form_errors = $_SESSION['form_errors'];
 $form_success = $_SESSION['form_success'];
@@ -15,39 +16,7 @@ $form_success = $_SESSION['form_success'];
 <?php get_header(); ?>
 <section class="page-section list-view-page">
     <div class="page-content-container">
-        <?php
-        // get_template_part('parts/notice-banner.php');
-        ?>
-        <?php if (isset($form_errors) && !empty($form_errors)) : ?>
-            <div class="notice-banner error">
-                <div class="notice-banner__msgs-container">
-                    <p>Unable to create the website. Please try again and correct the following errors:</p>
-                    <ul class="notice-banner__msgs-list">
-                        <?php
-                        // remove this later
-                        // echo '<li>' . $wpdb->last_error . '</li>';
-
-                        foreach ($form_errors as $error) {
-                            echo '<li>' . htmlspecialchars($error) . '</li>';
-                        }
-                        unset($_SESSION['form_errors']);
-                        ?>
-
-                    </ul>
-                </div>
-                <button class="icon-btn notice-banner__x-btn">
-                    <i class="fa-solid fa-x"></i>
-                </button>
-            </div>
-        <?php elseif (isset($form_success)) : ?>
-            <div class="notice-banner success">
-                <p><?php echo $form_success ?></p>
-                <button class="icon-btn notice-banner__x-btn">
-                    <i class="fa-solid fa-x"></i>
-                </button>
-            </div>
-            <?php unset($_SESSION['form_success']); ?>
-        <?php endif;  ?>
+        <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
             <h1>Manage Websites</h1>
             <button class="default-btn add-item-btn">Add Website</button>
