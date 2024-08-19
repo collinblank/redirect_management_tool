@@ -4,8 +4,8 @@ function get_website_form_errors($website_id)
 {
     $name = $_POST['website_name'];
     $domain = $_POST['website_domain'];
-    $server_id = $_POST['website_server'] == '' ? NULL : intval($_POST['website_server']);
-    $sandbox_id = $_POST['website_sandbox'] == '' ? NULL : intval($_POST['website_sandbox']);
+    $server_id = $_POST['website_server'] == '' ? null : intval($_POST['website_server']);
+    $sandbox_id = $_POST['website_sandbox'] == '' ? null : intval($_POST['website_sandbox']);
     $errors = [];
 
     if (!Validator::string($name, 4, 50) || !Validator::letters_and_spaces($name)) {
