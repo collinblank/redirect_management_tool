@@ -227,6 +227,7 @@ function show_private_pages_menu_selection($args)
 
 // FORM ACTIONS
 require 'functions/form-handlers/validation/validator.php';
+require 'functions/form-handlers/submit-form.php';
 
 // Handle form submissions (adding/edting) for servers 
 require 'functions/form-handlers/server-form-submit.php';
