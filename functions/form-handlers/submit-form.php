@@ -1,12 +1,10 @@
 <?php
 
-function submit_form($validate_form, $table_name, $data, $item_id = NULL, $where)
+function submit_form($table_name, $data, $errors = [], $item_id = null, $where = [])
 {
     unset($_SESSION['form_errors']);
     unset($_SESSION['form_success']);
     session_start();
-
-    $errors = $validate_form($item_id);
 
     if (!empty($errors)) {
         $_SESSION['form_errors'] = $errors;
@@ -20,6 +18,7 @@ function submit_form($validate_form, $table_name, $data, $item_id = NULL, $where
         } else {
             $result = $wpdb->insert($table_name, $data);
         }
+
         if ($wpdb->last_error) {
             $_SESSION['form_errors'] = 'Database error: ' . $wpdb->last_error;
             $redirect_args = ['errors' =>  1];

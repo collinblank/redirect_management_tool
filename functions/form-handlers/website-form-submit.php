@@ -15,11 +15,13 @@ function handle_website_form_submit()
             'sandboxId' => $_POST['website_sandbox'],
             'isProd' => $_POST['website_server'] == 3 ? 0 : 1,
         );
-        $item_id = $_POST['item_id'] ?? NULL;
+        $item_id = $_POST['item_id'] ?? null;
         $where = array(
             'id' => $item_id
         );
 
-        submit_form($get_website_form_errors, $table_name, $data, $item_id, $where);
+        $errors = get_website_form_errors($item_id);
+
+        submit_form($table_name, $data, $errors, $item_id, $where);
     }
 }
