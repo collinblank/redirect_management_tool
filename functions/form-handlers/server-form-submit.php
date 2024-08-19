@@ -4,50 +4,21 @@ include get_template_directory() . '/functions/form-handlers/validation/get-serv
 
 function handle_server_form_submit()
 {
-    session_start();
-    global $wpdb;
-
     if (!isset($_POST['server_form_nonce_field']) || !wp_verify_nonce($_POST['server_form_nonce_field'], 'server_form_nonce')) {
-        wp_die('Error: Security check failed.');
+        wp_die('Error: Unable to verify form nonce.');
     } else {
-        unset($_SESSION['form_errors']);
-        unset($_SESSION['form_success']);
-
         $table_name = 'servers';
         $data = array(
             'name' => $_POST['server_name'],
             'domain' => $_POST['server_domain'],
         );
-        $item_id = $_POST['item_id'] ?? NULL;
+        $item_id = $_POST['item_id'] ?? null;
         $where = array(
             'id' => $item_id
         );
         $errors = get_server_form_errors();
+        $action = $item_id ? 'edit' : 'add';
 
-        if (!empty($errors)) {
-            $_SESSION['form_errors'] = $errors;
-            wp_safe_redirect(add_query_arg('errors', count($errors), home_url('/' . $table_name)), 303);
-            exit;
-        } elseif (!$item_id) {
-            // for adding
-            $result = $wpdb->insert($table_name, $data);
-            if ($result) {
-                $_SESSION['form_success'] = 'A new server has been successfully created.';
-                wp_safe_redirect(add_query_arg('add', $result, home_url('/' . $table_name)), 303);
-                exit;
-            } else {
-                echo "<script>console.log('Unable to add new server');</script>";
-            }
-        } elseif ($item_id) {
-            // for editing
-            $result = $wpdb->update($table_name, $data, $where);
-            if ($result) {
-                $_SESSION['form_success'] = 'The server was successfully edited.';
-                wp_safe_redirect(add_query_arg('edit', $item_id, home_url('/' . $table_name)), 303);
-                exit;
-            } else {
-                echo "<script>console.log('Unable to edit server');</script>";
-            }
-        }
+        handle_form_submission($action, $table_name, $data, $errors, $item_id, $where);
     }
 }

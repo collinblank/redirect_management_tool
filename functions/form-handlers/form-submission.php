@@ -1,6 +1,6 @@
 <?php
 
-function submit_form($table_name, $data, $errors = [], $item_id = null, $where = [])
+function handle_form_submission($action, $table_name, $data, $errors = [], $item_id = null, $where = [])
 {
     unset($_SESSION['form_errors']);
     unset($_SESSION['form_success']);
@@ -11,12 +11,12 @@ function submit_form($table_name, $data, $errors = [], $item_id = null, $where =
         $redirect_args = ['errors' => count($errors)];
     } else {
         global $wpdb;
-        $action = $item_id ? 'edit' : 'add';
 
-        if ($action == 'edit') {
-            $result = $wpdb->update($table_name, $data, $where);
-        } else {
+        if ($action == 'add') {
             $result = $wpdb->insert($table_name, $data);
+        } else {
+            // either edit or disable
+            $result = $wpdb->update($table_name, $data, $where);
         }
 
         if ($wpdb->last_error) {
