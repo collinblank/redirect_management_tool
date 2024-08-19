@@ -5,7 +5,7 @@ include get_template_directory() . '/functions/form-handlers/validation/get-webs
 function handle_website_form_submit()
 {
     if (!isset($_POST['website_form_nonce_field']) || !wp_verify_nonce($_POST['website_form_nonce_field'], 'website_form_nonce')) {
-        wp_die('Error: Security check failed.');
+        wp_die('Error: Unable to verify form nonce.');
     } else {
         $table_name = 'websites';
         $data = array(
@@ -19,9 +19,9 @@ function handle_website_form_submit()
         $where = array(
             'id' => $item_id
         );
-
         $errors = get_website_form_errors($item_id);
+        $action = $item_id ? 'edit' : 'add';
 
-        submit_form($table_name, $data, $errors, $item_id, $where);
+        handle_form_submission($action, $table_name, $data, $errors, $item_id, $where);
     }
 }
