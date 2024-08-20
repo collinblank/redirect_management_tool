@@ -13,7 +13,6 @@ $form_success = $_SESSION['form_success'];
                 foreach ($form_errors as $error) {
                     echo '<li>' . htmlspecialchars($error) . '</li>';
                 }
-                unset($_SESSION['form_errors']);
                 ?>
             </ul>
         </div>
@@ -28,5 +27,6 @@ $form_success = $_SESSION['form_success'];
             <i class="fa-solid fa-x"></i>
         </button>
     </div>
-    <?php unset($_SESSION['form_success']); ?>
-<?php endif;  ?>
+
+<?php endif; ?>
+<?php unset($_SESSION['form_errors'], $_SESSION['form_success']); ?>

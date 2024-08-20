@@ -4,13 +4,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 $action = $_GET['action'];
 $item_id = intval($_GET['item_id']) ?? null;
-$server_to_edit = array();
 
 if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     global $wpdb;
     $table_name = $_GET['table_name'];
-    $server_to_edit_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
-    $server_to_edit = $wpdb->get_row($server_to_edit_sql, ARRAY_A);
+    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
+    $server_to_edit = $wpdb->get_row($sql, ARRAY_A);
 }
 ?>
 
