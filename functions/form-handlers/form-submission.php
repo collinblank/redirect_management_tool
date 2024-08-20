@@ -2,8 +2,7 @@
 
 function handle_form_submission($action, $table_name, $data, $errors = [], $item_id = null, $where = [])
 {
-    unset($_SESSION['form_errors']);
-    unset($_SESSION['form_success']);
+    unset($_SESSION['form_errors'], $_SESSION['form_success']);
     session_start();
 
     if (!empty($errors)) {
@@ -23,10 +22,11 @@ function handle_form_submission($action, $table_name, $data, $errors = [], $item
             $_SESSION['form_errors'] = 'Database error: ' . $wpdb->last_error;
             $redirect_args = ['errors' =>  1];
         } else {
-            $_SESSION['form_success'] = "The item has been successfully {$action}ed.";
+            $_SESSION['form_success'] = "The item has been successfully {$action}" . ($action == 'disable' ? 'd' : 'ed') . ".";
             $redirect_args = [$action => $item_id ?? $result];
         }
     }
+    // redirect to prevent form resubmission
     wp_safe_redirect(add_query_arg($redirect_args, home_url('/' . $table_name)), 303);
     exit;
 }

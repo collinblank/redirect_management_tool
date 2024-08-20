@@ -7,18 +7,17 @@ function handle_server_form_submit()
     if (!isset($_POST['server_form_nonce_field']) || !wp_verify_nonce($_POST['server_form_nonce_field'], 'server_form_nonce')) {
         wp_die('Error: Unable to verify form nonce.');
     } else {
-        $table_name = 'servers';
         $data = array(
             'name' => $_POST['server_name'],
             'domain' => $_POST['server_domain'],
         );
-        $item_id = $_POST['item_id'] ?? null;
+        $item_id = intval($_POST['item_id']) ?? null;
         $where = array(
             'id' => $item_id
         );
         $errors = get_server_form_errors();
         $action = $item_id ? 'edit' : 'add';
 
-        handle_form_submission($action, $table_name, $data, $errors, $item_id, $where);
+        handle_form_submission($action, 'servers', $data, $errors, $item_id, $where);
     }
 }

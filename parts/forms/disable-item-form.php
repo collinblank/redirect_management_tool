@@ -2,13 +2,9 @@
 // This may be what is slowing down the modal popup:
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
-$item_name = '';
-$item_description = '';
-$item_type = '';
-$table_name = '';
-
 if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     global $wpdb;
+
     $item_id = intval($_GET['item_id']);
     $table_name = $_GET['table_name'];
     $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);

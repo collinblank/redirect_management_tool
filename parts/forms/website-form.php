@@ -10,8 +10,8 @@ $servers = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
 $available_sandbox_websites_sql = $wpdb->prepare("SELECT * FROM websites WHERE isProd = %d AND disabled = %d AND id NOT IN (SELECT sandboxId FROM websites WHERE isProd = %d)", 0, 0, 1);
 $available_sandbox_websites = $wpdb->get_results($available_sandbox_websites_sql, ARRAY_A);
 
-
 if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
+    // do i need the table name? same on server-form. Why can't i just use 'websites' in the sql statement?
     $table_name = $_GET['table_name'];
     $website_to_edit_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
     $website_to_edit = $wpdb->get_row($website_to_edit_sql, ARRAY_A);
@@ -64,14 +64,11 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                         <option value="<?php echo $sandbox_website['id'] ?>" <?php echo ($sandbox_website['id'] == $website_to_edit['sandboxId']) ? "selected"  : "" ?>><?php echo $sandbox_website['name'] ?></option>
                     <?php } ?>
                 </select>
-                <!-- NOTE: Probably not needed for validation -->
-                <!-- <p class="form__input-item__validation-msg"></p> -->
             </li>
 
         </ul>
         <div class="modal-content__btns-container">
             <button type="button" class="default-btn" id="modal-cancel-btn" tabindex="5">Cancel</button>
-            <!-- NOTE: re-add disabled below after finishing server-side validation -->
             <input type="submit" id="website-form-submit-btn" class="default-btn blue-btn" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="6" disabled />
         </div>
     </form>

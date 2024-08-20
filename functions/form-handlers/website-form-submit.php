@@ -7,7 +7,6 @@ function handle_website_form_submit()
     if (!isset($_POST['website_form_nonce_field']) || !wp_verify_nonce($_POST['website_form_nonce_field'], 'website_form_nonce')) {
         wp_die('Error: Unable to verify form nonce.');
     } else {
-        $table_name = 'websites';
         $data = array(
             'name' => $_POST['website_name'],
             'domain' => $_POST['website_domain'],
@@ -15,13 +14,13 @@ function handle_website_form_submit()
             'sandboxId' => $_POST['website_sandbox'],
             'isProd' => $_POST['website_server'] == 3 ? 0 : 1,
         );
-        $item_id = $_POST['item_id'] ?? null;
+        $item_id = intval($_POST['item_id']) ?? null;
         $where = array(
             'id' => $item_id
         );
         $errors = get_website_form_errors($item_id);
         $action = $item_id ? 'edit' : 'add';
 
-        handle_form_submission($action, $table_name, $data, $errors, $item_id, $where);
+        handle_form_submission($action, 'websites', $data, $errors, $item_id, $where);
     }
 }
