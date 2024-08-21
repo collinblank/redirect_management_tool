@@ -22,28 +22,50 @@ class Validator
         return preg_match($pattern, $str);
     }
 
-    public static function record_in_table($item_id, $table_name)
+    public static function record_exists($item_id, $table_name)
     {
         global $wpdb;
-        $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id), ARRAY_A);
-        return !empty($results); // true if item id exists in db
+
+        $results = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id), ARRAY_A);
+        return !empty($results); // if not empty, item exists in table, returns true
     }
 
-    public static function unique_record($name, $domain, $item_id)
+    public static function unique_record($name, $domain, $item_id, $table_name)
     {
         global $wpdb;
+
         $name_like = '%' . $wpdb->esc_like($name) . '%';
-        $stripped_domain = rtrim(parse_url($domain)['host'], '/');
-        $domain_like = '%' . $wpdb->esc_like($stripped_domain) . '%';
+        $domain_like = '%' . $wpdb->esc_like(rtrim(parse_url($domain)['host'], '/')) . '%';
+        $where = "name LIKE %s OR domain LIKE %s";
+        $placeholders = [$table_name, $name_like, $domain_like];
 
-        if (!$item_id) {
-            // when creating a new site
-            $where = $wpdb->prepare(" WHERE name LIKE %s OR domain LIKE %s", $name_like, $domain_like);
-        } else {
-            // when editing a site
-            $where = $wpdb->prepare(" WHERE (name LIKE %s OR domain LIKE %s) AND id != %d", $name_like, $domain_like, $item_id);
+        if ($item_id) {
+            $where .= "AND id != %d";
+            $placeholders[] = $item_id;
         }
-        $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM websites" . $where), ARRAY_A);
-        return empty($results);
+
+        $sql = $wpdb->prepare("SELECT * FROM %d WHERE $where", $placeholders);
+
+        $results = $wpdb->get_results($sql, ARRAY_A);
+        return empty($results); // if empty, it is a unique record, returns true
     }
+
+
+    // public static function unique_record($name, $domain, $item_id)
+    // {
+    //     global $wpdb;
+    //     $name_like = '%' . $wpdb->esc_like($name) . '%';
+    //     $stripped_domain = rtrim(parse_url($domain)['host'], '/');
+    //     $domain_like = '%' . $wpdb->esc_like($stripped_domain) . '%';
+
+    //     if (!$item_id) {
+    //         // when creating a new site
+    //         $where = $wpdb->prepare(" WHERE name LIKE %s OR domain LIKE %s", $name_like, $domain_like);
+    //     } else {
+    //         // when editing a site
+    //         $where = $wpdb->prepare(" WHERE (name LIKE %s OR domain LIKE %s) AND id != %d", $name_like, $domain_like, $item_id);
+    //     }
+    //     $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM websites" . $where), ARRAY_A);
+    //     return empty($results);
+    // }
 }
