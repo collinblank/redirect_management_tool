@@ -30,7 +30,7 @@ class Validator
         return !empty($results); // if not empty, item exists in table, returns true
     }
 
-    public static function unique_record($name, $domain, $item_id, $table_name)
+    public static function unique_record($table_name, $name, $domain, $item_id)
     {
         global $wpdb;
 
@@ -44,7 +44,7 @@ class Validator
             $placeholders[] = $item_id;
         }
 
-        $sql = $wpdb->prepare("SELECT * FROM %d WHERE $where", $placeholders);
+        $sql = $wpdb->prepare("SELECT * FROM %s WHERE $where", $placeholders);
 
         $results = $wpdb->get_results($sql, ARRAY_A);
         return empty($results); // if empty, it is a unique record, returns true
