@@ -35,7 +35,8 @@ class Validator
         global $wpdb;
 
         $name_like = '%' . $wpdb->esc_like($name) . '%';
-        $domain_like = '%' . $wpdb->esc_like(rtrim(parse_url($domain)['host'], '/')) . '%';
+        $stripped_domain = rtrim(parse_url($domain)['host'], '/');
+        $domain_like = '%' . $wpdb->esc_like($stripped_domain) . '%';
         $where = "(name LIKE %s OR domain LIKE %s)";
         $placeholders = [$table_name, $name_like, $domain_like];
 
@@ -46,7 +47,15 @@ class Validator
 
         $sql = $wpdb->prepare("SELECT * FROM %s WHERE $where", $placeholders);
 
+        // debugging
+        echo "<script>console.log('Unique record query: ', " . json_encode($sql) . ");</script>";
+
+
         $results = $wpdb->get_results($sql, ARRAY_A);
+
+        // debugging
+        echo "<script>console.log('Unique record query results: ', " . json_encode($results) . ");</script>";
+
         return empty($results); // if empty, it is a unique record, returns true
     }
 
