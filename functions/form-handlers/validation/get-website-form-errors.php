@@ -24,7 +24,7 @@ function get_website_form_errors($website_id)
         }
     }
 
-    if (!Validator::unique_record($name, $domain, $website_id, 'websites')) {
+    if (!Validator::unique_record('websites', $name, $domain, $website_id)) {
         $errors[] = 'A website with the name "' . $name . '" or domain "' . $domain . '" already exists. Please choose a different name and/or domain.';
     }
 
