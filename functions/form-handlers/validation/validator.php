@@ -36,7 +36,7 @@ class Validator
 
         $name_like = '%' . $wpdb->esc_like($name) . '%';
         $domain_like = '%' . $wpdb->esc_like(rtrim(parse_url($domain)['host'], '/')) . '%';
-        $where = "name LIKE %s OR domain LIKE %s";
+        $where = "(name LIKE %s OR domain LIKE %s)";
         $placeholders = [$table_name, $name_like, $domain_like];
 
         if ($item_id) {
