@@ -75,7 +75,11 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                     <?php else : ?>
                         <button class="icon-btn disable-item-btn" title="Disable Website"><i class="fa-regular fa-circle-xmark"></i></button>
                     <?php endif; ?>
-                    <button class="default-btn ghost-btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></button>
+                    <form action="/redirect-rules" method="GET">
+                        <input type="hidden" name="website_id" value="<?php echo $item['id'] ?>">
+                        <input type="submit" value="View Redirects" class="input-submit-link">
+                    </form>
+                    <!-- class="default-btn ghost-btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></a> -->
                 </div>
             </li>
         <?php } ?>
