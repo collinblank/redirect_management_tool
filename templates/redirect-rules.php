@@ -2,6 +2,17 @@
 
 <?php
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (isset($_GET['website_id'])) {
+        global $wpdb;
+
+        $website_id = intval($_GET['website_id']);
+        $redirects_sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT 25", $website_id);
+        $results = $wpdb->get_results($redirects_sql, ARRAY_A);
+        $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
+    }
+}
+
 // if (isset($_GET['search_websites'])) {
 //     $search_text = htmlspecialchars((trim($_GET['search_text'])));
 // }
@@ -16,7 +27,7 @@
     <div class="page-content-container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
-            <h1>Manage Redirects</h1>
+            <h1>Manage Redirects<?php if ($website_id) echo ' for ' . $website_name ?></h1>
             <button class="default-btn add-item-btn">Add Rule</button>
         </div>
         <!-- <div class="list-view-page__filter-container">
