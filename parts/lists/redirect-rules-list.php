@@ -1,14 +1,14 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_GET['website_id'])) {
-        global $wpdb;
+// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+//     if (isset($_GET['website_id'])) {
+//         global $wpdb;
 
-        $website_id = intval($_GET['website_id']);
-        $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT 25", $website_id);
-        $results = $wpdb->get_results($sql, ARRAY_A);
-    }
-}
+//         $website_id = intval($_GET['website_id']);
+//         $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT 25", $website_id);
+//         $results = $wpdb->get_results($sql, ARRAY_A);
+//     }
+// }
 ?>
 
 <?php if ($results) : ?>
