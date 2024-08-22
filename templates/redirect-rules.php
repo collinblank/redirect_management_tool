@@ -7,9 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         global $wpdb;
 
         $website_id = intval($_GET['website_id']);
-        $redirects_sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT 25", $website_id);
-        $results = $wpdb->get_results($redirects_sql, ARRAY_A);
-        $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
+        $sql = $wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id);
+        $website_name = $wpdb->get_var($sql);
     }
 }
 
