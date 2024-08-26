@@ -70,8 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <ul class="list-view__pagination-list">
     <?php
     for ($i = 1; $i <= $total_pages; $i++) { ?>
+        <?php
+        $params = array(
+            'website_id' => $website_id,
+            'page' => $i,
+        )
+        ?>
         <li class="page__list-item <?php if ($i == $page_number) echo "active"; ?>">
-            <a href="?website_id=<?php echo $website_id ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            <a href="<?php echo esc_url(add_query_arg($params)); ?>"><?php echo esc_html($i); ?></a>
         </li>
     <?php }
     ?>
