@@ -12,8 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 }
 
+$page_title = $website_id ? "Manage Redirects for {$website_name}" : "Select Website";
+
 // if (isset($_GET['search_websites'])) {
-//     $search_text = htmlspecialchars((trim($_GET['search_text'])));
+// $search_text = htmlspecialchars((trim($_GET['search_text'])));
 // }
 
 // session_start();
@@ -26,8 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <div class="page-content-container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
-            <h1>Manage Redirects<?php if ($website_id) echo ' for ' . $website_name ?></h1>
-            <button class="default-btn add-item-btn">Add Rule</button>
+            <h1><?php $page_title ?></h1>
+            <?php if ($website_id) : ?>
+                <button class="default-btn add-item-btn">Add Rule</button>
+            <?php endif; ?>
         </div>
         <!-- <div class="list-view-page__filter-container">
             <form method="GET" class="list-view__page__search-form">
@@ -57,7 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </form>
         </div> -->
         <div class="list-view-container">
-            <?php get_template_part('parts/lists/redirect-rules-list'); ?>
+            <?php if ($website_id) {
+                get_template_part('parts/lists/redirect-rules-list');
+            } else {
+                get_template_part('parts/lists/websites-list');
+            } ?>
         </div>
     </div>
 </section>
