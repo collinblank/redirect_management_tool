@@ -1,5 +1,6 @@
 <?php
 $is_redirects_page = $_SERVER['REQUEST_URI'] == '/redirect-rules';
+echo "<script>console.log({$is_redirects_page} , {$_SERVER['REQUEST_URI']})</script>";
 
 global $wpdb;
 $search_text = NULL;

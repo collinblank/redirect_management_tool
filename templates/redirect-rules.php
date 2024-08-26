@@ -2,17 +2,18 @@
 
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_GET['website_id'])) {
-        global $wpdb;
+$page_title = "Select Website";
 
-        $website_id = intval($_GET['website_id']);
-        $sql = $wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id);
-        $website_name = $wpdb->get_var($sql);
-    }
+if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
+    global $wpdb;
+
+    $website_id = intval($_GET['website_id']);
+    $sql = $wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id);
+    $website_name = $wpdb->get_var($sql);
+    $page_title = "Manage Redirects for $website_name";
 }
 
-$page_title = $website_id ? "Manage Redirects for {$website_name}" : "Select Website";
+
 
 // if (isset($_GET['search_websites'])) {
 // $search_text = htmlspecialchars((trim($_GET['search_text'])));
