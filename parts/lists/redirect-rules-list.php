@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
         $total_pages = $count /  $results_per_page;
-        $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $offset, $limit);
+        $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
         $results = $wpdb->get_results($sql, ARRAY_A);
 
         // limit, offset
@@ -67,7 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <?php else : ?>
     <p>Error: Unable to retrieve results from database.</p>
 <?php endif; ?>
-<form action="/redirect-rules" method="GET">
+<form method="GET">
+    <input type="hidden" name="website_id" value="<?php echo $website_id ?>">
     <ul class="list-view__pagination-list">
         <?php
         for ($i = 1; $i <= $total_pages; $i++) { ?>
