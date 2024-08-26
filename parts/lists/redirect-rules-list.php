@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $website_id = intval($_GET['website_id']);
 
         $results_per_page = 25;
-        $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $page_number = isset($_GET['page']) ? intval($_GET['page_number']) : 1;
         $offset = ($page_number - 1) * $results_per_page; // defaults to 0 on first page
         $limit = $page_number * $results_per_page;
 
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <?php
         $params = array(
             'website_id' => $website_id,
-            'page' => $i,
+            'page_number' => $i,
         )
         ?>
         <li class="page__list-item <?php if ($i == $page_number) echo "active"; ?>">
