@@ -72,8 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <ul class="list-view__pagination-list">
         <?php
         for ($i = 1; $i <= $total_pages; $i++) { ?>
-            <li class="page__list-item">
-                <input type="submit" name="page" value="<?php echo $i ?>" />
+            <li class="page__list-item <?php if ($i = $page_number) echo "active"; ?>">
+                <input type="hidden" name="page" value="<?php echo $i ?>" />
+                <input type="submit" value="<?php echo $i ?>">
             </li>
         <?php }
         ?>
