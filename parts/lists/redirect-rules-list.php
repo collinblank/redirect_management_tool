@@ -67,16 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <?php else : ?>
     <p>Error: Unable to retrieve results from database.</p>
 <?php endif; ?>
-<form method="GET">
-    <input type="hidden" name="website_id" value="<?php echo $website_id ?>">
-    <ul class="list-view__pagination-list">
-        <?php
-        for ($i = 1; $i <= $total_pages; $i++) { ?>
-            <li class="page__list-item <?php if ($i == $page_number) echo "active"; ?>">
-                <input type="hidden" name="page" value="<?php echo $i ?>" />
-                <input type="submit" value="<?php echo $i ?>">
-            </li>
-        <?php }
-        ?>
-    </ul>
-</form>
+<ul class="list-view__pagination-list">
+    <?php
+    for ($i = 1; $i <= $total_pages; $i++) { ?>
+        <li class="page__list-item <?php if ($i == $page_number) echo "active"; ?>">
+            <a href="?website_id=<?php echo $website_id ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+        </li>
+    <?php }
+    ?>
+</ul>
