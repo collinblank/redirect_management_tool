@@ -5,8 +5,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         global $wpdb;
 
         $website_id = intval($_GET['website_id']);
-        $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT 25", $website_id);
+
+        $results_per_page = 25;
+        $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $offset = ($page_number - 1) * $results_per_page; // defaults to 0 on first page
+        $limit = $page_number * $results_per_page;
+
+        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
+        $total_pages = $count /  $results_per_page;
+        $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $offset, $limit);
         $results = $wpdb->get_results($sql, ARRAY_A);
+
+        // limit, offset
+        // 1 x 25 = 25, 0
+        // 2 x 25 = 50, offset 1 x 25 = 25
+        // 3 x 25 = 75, offset 2 x 25 = 50
+
+
+        // 500 total count
+        // 500 / 25 = 20 pages
+        // for loop from 20 down?
     }
 }
 ?>
@@ -19,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         ?>" data-item-id=<?php echo $item['id']; ?>>
                 <div class="list-view__item__info">
                     <h4><?php echo $item['name']; ?></h4>
-                    <p class="list-view__item__description"><?php echo $item['fromURLRegex'] . ' -> ' . $item['toURL']; ?></p>
+                    <p class="list-view__item__description"><?php echo $item['description']; ?></p>
+                    <p class="list-view__item__description"><?php echo $item['fromURLRegex'] . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
                 </div>
                 <!-- <?php //if ($item['disabled']) : 
                         ?>
@@ -48,3 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <?php else : ?>
     <p>Error: Unable to retrieve results from database.</p>
 <?php endif; ?>
+<form action="/redirect-rules" method="GET">
+    <ul class="list-view__pagination-list">
+        <?php
+        for ($i = 1; $i <= $total_pages; $i++) { ?>
+            <li class="page__list-item">
+                <input type="submit" name="page" value="<?php echo $i ?>" />
+            </li>
+        <?php }
+        ?>
+    </ul>
+</form>
