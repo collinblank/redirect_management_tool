@@ -1,4 +1,6 @@
 <?php
+$is_redirects_page = $_SERVER['REQUEST_URI'] == '/redirect-rules';
+
 global $wpdb;
 $search_text = NULL;
 $order = $wpdb->prepare(" ORDER BY isProd, name");
@@ -27,7 +29,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
             $conditions[] = "(isProd != 1 AND isProd != 0)";
         }
         if (!isset($_GET['show_disabled'])) {
-
             $conditions[] = "disabled = 0";
         }
         if (!empty($conditions)) {
@@ -36,7 +37,12 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
     }
 }
 
-$sql = "SELECT * FROM websites" . $where . $order;
+if ($is_redirects_page) {
+    $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d" . $order, 1);
+} else {
+    $sql = "SELECT * FROM websites" . $where . $order;
+}
+
 $results = $wpdb->get_results($sql, ARRAY_A);
 
 ?>
@@ -69,17 +75,20 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                     </div>
                 </div>
                 <div class="list-view__item__btns-container">
-                    <button class="icon-btn edit-item-btn" title="Edit Website"><i class="fa-regular fa-pen-to-square"></i></button>
-                    <?php if ($item['disabled']) : ?>
-                        <button class="icon-btn enable-item-btn" title="Enable Website"><i class="fa-regular fa-circle-check"></i></button>
-                    <?php else : ?>
-                        <button class="icon-btn disable-item-btn" title="Disable Website"><i class="fa-regular fa-circle-xmark"></i></button>
+                    <?php if (!$is_redirects_page) : ?>
+                        <button class="icon-btn edit-item-btn" title="Edit Website"><i class="fa-regular fa-pen-to-square"></i></button>
+                        <?php if ($item['disabled']) : ?>
+                            <button class="icon-btn enable-item-btn" title="Enable Website"><i class="fa-regular fa-circle-check"></i></button>
+                        <?php else : ?>
+                            <button class="icon-btn disable-item-btn" title="Disable Website"><i class="fa-regular fa-circle-xmark"></i></button>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <form action="/redirect-rules" method="GET">
                         <input type="hidden" name="website_id" value="<?php echo $item['id'] ?>">
-                        <input type="submit" value="View Redirects" class="input-submit-link">
+                        <button type="submit" class="defaul-btn ghost-btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></button>
                     </form>
-                    <!-- class="default-btn ghost-btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></a> -->
+                    <!-- input-submit-link class -->
+                    <!-- class="default-btn ghost-btn view-more-btn">View Redirects</a> -->
                 </div>
             </li>
         <?php } ?>
