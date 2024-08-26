@@ -29,7 +29,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
     <div class="page-content-container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
-            <h1><?php $page_title ?></h1>
+            <h1><?php echo $page_title ?></h1>
             <?php if ($website_id) : ?>
                 <button class="default-btn add-item-btn">Add Rule</button>
             <?php endif; ?>
