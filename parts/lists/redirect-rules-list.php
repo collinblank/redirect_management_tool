@@ -32,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <ul class="list-view" data-table-name="servers">
         <?php
         foreach ($results as $item) {
-            $pattern = '/^\^(?:\(\?i\))?([\w-]+)\/??\$$/';
+            $pattern = '/[a-zA-Z0-9-]+/';
             if (preg_match($pattern, $item['fromURLRegex'], $matches)) {
-                $fromUrl = $matches[1];
+                $fromUrl = $matches[0];
             } else {
                 $fromUrl = $item['fromURLRegex'];
             }
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <button class="icon-btn enable-item-btn" title="Enable Redirect"><i class="fa-regular fa-circle-check"></i></button>
                     <?php //else : 
                     ?>
-                        <button class="icon-btn disable-item-btn" title="Disable Server"><i class="fa-regular fa-circle-xmark"></i></button>
+                        <button class="icon-btn disable-item-btn" title="Disable Redirect"><i class="fa-regular fa-circle-xmark"></i></button>
                     <?php //endif; 
                     ?>
                     <button class="default-btn ghost-btn view-more-btn">View Sites<i class="fa-solid fa-arrow-right-long"></i></button>
