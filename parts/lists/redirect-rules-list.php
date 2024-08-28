@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <ul class="list-view" data-table-name="servers">
         <?php
         foreach ($results as $item) {
-            $pattern = '/[a-zA-Z0-9-]+/';
+            $pattern = '/[a-zA-Z0-9-]+/g';
             if (preg_match($pattern, $item['fromURLRegex'], $matches)) {
                 $fromUrl = $matches[1];
             } else {
