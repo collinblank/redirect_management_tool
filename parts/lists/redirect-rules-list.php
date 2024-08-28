@@ -6,13 +6,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $website_id = intval($_GET['website_id']);
 
-        $results_per_page = 25;
-        $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1;
-        $offset = ($page_number - 1) * $results_per_page; // defaults to 0 on first page
-        $limit = $page_number * $results_per_page;
+        $limit = 25;
+        $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
+        $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
 
         $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
-        $total_pages = $count /  $results_per_page;
+        $total_pages = $count / $limit;
         $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
         $results = $wpdb->get_results($sql, ARRAY_A);
 
