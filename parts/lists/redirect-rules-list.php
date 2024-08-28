@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         foreach ($results as $item) {
             $pattern = '/[a-zA-Z0-9-]+/';
             if (preg_match($pattern, $item['fromURLRegex'], $matches)) {
-                $fromUrl = $matches[0];
+                $fromUrl = $matches[1];
             } else {
                 $fromUrl = $item['fromURLRegex'];
             }
