@@ -6,13 +6,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $website_id = intval($_GET['website_id']);
 
-        $results_per_page = 25;
-        $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1;
-        $offset = ($page_number - 1) * $results_per_page; // defaults to 0 on first page
-        $limit = $page_number * $results_per_page;
+        $limit = 25;
+        $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
+        $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
 
         $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
-        $total_pages = $count /  $results_per_page;
+        $total_pages = $count / $limit;
         $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
         $results = $wpdb->get_results($sql, ARRAY_A);
 
@@ -32,13 +31,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <?php if ($results) : ?>
     <ul class="list-view" data-table-name="servers">
         <?php
-        foreach ($results as $item) { ?>
+        foreach ($results as $item) {
+            $pattern = '/^\^(?:\(\?i\))?([\w-]+)\/??\$$/';
+            if (preg_match($pattern, $item['fromURLRegex'], $matches)) {
+                $fromUrl = $matches[1];
+            } else {
+                $fromUrl = $item['fromURLRegex'];
+            }
+        ?>
             <li class="list-view__item <?php //echo $item['disabled'] ? "disabled" : "" 
                                         ?>" data-item-id=<?php echo $item['id']; ?>>
                 <div class="list-view__item__info">
                     <h4><?php echo $item['name']; ?></h4>
                     <p class="list-view__item__description"><?php echo $item['description']; ?></p>
-                    <p class="list-view__item__description"><?php echo $item['fromURLRegex'] . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
+                    <p class="list-view__item__description"><?php echo $fromUrl . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
                 </div>
                 <!-- <?php //if ($item['disabled']) : 
                         ?>
