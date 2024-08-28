@@ -31,13 +31,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <?php if ($results) : ?>
     <ul class="list-view" data-table-name="servers">
         <?php
-        foreach ($results as $item) { ?>
+        foreach ($results as $item) {
+            $pattern = '/^\^(?:\(\?i\))?([\w-]+)\/??\$$/';
+            if (preg_match($pattern, $item['fromURLRegex'], $matches)) {
+                $fromUrl = $matches[1];
+            } else {
+                $fromUrl = $item['fromURLRegex'];
+            }
+        ?>
             <li class="list-view__item <?php //echo $item['disabled'] ? "disabled" : "" 
                                         ?>" data-item-id=<?php echo $item['id']; ?>>
                 <div class="list-view__item__info">
                     <h4><?php echo $item['name']; ?></h4>
                     <p class="list-view__item__description"><?php echo $item['description']; ?></p>
-                    <p class="list-view__item__description"><?php echo $item['fromURLRegex'] . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
+                    <p class="list-view__item__description"><?php echo $fromUrl . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
                 </div>
                 <!-- <?php //if ($item['disabled']) : 
                         ?>
