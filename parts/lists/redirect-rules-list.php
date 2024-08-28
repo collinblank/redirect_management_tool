@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 ?>
 
 <?php if ($results) : ?>
-    <ul class="list-view" data-table-name="servers">
+    <ul class="list-view" data-table-name="redirectRules">
         <?php
         foreach ($results as $item) {
             $pattern = '/[a-zA-Z0-9-]+/g';
