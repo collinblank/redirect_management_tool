@@ -15,6 +15,9 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
         if ($table_name === 'servers' || $table_name === 'websites') {
             $item_description = $item['domain'];
             $item_type = substr($table_name, 0, -1);
+        } else {
+            $item_description = $item['description'];
+            $item_type = 'redirect';
         }
         /* for websites and servers this is fine.
          It'll be more complex logic to figure out what the item_description should be for redirect rules and redirect flags, 
@@ -32,6 +35,10 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
         <div class="disable-item__list-item">
             <h4><?php echo $item_name; ?></h4>
             <p class="disable-item__list-item__description"><?php echo $item_description; ?></p>
+            <?php
+            if ($item_type == 'redirect') { ?>
+                <p class="list-view__item__description"><?php echo $item['fromURLRegex'] . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
+            <?php } ?>
         </div>
         <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="disable-item__form" id="disable-item__form">
             <input type="hidden" name="action" value="disable_item">
