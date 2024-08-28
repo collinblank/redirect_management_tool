@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <?php
         foreach ($results as $item) {
             $pattern = '/[a-zA-Z0-9-]+/g';
-            if (preg_match($pattern, $item['fromURLRegex'], $matches)) {
-                $fromUrl = $matches[1];
+            if (preg_match_all($pattern, $item['fromURLRegex'], $matches) && isset($matches[0][1])) {
+                $fromUrl = $matches[0][1];
             } else {
                 $fromUrl = $item['fromURLRegex'];
             }
