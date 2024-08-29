@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         foreach ($results as $item) {
             $prefix_pattern = '/\^\S*\)/';
             $suffix_pattern = '/\?\$/';
-            $fromURL = preg_replace($suffix_pattern, '', preg_replace($prefix_pattern, '', $item['fromURLRegex']));
+            $fromURL = '/' . preg_replace($suffix_pattern, '', preg_replace($prefix_pattern, '', $item['fromURLRegex']));
         ?>
             <li class="list-view__item <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
                 <div class="list-view__item__info">
