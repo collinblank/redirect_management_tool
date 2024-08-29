@@ -22,18 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <ul class="list-view" data-table-name="redirectRules">
         <?php
         foreach ($results as $item) {
-            $pattern = '/[a-zA-Z0-9-]+/g';
-            if (preg_match_all($pattern, $item['fromURLRegex'], $matches) && isset($matches[0][1])) {
-                $fromUrl = $matches[0][1];
-            } else {
-                $fromUrl = $item['fromURLRegex'];
-            }
+            $prefix_pattern = '/\^\S*\)/';
+            $suffix_pattern = '/\?\$/';
+            $fromURL = preg_replace($suffix_pattern, '', preg_replace($prefix_pattern, '', $item['fromURLRegex']));
         ?>
             <li class="list-view__item <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
                 <div class="list-view__item__info">
                     <h4><?php echo $item['name']; ?></h4>
                     <p class="list-view__item__description"><?php echo $item['description']; ?></p>
-                    <p class="list-view__item__description"><?php echo $fromUrl . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
+                    <p class="list-view__item__description"><?php echo $fromURL . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
                 </div>
                 <?php if ($item['disabled']) :
                 ?>
