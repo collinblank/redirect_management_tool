@@ -5,7 +5,7 @@ $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
 <!-- try to refactor this file to a generic list at some point -->
 
 <?php if ($results) : ?>
-    <ul class="list-view" data-table-name="servers">
+    <ul class="list-view">
         <?php
         foreach ($results as $item) { ?>
             <li class="list-view__item <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
