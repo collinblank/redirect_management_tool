@@ -3,6 +3,7 @@
 function get_redirect_rule_form_errors()
 {
     // should i just these from data, passed as a param?
+    $website_id = intval($_POST['website_id']);
     $name = $_POST['redirect_rule_name'];
     $description = $_POST['redirect_rule_description'];
     $from_url_regex = $_POST['redirect_rule_from_url_regex'];
