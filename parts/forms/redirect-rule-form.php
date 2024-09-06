@@ -6,7 +6,11 @@ $action = $_GET['action'];
 $table_name = $_GET['table_name'];
 $item_id = intval($_GET['item_id']) ?? null;
 
-$website_id = intval($_GET['website_id']);
+$referer = $_SERVER['HTTP_REFERER'] ?? '';
+$refererParams = parse_url($referer, PHP_URL_QUERY);
+parse_str($refererParams, $params);
+
+$website_id = isset($params['website_id']) ? intval($params['website_id']) : null;
 $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
 
 // pretty sure i can rework this so it is one function to get edit item for all forms, or at least some of it. This is basically the same as the logic in the website-form.php file
@@ -17,7 +21,6 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
 
 <div class="modal-content">
     <div class="modal-content__header">
-        <?php echo $website_id ?>
         <h3><?php echo ucfirst($action) . " Redirect for $website_name" ?></h3>
     </div>
     <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-content__section modal-form">
