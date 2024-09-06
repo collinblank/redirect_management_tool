@@ -11,6 +11,7 @@ function handle_redirect_rule_form_submit()
         wp_die('Error: Unable to verify form nonce.');
     } else {
         $data = array(
+            'websiteId' => intval($_POST['website_id']),
             'name' => $_POST['redirect_rule_name'],
             'description' => $_POST['redirect_rule_description'],
             'fromURLRegex' => $_POST['redirect_rule_from_url_regex'],
