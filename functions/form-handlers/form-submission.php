@@ -27,6 +27,11 @@ function handle_form_submission($action, $table_name, $data, $errors = [], $item
         }
     }
     // redirect to prevent form resubmission
-    wp_safe_redirect(add_query_arg($redirect_args, home_url('/' . $table_name)), 303);
+    if ($table_name == 'redirectRules') {
+        $path = 'redirect-rules';
+    } else {
+        $path = $table_name;
+    }
+    wp_safe_redirect(add_query_arg($redirect_args, home_url('/' . $path)), 303);
     exit;
 }

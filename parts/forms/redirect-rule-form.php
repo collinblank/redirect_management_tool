@@ -17,7 +17,8 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
 
 <div class="modal-content">
     <div class="modal-content__header">
-        <h3><?php echo ucfirst($action) . " Redirect for " ?></h3>
+        <?php echo $website_id ?>
+        <h3><?php echo ucfirst($action) . " Redirect for $website_name" ?></h3>
     </div>
     <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-content__section modal-form">
         <input type="hidden" name="action" value="redirect_rule_form">
@@ -33,17 +34,17 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             </li>
             <li class="form__input-item">
                 <label for="redirect-rule-description">Description</label>
-                <textarea id="redirect-rule-description" name="redirect_rule_description" placeholder="ex. Redirect for churches and pastor appreciation week"><?php echo $redirect_rule_to_edit['description'] ?? "" ?></textarea>
+                <textarea id="redirect-rule-description" name="redirect_rule_description" placeholder="ex. Redirect for churches and pastor appreciation week" tabindex="2"><?php echo $redirect_rule_to_edit['description'] ?? "" ?></textarea>
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <li class="form__input-item">
                 <label for="redirect-rule-from-url-regex">From URL Regex<span>*</span></label>
-                <input type="text" id="redirect-rule-from-url-regex" name="redirect_rule_from_url_regex" placeholder="ex. ^(?i)churches/?$" value="<?php echo $redirect_rule_to_edit['fromURLRegex'] ?? "" ?>" tabindex="1" required>
+                <input type="text" id="redirect-rule-from-url-regex" name="redirect_rule_from_url_regex" placeholder="ex. ^(?i)churches/?$" value="<?php echo $redirect_rule_to_edit['fromURLRegex'] ?? "" ?>" tabindex="3" required>
                 <p class="form__input-item__validation-msg"></p>
             </li>
             <li class="form__input-item">
                 <label for="redirect-rule-to-url">To URL or Path<span>*</span></label>
-                <input type="text" id="redirect-rule-to-url" name="redirect_rule_to_url" placeholder="ex. https://info.classicalconversations.com/churchesandpastorappreciation" value="<?php echo $redirect_rule_to_edit['toURL'] ?? "" ?>" tabindex="2" required>
+                <input type="text" id="redirect-rule-to-url" name="redirect_rule_to_url" placeholder="ex. https://info.classicalconversations.com/churchesandpastorappreciation" value="<?php echo $redirect_rule_to_edit['toURL'] ?? "" ?>" tabindex="4" required>
                 <p class="form__input-item__validation-msg"></p>
             </li>
         </ul>
