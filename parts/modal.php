@@ -1,8 +1,8 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
-$modal_content_path = '';
-$error_msg = '';
+// $modal_content_path = '';
+// $error_msg = '';
 
 if (isset($_GET['action'])) {
     $action = $_GET['action'];

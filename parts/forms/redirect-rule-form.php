@@ -1,12 +1,13 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 global $wpdb;
 
-$action = $_GET['action'];
 
-$website_id = intval($_GET['website_id']);
-$website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
+// $website_id = intval($_GET['website_id']);
+// $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
+$action = $_GET['action'];
 $table_name = $_GET['table_name'];
-$item_id = intval($_GET['item_id']);
+$item_id = intval($_GET['item_id']) ?? null;
 
 // pretty sure i can rework this so it is one function to get edit item for all forms, or at least some of it. This is basically the same as the logic in the website-form.php file
 if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
