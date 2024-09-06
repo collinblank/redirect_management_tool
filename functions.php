@@ -237,6 +237,10 @@ add_action('admin_post_server_form', 'handle_server_form_submit');
 require 'functions/form-handlers/website-form-submit.php';
 add_action('admin_post_website_form', 'handle_website_form_submit');
 
+// Handle form submissions (adding/editing) for redirect rules
+require 'functions/form-handlers/redirect-rule-form-submit.php';
+add_action('admin_post_redirect_rule_form', 'handle_redirect_rule_form_submit');
+
 // Handle disabling any item
 require 'functions/form-handlers/disable-item.php';
 add_action('admin_post_disable_item', 'handle_disable_item');
