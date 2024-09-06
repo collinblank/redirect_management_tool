@@ -2,6 +2,7 @@
 
 function get_server_form_errors()
 {
+    // these may need to change to server_name server_domain
     $name = $_POST['name'];
     $domain = $_POST['domain'];
     $errors = [];
