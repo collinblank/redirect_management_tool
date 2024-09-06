@@ -12,7 +12,7 @@ $form_success = $_SESSION['form_success'];
 ?>
 
 <?php get_header(); ?>
-<section class="page-section list-view-page" data-table-name="websites">
+<section id="list-view-page" class="page-section list-view-page" data-table-name="websites">
     <div class="page-content-container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
