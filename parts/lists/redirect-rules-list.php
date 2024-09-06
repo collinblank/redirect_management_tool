@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 ?>
 
-<?php if ($results) : ?>
-    <ul class="list-view" data-table-name="redirectRules">
+<?php if (!empty($results)) : ?>
+    <ul class="list-view">
         <?php
         foreach ($results as $item) {
             $prefix_pattern = '/\^\S*\)/';

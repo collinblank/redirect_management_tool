@@ -25,7 +25,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
 ?>
 
 <?php get_header(); ?>
-<section class="page-section list-view-page">
+<section class="page-section list-view-page" data-table-name="<?php echo $website_id ? "redirectRules" : "websites" ?>">
     <div class="page-content-container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">

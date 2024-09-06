@@ -56,7 +56,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
     </div>
 <?php endif; ?>
 <?php if (!empty($results)) : ?>
-    <ul class="list-view" data-table-name="websites">
+    <ul class="list-view">
         <?php
         foreach ($results as $item) { ?>
             <li class="list-view__item <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
