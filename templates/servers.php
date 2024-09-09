@@ -5,7 +5,6 @@ session_start();
 $form_errors = $_SESSION['form_errors'];
 $form_success = $_SESSION['form_success'];
 
-
 // Cut from servers-list.php to see if works here. 
 global $wpdb;
 $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
@@ -20,7 +19,7 @@ $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
             <button class="default-btn add-item-btn">Add Server</button>
         </div>
         <div class="list-view-container">
-            <?php get_template_part('parts/lists/servers-list'); ?>
+            <?php get_template_part('parts/lists/servers-list', null, array('results' => $results)); ?>
         </div>
     </div>
 </section>
