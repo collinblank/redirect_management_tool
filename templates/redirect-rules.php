@@ -7,20 +7,16 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
     $website_id = intval($_GET['website_id']) ?? null;
     $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
 
-    if ($website_id) {
-        // pagination
-        $limit = 25;
-        $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
-        $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
-        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
-        $total_pages = $count / $limit;
-        $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
-    } else {
-        $sql = $wpdb->prepare("SELECT * FROM websites ORDER BY isProd, name");
-    }
-
-    $results = $wpdb->get_results($sql, ARRAY_A);
+    $limit = 25;
+    $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
+    $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
+    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
+    $total_pages = $count / $limit;
+    $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
+} else {
+    $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d ORDER BY isProd, name", 1);
 }
+$results = $wpdb->get_results($sql, ARRAY_A);
 
 // if (isset($_GET['search_websites'])) {
 // $search_text = htmlspecialchars((trim($_GET['search_text'])));
@@ -72,7 +68,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
             <?php if ($website_id) {
                 get_template_part('parts/lists/redirect-rules-list', null, array('results' => $results));
             } else {
-                get_template_part('parts/lists/websites-list', null, array('results' => $results));
+                get_template_part('parts/lists/websites-list', null, array('results' => $results, 'is_redirects_page' => true));
             } ?>
         </div>
         <ul class="list-view-page__pagination-list">
