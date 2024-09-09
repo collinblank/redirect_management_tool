@@ -1,19 +1,22 @@
 <?php /* Template Name: Redirect Rules */ ?>
 
 <?php
-
-$page_title = "Select Website";
+global $wpdb;
 
 if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
-    global $wpdb;
-
     $website_id = intval($_GET['website_id']);
-    $sql = $wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id);
-    $website_name = $wpdb->get_var($sql);
-    $page_title = "Manage Redirects for $website_name";
+    $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
+
+    // pagination
+    $limit = 25;
+    $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
+    $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
+    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
+    $total_pages = $count / $limit;
+    $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
+
+    $results = $wpdb->get_results($sql, ARRAY_A);
 }
-
-
 
 // if (isset($_GET['search_websites'])) {
 // $search_text = htmlspecialchars((trim($_GET['search_text'])));
@@ -29,7 +32,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
     <div class="page-content-container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
-            <h1><?php echo $page_title ?></h1>
+            <h1><?php echo $website_name ? "Manage Redirects for $website_name" : "Select Website" ?></h1>
             <?php if ($website_id) : ?>
                 <button class="default-btn add-item-btn">Add Rule</button>
             <?php endif; ?>
@@ -63,11 +66,26 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
         </div> -->
         <div class="list-view-container">
             <?php if ($website_id) {
-                get_template_part('parts/lists/redirect-rules-list');
+                get_template_part('parts/lists/redirect-rules-list', null, array('results' => $results));
             } else {
                 get_template_part('parts/lists/websites-list');
             } ?>
         </div>
+        <ul class="list-view-page__pagination-list">
+            <?php
+            for ($i = 1; $i <= $total_pages; $i++) { ?>
+                <?php
+                $params = array(
+                    'website_id' => $website_id,
+                    'page_number' => $i,
+                )
+                ?>
+                <li class="page__list-item <?php if ($i == $page_number) echo "active"; ?>">
+                    <a href="<?php echo esc_url(add_query_arg($params)); ?>"><?php echo esc_html($i); ?></a>
+                </li>
+            <?php }
+            ?>
+        </ul>
     </div>
 </section>
 <?php get_footer(); ?>
