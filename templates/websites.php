@@ -12,11 +12,6 @@ session_start();
 $form_errors = $_SESSION['form_errors'];
 $form_success = $_SESSION['form_success'];
 
-
-
-$is_redirects_page = str_contains($_SERVER['REQUEST_URI'], 'redirect-rules');
-
-
 $search_text = NULL;
 $order = $wpdb->prepare(" ORDER BY isProd, name");
 
@@ -52,12 +47,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
     }
 }
 
-if ($is_redirects_page) {
-    $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d" . $order, 1);
-} else {
-    $sql = "SELECT * FROM websites" . $where . $order;
-}
-
+$sql = "SELECT * FROM websites" . $where . $order;
 $results = $wpdb->get_results($sql, ARRAY_A);
 ?>
 
@@ -102,7 +92,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                     </form>
                 </div>
             <?php endif; ?>
-            <?php get_template_part('parts/lists/websites-list', null, array('results' => $results, 'is_redirects_page' => $is_redirects_page)); ?>
+            <?php get_template_part('parts/lists/websites-list', null, array('results' => $results)); ?>
         </div>
     </div>
 </section>
