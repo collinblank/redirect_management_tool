@@ -1,7 +1,6 @@
 <?php
-
+$results = $args['results'] ?? null;
 ?>
-<!-- try to refactor this file to a generic list at some point -->
 
 <?php if ($results) : ?>
     <ul class="list-view">
