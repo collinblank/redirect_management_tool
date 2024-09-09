@@ -15,10 +15,8 @@ function get_redirect_rule_form_errors()
         $errors[] = 'Unable to manage redirects on the selected website. Please try again.';
     }
 
-    if (!Validator::string($name, 4, 50) || !Validator::letters_and_spaces($name)) {
-        if (strlen($name) == 0) {
-            $errors[] = 'Please enter a value for your redirect name (including 4 to 50 letters and spaces).';
-        } else {
+    if (strlen($name) != 0) {
+        if (!Validator::string($name, 4, 50) || !Validator::letters_and_spaces($name)) {
             $errors[] = $name . ' is not a valid name. Please correct your name to include only 4 to 50 letters and spaces.';
         }
     }
