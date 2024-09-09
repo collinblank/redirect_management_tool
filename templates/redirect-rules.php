@@ -68,7 +68,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
             <?php if ($website_id) {
                 get_template_part('parts/lists/redirect-rules-list', null, array('results' => $results));
             } else {
-                get_template_part('parts/lists/websites-list');
+                get_template_part('parts/lists/websites-list', null, array('results' => $results));
             } ?>
         </div>
         <ul class="list-view-page__pagination-list">
