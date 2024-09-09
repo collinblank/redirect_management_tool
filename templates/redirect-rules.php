@@ -4,16 +4,20 @@
 global $wpdb;
 
 if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
-    $website_id = intval($_GET['website_id']);
+    $website_id = intval($_GET['website_id']) ?? null;
     $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
 
-    // pagination
-    $limit = 25;
-    $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
-    $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
-    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
-    $total_pages = $count / $limit;
-    $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
+    if ($website_id) {
+        // pagination
+        $limit = 25;
+        $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
+        $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
+        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
+        $total_pages = $count / $limit;
+        $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
+    } else {
+        $sql = $wpdb->prepare("SELECT * FROM websites ORDER BY isProd, name");
+    }
 
     $results = $wpdb->get_results($sql, ARRAY_A);
 }
