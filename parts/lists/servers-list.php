@@ -1,6 +1,5 @@
 <?php
-global $wpdb;
-$results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
+
 ?>
 <!-- try to refactor this file to a generic list at some point -->
 
