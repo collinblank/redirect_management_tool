@@ -2,6 +2,8 @@
 
 <?php
 
+global $wpdb;
+
 if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars((trim($_GET['search_text'])));
 }
@@ -9,7 +11,56 @@ if (isset($_GET['search_websites'])) {
 session_start();
 $form_errors = $_SESSION['form_errors'];
 $form_success = $_SESSION['form_success'];
+
+
+
+$is_redirects_page = str_contains($_SERVER['REQUEST_URI'], 'redirect-rules');
+
+
+$search_text = NULL;
+$order = $wpdb->prepare(" ORDER BY isProd, name");
+
+if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
+    // Search
+    if (isset($_GET['search_websites'])) {
+        $search_text = htmlspecialchars(strtolower(trim($_GET['search_text'])));
+        $like = '%' . $wpdb->esc_like($search_text) . '%';
+        if (!empty($search_text)) {
+            $where = $wpdb->prepare(" WHERE name LIKE %s OR domain LIKE %s", $like, $like);
+        }
+    }
+    if (isset($_GET['view_all_websites'])) {
+        $search_text = NULL;
+        $where = "";
+    }
+    // Filters
+    if (isset($_GET['filter_form_submitted'])) {
+        $conditions = [];
+        if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
+            $conditions[] = "isProd = 1";
+        } elseif (isset($_GET['show_test']) && !isset($_GET['show_production'])) {
+            $conditions[] = "isProd = 0";
+        } elseif (!isset($_GET['show_production']) && !isset($_GET['show_test'])) {
+            $conditions[] = "(isProd != 1 AND isProd != 0)";
+        }
+        if (!isset($_GET['show_disabled'])) {
+            $conditions[] = "disabled = 0";
+        }
+        if (!empty($conditions)) {
+            $where = " WHERE " . implode(" AND ", $conditions);
+        }
+    }
+}
+
+if ($is_redirects_page) {
+    $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d" . $order, 1);
+} else {
+    $sql = "SELECT * FROM websites" . $where . $order;
+}
+
+$results = $wpdb->get_results($sql, ARRAY_A);
 ?>
+
 
 <?php get_header(); ?>
 <section id="list-view-page" class="page-section list-view-page" data-table-name="websites">
@@ -43,7 +94,15 @@ $form_success = $_SESSION['form_success'];
             </form>
         </div>
         <div class="list-view-container">
-            <?php get_template_part('parts/lists/websites-list'); ?>
+            <?php if (!empty($search_text)) : ?>
+                <div class="list-view-page__results-shown">
+                    <p><?php echo empty($results) ? "No results found for" : "Showing all results for" ?> "<?php echo $search_text ?>".</p>
+                    <form method="GET">
+                        <input type="submit" class="input-submit-link" name="view_all_websites" value="View All Websites">
+                    </form>
+                </div>
+            <?php endif; ?>
+            <?php get_template_part('parts/lists/websites-list', null, array('results' => $results, 'is_redirects_page' => $is_redirects_page)); ?>
         </div>
     </div>
 </section>
