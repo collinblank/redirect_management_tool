@@ -33,6 +33,7 @@ function get_redirect_rule_form_errors()
 
 
     // toURL
+    // when flags are separated, this will have to validate to a proper url, using the "url" method form the 
     if (strlen($toURL) == 0) {
         $errors[] = 'Please enter a url to redirect the regex/path to.';
     }
