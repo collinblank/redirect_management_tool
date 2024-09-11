@@ -84,6 +84,9 @@ function initFormValidation(tableName) {
     case "websites":
       initWebsiteFormValidation();
       break;
+    case "redirectRules":
+      initRedirectRuleFormValidation();
+      break;
   }
 }
 
@@ -206,6 +209,30 @@ function initWebsiteFormValidation() {
   }
 }
 
+function initRedirectRuleFormValidation() {
+  const submitBtn = document.getElementById("redirect-rule-form-submit-btn");
+  const name = document.getElementById("redirect-rule-name");
+  const description = document.getElementById("redirect-rule-description");
+  const fromURLRegex = document.getElementById("redirect-rule-from-url-regex");
+  const toURL = document.getElementById("redirect-rule-to-url");
+
+  initInputEvents(name, handleNameEvents);
+  initInputEvents(description, handleDescriptionEvents);
+  initSelectEvents(server, handleServerEvents);
+
+  function handleNameEvents() {
+    Validator.checkName(name);
+    toggleSubmitBtn();
+  }
+
+  function handleDescriptionEvents() {
+    Validator.checkTextInput(description);
+    toggleSubmitBtn();
+  }
+
+  // functio
+}
+
 class Validator {
   static checkName(name) {
     if (!name.validity.valid) {
@@ -237,6 +264,18 @@ class Validator {
     }
   }
 
+  static checkTextInput(textInput, errorMsg) {
+    if (!textInput.validity.valid) {
+      if (textInput.validity.valueMissing) {
+        this._setErrorMsg(textInput, "Please enter a value.");
+      } else {
+        this._setErrorMsg(textInput, errorMsg);
+      }
+    } else {
+      this._setSuccessMsg(textInput);
+    }
+  }
+
   static checkSelect(select) {
     if (select.validity.valueMissing) {
       this._setErrorMsg(select, "Please select a value.");
@@ -259,9 +298,20 @@ class Validator {
     msg.classList.add("error", "active");
   }
 
-  static _setSuccessMsg(input, successMsg) {
+  static _setSuccessMsg(input, customMsg) {
+    const availableSuccessMsgs = [
+      "Nice!",
+      "Awesome!",
+      "Fantastic!",
+      "Looking good!",
+      "Thanks!",
+    ];
     const msg = input.nextElementSibling;
-    msg.textContent = successMsg;
+    msg.textContent = customMsg
+      ? customMsg
+      : availableSuccessMsgs[
+          Math.floor(Math.random() * availableSuccessMsgs.length)
+        ];
 
     input.classList.remove("invalid");
     input.classList.add("valid");
