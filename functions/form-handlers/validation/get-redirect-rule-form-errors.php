@@ -3,11 +3,12 @@
 function get_redirect_rule_form_errors()
 {
     // should i just these from data, passed as a param?
+    // need to trim, sanitize, etc.
     $website_id = intval($_POST['website_id']);
     $name = $_POST['redirect_rule_name'];
     $description = $_POST['redirect_rule_description'];
-    $from_url_regex = $_POST['redirect_rule_from_url_regex'];
-    $to_url = $_POST['redirect_rule_to_url'];
+    $fromURLRegex = $_POST['redirect_rule_from_url_regex'];
+    $toURL = $_POST['redirect_rule_to_url'];
 
     $errors = [];
 
@@ -26,10 +27,15 @@ function get_redirect_rule_form_errors()
     }
 
     // fromURLRegex
+    if (strlen($fromURLRegex) == 0) {
+        $errors[] = 'Please enter a regex pattern or path name (e.g., "^(?i)churches?$" or "churches/", without the leading "/").';
+    }
 
 
     // toURL
-
+    if (strlen($toURL) == 0) {
+        $errors[] = 'Please enter a url to redirect the regex/path to.';
+    }
 
     // Flags
 
