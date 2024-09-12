@@ -1,13 +1,14 @@
 <?php
 
-function write_website_redirect_rules_file($website_id)
+function write_redirect_rules_file($website_id)
 {
     global $wpdb;
     $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
+    echo "<script>console.log('Website Id: {$website_id} Website Name: {$website_name}')</script>";
     $redirect_rules = $wpdb->get_results($wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d AND disabled != %d ORDER BY id", $website_id, 1));
 
-    $hyphenated_website_name = implode("-", explode(" ", $website_name));
-    $filepath = get_template_directory() . "/{$hyphenated_website_name}-redirect-rules.txt";
+    $hyphenated_website_name = implode("-", explode(" ", strtolower($website_name)));
+    $filepath = get_template_directory() . "/redirect-rules/{$hyphenated_website_name}.txt";
     $file = fopen($filepath, "w");
 
     if ($file) {

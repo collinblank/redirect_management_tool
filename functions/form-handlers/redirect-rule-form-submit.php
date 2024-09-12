@@ -1,7 +1,6 @@
 <?php
 // Handles redirect rule form edit and add actions
 include get_template_directory() . '/functions/form-handlers/validation/get-redirect-rule-form-errors.php';
-include get_template_directory() . '/functions/write-redirect-rules.php';
 
 // NEEDS TO SUBMIT THE WEBSITE ID SOMEHOW
 
@@ -25,6 +24,5 @@ function handle_redirect_rule_form_submit()
         $action = $item_id ? 'edit' : 'add';
 
         handle_form_submission($action, 'redirectRules', $data, $errors, $item_id, $where);
-        write_website_redirect_rules_file($data['website_id']);
     }
 }
