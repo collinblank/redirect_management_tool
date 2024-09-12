@@ -13,8 +13,9 @@ function write_redirect_rules_file($website_id)
     if ($file) {
         fwrite($file, "#Website: {$website_name}\n\n#Begin Rewrite Rules - DO NOT EDIT\n");
         foreach ($redirect_rules as $rule) {
-            $rewrite_rule_content = "#{$rule['name']}\nRewriteRule {$rule['fromURLRegex']} {$rule['toURL']}\n";
-            fwrite($file, $rewrite_rule_content);
+            $name_content = $rule['name'] ? "#{$rule['name']}\n" : '';
+            $rewrite_rule_content = "RewriteRule {$rule['fromURLRegex']} {$rule['toURL']}\n";
+            fwrite($file, $name_content . $rewrite_rule_content);
         }
         fwrite($file, "\n#End Rewrite Rules - DO NOT EDIT\n");
 
