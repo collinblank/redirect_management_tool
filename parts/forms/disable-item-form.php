@@ -51,7 +51,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
                 <label for="disable-item__checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
             </div>
             <div class="modal-content__btns-container">
-                <button type="button" class="btn" id="modal-cancel-btn" tabindex="3">Cancel</button>
+                <button type="button" class="btn cancel" id="modal-cancel-btn" tabindex="3">Cancel</button>
                 <input type="submit" class="btn red" value="Disable" tabindex="2" disabled />
             </div>
         </form>
