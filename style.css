@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.351
+Version: 2024.1.352
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -226,35 +226,33 @@ input[type="checkbox"]:checked::before {
   align-items: end;
   gap: 24px;
   padding: 16px 24px;
-  border-bottom: 1px solid var(--primary-border-color);
+  background-color: var(--primary-txt-color);
 }
 
-.nav__link {
+.nav-link {
+  font-size: 1rem;
+  font-weight: 600;
   text-decoration: none;
-  color: var(--primary-link-color);
-  font-size: 1.1rem;
-  /* transition: 0.1s ease-out; */
-}
-
-.nav__link:hover {
-  color: var(--primary-link-color-hover);
+  text-transform: uppercase;
+  letter-spacing: 0.025rem;
+  color: #fff;
 }
 
 /* for home icon */
-.nav__link:first-child {
+.nav-link:first-child {
   font-size: 1.2rem;
 }
 
-.nav__link + .nav__link {
+.nav-link + .nav-link {
   position: relative;
 }
 
-.nav__link + .nav__link::before {
+.nav-link + .nav-link::before {
   content: "/";
   position: absolute;
   top: 0;
   left: -14px;
-  color: var(--primary-link-color);
+  color: #fff;
 }
 
 /* Home page */
