@@ -22,6 +22,7 @@ function redirect_manager_scripts_styles()
 {
 	wp_enqueue_style('styles', get_stylesheet_directory_uri() . '/src/css/custom-style.css', array(), false, 'screen');
 	wp_enqueue_script('scripts', get_template_directory_uri() . '/src/js/custom-scripts.js', array(), false, array('strategy' => 'defer'));
+	wp_enqueue_script('jquery', get_template_directory_uri() . '/src/js/custom-jquery.js', array(), false, array('strategy' => 'defer'));
 }
 add_action('wp_enqueue_scripts', 'redirect_manager_scripts_styles');
 
