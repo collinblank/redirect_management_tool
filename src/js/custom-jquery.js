@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(document).ready(function ($) {
   console.log("JQuery loaded!");
 
   $(".more-actions-btn").click(function () {
