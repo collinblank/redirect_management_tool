@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.348
+Version: 2024.1.349
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -56,19 +56,6 @@ BlankSlate is distributed under the terms of the GNU GPL
   --blue-btn-txt-color: #0ea5e9;
   --blue-btn-border-color-hover: #38bdf8;
   --blue-btn-bg-color-hover: #bae6fd;
-
-  /* Error  */
-  --error-border-color: #ef4444;
-  --error-bg-color: #fecaca;
-  --error-txt-color: #ef4444;
-  --error-secondary-border-color: #fca5a5;
-  --error-secondary-bg-color: #fee2e2;
-  --error-secondary-txt-color: #f87171;
-
-  /* Success */
-  --success-border-color: #86efac;
-  --success-bg-color: #dcfce7;
-  --success-txt-color: #22c55e;
 
   --input-border-color: #e4e4e7;
   --input-border-color-focus: #38bdf8;
@@ -320,7 +307,7 @@ input[type="checkbox"]:checked::before {
   justify-content: space-between;
   align-items: center;
   gap: 24px;
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 4px;
   padding: 12px 8px;
   margin-bottom: 8px;
@@ -342,15 +329,15 @@ input[type="checkbox"]:checked::before {
 }
 
 .notice-banner.error {
-  border-color: var(--error-border-color);
-  background-color: var(--error-bg-color);
-  color: var(--error-txt-color);
+  border-color: var(--red);
+  background-color: var(--red-light);
+  color: var(--red);
 }
 
 .notice-banner.success {
-  border-color: var(--success-border-color);
-  background-color: var(--success-bg-color);
-  color: var(--success-txt-color);
+  border-color: var(--green);
+  background-color: var(--green);
+  color: #fff;
 }
 
 /* List view pages (Servers, Websites, Redirects, Redirect Flags) */
@@ -410,16 +397,16 @@ input[type="checkbox"]:checked::before {
 }
 
 .list-view__item.disabled {
-  border-color: var(--error-border-color);
-  color: var(--error-txt-color);
+  border-color: var(--red);
+  color: var(--red);
 }
 
 .list-view__item.disabled:hover {
-  background-color: var(--error-secondary-bg-color);
+  background-color: var(--red-light);
 }
 
 .list-view__item.disabled .list-view__item__description {
-  color: var(--error-secondary-txt-color);
+  color: var(--red);
 }
 
 .list-view__item__btns-container {
@@ -429,7 +416,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .list-view__item__btns-container .disable-btn:hover {
-  color: var(--error-txt-color);
+  color: var(--red);
 }
 
 .list-view__item__btns-container .view-more-btn {
@@ -524,7 +511,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .form__input-item label span {
-  color: var(--error-txt-color);
+  color: var(--red);
 }
 
 .form__input-item input,
@@ -558,52 +545,50 @@ input[type="checkbox"]:checked::before {
 .form__input-item input.valid,
 .form__input-item select.valid,
 .form__input-item textarea.valid {
-  border-color: var(--success-border-color);
+  border-color: var(--green);
 }
 
 .form__input-item input.invalid,
 .form__input-item select.invalid,
 .form__input-item textarea.invalid {
-  border-color: var(--error-border-color);
+  border-color: var(--red);
 }
 
 .form__input-item__validation-msg {
-  padding: 6px 4px;
+  padding: 4px 2px;
   font-size: 0.8rem;
   letter-spacing: 0.025rem;
 }
 
 .form__input-item__validation-msg.error {
-  background-color: var(--error-secondary-bg-color);
-  color: var(--error-txt-color);
+  color: var(--red);
 }
 
 .form__input-item__validation-msg.success {
-  background-color: var(--success-bg-color);
-  color: var(--success-txt-color);
+  color: var(--green);
 }
 
 /* Disable Item Form */
 
 .disable-modal {
-  border: 1px solid var(--error-border-color);
-  background-color: var(--error-secondary-bg-color);
+  border: 1px solid var(--red);
+  background-color: var(--red-light);
 }
 
 .disable-modal .modal-content__header {
-  border-bottom: 1px solid var(--error-secondary-border-color);
+  border-bottom: 1px solid var(--red);
 }
 
 .disable-modal .modal-content__header strong {
-  color: var(--error-txt-color);
+  color: var(--red);
   font-weight: 600;
 }
 
 .disable-item__list-item {
-  border: 1px solid var(--error-border-color);
+  border: 1px solid var(--red);
   border-radius: 4px;
   padding: 6px 8px;
-  background-color: var(--primary-bg-color);
+  background-color: var(--red-light);
 }
 
 .disable-item__list-item__description {
