@@ -6,10 +6,10 @@ $results = $args['results'] ?? null;
     <table class="data-table">
         <thead class="table-header">
             <tr class="table-row">
-                <th>Name</th>
-                <th>Domain</th>
-                <th>Last modified</th>
-                <th></th>
+                <th class="table-cell">Name</th>
+                <th class="table-cell">Domain</th>
+                <th class="table-cell">Last modified</th>
+                <th class="table-cell"></th>
             </tr>
         </thead>
         <tbody class="table-body">
