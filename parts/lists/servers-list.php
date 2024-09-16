@@ -21,8 +21,8 @@ $results = $args['results'] ?? null;
                         <td class="table-cell time-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y h:i a') ?></td>
                         <td class="table-cell table-actions">
                             <div class="more-actions">
-                                <button class="default-btn">Disable</button>
-                                <button class="default-btn">Edit</button>
+                                <button class="btn">Disable</button>
+                                <button class="btn">Edit</button>
                             </div>
                             <button class="icon-btn more-actions-btn"><i class="fa-solid fa-ellipsis"></i></button>
                         </td>

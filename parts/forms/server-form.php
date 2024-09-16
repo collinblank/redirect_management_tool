@@ -36,8 +36,8 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             </li>
         </ul>
         <div class="modal-content__btns-container">
-            <button type="button" class="default-btn" id="modal-cancel-btn" tabindex="3">Cancel</button>
-            <input type="submit" id="server-form-submit-btn" class="default-btn blue-btn" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" disabled />
+            <button type="button" class="btn" id="modal-cancel-btn" tabindex="3">Cancel</button>
+            <input type="submit" id="server-form-submit-btn" class="btn blue" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" disabled />
         </div>
     </form>
 </div>

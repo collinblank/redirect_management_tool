@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.349
+Version: 2024.1.350
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -19,47 +19,26 @@ BlankSlate is distributed under the terms of the GNU GPL
 
 /* CSS global variables to go here */
 :root {
-  --primary-bg-color: #fff;
-  --primary-txt-color: #18181b;
-  --primary-border-color: #d4d4d8;
+  --primary-border-color: rgb(224, 224, 224);
+  --primary-bg-color: rgb(254, 250, 247);
+  --primary-txt-color: rgb(5, 31, 66);
 
-  --primary-link-color: #71717a;
-  --primary-link-color-hover: #18181b;
+  --secondary-bg-color: rgb(253, 245, 241);
+  --secondary-txt-color: rgba(5, 31, 66, 0.65);
 
-  --secondary-border-color: #a1a1aa;
-  --secondary-bg-color: #fafafa;
-  --secondary-txt-color: #71717a;
+  --red: rgb(193, 79, 60);
+  --red-light: rgb(193, 79, 60, 0.25);
+  --green: rgb(87, 171, 130);
+  --green-light: rgba(87, 171, 130, 0.04);
+  --green-dark: rgb(60, 119, 91);
 
-  /* Default Button Colors */
-  --default-btn-border-color: #d4d4d8;
-  --default-btn-bg-color: #e4e4e7;
-  --default-btn-txt-color: #18181b;
-  --default-btn-border-color-hover: #a3a3a3;
-  --default-btn-bg-color-hover: #d4d4d8;
-  /* --default-btn-txt-color-hover: ; */
+  --btn-border-color: rgba(0, 0, 0, 0.23);
+  --btn-bg-color: rgb(251, 246, 242);
+  --btn-border-color-hover: rgba(0, 0, 0, 0.87);
+  --btn-bg-color-hover: rgba(5, 31, 66, 0.04);
 
-  /* Disabled */
-  --default-btn-border-color-disabled: #d4d4d8;
-  --default-btn-bg-color-disabled: #f5f5f5;
-  --default-btn-txt-color-disabled: #d4d4d8;
-
-  /* Red Button Colors */
-  --red-btn-border-color: #ef4444;
-  --red-btn-bg-color: #fecaca;
-  --red-btn-txt-color: #ef4444;
-  --red-btn-border-color-hover: #ef4444;
-  --red-btn-bg-color-hover: #fca5a5;
-
-  /* Blue Button Colors */
-  --blue-btn-border-color: #7dd3fc;
-  --blue-btn-bg-color: #e0f2fe;
-  --blue-btn-txt-color: #0ea5e9;
-  --blue-btn-border-color-hover: #38bdf8;
-  --blue-btn-bg-color-hover: #bae6fd;
-
-  --input-border-color: #e4e4e7;
-  --input-border-color-focus: #38bdf8;
-  --input-placeholder-txt-color: #a1a1aa;
+  --btn-bg-color-disabled: rgba(0, 0, 0, 0.12);
+  --btn-txt-color-disabled: rgba(0, 0, 0, 0.26);
 }
 
 /* START CUSTOM STYLES */
@@ -99,53 +78,75 @@ button i {
 }
 
 /* Buttons */
-.default-btn {
+.btn {
   font-family: "Inter", sans-serif;
-  padding: 6px 12px;
-  border: 1px solid var(--default-btn-border-color);
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 600;
   letter-spacing: 0.025rem;
-  color: var(--default-btn-txt-color);
-  background-color: var(--default-btn-bg-color);
-  /* transition: 0.1s ease-out; */
+  padding: 8px 12px;
+  border: 1px solid var(--btn-border-color);
+  border-radius: 4px;
+  color: var(--secondary-txt-color);
+  background-color: var(--btn-bg-color);
 }
 
-.default-btn:hover {
-  border-color: var(--default-btn-border-color-hover);
-  background-color: var(--default-btn-bg-color-hover);
-  color: var(--default-btn-txt-color);
+.btn:hover {
+  border-color: var(--btn-border-color-hover);
+  background-color: var(--btn-bg-color-hover);
+  color: var(--primary-txt-color);
   cursor: pointer;
 }
 
-.default-btn:disabled {
-  border-color: var(--default-btn-border-color-disabled);
-  background-color: var(--default-btn-bg-color-disabled);
-  color: var(--default-btn-txt-color-disabled);
+.btn:disabled {
+  border: 1px solid var(--btn-bg-color-disabled);
+  background-color: var(--btn-bg-color-disabled);
+  color: var(--btn-txt-color-disabled);
   cursor: not-allowed;
 }
 
-.red-btn:not(:disabled) {
-  border-color: var(--red-btn-border-color);
-  background-color: var(--red-btn-bg-color);
-  color: var(--red-btn-txt-color);
+.btn.red:not(:disabled) {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+  background-color: var(--red-light);
+  border-color: var(--red);
+  color: var(--red);
 }
 
-.red-btn:not(:disabled):hover {
-  border-color: var(--red-btn-border-color-hover);
-  background-color: var(--red-btn-bg-color-hover);
+.btn.red:not(:disabled):hover {
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: var(--red);
+  color: #fff;
 }
 
-.blue-btn:not(:disabled) {
-  border-color: var(--blue-btn-border-color);
-  background-color: var(--blue-btn-bg-color);
-  color: var(--blue-btn-txt-color);
+.btn.green:not(:disabled) {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+  border-color: var(--green);
+  background-color: var(--green);
+  color: #fff;
 }
 
-.blue-btn:not(:disabled):hover {
-  border-color: var(--blue-btn-border-color-hover);
-  background-color: var(--blue-btn-bg-color-hover);
+.btn.green:not(:disabled):hover {
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-color: var(--green-dark);
+  background-color: var(--green-dark);
+}
+
+.btn.cancel {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.btn.cancel:hover {
+  border-color: var(--btn-bg-color-hover);
+  background-color: var(--btn-bg-color-hover);
 }
 
 /* Checkbox */
@@ -161,8 +162,8 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background-color: var(--blue-btn-bg-color);
-  border-color: var(--blue-btn-border-color);
+  background-color: var(--green);
+  border-color: var(--green);
 }
 
 /* Proabably should have this somewhere. From FontAwesome's site */
@@ -178,7 +179,7 @@ input[type="checkbox"]:checked::before {
   position: absolute;
   top: 1px;
   left: 1.5px;
-  color: var(--blue-btn-txt-color);
+  color: #fff;
 }
 
 /* Icon button styles */
@@ -274,15 +275,15 @@ input[type="checkbox"]:checked::before {
 /* Probably just style as default btns */
 #home-page .menu-item {
   transition: 0.1s ease-out;
-  background-color: var(--default-btn-bg-color);
-  border: 1px solid var(--default-btn-border-color);
+  background-color: var(--btn-bg-color);
+  border: 1px solid var(--btn-border-color);
   border-radius: 4px;
 }
 
 #home-page .menu-item:hover {
   transform: scale(1.05);
-  background-color: var(--default-btn-bg-color-hover);
-  border-color: var(--default-btn-border-color-hover);
+  background-color: var(--btn-bg-color-hover);
+  border-color: var(--btn-border-color-hover);
 }
 
 #home-page .menu-item a {
@@ -292,7 +293,7 @@ input[type="checkbox"]:checked::before {
   text-decoration: none;
   font-weight: 500;
   letter-spacing: 0.025rem;
-  color: var(--default-btn-txt-color);
+  color: var(--btn-txt-color);
 }
 
 .page-content-container {
@@ -381,7 +382,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .list-view__item:hover {
-  border-color: var(--secondary-border-color);
+  /* border-color: var(--secondary-border-color); */
   background-color: var(--secondary-bg-color);
 }
 
@@ -420,7 +421,6 @@ input[type="checkbox"]:checked::before {
 }
 
 .list-view__item__btns-container .view-more-btn {
-  font-size: 0.8rem;
   display: flex;
   align-items: center;
   gap: 4px;
