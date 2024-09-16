@@ -15,6 +15,8 @@ if (str_contains($page_title, "Private: ")) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/dkx7pbs.css">
+
     <!-- End Google Font Inter -->
     <script src="https://kit.fontawesome.com/3feedd961e.js" crossorigin="anonymous"></script>
     <?php wp_head(); ?>
