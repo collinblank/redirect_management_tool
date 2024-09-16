@@ -33,7 +33,7 @@ $is_redirects_page = $args['is_redirects_page'] ?? null;
                     <?php endif; ?>
                     <form action="/redirect-rules" method="GET">
                         <input type="hidden" name="website_id" value="<?php echo $item['id'] ?>">
-                        <button type="submit" class="default-btn ghost-btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></button>
+                        <button type="submit" class="btn view-more-btn">View Redirects<i class="fa-solid fa-arrow-right-long"></i></button>
                     </form>
                 </div>
             </li>
