@@ -226,35 +226,33 @@ input[type="checkbox"]:checked::before {
   align-items: end;
   gap: 24px;
   padding: 16px 24px;
-  border-bottom: 1px solid var(--primary-border-color);
+  background-color: var(--primary-txt-color);
 }
 
-.nav__link {
+.nav-link {
+  font-size: 1rem;
+  font-weight: 600;
   text-decoration: none;
-  color: var(--primary-link-color);
-  font-size: 1.1rem;
-  /* transition: 0.1s ease-out; */
-}
-
-.nav__link:hover {
-  color: var(--primary-link-color-hover);
+  text-transform: uppercase;
+  letter-spacing: 0.025rem;
+  color: #fff;
 }
 
 /* for home icon */
-.nav__link:first-child {
+.nav-link:first-child {
   font-size: 1.2rem;
 }
 
-.nav__link + .nav__link {
+.nav-link + .nav-link {
   position: relative;
 }
 
-.nav__link + .nav__link::before {
+.nav-link + .nav-link::before {
   content: "/";
   position: absolute;
   top: 0;
   left: -14px;
-  color: var(--primary-link-color);
+  color: #fff;
 }
 
 /* Home page */
