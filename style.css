@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.354
+Version: 2024.1.355
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -19,24 +19,28 @@ BlankSlate is distributed under the terms of the GNU GPL
 
 /* CSS global variables to go here */
 :root {
-  --primary-border-color: rgb(224, 224, 224);
+  /* Fonts */
+  --plantin: plantin, Georgia, serif;
+  --sweet-sans: sweet-sans-pro, Verdana, sans-serif;
+  /* Text */
+  --txt-color-dark: rgb(5, 31, 66);
+  --txt-color-medium: rgba(5, 31, 66, 0.65);
+  --txt-color-light: rgba(5, 31, 66, 0.5);
+  /* Backgrounds/Borders */
   --primary-bg-color: rgb(254, 250, 247);
-  --primary-txt-color: rgb(5, 31, 66);
-
   --secondary-bg-color: rgb(253, 245, 241);
-  --secondary-txt-color: rgba(5, 31, 66, 0.65);
-
+  --border-color: rgb(224, 224, 224);
+  /* Accents */
   --red: rgb(193, 79, 60);
   --red-light: rgb(193, 79, 60, 0.25);
   --green: rgb(87, 171, 130);
   --green-light: rgba(87, 171, 130, 0.04);
   --green-dark: rgb(60, 119, 91);
-
+  /* Buttons */
   --btn-border-color: rgba(0, 0, 0, 0.23);
   --btn-bg-color: rgb(251, 246, 242);
   --btn-border-color-hover: rgba(0, 0, 0, 0.87);
   --btn-bg-color-hover: rgba(5, 31, 66, 0.04);
-
   --btn-bg-color-disabled: rgba(0, 0, 0, 0.12);
   --btn-txt-color-disabled: rgba(0, 0, 0, 0.26);
 }
@@ -50,9 +54,9 @@ BlankSlate is distributed under the terms of the GNU GPL
 
 body {
   height: 100vh;
-  font-family: "Inter", sans-serif;
+  font-family: var(--plantin);
   background-color: var(--primary-bg-color);
-  color: var(--primary-txt-color);
+  color: var(--txt-color-dark);
 }
 
 h1,
@@ -61,6 +65,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: var(--plantin);
   font-weight: 600;
   letter-spacing: 0.025rem;
 }
@@ -79,22 +84,22 @@ button i {
 
 /* Buttons */
 .btn {
-  font-family: "Inter", sans-serif;
+  font-family: var(--sweet-sans);
   font-size: 0.8rem;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.025rem;
   padding: 8px 12px;
   border: 1px solid var(--btn-border-color);
   border-radius: 4px;
-  color: var(--secondary-txt-color);
+  color: var(--txt-color-medium);
   background-color: var(--btn-bg-color);
 }
 
 .btn:hover {
   border-color: var(--btn-border-color-hover);
   background-color: var(--btn-bg-color-hover);
-  color: var(--primary-txt-color);
+  color: var(--txt-color-dark);
   cursor: pointer;
 }
 
@@ -140,6 +145,7 @@ button i {
 }
 
 .btn.cancel {
+  color: var(--txt-color-light);
   border-color: transparent;
   background-color: transparent;
 }
@@ -155,7 +161,7 @@ input[type="checkbox"] {
   height: 1rem;
   width: 1rem;
   background-color: var(--primary-bg-color);
-  border: 1px solid var(--primary-border-color);
+  border: 1px solid var(--border-color);
   border-radius: 2px;
   position: relative;
   cursor: pointer;
@@ -188,14 +194,17 @@ input[type="checkbox"]:checked::before {
   outline: none;
   background: none;
   padding: 2px;
-  color: var(--primary-link-color);
-  /* transition: 0.1s ease-out; */
+  color: var(--txt-color-medium);
 }
 
 .icon-btn:hover {
   background: none;
   cursor: pointer;
-  color: var(--primary-link-color-hover);
+  color: var(--txt-color-dark);
+}
+
+.icon-btn.disable-item-btn:hover {
+  color: var(--red);
 }
 
 /* Universal page layout */
@@ -226,12 +235,13 @@ input[type="checkbox"]:checked::before {
   align-items: end;
   gap: 24px;
   padding: 16px 24px;
-  background-color: var(--primary-txt-color);
+  background-color: var(--txt-color-dark);
 }
 
 .nav-link {
+  font-family: var(--sweet-sans);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.025rem;
@@ -351,7 +361,7 @@ input[type="checkbox"]:checked::before {
   justify-content: space-between;
   align-items: end;
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--primary-border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .list-view-container {
@@ -372,7 +382,7 @@ input[type="checkbox"]:checked::before {
   align-items: center;
   /* justify-content: space-between; */
   flex-wrap: wrap;
-  border: 1px solid var(--primary-border-color);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 6px 8px;
   /* transition: 0.2s ease-out; */
@@ -380,7 +390,6 @@ input[type="checkbox"]:checked::before {
 }
 
 .list-view__item:hover {
-  /* border-color: var(--secondary-border-color); */
   background-color: var(--secondary-bg-color);
 }
 
@@ -389,7 +398,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .list-view__item__description {
-  color: var(--secondary-txt-color);
+  color: var(--txt-color-medium);
   /* word-wrap: break-word; */
   /* ? */
   word-break: break-word;
@@ -452,8 +461,8 @@ input[type="checkbox"]:checked::before {
   min-width: 348px;
   min-height: 348px;
   border-radius: 4px;
-  border: 1px solid var(--primary-border-color);
-  background-color: var(--primary-bg-color);
+  border: 1px solid var(--border-color);
+  background-color: #fff;
   -webkit-box-shadow: -2px 4px 10px 2px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: -2px 4px 10px 2px rgba(0, 0, 0, 0.2);
   box-shadow: -2px 4px 10px 2px rgba(0, 0, 0, 0.2);
@@ -470,7 +479,7 @@ input[type="checkbox"]:checked::before {
   flex-direction: column;
   gap: 4px;
   padding: 16px 48px;
-  border-bottom: 1px solid var(--primary-border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .modal-content__section {
@@ -503,6 +512,8 @@ input[type="checkbox"]:checked::before {
 }
 
 .form__input-item label {
+  font-family: var(--sweet-sans);
+  color: var(--txt-color-medium);
   font-size: 0.8rem;
   letter-spacing: 0.025rem;
   font-weight: 600;
@@ -514,30 +525,31 @@ input[type="checkbox"]:checked::before {
 
 .form__input-item input,
 .form__input-item textarea {
-  font-family: "Inter", sans-serif;
-  padding: 4px 2px;
-  border: 2px solid var(--input-border-color);
-  border-radius: 4px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--primary-txt-color);
+  font-family: var(--sweet-sans);
+  height: 3rem;
   outline: none;
+  border: none;
+  border-bottom: 1px solid var(--btn-border-color);
+  font-size: 0.9rem;
+  background-color: var(--primary-bg-color);
+  color: var(--txt-color-dark);
 }
 
 .form__input-item textarea {
   height: 5rem;
+  padding: 16px 6px;
   resize: none;
   overflow: auto;
 }
 
 .form__input-item input::placeholder,
 .form__input-item textarea::placeholder {
-  color: var(--input-placeholder-txt-color);
+  color: var(--txt-color-light);
 }
 
 .form__input-item input:focus,
 .form__input-item textarea:focus {
-  border-color: var(--input-border-color-focus);
+  border-color: var(--btn-border-color-hover);
 }
 
 .form__input-item input.valid,
@@ -553,6 +565,8 @@ input[type="checkbox"]:checked::before {
 }
 
 .form__input-item__validation-msg {
+  font-family: var(--sweet-sans);
+  font-weight: 600;
   padding: 4px 2px;
   font-size: 0.8rem;
   letter-spacing: 0.025rem;
@@ -590,7 +604,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .disable-item__list-item__description {
-  color: var(--secondary-txt-color);
+  color: var(--txt-color-medium);
   word-wrap: break-word;
 }
 
@@ -611,7 +625,7 @@ input[type="checkbox"]:checked::before {
 } */
 
 .form__input-item select.active {
-  color: var(--primary-txt-color);
+  color: var(--txt-color-dark);
 }
 
 #website-sandbox-list-item.hidden {
