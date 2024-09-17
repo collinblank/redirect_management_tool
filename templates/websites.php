@@ -53,8 +53,8 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 
 
 <?php get_header(); ?>
-<section id="list-view-page" class="page-section list-view-page" data-table-name="websites">
-    <div class="page-content-container">
+<section class="page-section" data-table-name="websites">
+    <div class="container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
             <h1>Websites</h1>
@@ -62,7 +62,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
         </div>
         <div class="list-view-page__filter-container">
             <form method="GET" class="list-view__page__search-form">
-                <input type="text" class="list-view__page__search-input" name="search_text" placeholder="Website name or domain..." value="<?php echo $search_text ?>">
+                <input type="text" class="form-text-input" name="search_text" placeholder="Website name or domain..." value="<?php echo $search_text ?>">
                 <input type="submit" class="btn" name="search_websites" value="Search">
             </form>
             <form method="GET" class="list-view__page__filter-form">

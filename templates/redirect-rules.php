@@ -28,8 +28,8 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 ?>
 
 <?php get_header(); ?>
-<section id="list-view-page" class="page-section list-view-page" data-table-name="<?php echo $website_id ? "redirectRules" : "websites" ?>">
-    <div class="page-content-container">
+<section class="page-section" data-table-name="<?php echo $website_id ? "redirectRules" : "websites" ?>">
+    <div class="container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
             <h1><?php echo $website_name ? "Redirects for $website_name" : "Select Website" ?></h1>
