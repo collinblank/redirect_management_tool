@@ -18,13 +18,19 @@ $results = $args['results'] ?? null;
                     <tr class="table-row">
                         <td class="table-cell"><?= $item['name'] ?></td>
                         <td class="table-cell"><?= $item['domain'] ?></td>
-                        <td class="table-cell time-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y h:i a') ?></td>
+                        <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y h:i a') ?></td>
                         <td class="table-cell table-actions">
-                            <div class="more-actions">
-                                <button class="btn">Disable</button>
-                                <button class="btn">Edit</button>
+                            <button class="icon-btn more-actions-toggle"><i class="fa-solid fa-ellipsis"></i></button>
+                            <div class="more-actions-menu">
+                                <div class="more-actions-btns">
+                                    <button class="icon-btn edit-item-btn" title="Edit server"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <?php if ($item['disabled']) : ?>
+                                        <button class="icon-btn enable-item-btn" title="Enable server"><i class="fa-regular fa-circle-check"></i></button>
+                                    <?php else : ?>
+                                        <button class="icon-btn disable-item-btn" title="Disable server"><i class="fa-regular fa-circle-xmark"></i></button>
+                                    <?php endif; ?>
+                                </div>
                             </div>
-                            <button class="icon-btn more-actions-btn"><i class="fa-solid fa-ellipsis"></i></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
