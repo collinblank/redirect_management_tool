@@ -5,7 +5,7 @@ Author: Grant and Collin
 Author URI: https://opencollective.com/blankslate#section-contributors
 Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.357
+Version: 2024.1.358
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -499,19 +499,22 @@ input[type="checkbox"]:checked::before {
 
 /* Modal Form (Add/Edit) */
 
-.form__inputs-container {
+/* .form__inputs-container, */
+.form-items-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.form__input-item {
+/* .form__input-item, */
+.form-item {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.form__input-item label {
+/* .form__input-item label, */
+.form-label {
   font-family: var(--sweet-sans);
   color: var(--txt-color-medium);
   font-size: 0.8rem;
@@ -519,12 +522,15 @@ input[type="checkbox"]:checked::before {
   font-weight: 600;
 }
 
-.form__input-item label span {
+/* .form__input-item label span, */
+.form-label span {
   color: var(--red);
 }
 
-.form__input-item input,
-.form__input-item textarea {
+/* .form__input-item input,
+.form__input-item textarea, */
+.form-text-input,
+.form-textarea {
   font-family: var(--plantin);
   height: 3rem;
   outline: none;
@@ -535,36 +541,48 @@ input[type="checkbox"]:checked::before {
   color: var(--txt-color-dark);
 }
 
-.form__input-item textarea {
+/* .form__input-item textarea, */
+.form-textarea {
   height: 5rem;
   padding: 16px 6px;
   resize: none;
   overflow: auto;
 }
 
-.form__input-item input::placeholder,
-.form__input-item textarea::placeholder {
+/* .form__input-item input::placeholder,
+.form__input-item textarea::placeholder, */
+.form-text-input::placeholder,
+.form-textarea::placeholder {
   color: var(--txt-color-light);
 }
 
-.form__input-item input:focus,
-.form__input-item textarea:focus {
+/* .form__input-item input:focus,
+.form__input-item textarea:focus, */
+.form-text-input:focus,
+.form-textarea:focus {
   border-color: var(--btn-border-color-hover);
 }
 
-.form__input-item input.valid,
+/* .form__input-item input.valid,
 .form__input-item select.valid,
-.form__input-item textarea.valid {
+.form__input-item textarea.valid, */
+.form-text-input.valid,
+.form-textarea.valid,
+.form-select.valid {
   border-color: var(--green);
 }
 
-.form__input-item input.invalid,
+/* .form__input-item input.invalid,
 .form__input-item select.invalid,
-.form__input-item textarea.invalid {
+.form__input-item textarea.invalid, */
+.form-text-input.invalid,
+.form-textarea.invalid,
+.form-select.invalid {
   border-color: var(--red);
 }
 
-.form__input-item__validation-msg {
+/* .form__input-item__validation-msg, */
+.form-validation-msg {
   font-family: var(--sweet-sans);
   font-weight: 600;
   padding: 4px 2px;
@@ -572,11 +590,13 @@ input[type="checkbox"]:checked::before {
   letter-spacing: 0.025rem;
 }
 
-.form__input-item__validation-msg.error {
+/* .form__input-item__validation-msg.error, */
+.form-validation-msg.error {
   color: var(--red);
 }
 
-.form__input-item__validation-msg.success {
+/* .form__input-item__validation-msg.success, */
+.form-validation-msg.success {
   color: var(--green);
 }
 
