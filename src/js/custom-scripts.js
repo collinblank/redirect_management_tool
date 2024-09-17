@@ -41,7 +41,7 @@ function removeModal() {
 
 function showModal(action, e) {
   const mainContent = document.getElementById("content");
-  const tableName = document.getElementById("list-view-page").dataset.tableName;
+  const tableName = document.querySelector(".page-section").dataset.tableName;
   console.log(tableName);
   const itemId = e ? e.target.closest(".list-view__item").dataset.itemId : "";
   const params = `?action=${action}&table_name=${tableName}${

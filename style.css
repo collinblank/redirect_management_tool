@@ -1,11 +1,8 @@
 /*
-Theme Name: Grant and Collin Redirect Management Tool
-Theme URI: https://opencollective.com/blankslate
-Author: Grant and Collin
-Author URI: https://opencollective.com/blankslate#section-contributors
-Description: Donate: https://opencollective.com/blankslate. Learn: https://blankslate.me/. BlankSlate is the definitive WordPress boilerplate starter theme. I've carefully constructed the most clean and minimalist theme possible for designers and developers to use as a base to build websites for clients or to build completely custom themes from scratch. Clean, simple, unstyled, semi-minified, unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer comments, standardized and as white label as possible, and most importantly, the CSS is reset for cross-browser-compatability, with no intrusive visual CSS styles added whatsoever. A perfect skeleton theme. For support and suggestions, go to: https://github.com/bhadaway/blankslate/issues. Thank you.
-Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2024.1.361
+Theme Name: Redirect Manager
+Author: Grant Collins and Collin Blank
+Description: A custom theme built for the Classical Conversations Redirect Manager.
+Version: 2024.1.362
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -250,6 +247,19 @@ input[type="checkbox"]:checked::before {
   padding: 48px 96px;
 }
 
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* List view pages (Servers, Websites, Redirects, Redirect Flags) */
+/* .list-view-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+} */
+
 /* Header */
 .nav {
   display: flex;
@@ -325,12 +335,6 @@ input[type="checkbox"]:checked::before {
   color: var(--btn-txt-color);
 }
 
-.page-content-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
 /* PAGE NOTICE BANNER */
 .notice-banner {
   display: flex;
@@ -368,13 +372,6 @@ input[type="checkbox"]:checked::before {
   border-color: var(--green);
   background-color: var(--green);
   color: #fff;
-}
-
-/* List view pages (Servers, Websites, Redirects, Redirect Flags) */
-.list-view-page {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 }
 
 .list-view-page__header {
