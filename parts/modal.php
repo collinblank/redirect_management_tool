@@ -41,7 +41,7 @@ if (isset($_GET['action'])) {
 ?>
 
 <div class="modal-overlay">
-    <div class="modal <?php echo $action . "-modal" ?>">
+    <div class="modal <?= $action === 'disable' ? 'disable' : '' ?>">
         <?php if (!$error_msg) : ?>
             <?php get_template_part($modal_content_path); ?>
         <?php else : ?>

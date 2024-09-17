@@ -27,20 +27,20 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
 ?>
 
 <div class="modal-content">
-    <div class="modal-content__header">
+    <div class="modal-header">
         <h3>Disable <?php echo ucfirst($item_type) ?></h3>
         <p><strong>Careful!</strong> You are about to disable this <?php echo $item_type ?>. Do you still wish to proceed?</p>
     </div>
-    <div class="modal-content__section">
-        <div class="disable-item__list-item">
+    <div class="modal-section">
+        <div class="item-container">
             <h4><?php echo $item_name; ?></h4>
-            <p class="disable-item__list-item__description"><?php echo $item_description; ?></p>
+            <p class="item-description"><?php echo $item_description; ?></p>
             <?php
             if ($item_type == 'redirect') { ?>
-                <p class="list-view__item__description"><?php echo $item['fromURLRegex'] . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
+                <p class="item-description"><?php echo $item['fromURLRegex'] . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
             <?php } ?>
         </div>
-        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="disable-item__form" id="disable-item__form">
+        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="disable-item-form" id="disable-item-form">
             <input type="hidden" name="action" value="disable_item">
             <?php wp_nonce_field('disable_item_form_nonce', 'disable_item_form_nonce_field'); ?>
             <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
