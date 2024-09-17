@@ -91,7 +91,7 @@ function initFormValidation(tableName) {
 }
 
 function initDisableItemFormValidation() {
-  const form = document.getElementById("disable-item__form");
+  const form = document.getElementById("disable-item-form");
   const checkbox = form.querySelector('input[type="checkbox"]');
   const disableBtn = form.querySelector('input[type="submit"]');
 

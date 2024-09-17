@@ -20,10 +20,10 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
 ?>
 
 <div class="modal-content">
-    <div class="modal-content__header">
+    <div class="modal-header">
         <h3><?php echo ucfirst($action) . " Website" ?></h3>
     </div>
-    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-content__section modal-form">
+    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-form">
         <input type="hidden" name="action" value="website_form">
         <?php wp_nonce_field('website_form_nonce', 'website_form_nonce_field'); ?>
         <?php if ($item_id) : ?>
@@ -67,7 +67,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             </li>
 
         </ul>
-        <div class="modal-content__btns-container">
+        <div class="form-btns-container">
             <button type="button" class="btn cancel" id="modal-cancel-btn" tabindex="5">Cancel</button>
             <input type="submit" id="website-form-submit-btn" class="btn green" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="6" disabled />
         </div>

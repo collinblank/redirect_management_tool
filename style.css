@@ -2,7 +2,7 @@
 Theme Name: Redirect Manager
 Author: Grant Collins and Collin Blank
 Description: A custom theme built for the Classical Conversations Redirect Manager.
-Version: 2024.1.363
+Version: 2024.1.364
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -407,7 +407,7 @@ input[type="checkbox"]:checked::before {
   flex-direction: column;
 }
 
-.modal-content__header {
+.modal-header {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -415,7 +415,8 @@ input[type="checkbox"]:checked::before {
   border-bottom: 1px solid var(--border-color);
 }
 
-.modal-content__section {
+.modal-form,
+.modal-section {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -423,11 +424,50 @@ input[type="checkbox"]:checked::before {
   padding: 16px 48px;
 }
 
-.modal-content__btns-container {
+.modal-form .form-btns-container {
   display: flex;
   align-self: center;
   margin-top: auto;
   gap: 16px;
+}
+
+/* Disable Item Form */
+
+.modal.disable {
+  border: 1px solid var(--red);
+}
+
+.modal.disable .modal-header {
+  border-bottom: 1px solid var(--red);
+}
+
+.modal.disable .modal-header strong {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.modal.disable .item-container {
+  border: 1px solid var(--red);
+  border-radius: 4px;
+  padding: 6px 8px;
+  background-color: var(--red-light);
+}
+
+.modal.disable .item-description {
+  color: var(--txt-color-medium);
+  word-wrap: break-word;
+}
+
+.disable-item-form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.disable-item__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* Forms */
@@ -518,54 +558,6 @@ input[type="checkbox"]:checked::before {
 
 .form-validation-msg.success {
   color: var(--green);
-}
-
-/* Disable Item Form */
-
-.disable-modal {
-  border: 1px solid var(--red);
-  background-color: var(--red-light);
-}
-
-.disable-modal .modal-content__header {
-  border-bottom: 1px solid var(--red);
-}
-
-.disable-modal .modal-content__header strong {
-  color: var(--red);
-  font-weight: 600;
-}
-
-.disable-item__list-item {
-  border: 1px solid var(--red);
-  border-radius: 4px;
-  padding: 6px 8px;
-  background-color: var(--red-light);
-}
-
-.disable-item__list-item__description {
-  color: var(--txt-color-medium);
-  word-wrap: break-word;
-}
-
-.disable-item__form {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.disable-item__checkbox {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* .form__input-item select {
-
-} */
-
-.form__input-item select.active {
-  color: var(--txt-color-dark);
 }
 
 #website-sandbox-list-item.hidden {
