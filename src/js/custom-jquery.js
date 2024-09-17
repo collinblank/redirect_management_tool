@@ -1,6 +1,7 @@
 jQuery(document).ready(function ($) {
   console.log("JQuery loaded!");
 
+  // START more actions toggle on table
   $(".more-actions-toggle").click(function (e) {
     e.stopPropagation();
     console.log("toggled!");
@@ -20,4 +21,8 @@ jQuery(document).ready(function ($) {
   $(".more-actions-menu").click(function (e) {
     e.stopPropagation();
   });
+  //   END more actions toggle on table
+
+
+  $
 });
