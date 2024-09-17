@@ -57,7 +57,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
     <div class="page-content-container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
-            <h1>Manage Websites</h1>
+            <h1>Websites</h1>
             <button class="btn add-item-btn">Add Website</button>
         </div>
         <div class="list-view-page__filter-container">
@@ -70,15 +70,15 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                 <ul class="form__input-container form__checkbox-container">
                     <li class="form__checkbox-item">
                         <input type="checkbox" id="show-production" name="show_production" value="1" <?php echo !isset($_GET['filter_form_submitted']) || isset($_GET['show_production']) || $search_text ? "checked" : "" ?> onchange="this.form.submit()">
-                        <label for="show-production">Show Production</label>
+                        <label for="show-production" class="form-label">Show Production</label>
                     </li>
                     <li class="form__checkbox-item">
                         <input type="checkbox" id="show-test" name="show_test" value="1" <?php echo !isset($_GET['filter_form_submitted']) || isset($_GET['show_test']) || $search_text ? "checked" : "" ?> onchange="this.form.submit()">
-                        <label for="show-test">Show Test</label>
+                        <label for="show-test" class="form-label">Show Test</label>
                     </li>
                     <li class="form__checkbox-item">
                         <input type="checkbox" id="show-disabled" name="show_disabled" value="1" <?php echo !isset($_GET['filter_form_submitted']) || isset($_GET['show_disabled']) || $search_text ? "checked" : "" ?> onchange="this.form.submit()">
-                        <label for="show-disabled">Show Disabled</label>
+                        <label for="show-disabled" class="form-label">Show Disabled</label>
                     </li>
                 </ul>
             </form>

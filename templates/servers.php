@@ -15,7 +15,7 @@ $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
     <div class="page-content-container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="list-view-page__header">
-            <h1>Manage Servers</h1>
+            <h1>Servers</h1>
             <button class="btn add-item-btn">Add Server</button>
         </div>
         <div class="list-view-container">
