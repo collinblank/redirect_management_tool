@@ -11,8 +11,8 @@ $is_redirects_page = $args['is_redirects_page'] ?? null;
                     <th class="table-cell">Name</th>
                     <th class="table-cell">Domain</th>
                     <th class="table-cell">Prod/Test</th>
-                    <?php if (!$is_redirects_page)?>
-                    <th class="table-cell">Last modified</th>
+                    <?php if (!$is_redirects_page) : ?>
+                        <th class="table-cell">Last modified</th>
                     <?php endif; ?>
                     <th class="table-cell"></th>
                 </tr>
@@ -27,8 +27,8 @@ $is_redirects_page = $args['is_redirects_page'] ?? null;
                                 <?= $item['isProd'] ? 'Production' : 'Test' ?>
                             </div>
                         </td>
-                        <?php if (!$is_redirects_page) ?>
-                        <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y h:i a') ?></td>
+                        <?php if (!$is_redirects_page) : ?>
+                            <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y h:i a') ?></td>
                         <?php endif; ?>
                         <td class="table-cell table-actions">
                             <?php if (!$is_redirects_page) : ?>
