@@ -193,7 +193,7 @@ function initWebsiteFormValidation() {
   }
 
   function setSelectStyles() {
-    const selects = document.querySelectorAll(".form__input-item select");
+    const selects = document.querySelectorAll(".form-select");
     selects.forEach((select) => {
       if (select.value) {
         select.classList.add("active");

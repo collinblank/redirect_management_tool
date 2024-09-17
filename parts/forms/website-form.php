@@ -29,31 +29,31 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         <?php if ($item_id) : ?>
             <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
         <?php endif; ?>
-        <ul class="form__inputs-container">
-            <li class="form__input-item">
-                <label for="website-name">Name<span>*</span></label>
-                <input type="text" id="website-name" name="website_name" placeholder="ex. Classical Conversations Production" value="<?php echo $website_to_edit['name'] ?? "" ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
-                <p class="form__input-item__validation-msg"></p>
+        <ul class="form-items-list">
+            <li class="form-item">
+                <label for="website-name" class="form-label">Name<span>*</span></label>
+                <input type="text" class="form-text-input" id="website-name" name="website_name" placeholder="ex. Classical Conversations Production" value="<?php echo $website_to_edit['name'] ?? "" ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
+                <p class="form-validation-msg"></p>
             </li>
-            <li class="form__input-item">
-                <label for="website-domain">Domain<span>*</span></label>
-                <input type="url" id="website-domain" name="website_domain" placeholder="ex. https://classicalconversations.com/" value="<?php echo $website_to_edit['domain'] ?? "" ?>" tabindex="2" maxlength="100" pattern="^https?://.*$" required>
-                <p class="form__input-item__validation-msg"></p>
+            <li class="form-item">
+                <label for="website-domain" class="form-label">Domain<span>*</span></label>
+                <input type="url" class="form-text-input" id="website-domain" name="website_domain" placeholder="ex. https://classicalconversations.com/" value="<?php echo $website_to_edit['domain'] ?? "" ?>" tabindex="2" maxlength="100" pattern="^https?://.*$" required>
+                <p class="form-validation-msg"></p>
             </li>
-            <li class="form__input-item">
-                <label for="website-server">Server<span>*</span></label>
-                <select id="website-server" name="website_server" tabindex="3" required>
+            <li class="form-item">
+                <label for="website-server" class="form-label">Server<span>*</span></label>
+                <select class="form-select" id="website-server" name="website_server" tabindex="3" required>
                     <option value="" disabled selected>--Select host server--</option>
                     <?php
                     foreach ($servers as $server) { ?>
                         <option value="<?php echo $server['id'] ?>" <?php echo ($server['id'] == $website_to_edit['serverId']) ? "selected"  : "" ?>><?php echo $server['name'] ?></option>
                     <?php } ?>
                 </select>
-                <p class="form__input-item__validation-msg"></p>
+                <p class="form-validation-msg"></p>
             </li>
-            <li id="website-sandbox-list-item" class="form__input-item <?php echo $action == 'edit' && $website_to_edit['serverId'] != 3  ? '' : 'hidden' ?>">
-                <label for="website-sandbox">Sandbox Website</label>
-                <select id="website-sandbox" name="website_sandbox" tabindex="4">
+            <li id="website-sandbox-list-item" class="form-item <?php echo $action == 'edit' && $website_to_edit['serverId'] != 3  ? '' : 'hidden' ?>">
+                <label for="website-sandbox" class="form-label">Sandbox Website</label>
+                <select class="form-select" id="website-sandbox" name="website_sandbox" tabindex="4">
                     <option value="" disabled selected>--Select corresponding sandbox site--</option>
                     <?php if (isset($selected_sandbox_website)) : ?>
                         <option value="<?php echo $selected_sandbox_website['id'] ?>" selected><?php echo $selected_sandbox_website['name'] ?></option>
