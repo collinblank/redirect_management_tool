@@ -17,11 +17,11 @@ $is_redirects_page = $args['is_redirects_page'] ?? null;
             </thead>
             <tbody class="table-body">
                 <?php foreach ($results as $item) : ?>
-                    <tr class="table-row" data-item-id=<?php echo $item['id']; ?>>
+                    <tr class="table-row <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
                         <td class="table-cell"><?= $item['name'] ?></td>
                         <td class="table-cell"><?= $item['domain'] ?></td>
                         <td class="table-cell">
-                            <div class="table-flag <?= $item['isProd'] ? 'prod' : 'test' ?>">
+                            <div class="table-flag <?= $item['isProd'] ? 'green' : 'yellow' ?>">
                                 <?= $item['isProd'] ? 'Production' : 'Test' ?>
                             </div>
                         </td>
