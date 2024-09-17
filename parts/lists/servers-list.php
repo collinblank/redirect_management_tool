@@ -15,7 +15,7 @@ $results = $args['results'] ?? null;
             </thead>
             <tbody class="table-body">
                 <?php foreach ($results as $item) : ?>
-                    <tr class="table-row">
+                    <tr class="table-row" data-item-id=<?php echo $item['id']; ?>>
                         <td class="table-cell"><?= $item['name'] ?></td>
                         <td class="table-cell"><?= $item['domain'] ?></td>
                         <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y h:i a') ?></td>
