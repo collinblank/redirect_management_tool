@@ -2,7 +2,7 @@
 Theme Name: Redirect Manager
 Author: Grant Collins and Collin Blank
 Description: A custom theme built for the Classical Conversations Redirect Manager.
-Version: 2024.1.362
+Version: 2024.1.363
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -253,13 +253,6 @@ input[type="checkbox"]:checked::before {
   margin: 0 auto;
 }
 
-/* List view pages (Servers, Websites, Redirects, Redirect Flags) */
-/* .list-view-page {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-} */
-
 /* Header */
 .nav {
   display: flex;
@@ -374,90 +367,12 @@ input[type="checkbox"]:checked::before {
   color: #fff;
 }
 
-.list-view-page__header {
+.page-header {
   display: flex;
   justify-content: space-between;
   align-items: end;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--border-color);
-}
-
-.list-view-container {
-  /* height: 100%; */
-  overflow-x: hidden;
-  overflow-y: auto;
-  margin-top: 8px;
-}
-
-.list-view {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.list-view__item {
-  display: flex;
-  align-items: center;
-  /* justify-content: space-between; */
-  flex-wrap: wrap;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  padding: 6px 8px;
-  /* transition: 0.2s ease-out; */
-  gap: 6px;
-}
-
-.list-view__item:hover {
-  background-color: var(--secondary-bg-color);
-}
-
-.list-view__item__info {
-  flex-grow: 1;
-}
-
-.list-view__item__description {
-  color: var(--txt-color-medium);
-  /* word-wrap: break-word; */
-  /* ? */
-  word-break: break-word;
-}
-
-.list-view__item.disabled {
-  border-color: var(--red);
-  color: var(--red);
-}
-
-.list-view__item.disabled:hover {
-  background-color: var(--red-light);
-}
-
-.list-view__item.disabled .list-view__item__description {
-  color: var(--red);
-}
-
-.list-view__item__btns-container {
-  display: flex;
-  gap: 8px;
-  margin-left: auto;
-}
-
-.list-view__item__btns-container .disable-btn:hover {
-  color: var(--red);
-}
-
-.list-view__item__btns-container .view-more-btn {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.list-view__item__btns-container .view-more-btn i {
-  font-size: 1rem;
-  transition: transform 0.2s ease-out;
-}
-
-.list-view__item__btns-container .view-more-btn:hover i {
-  transform: translateX(2px);
 }
 
 /* MODAL */
