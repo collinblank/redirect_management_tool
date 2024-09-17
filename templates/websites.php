@@ -56,7 +56,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 <section class="page-section" data-table-name="websites">
     <div class="container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
-        <div class="list-view-page__header">
+        <div class="page-header">
             <h1>Websites</h1>
             <button class="btn add-item-btn">Add Website</button>
         </div>
@@ -83,7 +83,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                 </ul>
             </form>
         </div>
-        <div class="list-view-container">
+        <div class="table-container">
             <?php if (!empty($search_text)) : ?>
                 <div class="list-view-page__results-shown">
                     <p><?php echo empty($results) ? "No results found for" : "Showing all results for" ?> "<?php echo $search_text ?>".</p>

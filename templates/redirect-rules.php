@@ -31,7 +31,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 <section class="page-section" data-table-name="<?php echo $website_id ? "redirectRules" : "websites" ?>">
     <div class="container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
-        <div class="list-view-page__header">
+        <div class="page-header">
             <h1><?php echo $website_name ? "Redirects for $website_name" : "Select Website" ?></h1>
             <?php if ($website_id) : ?>
                 <button class="btn add-item-btn">Add Rule</button>
@@ -64,7 +64,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                 </ul>
             </form>
         </div> -->
-        <div class="list-view-container">
+        <div class="table-container">
             <?php if ($website_id) {
                 get_template_part('parts/lists/redirect-rules-list', null, array('results' => $results));
             } else {
