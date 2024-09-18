@@ -28,7 +28,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 ?>
 
 <?php get_header(); ?>
-<?php get_template_part('parts/sidebar.php'); ?>
+<?php get_template_part('parts/sidebar', 'sidebar'); ?>
 <section class="page-section" data-table-name="<?php echo $website_id ? "redirectRules" : "websites" ?>">
     <div class="container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
