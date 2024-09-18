@@ -36,7 +36,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
             <div class="page-title">
                 <h1><?php echo $website ? "Redirects for {$website['name']}" : "Select Website" ?></h1>
                 <?php if ($website) : ?>
-                    <p class="website-domain"><?= $website['domain'] ?></p>
+                    <a href="<?= $website['domain'] ?>" class="website-domain" target="_blank" rel="noopenner noreferrer"><?= $website['domain'] ?></a>
                 <?php endif; ?>
             </div>
             <?php if ($website_id) : ?>
