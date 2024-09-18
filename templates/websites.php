@@ -84,15 +84,15 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                 </ul>
             </form>
         </div>
+        <?php if (!empty($search_text)) : ?>
+            <div class="search-results-text">
+                <p><?php echo empty($results) ? "No results found for" : "Showing all results for" ?> "<?php echo $search_text ?>".</p>
+                <form method="GET">
+                    <input type="submit" class="form-submit-link" name="view_all_websites" value="View All Websites">
+                </form>
+            </div>
+        <?php endif; ?>
         <div class="table-container">
-            <?php if (!empty($search_text)) : ?>
-                <div class="list-view-page__results-shown">
-                    <p><?php echo empty($results) ? "No results found for" : "Showing all results for" ?> "<?php echo $search_text ?>".</p>
-                    <form method="GET">
-                        <input type="submit" class="input-submit-link" name="view_all_websites" value="View All Websites">
-                    </form>
-                </div>
-            <?php endif; ?>
             <?php get_template_part('parts/lists/websites-list', null, array('results' => $results)); ?>
         </div>
     </div>
