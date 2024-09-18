@@ -5,7 +5,7 @@ global $wpdb;
 
 if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
     $website_id = intval($_GET['website_id']) ?? null;
-    $website = $wpdb->get_row($wpdb->prepare("SELECT * FROM websites WHERE id = %d", $website_id));
+    $website = $wpdb->get_row($wpdb->prepare("SELECT * FROM websites WHERE id = %d", $website_id), ARRAY_A);
 
     $limit = 25;
     $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
