@@ -11,6 +11,7 @@ $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
 ?>
 
 <?php get_header(); ?>
+<?php get_template_part('parts/sidebar.php'); ?>
 <section class="page-section" data-table-name="servers">
     <div class="container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>

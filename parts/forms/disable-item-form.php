@@ -45,12 +45,12 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
             <?php wp_nonce_field('disable_item_form_nonce', 'disable_item_form_nonce_field'); ?>
             <input type="hidden" name="item_id" value="<?php echo $item_id ?>">
             <input type="hidden" name="table_name" value="<?php echo $table_name ?>">
-            <div class="disable-item__checkbox">
+            <div class="form-checkbox">
                 <!-- change id and for -->
-                <input type="checkbox" id="disable-item__checkbox" name="confirm_disable" tabindex="1" required>
-                <label for="disable-item__checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
+                <input type="checkbox" id="disable-item-checkbox" name="confirm_disable" tabindex="1" required>
+                <label for="disable-item-checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
             </div>
-            <div class="modal-content__btns-container">
+            <div class="form-btns-container">
                 <button type="button" class="btn cancel" id="modal-cancel-btn" tabindex="3">Cancel</button>
                 <input type="submit" class="btn red" value="Disable" tabindex="2" disabled />
             </div>

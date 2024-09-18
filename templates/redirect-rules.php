@@ -5,7 +5,7 @@ global $wpdb;
 
 if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
     $website_id = intval($_GET['website_id']) ?? null;
-    $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
+    $website = $wpdb->get_row($wpdb->prepare("SELECT * FROM websites WHERE id = %d", $website_id));
 
     $limit = 25;
     $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
@@ -28,11 +28,17 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 ?>
 
 <?php get_header(); ?>
+<?php get_template_part('parts/sidebar.php'); ?>
 <section class="page-section" data-table-name="<?php echo $website_id ? "redirectRules" : "websites" ?>">
     <div class="container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="page-header">
-            <h1><?php echo $website_name ? "Redirects for $website_name" : "Select Website" ?></h1>
+            <div class="page-title">
+                <h1><?php echo $website ? "Redirects for {$website['name']}" : "Select Website" ?></h1>
+                <?php if ($website) : ?>
+                    <p class="website-domain"><?= $website['domain'] ?></p>
+                <?php endif; ?>
+            </div>
             <?php if ($website_id) : ?>
                 <button class="btn add-item-btn">Add Rule</button>
             <?php endif; ?>
