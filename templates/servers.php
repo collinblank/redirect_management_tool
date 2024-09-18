@@ -20,7 +20,7 @@ $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
             <button class="btn add-item-btn">Add Server</button>
         </div>
         <div class="table-container">
-            <?php get_template_part('parts/lists/servers-list', null, array('results' => $results)); ?>
+            <?php get_template_part('parts/tables/servers-table', null, array('results' => $results)); ?>
         </div>
     </div>
 </section>

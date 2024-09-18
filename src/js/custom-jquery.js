@@ -4,7 +4,6 @@ jQuery(document).ready(function ($) {
   // START more actions toggle on table
   $(".more-actions-toggle").click(function (e) {
     e.stopPropagation();
-    console.log("toggled!");
 
     // Hide all other menus
     $(".more-actions-menu").not($(this).siblings(".more-actions-menu")).hide();
