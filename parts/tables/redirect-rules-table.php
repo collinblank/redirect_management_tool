@@ -20,7 +20,7 @@ $results = $args['results'] ?? null;
                 $suffix_pattern = '/\?\$/';
                 $from_url = '/' . preg_replace($suffix_pattern, '', preg_replace($prefix_pattern, '', $item['fromURLRegex']));
                 ?>
-                <tr class="table-row" data-item-id=<?php echo $item['id']; ?>>
+                <tr class="table-row <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
                     <td class="table-cell"><?= $item['name'] ?></td>
                     <td class="table-cell"><?= $from_url ?></td>
                     <td class="table-cell"><?= $item['toURL'] ?></td>

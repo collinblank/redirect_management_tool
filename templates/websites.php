@@ -93,7 +93,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
             </div>
         <?php endif; ?>
         <div class="table-container">
-            <?php get_template_part('parts/lists/websites-list', null, array('results' => $results)); ?>
+            <?php get_template_part('parts/tables/websites-table', null, array('results' => $results)); ?>
         </div>
     </div>
 </section>
