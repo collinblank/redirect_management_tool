@@ -2,7 +2,7 @@
 Theme Name: Redirect Manager
 Author: Grant Collins and Collin Blank
 Description: A custom theme built for the Classical Conversations Redirect Manager.
-Version: 2024.1.366
+Version: 2024.1.367
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -238,6 +238,40 @@ input[type="checkbox"]:checked::before {
 
 #content {
   height: 100%;
+  margin-top: 60px;
+  display: flex;
+}
+
+/* sidebar */
+.sidebar {
+  border-right: 1px solid var(--border-color);
+  background-color: var(--secondary-bg-color);
+  min-width: 196px;
+}
+
+.sidebar .main-menu {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 16px;
+}
+
+.sidebar .menu-item a {
+  display: flex;
+  font-family: var(--sweet-sans);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.025rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 16px;
+  color: var(--txt-color-medium);
+}
+
+.sidebar .menu-item a:hover {
+  background-color: var(--btn-bg-color-hover);
 }
 
 .page-section {
@@ -245,6 +279,7 @@ input[type="checkbox"]:checked::before {
   /* 	height: 100vh; */
   /* Leave height: 100%; uncommented for now while the header and footer are on each page */
   padding: 48px 96px;
+  flex-grow: 1;
 }
 
 .container {
@@ -259,7 +294,14 @@ input[type="checkbox"]:checked::before {
   align-items: end;
   gap: 24px;
   padding: 16px 24px;
+  min-height: 60px;
+  z-index: 999;
+  position: fixed;
+  left: 0;
+  right: 0;
   background-color: var(--txt-color-dark);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
+    rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
 }
 
 .nav-link {
@@ -288,44 +330,6 @@ input[type="checkbox"]:checked::before {
   left: -14px;
   color: #fff;
 }
-
-/* Home page */
-/* #home-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-#home-page .main-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-#home-page .menu-item {
-  transition: 0.1s ease-out;
-  background-color: var(--btn-bg-color);
-  border: 1px solid var(--btn-border-color);
-  border-radius: 4px;
-}
-
-#home-page .menu-item:hover {
-  transform: scale(1.05);
-  background-color: var(--btn-bg-color-hover);
-  border-color: var(--btn-border-color-hover);
-}
-
-#home-page .menu-item a {
-  display: flex;
-  justify-content: center;
-  padding: 12px 24px;
-  text-decoration: none;
-  font-weight: 500;
-  letter-spacing: 0.025rem;
-  color: var(--btn-txt-color);
-} */
 
 /* PAGE NOTICE BANNER */
 .notice-banner {
