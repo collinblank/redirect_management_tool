@@ -27,7 +27,7 @@ $is_redirects_page = $args['is_redirects_page'] ?? null;
                         </div>
                     </td>
                     <?php if (!$is_redirects_page) : ?>
-                        <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y h:i a') ?></td>
+                        <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y g:i a') ?></td>
                     <?php endif; ?>
                     <td class="table-cell table-actions">
                         <?php if (!$is_redirects_page) : ?>

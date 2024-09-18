@@ -24,7 +24,7 @@ $results = $args['results'] ?? null;
                     <td class="table-cell"><?= $item['name'] ?></td>
                     <td class="table-cell"><?= $from_url ?></td>
                     <td class="table-cell"><?= $item['toURL'] ?></td>
-                    <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y h:i a') ?></td>
+                    <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y g:i a') ?></td>
                     <td class="table-cell table-actions">
                         <button class="icon-btn more-actions-toggle"><i class="fa-solid fa-ellipsis"></i></button>
                         <div class="more-actions-menu">
