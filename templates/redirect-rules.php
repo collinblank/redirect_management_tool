@@ -36,7 +36,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
             <div class="page-title">
                 <h1><?php echo $website ? "Redirects for {$website['name']}" : "Select Website" ?></h1>
                 <?php if ($website) : ?>
-                    <a href="<?= $website['domain'] ?>" class="website-domain" target="_blank" rel="noopenner noreferrer"><?= $website['domain'] ?></a>
+                    <a href="<?= $website['domain'] ?>" class="website-domain" target="_blank" rel="noopener noreferrer"><?= $website['domain'] ?></a>
                 <?php endif; ?>
             </div>
             <?php if ($website_id) : ?>
@@ -72,7 +72,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
         </div> -->
         <div class="table-container">
             <?php if ($website_id) {
-                get_template_part('parts/tables/redirect-rules-table', null, array('results' => $results));
+                get_template_part('parts/tables/redirect-rules-table', null, array('results' => $results, 'website_domain' => $website['domain']));
             } else {
                 get_template_part('parts/tables/websites-table', null, array('results' => $results, 'is_redirects_page' => true));
             } ?>
