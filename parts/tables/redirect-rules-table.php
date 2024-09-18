@@ -1,5 +1,6 @@
 <?php
 $results = $args['results'] ?? null;
+$website_domain = $args['website_domain'] ?? '';
 ?>
 
 <?php if ($results) : ?>
@@ -18,17 +19,18 @@ $results = $args['results'] ?? null;
                 <?php
                 $prefix_pattern = '/\^\S*\)/';
                 $suffix_pattern = '/\?\$/';
-                $from_url = '/' . preg_replace($suffix_pattern, '', preg_replace($prefix_pattern, '', $item['fromURLRegex']));
+                $from_url = preg_replace($suffix_pattern, '', preg_replace($prefix_pattern, '', $item['fromURLRegex']));
                 ?>
                 <tr class="table-row <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
                     <td class="table-cell"><?= $item['name'] ?></td>
-                    <td class="table-cell"><?= $from_url ?></td>
+                    <td class="table-cell"><?= '/' . $from_url ?></td>
                     <td class="table-cell"><?= $item['toURL'] ?></td>
                     <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y g:i a') ?></td>
                     <td class="table-cell table-actions">
                         <button class="icon-btn more-actions-toggle"><i class="fa-solid fa-ellipsis"></i></button>
                         <div class="more-actions-menu">
                             <div class="more-actions-btns">
+                                <a href="<?= $website_domain . $from_url ?>" class="icon-link" title="Test rule" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-flask"></i></a>
                                 <button class="icon-btn edit-item-btn" title="Edit rule"><i class="fa-regular fa-pen-to-square"></i></button>
                                 <?php if ($item['disabled']) : ?>
                                     <button class="icon-btn enable-item-btn" title="Enable rule"><i class="fa-regular fa-circle-check"></i></button>
