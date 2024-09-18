@@ -2,7 +2,7 @@
 Theme Name: Redirect Manager
 Author: Grant Collins and Collin Blank
 Description: A custom theme built for the Classical Conversations Redirect Manager.
-Version: 2024.1.368
+Version: 2024.1.370
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -465,6 +465,7 @@ input[type="checkbox"]:checked::before {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .form-checkbox {
@@ -702,6 +703,30 @@ input[type="checkbox"]:checked::before {
   transform: translatey(-50%);
   display: none;
   margin-left: 4px;
+}
+
+.more-actions-menu::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translatey(-50%);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  border-right: 11px solid var(--border-color);
+  margin-right: -0.5px;
+}
+
+.more-actions-menu::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translatey(-50%);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #fff;
+  margin-right: -1px;
 }
 
 .more-actions-btns {
