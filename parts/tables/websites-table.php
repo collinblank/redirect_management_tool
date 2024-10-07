@@ -34,6 +34,10 @@ $is_redirects_page = $args['is_redirects_page'] ?? null;
                             <button class="icon-btn more-actions-toggle"><i class="fa-solid fa-ellipsis"></i></button>
                             <div class="more-actions-menu">
                                 <div class="more-actions-btns">
+                                    <form action="/redirect-rules" method="GET">
+                                        <input type="hidden" name="website_id" value="<?php echo $item['id'] ?>">
+                                        <button type="submit" class="icon-btn view-more-btn" title="View redirects"><i class="fa-solid fa-arrows-turn-to-dots"></i></button>
+                                    </form>
                                     <button class="icon-btn edit-item-btn" title="Edit website"><i class="fa-regular fa-pen-to-square"></i></button>
                                     <?php if ($item['disabled']) : ?>
                                         <button class="icon-btn enable-item-btn" title="Enable website"><i class="fa-regular fa-circle-check"></i></button>
