@@ -246,3 +246,29 @@ add_action('admin_post_redirect_rule_form', 'handle_redirect_rule_form_submit');
 // Handle disabling any item
 require 'functions/form-handlers/disable-item.php';
 add_action('admin_post_disable_item', 'handle_disable_item');
+
+class Icon_Walker_Nav_Menu extends Walker_Nav_Menu
+{
+	public function start_el(&$output, $item, $depth = 0)
+	{
+		// Define icons for specific menu items
+		$icons = array(
+			'Servers' => '<i class="fa-solid fa-server"></i>',
+			'Websites' => '<i class="fa-solid fa-desktop"></i>',
+			'Redirect Rules' => '<i class="fa-solid fa-arrows-turn-to-dots"></i>',
+			'Redirect Flags' => '<i class="fa-solid fa-flag"></i>'
+		);
+
+		// Get icon based on menu item title, or use an empty string if not defined
+		$icon = isset($icons[$item->title]) ? $icons[$item->title] : '';
+
+		// Build the list item with the icon and link text
+		$output .= sprintf(
+			'<li class="%s"><a href="%s">%s %s</a></li>',
+			esc_attr(implode(' ', $item->classes)),
+			esc_url($item->url),
+			$icon,
+			esc_html($item->title)
+		);
+	}
+}

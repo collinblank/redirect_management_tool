@@ -5,7 +5,8 @@
             'menu' => 'Main Menu',
             'container' => 'div',
             'container_class' => 'main-menu-container',
-            'menu_class' => 'main-menu'
+            'menu_class' => 'main-menu',
+            'walker' => new Icon_Walker_Nav_Menu()
         )
     );
     ?>
