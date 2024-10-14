@@ -17,7 +17,7 @@ $results = $args['results'] ?? null;
                 <tr class="table-row <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
                     <td class="table-cell"><?= $item['name'] ?></td>
                     <td class="table-cell"><?= $item['domain'] ?></td>
-                    <td class="table-cell"><?= date_format(date_create($item['last_modified_date']), 'M j, Y g:i a') ?></td>
+                    <td class="table-cell"><?= format_date_to_est($item['last_modified_date']) ?></td>
                     <td class="table-cell table-actions">
                         <button class="icon-btn more-actions-toggle"><i class="fa-solid fa-ellipsis"></i></button>
                         <div class="more-actions-menu">

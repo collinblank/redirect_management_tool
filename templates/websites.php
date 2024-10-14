@@ -13,7 +13,7 @@ $form_errors = $_SESSION['form_errors'];
 $form_success = $_SESSION['form_success'];
 
 $search_text = NULL;
-$order = $wpdb->prepare(" ORDER BY isProd, name");
+$order = $wpdb->prepare(" ORDER BY name, isProd");
 
 if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
     // Search
@@ -47,7 +47,24 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
     }
 }
 
+// $limit = 25;
+// $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
+// $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
+// $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
+// $total_pages = $count / $limit;
+// $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
+
+// $results = $wpdb->get_results($sql, ARRAY_A);
+
+
+
+
 $sql = "SELECT * FROM websites" . $where . $order;
+
+
+
+
+
 $results = $wpdb->get_results($sql, ARRAY_A);
 ?>
 
@@ -95,6 +112,20 @@ $results = $wpdb->get_results($sql, ARRAY_A);
         <div class="table-container">
             <?php get_template_part('parts/tables/websites-table', null, array('results' => $results)); ?>
         </div>
+        <ul class="page-numbers-list">
+            <?php
+            for ($i = 1; $i <= $total_pages; $i++) { ?>
+                <?php
+                $params = array(
+                    'page_number' => $i,
+                )
+                ?>
+                <li class="page-number-list-item <?php if ($i == $page_number) echo "active"; ?>">
+                    <a href="<?php echo esc_url(add_query_arg($params)); ?>"><?php echo esc_html($i); ?></a>
+                </li>
+            <?php }
+            ?>
+        </ul>
     </div>
 </section>
 <?php get_footer(); ?>

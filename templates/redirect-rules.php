@@ -14,7 +14,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
     $total_pages = $count / $limit;
     $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
 } else {
-    $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d ORDER BY isProd, name", 1);
+    $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d ORDER BY name, isProd", 1);
 }
 $results = $wpdb->get_results($sql, ARRAY_A);
 
@@ -72,12 +72,12 @@ $results = $wpdb->get_results($sql, ARRAY_A);
         </div> -->
         <div class="table-container">
             <?php if ($website_id) {
-                get_template_part('parts/tables/redirect-rules-table', null, array('results' => $results, 'website_domain' => $website['domain']));
+                get_template_part('parts/tables/redirect-rules-table', null, array('results' => $results));
             } else {
                 get_template_part('parts/tables/websites-table', null, array('results' => $results, 'is_redirects_page' => true));
             } ?>
         </div>
-        <ul class="list-view-page__pagination-list">
+        <ul class="page-numbers-list">
             <?php
             for ($i = 1; $i <= $total_pages; $i++) { ?>
                 <?php
@@ -86,7 +86,7 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                     'page_number' => $i,
                 )
                 ?>
-                <li class="page__list-item <?php if ($i == $page_number) echo "active"; ?>">
+                <li class="page-number-list-item <?php if ($i == $page_number) echo "active"; ?>">
                     <a href="<?php echo esc_url(add_query_arg($params)); ?>"><?php echo esc_html($i); ?></a>
                 </li>
             <?php }
