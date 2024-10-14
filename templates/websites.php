@@ -13,7 +13,7 @@ $form_errors = $_SESSION['form_errors'];
 $form_success = $_SESSION['form_success'];
 
 $search_text = NULL;
-$order = $wpdb->prepare(" ORDER BY name, isProd");
+$order = $wpdb->prepare(" ORDER BY name, is_prod");
 
 if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
     // Search
@@ -32,11 +32,11 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
     if (isset($_GET['filter_form_submitted'])) {
         $conditions = [];
         if (isset($_GET['show_production']) && !isset($_GET['show_test'])) {
-            $conditions[] = "isProd = 1";
+            $conditions[] = "is_prod = 1";
         } elseif (isset($_GET['show_test']) && !isset($_GET['show_production'])) {
-            $conditions[] = "isProd = 0";
+            $conditions[] = "is_prod = 0";
         } elseif (!isset($_GET['show_production']) && !isset($_GET['show_test'])) {
-            $conditions[] = "(isProd != 1 AND isProd != 0)";
+            $conditions[] = "(is_prod != 1 AND is_prod != 0)";
         }
         if (!isset($_GET['show_disabled'])) {
             $conditions[] = "disabled = 0";
@@ -50,9 +50,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
 // $limit = 25;
 // $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
 // $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
-// $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirectRules WHERE websiteId = %d", $website_id));
+// $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d", $website_id));
 // $total_pages = $count / $limit;
-// $sql = $wpdb->prepare("SELECT * FROM redirectRules WHERE websiteId = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
+// $sql = $wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
 
 // $results = $wpdb->get_results($sql, ARRAY_A);
 

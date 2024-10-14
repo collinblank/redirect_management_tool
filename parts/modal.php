@@ -20,10 +20,10 @@ if (isset($_GET['action'])) {
                         $modal_content_path .= 'website-form';
                         break;
                         // below, not sure how these will be formatted yet, like with or without underscores
-                    case 'redirectRules':
+                    case 'redirect_rules':
                         $modal_content_path .= 'redirect-rule-form';
                         break;
-                    case 'redirectFlags':
+                    case 'redirect_flags':
                         $modal_content_path .= 'redirect-flag-form';
                         break;
                     default:

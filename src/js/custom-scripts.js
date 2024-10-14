@@ -84,7 +84,7 @@ function initFormValidation(tableName) {
     case "websites":
       initWebsiteFormValidation();
       break;
-    case "redirectRules":
+    case "redirect_rules":
       initRedirectRuleFormValidation();
       break;
   }

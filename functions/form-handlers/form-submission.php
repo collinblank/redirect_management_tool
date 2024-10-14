@@ -28,8 +28,8 @@ function handle_form_submission($action, $table_name, $data, $errors = [], $item
         }
     }
     // redirect to prevent form resubmission
-    if ($table_name == 'redirectRules') {
-        write_redirect_rules_file($data['websiteId']);
+    if ($table_name == 'redirect_rules') {
+        write_redirect_rules_file($data['website_id']);
         $path = 'redirect-rules';
     } else {
         $path = $table_name;

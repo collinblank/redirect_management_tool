@@ -7,7 +7,7 @@ $item_id = intval($_GET['item_id']) ?? null;
 
 global $wpdb;
 $servers = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
-$available_sandbox_websites_sql = $wpdb->prepare("SELECT * FROM websites WHERE isProd = %d AND disabled = %d AND id NOT IN (SELECT sandboxId FROM websites WHERE isProd = %d)", 0, 0, 1);
+$available_sandbox_websites_sql = $wpdb->prepare("SELECT * FROM websites WHERE is_prod = %d AND disabled = %d AND id NOT IN (SELECT sandbox_id FROM websites WHERE is_prod = %d)", 0, 0, 1);
 $available_sandbox_websites = $wpdb->get_results($available_sandbox_websites_sql, ARRAY_A);
 
 if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
@@ -15,7 +15,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     $table_name = $_GET['table_name'];
     $website_to_edit_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $item_id);
     $website_to_edit = $wpdb->get_row($website_to_edit_sql, ARRAY_A);
-    $selected_sandbox_website = $wpdb->get_row($wpdb->prepare("SELECT * FROM websites where id = %d", $website_to_edit["sandboxId"]), ARRAY_A);
+    $selected_sandbox_website = $wpdb->get_row($wpdb->prepare("SELECT * FROM websites where id = %d", $website_to_edit["sandbox_id"]), ARRAY_A);
 }
 ?>
 
@@ -46,12 +46,12 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                     <option value="" disabled selected>--Select host server--</option>
                     <?php
                     foreach ($servers as $server) { ?>
-                        <option value="<?php echo $server['id'] ?>" <?php echo ($server['id'] == $website_to_edit['serverId']) ? "selected"  : "" ?>><?php echo $server['name'] ?></option>
+                        <option value="<?php echo $server['id'] ?>" <?php echo ($server['id'] == $website_to_edit['server_id']) ? "selected"  : "" ?>><?php echo $server['name'] ?></option>
                     <?php } ?>
                 </select>
                 <p class="form-validation-msg"></p>
             </li>
-            <li id="website-sandbox-list-item" class="form-item <?php echo $action == 'edit' && $website_to_edit['serverId'] != 3  ? '' : 'hidden' ?>">
+            <li id="website-sandbox-list-item" class="form-item <?php echo $action == 'edit' && $website_to_edit['server_id'] != 3  ? '' : 'hidden' ?>">
                 <label for="website-sandbox" class="form-label">Sandbox Website</label>
                 <select class="form-select" id="website-sandbox" name="website_sandbox" tabindex="4">
                     <option value="" disabled selected>--Select corresponding sandbox site--</option>
@@ -61,7 +61,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                     <option value="">None (e.g., themathmap.com)</option>
                     <?php
                     foreach ($available_sandbox_websites as $sandbox_website) { ?>
-                        <option value="<?php echo $sandbox_website['id'] ?>" <?php echo ($sandbox_website['id'] == $website_to_edit['sandboxId']) ? "selected"  : "" ?>><?php echo $sandbox_website['name'] ?></option>
+                        <option value="<?php echo $sandbox_website['id'] ?>" <?php echo ($sandbox_website['id'] == $website_to_edit['sandbox_id']) ? "selected"  : "" ?>><?php echo $sandbox_website['name'] ?></option>
                     <?php } ?>
                 </select>
             </li>

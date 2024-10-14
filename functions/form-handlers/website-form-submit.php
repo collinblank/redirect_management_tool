@@ -10,9 +10,9 @@ function handle_website_form_submit()
         $data = array(
             'name' => $_POST['website_name'],
             'domain' => $_POST['website_domain'],
-            'serverId' => $_POST['website_server'],
-            'sandboxId' => $_POST['website_sandbox'],
-            'isProd' => $_POST['website_server'] == 3 ? 0 : 1,
+            'server_id' => $_POST['website_server'],
+            'sandbox_id' => $_POST['website_sandbox'],
+            'is_prod' => $_POST['website_server'] == 3 ? 0 : 1,
         );
         $item_id = intval($_POST['item_id']) ?? null;
         $where = array(

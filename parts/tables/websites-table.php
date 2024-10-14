@@ -22,8 +22,8 @@ $is_redirects_page = $args['is_redirects_page'] ?? null;
                     <td class="table-cell"><?= $item['name'] ?></td>
                     <td class="table-cell"><?= $item['domain'] ?></td>
                     <td class="table-cell">
-                        <div class="table-flag <?= $item['isProd'] ? 'green' : 'yellow' ?>">
-                            <?= $item['isProd'] ? 'Production' : 'Test' ?>
+                        <div class="table-flag <?= $item['is_prod'] ? 'green' : 'yellow' ?>">
+                            <?= $item['is_prod'] ? 'Production' : 'Test' ?>
                         </div>
                     </td>
                     <?php if (!$is_redirects_page) : ?>

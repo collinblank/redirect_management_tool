@@ -7,5 +7,7 @@ RewriteRule checkfile checkfile.com
 RewriteRule exampleregextest test.com
 #rule to test timezone
 RewriteRule timezone https://domain.com
+#snake case test
+RewriteRule snake-case https://domain.com
 
 #End Rewrite Rules - DO NOT EDIT

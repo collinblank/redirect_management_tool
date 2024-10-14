@@ -15,7 +15,7 @@ $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE i
 
 // pretty sure i can rework this so it is one function to get edit item for all forms, or at least some of it. This is basically the same as the logic in the website-form.php file
 if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
-    $redirect_rule_to_edit = $wpdb->get_row($wpdb->prepare("SELECT * FROM redirectRules WHERE id = %d", $item_id), ARRAY_A);
+    $redirect_rule_to_edit = $wpdb->get_row($wpdb->prepare("SELECT * FROM redirect_rules WHERE id = %d", $item_id), ARRAY_A);
 }
 ?>
 
@@ -43,12 +43,12 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
             </li>
             <li class="form-item">
                 <label for="redirect-rule-from-url-regex" class="form-label">From URL Regex<span>*</span></label>
-                <input type="text" class="form-text-input" id="redirect-rule-from-url-regex" name="redirect_rule_from_url_regex" placeholder="ex. ^(?i)churches/?$" value="<?php echo $redirect_rule_to_edit['fromURLRegex'] ?? "" ?>" tabindex="3" required>
+                <input type="text" class="form-text-input" id="redirect-rule-from-url-regex" name="redirect_rule_from_url_regex" placeholder="ex. ^(?i)churches/?$" value="<?php echo $redirect_rule_to_edit['from_url_regex'] ?? "" ?>" tabindex="3" required>
                 <p class="form-validation-msg"></p>
             </li>
             <li class="form-item">
                 <label for="redirect-rule-to-url" class="form-label">To URL or Path<span>*</span></label>
-                <input type="text" class="form-text-input" id="redirect-rule-to-url" name="redirect_rule_to_url" placeholder="ex. https://info.classicalconversations.com/churchesandpastorappreciation" value="<?php echo $redirect_rule_to_edit['toURL'] ?? "" ?>" tabindex="4" required>
+                <input type="text" class="form-text-input" id="redirect-rule-to-url" name="redirect_rule_to_url" placeholder="ex. https://info.classicalconversations.com/churchesandpastorappreciation" value="<?php echo $redirect_rule_to_edit['to_url'] ?? "" ?>" tabindex="4" required>
                 <p class="form-validation-msg"></p>
             </li>
         </ul>
