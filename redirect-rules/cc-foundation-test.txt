@@ -1,0 +1,23 @@
+#Website: CC Foundation Test
+
+#Begin Rewrite Rules - DO NOT EDIT
+#new redirect test
+RewriteRule redirect-path https://httpd.apache.org/docs/2.4/rewrite/flags.html
+#file test
+RewriteRule afancyregex https://test-ccp1.classicaltesting.net/
+#another file test
+RewriteRule fileregex file.com
+#example check file
+RewriteRule asdf asdf.com
+#one more file test
+RewriteRule filetest filetest.com
+#testfilepleasework
+RewriteRule asdf classicalconversations.com
+#try this again
+RewriteRule exampleregex example.com
+#did it work
+RewriteRule exregex example.com
+#post style file check
+RewriteRule filecheck domain.com
+
+#End Rewrite Rules - DO NOT EDIT

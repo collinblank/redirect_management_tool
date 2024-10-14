@@ -274,3 +274,8 @@ if (class_exists('Walker_Nav_Menu')) {
 		}
 	}
 }
+
+// UTILS
+require 'functions/utils/get_from_path.php';
+require 'functions/utils/get_full_from_url.php';
+require 'functions/utils/format_date_to_est.php';

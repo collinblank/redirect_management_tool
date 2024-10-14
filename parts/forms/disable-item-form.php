@@ -34,10 +34,10 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
     <div class="modal-section">
         <div class="item-container">
             <h4><?php echo $item_name; ?></h4>
-            <p class="item-description"><?php echo $item_description; ?></p>
+            <p class="item-description"><?php #echo $item_description; ?></p>
             <?php
             if ($item_type == 'redirect') { ?>
-                <p class="item-description"><?php echo $item['fromURLRegex'] . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></p>
+                <span class="item-description redirect-rule-path"><?php echo get_full_from_url($item) . '<i class="fa-solid fa-arrow-right-long"></i>' . $item['toURL']; ?></span>
             <?php } ?>
         </div>
         <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="disable-item-form" id="disable-item-form">

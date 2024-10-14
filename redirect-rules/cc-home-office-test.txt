@@ -1,0 +1,11 @@
+#Website: CC Home Office Test
+
+#Begin Rewrite Rules - DO NOT EDIT
+#check file
+RewriteRule checkfile checkfile.com
+#an example for cchomeoffice
+RewriteRule exampleregextest test.com
+#rule to test timezone
+RewriteRule timezone https://domain.com
+
+#End Rewrite Rules - DO NOT EDIT
