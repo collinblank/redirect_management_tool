@@ -10,11 +10,11 @@ function handle_redirect_rule_form_submit()
         wp_die('Error: Unable to verify form nonce.');
     } else {
         $data = array(
-            'websiteId' => intval($_POST['website_id']),
+            'website_id' => intval($_POST['website_id']),
             'name' => $_POST['redirect_rule_name'],
             'description' => $_POST['redirect_rule_description'],
-            'fromURLRegex' => $_POST['redirect_rule_from_url_regex'],
-            'toURL' => $_POST['redirect_rule_to_url'],
+            'from_url_regex' => $_POST['redirect_rule_from_url_regex'],
+            'to_url' => $_POST['redirect_rule_to_url'],
         );
         $item_id = intval($_POST['item_id']) ?? null;
         $where = array(
@@ -23,6 +23,6 @@ function handle_redirect_rule_form_submit()
         $errors = get_redirect_rule_form_errors();
         $action = $item_id ? 'edit' : 'add';
 
-        handle_form_submission($action, 'redirectRules', $data, $errors, $item_id, $where);
+        handle_form_submission($action, 'redirect_rules', $data, $errors, $item_id, $where);
     }
 }

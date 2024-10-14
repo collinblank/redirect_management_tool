@@ -7,8 +7,8 @@ function get_redirect_rule_form_errors()
     $website_id = intval($_POST['website_id']);
     $name = $_POST['redirect_rule_name'];
     $description = $_POST['redirect_rule_description'];
-    $fromURLRegex = $_POST['redirect_rule_from_url_regex'];
-    $toURL = $_POST['redirect_rule_to_url'];
+    $from_url_regex = $_POST['redirect_rule_from_url_regex'];
+    $to_url = $_POST['redirect_rule_to_url'];
 
     $errors = [];
 
@@ -26,15 +26,15 @@ function get_redirect_rule_form_errors()
         $errors[] = 'Please enter a value for your redirect name (including 4 to 50 letters and spaces).';
     }
 
-    // fromURLRegex
-    if (strlen($fromURLRegex) == 0) {
+    // from_url_regex
+    if (strlen($from_url_regex) == 0) {
         $errors[] = 'Please enter a regex pattern or path name (e.g., "^(?i)churches?$" or "churches/", without the leading "/").';
     }
 
 
-    // toURL
+    // to_url
     // when flags are separated, this will have to validate to a proper url, using the "url" method form the 
-    if (strlen($toURL) == 0) {
+    if (strlen($to_url) == 0) {
         $errors[] = 'Please enter a url to redirect the regex/path to.';
     }
 
