@@ -7,6 +7,7 @@ $results = $args['results'] ?? null;
     <table class="data-table">
         <thead class="table-header">
             <tr class="table-row">
+                <th class="table-cell">Status</th>
                 <th class="table-cell">Name</th>
                 <th class="table-cell">From</th>
                 <th class="table-cell">To</th>
@@ -17,9 +18,19 @@ $results = $args['results'] ?? null;
         <tbody class="table-body">
             <?php foreach ($results as $item) : ?>
                 <?php
-                // $from_path = get_from_path($item);
+                if ($item['disabled']) {
+                    $status = 'disabled';
+                    $status_icon = '<i class="fa-solid fa-circle-xmark"></i>';
+                } elseif (empty($item['committed'])) {
+                    $status = 'uncommitted';
+                    $status_icon = '<i class="fa-solid fa-circle-exclamation"></i>';
+                } else {
+                    $status = 'active';
+                    $status_icon = '<i class="fa-solid fa-circle-check"></i>';
+                }
                 ?>
-                <tr class="table-row <?php echo $item['disabled'] ? "disabled" : "" ?>" data-item-id=<?php echo $item['id']; ?>>
+                <tr class="table-row <?= $status ?>" data-item-id=<?php echo $item['id']; ?>>
+                    <td class="table-cell status" title=<?= ucfirst($status) ?>><?= $status_icon ?></td>
                     <td class="table-cell"><?= $item['name'] ?></td>
                     <td class="table-cell"><?= '/' . get_from_path($item) ?></td>
                     <td class="table-cell"><?= $item['to_url'] ?></td>
@@ -28,7 +39,9 @@ $results = $args['results'] ?? null;
                         <button class="icon-btn more-actions-toggle"><i class="fa-solid fa-ellipsis"></i></button>
                         <div class="more-actions-menu">
                             <div class="more-actions-btns">
-                                <a href="<?= get_full_from_url($item) ?>" class="icon-link" title="Test rule" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-flask"></i></a>
+                                <?php if ($status == 'active') : ?>
+                                    <a href="<?= get_full_from_url($item) ?>" class="icon-link" title="Test rule" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-flask"></i></a>
+                                <?php endif; ?>
                                 <button class="icon-btn edit-item-btn" title="Edit rule"><i class="fa-regular fa-pen-to-square"></i></button>
                                 <?php if ($item['disabled']) : ?>
                                     <button class="icon-btn enable-item-btn" title="Enable rule"><i class="fa-regular fa-circle-check"></i></button>

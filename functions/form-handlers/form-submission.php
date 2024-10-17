@@ -17,6 +17,11 @@ function handle_form_submission($action, $table_name, $data, $errors = [], $item
         } else {
             // either edit or disable
             $result = $wpdb->update($table_name, $data, $where);
+            if ($action == 'disable') {
+                $website_id = $wpdb->get_var($wpdb->prepare("SELECT website_id FROM $table_name WHERE id = %d", $item_id));
+                commit_rules_to_file($website_id);
+                // ? i don't know about this above, seems weird in this function. it does work here though...
+            }
         }
 
         if ($wpdb->last_error) {
@@ -29,7 +34,7 @@ function handle_form_submission($action, $table_name, $data, $errors = [], $item
     }
     // redirect to prevent form resubmission
     if ($table_name == 'redirect_rules') {
-        write_redirect_rules_file($data['website_id']);
+        // write_redirect_rules_file($data['website_id']);
         $path = 'redirect-rules';
     } else {
         $path = $table_name;

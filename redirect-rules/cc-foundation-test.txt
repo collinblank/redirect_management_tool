@@ -19,5 +19,7 @@ RewriteRule exampleregex example.com
 RewriteRule exregex example.com
 #post style file check
 RewriteRule filecheck domain.com
+#Demo Test Redirect Two
+RewriteRule ^(?i)demo-test-redirect-two?$ https://domain.com
 
 #End Rewrite Rules - DO NOT EDIT
