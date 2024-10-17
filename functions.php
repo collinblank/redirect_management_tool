@@ -247,6 +247,11 @@ add_action('admin_post_redirect_rule_form', 'handle_redirect_rule_form_submit');
 require 'functions/form-handlers/disable-item.php';
 add_action('admin_post_disable_item', 'handle_disable_item');
 
+// Committing rules to file
+require('functions/commit-rules-to-file.php');
+require('functions/form-handlers/commit-rules-form-submit.php');
+add_action('admin_post_commit_rules_to_file', 'handle_commit_rules_form_submission');
+
 if (class_exists('Walker_Nav_Menu')) {
 	class Icon_Walker_Nav_Menu extends Walker_Nav_Menu
 	{

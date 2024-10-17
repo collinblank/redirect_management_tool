@@ -29,7 +29,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
 <div class="modal-content">
     <div class="modal-header">
         <h3>Disable <?php echo ucfirst($item_type) ?></h3>
-        <p><strong>Careful!</strong> You are about to disable this <?php echo $item_type ?>. Do you still wish to proceed?</p>
+        <p><strong>Careful!</strong> You are about to disable this <?php echo $item_type ?>. <?php echo $item_type == 'redirect' ? 'This action will <strong>rewrite the .htaccess file</strong> for this site, excluding this rule.' : '' ?> Do you still wish to proceed?</p>
     </div>
     <div class="modal-section">
         <div class="item-container">
@@ -49,7 +49,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
             <div class="form-checkbox">
                 <!-- change id and for -->
                 <input type="checkbox" id="disable-item-checkbox" name="confirm_disable" tabindex="1" required>
-                <label for="disable-item-checkbox">Yes, I want to disable this <?php echo $item_type ?>.</label>
+                <label for="disable-item-checkbox">Yes, I want to disable this <?php echo $item_type ?><?php echo $item_type == 'redirect' ? ' and rewrite the .htaccess file' : '' ?>.</label>
             </div>
             <div class="form-btns-container">
                 <button type="button" class="btn cancel" id="modal-cancel-btn" tabindex="3">Cancel</button>

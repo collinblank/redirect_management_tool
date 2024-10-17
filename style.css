@@ -2,7 +2,7 @@
 Theme Name: Redirect Manager
 Author: Grant Collins and Collin Blank
 Description: A custom theme built for the Classical Conversations Redirect Manager.
-Version: 2024.1.376
+Version: 2024.1.377
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -31,6 +31,7 @@ Text Domain: redirect-manager
   --green-light: rgba(87, 171, 130, 0.04);
   --green-dark: rgb(60, 119, 91);
   --yellow: rgb(243, 213, 78);
+  --yellow-medium: rgba(243, 213, 78, 0.2);
   --yellow-light: rgba(243, 213, 78, 0.04);
   /* Buttons */
   --btn-border-color: rgba(0, 0, 0, 0.23);
@@ -425,6 +426,11 @@ input[type="checkbox"]:checked::before {
   border-bottom: 1px solid var(--border-color);
 }
 
+.page-header .btns-container {
+  display: flex;
+  gap: 8px;
+}
+
 .page-header .website-domain {
   font-size: 1.1rem;
   text-decoration: none;
@@ -677,6 +683,26 @@ input[type="checkbox"]:checked::before {
 .table-row.disabled .table-cell {
   background-color: var(--red-light);
   border-color: var(--red);
+}
+
+.table-row.uncommitted .table-cell {
+  background-color: var(--yellow-medium);
+}
+
+.table-row .table-cell.status {
+  text-align: center;
+}
+
+.table-row.active .table-cell.status {
+  color: var(--green);
+}
+
+.table-row.disabled .table-cell.status {
+  color: var(--red);
+}
+
+.table-row.uncommitted .table-cell.status {
+  color: var(--yellow);
 }
 
 .table-cell {

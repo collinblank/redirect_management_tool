@@ -13,10 +13,14 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
     $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d", $website_id));
     $total_pages = $count / $limit;
     $sql = $wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
+    $uncommitted_rules = $wpdb->get_results($wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d AND committed = %d AND disabled = %d", $website_id, 0, 0), ARRAY_A);
 } else {
     $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d ORDER BY name, is_prod", 1);
 }
 $results = $wpdb->get_results($sql, ARRAY_A);
+
+
+
 
 // if (isset($_GET['search_websites'])) {
 // $search_text = htmlspecialchars((trim($_GET['search_text'])));
@@ -40,7 +44,15 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                 <?php endif; ?>
             </div>
             <?php if ($website_id) : ?>
-                <button class="btn add-item-btn">Add Rule</button>
+                <div class="btns-container">
+                    <button class="btn add-item-btn">Add Rule</button>
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
+                        <input type="hidden" name="action" value="commit_rules_to_file">
+                        <?php wp_nonce_field('commit_rules_form_nonce', 'commit_rules_form_nonce_field'); ?>
+                        <input type="hidden" name="website_id" value="<?php echo $website_id ?>">
+                        <input type="submit" class="btn green" value="Commit All" <?php echo empty($uncommitted_rules) ? 'disabled' : '' ?>>
+                    </form>
+                </div>
             <?php endif; ?>
         </div>
         <!-- <div class="list-view-page__filter-container">

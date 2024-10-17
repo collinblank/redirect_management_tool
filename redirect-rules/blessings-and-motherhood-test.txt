@@ -1,0 +1,27 @@
+#Website: Blessings and Motherhood Test
+
+#Begin Rewrite Rules - DO NOT EDIT
+#Demo Test Redirect
+RewriteRule ^(?i)demo-test-redirect?$ https://classicalconversations.com
+#new rule bam
+RewriteRule bam-test classicalconversations.com
+#uncommitted rule
+RewriteRule uncommitted domain.com 
+#uncommitted rule two
+RewriteRule rule-two notcommittedrule.com
+#new rule for bam
+RewriteRule bam-test-3 domain.com
+#another uncommitted rule
+RewriteRule uncommitted-rule-two domain.com
+#new rule yet again
+RewriteRule regex domain.com
+#new rule yet once more
+RewriteRule regex domainz.com
+#rule to test active
+RewriteRule regex domain.comz
+#new rule
+RewriteRule regex domain.com
+#new rule
+RewriteRule regex domain.com
+
+#End Rewrite Rules - DO NOT EDIT
