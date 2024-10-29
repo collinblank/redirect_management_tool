@@ -76,6 +76,154 @@ function showModal(action, e) {
 }
 
 // FORM VALIDATION
+
+// rename obv
+// class FormValidator {
+//   static isEmpty(value) {
+//     return value.trim() === "";
+//   }
+
+//   static isValidURL(value) {
+//     const urlRegex = /^https?:\/\/.*$/;
+//     return urlRegex.test(value);
+//   }
+
+//   static isValidLength(value, min, max) {
+//     return value.length >= min && value.length <= max;
+//   }
+
+//   static isOnlyLettersAndSpaces(value) {
+//     const lettersAndSpacesRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+//     return lettersAndSpacesRegex.test(value);
+//   }
+// }
+
+// function validateServerForm
+
+class FormUIController {
+  constructor(formSelector) {
+    this.form = document.querySelector(formSelector);
+    this.submitBtn = this.form.querySelector('input[type="submit"]');
+    this.fields = Array.from(
+      this.form.querySelectorAll("input, textarea, select")
+    );
+  }
+
+  getField(fieldSelector) {
+    return this.form.querySelector(fieldSelector);
+  }
+
+  showErrorMessage(field, message) {
+    const feedbackMessageEl = field.nextElementSibling;
+    feedbackMessageEl.textContent = message;
+
+    field.classList.remove("valid");
+    field.classList.add("invalid");
+    feedbackMessageEl.classList.remove("success", "active");
+    feedbackMessageEl.classList.add("error", "active");
+  }
+
+  showSuccessMessage(field, message) {
+    const defualtSuccessMessages = [
+      "Nice!",
+      "Awesome!",
+      "Fantastic!",
+      "Looking good!",
+      "Thanks!",
+      "Great!",
+    ];
+    const feedbackMessageEl = field.nextElementSibling;
+    feedbackMessageEl.textContent = message
+      ? message
+      : defualtSuccessMessages[
+          Math.floor(Math.random() * defualtSuccessMessages.length)
+        ];
+
+    field.classList.remove("invalid");
+    field.classList.add("valid");
+    feedbackMessageEl.classList.remove("error", "active");
+    feedbackMessageEl.classList.add("success", "active");
+  }
+
+  validateTextInput(inputField, feedbackMessages = {}) {
+    if (!inputField.validity.valid) {
+      if (inputField.validity.valueMissing && inputField.value.trim() === "") {
+        this.showErrorMessage(inputField, "Please enter a value.");
+      } else if (
+        inputField.validity.patternMismatch ||
+        inputField.validity.tooLong ||
+        inputField.validity.tooShort
+      ) {
+        this.showErrorMessage(inputField, feedbackMessages.error);
+      } else {
+        this.showErrorMessage(
+          inputField,
+          `Invalid input type. Enter a valid ${inputField.type}.`
+        );
+      }
+    } else {
+      this.showSuccessMessage(inputField, feedbackMessages.success);
+    }
+    this.validateSubmitBtn();
+  }
+
+  validateSubmitBtn() {
+    this.submitBtn.disabled = !this.form.checkValidity();
+  }
+}
+
+class FormEventsHelper {
+  static addInputEventListener(inputField, validateFn) {
+    let blurredOnce = false;
+
+    inputField.addEventListener("blur", () => {
+      validateFn();
+      blurredOnce = true;
+    });
+
+    inputField.addEventListener("input", () => {
+      if (blurredOnce) {
+        validateFn();
+      }
+    });
+  }
+
+  static addSelectEventListener(select, validateFn) {
+    select.addEventListener("blur", validateFn);
+    select.addEventListener("change", validateFn);
+  }
+}
+
+// rename
+function initServerFormValidation() {
+  const formUI = new FormUIController("#server-form");
+  const nameInput = formUI.getField("#server-name");
+  const domainInput = formUI.getField("#server-domain");
+
+  FormEventsHelper.addInputEventListener(nameInput, () =>
+    formUI.validateTextInput(nameInput, {
+      error: "Please enter between 4 and 50 letters and spaces only.",
+      success: "What a great name!",
+    })
+  );
+
+  FormEventsHelper.addInputEventListener(domainInput, () =>
+    formUI.validateTextInput(domainInput, {
+      error: "Please enter a valid URL (including http(s)://).",
+      success: "Sick nasty domain bro!",
+    })
+  );
+}
+
+function initDisableItemFormValidation() {
+  const formUI = new FormUIController("#disable-item-form");
+  const checkbox = formUI.getField('input[type="checkbox"]');
+
+  checkbox.addEventListener("change", () => formUI.validateSubmitBtn());
+}
+
+// OLD
+
 function initFormValidation(tableName) {
   switch (tableName) {
     case "servers":
@@ -90,65 +238,66 @@ function initFormValidation(tableName) {
   }
 }
 
-function initDisableItemFormValidation() {
-  const form = document.getElementById("disable-item-form");
-  const checkbox = form.querySelector('input[type="checkbox"]');
-  const disableBtn = form.querySelector('input[type="submit"]');
+// function initDisableItemFormValidation() {
+//   const form = document.getElementById("disable-item-form");
+//   // const checkbox = form.querySelector('input[type="checkbox"]');
+//   // const disableBtn = form.querySelector('input[type="submit"]');
 
-  checkbox.addEventListener("change", () => {
-    disableBtn.disabled = !checkbox.checked;
-  });
-}
+//   checkbox.addEventListener("change", () => {
+//     disableBtn.disabled = !checkbox.checked;
+//   });
+// }
 
-function initInputEvents(input, handler) {
-  // const submitBtn = form.querySelector('input[type="submit"]');
-  let blurredOnce = false;
+// function initInputEvents(input, handler) {
+//   // const submitBtn = form.querySelector('input[type="submit"]');
+//   let blurredOnce = false;
 
-  // input.addEventListener("focus", () => {
-  //   // submitBtn.disabled = !allInputsValid();
-  // });
+//   // input.addEventListener("focus", () => {
+//   //   // submitBtn.disabled = !allInputsValid();
+//   // });
 
-  input.addEventListener("blur", () => {
-    // submitBtn.disabled = !allInputsValid();
-    handler(input);
-    blurredOnce = true;
-  });
+//   input.addEventListener("blur", () => {
+//     // submitBtn.disabled = !allInputsValid();
+//     //these shouldn't need params
+//     handler(input);
+//     blurredOnce = true;
+//   });
 
-  input.addEventListener("input", () => {
-    // submitBtn.disabled = !allInputsValid();
-    if (blurredOnce) {
-      handler(input);
-    }
-  });
-}
+//   input.addEventListener("input", () => {
+//     // submitBtn.disabled = !allInputsValid();
+//     if (blurredOnce) {
+//       handler(input);
+//     }
+//   });
+// }
 
-function initSelectEvents(select, handler) {
-  select.addEventListener("blur", handler);
-  select.addEventListener("change", handler);
-}
+// function initSelectEvents(select, handler) {
+//   select.addEventListener("blur", handler);
+//   select.addEventListener("change", handler);
+// }
 
-function initServerFormValidation() {
-  const submitBtn = document.getElementById("server-form-submit-btn");
-  const name = document.getElementById("server-name");
-  const domain = document.getElementById("server-domain");
+// function initServerFormValidation() {
+//   const submitBtn = document.getElementById("server-form-submit-btn");
+//   const name = document.getElementById("server-name");
+//   const domain = document.getElementById("server-domain");
 
-  initInputEvents(name, handleNameEvents);
-  initInputEvents(domain, handleDomainEvents);
+//   initInputEvents(name, handleNameEvents);
+//   initInputEvents(domain, handleDomainEvents);
 
-  function handleNameEvents() {
-    Validator.checkName(name);
-    toggleSubmitBtn();
-  }
+//   function handleNameEvents() {
+//     Validator.checkName(name);
+//     toggleSubmitBtn();
+//   }
 
-  function handleDomainEvents() {
-    Validator.checkDomain(domain);
-    toggleSubmitBtn();
-  }
+//   function handleDomainEvents() {
+//     Validator.checkDomain(domain);
+//     toggleSubmitBtn();
+//   }
 
-  function toggleSubmitBtn() {
-    submitBtn.disabled = !Validator.checkAllFields([name, domain]);
-  }
-}
+//   function toggleSubmitBtn() {
+//     submitBtn.disabled = !Validator.checkAllFields([name, domain]);
+//   }
+// }
 
 function initWebsiteFormValidation() {
   const submitBtn = document.getElementById("website-form-submit-btn");

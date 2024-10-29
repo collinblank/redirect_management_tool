@@ -53,7 +53,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
             </div>
             <div class="form-btns-container">
                 <button type="button" class="btn cancel" id="modal-cancel-btn" tabindex="3">Cancel</button>
-                <input type="submit" class="btn red" value="Disable" tabindex="2" disabled />
+                <input type="submit" id="submit-btn" class="btn red" value="Disable" tabindex="2" disabled />
             </div>
         </form>
     </div>
