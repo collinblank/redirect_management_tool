@@ -23,7 +23,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     <div class="modal-header">
         <h3><?php echo ucfirst($action) . " Website" ?></h3>
     </div>
-    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-form">
+    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-form" id="website-form">
         <input type="hidden" name="action" value="website_form">
         <?php wp_nonce_field('website_form_nonce', 'website_form_nonce_field'); ?>
         <?php if ($item_id) : ?>
@@ -32,28 +32,25 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         <ul class="form-items-list">
             <li class="form-item">
                 <label for="website-name" class="form-label">Name<span>*</span></label>
-                <input type="text" class="form-text-input" id="website-name" name="website_name" placeholder="ex. Classical Conversations Production" value="<?php echo $website_to_edit['name'] ?? "" ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
-                <p class="form-validation-msg"></p>
+                <input type="text" class="form-text-input" id="website-name" name="website_name" data-field-type="name" placeholder="ex. Classical Conversations Production" value="<?php echo $website_to_edit['name'] ?? "" ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
             </li>
             <li class="form-item">
                 <label for="website-domain" class="form-label">Domain<span>*</span></label>
-                <input type="url" class="form-text-input" id="website-domain" name="website_domain" placeholder="ex. https://classicalconversations.com/" value="<?php echo $website_to_edit['domain'] ?? "" ?>" tabindex="2" maxlength="100" pattern="^https?://.*$" required>
-                <p class="form-validation-msg"></p>
+                <input type="url" class="form-text-input" id="website-domain" name="website_domain" data-field-type="domain" placeholder="ex. https://classicalconversations.com/" value="<?php echo $website_to_edit['domain'] ?? "" ?>" tabindex="2" maxlength="100" pattern="^https?://.*$" required>
             </li>
             <li class="form-item">
                 <label for="website-server" class="form-label">Server<span>*</span></label>
-                <select class="form-select" id="website-server" name="website_server" tabindex="3" required>
+                <select class="form-select" id="website-server" name="website_server" data-field-type="select" tabindex="3" required>
                     <option value="" disabled selected>--Select host server--</option>
                     <?php
                     foreach ($servers as $server) { ?>
                         <option value="<?php echo $server['id'] ?>" <?php echo ($server['id'] == $website_to_edit['server_id']) ? "selected"  : "" ?>><?php echo $server['name'] ?></option>
                     <?php } ?>
                 </select>
-                <p class="form-validation-msg"></p>
             </li>
-            <li id="website-sandbox-list-item" class="form-item <?php echo $action == 'edit' && $website_to_edit['server_id'] != 3  ? '' : 'hidden' ?>">
+            <li id="website-sandbox-list-item" class="form-item <?php echo $action == 'edit' && $website_to_edit['server_id'] != 3  ? 'active' : '' ?>">
                 <label for="website-sandbox" class="form-label">Sandbox Website</label>
-                <select class="form-select" id="website-sandbox" name="website_sandbox" tabindex="4">
+                <select class="form-select" id="website-sandbox" name="website_sandbox" data-field-type="select" tabindex="4">
                     <option value="" disabled selected>--Select corresponding sandbox site--</option>
                     <?php if (isset($selected_sandbox_website)) : ?>
                         <option value="<?php echo $selected_sandbox_website['id'] ?>" selected><?php echo $selected_sandbox_website['name'] ?></option>
@@ -65,11 +62,10 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                     <?php } ?>
                 </select>
             </li>
-
         </ul>
         <div class="form-btns-container">
             <button type="button" class="btn cancel" id="modal-cancel-btn" tabindex="5">Cancel</button>
-            <input type="submit" id="website-form-submit-btn" class="btn green" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="6" disabled />
+            <input type="submit" class="btn green" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="6" disabled />
         </div>
     </form>
 </div>

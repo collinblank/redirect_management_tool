@@ -20,12 +20,41 @@ $myUpdateChecker->setBranch('main');
 // Enque custom Javascript functions to header
 function redirect_manager_scripts_styles()
 {
-	// wp_enqueue_style('styles', get_stylesheet_directory_uri() . '/src/css/custom-style.css', array(), false, 'screen');
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('scripts', get_template_directory_uri() . '/src/js/custom-scripts.js', array(), false, array('strategy' => 'defer'));
-	wp_enqueue_script('custom-jquery', get_template_directory_uri() . '/src/js/custom-jquery.js', array('jquery'), false, array('strategy' => 'defer'));
+	wp_enqueue_style('styles', get_stylesheet_directory_uri() . '/src/css/custom-style.css', array(), false, 'screen');
 }
 add_action('wp_enqueue_scripts', 'redirect_manager_scripts_styles');
+
+function enqueue_custom_scripts()
+{
+	// Register scripts without loading them yet
+	wp_register_script('main-script', get_template_directory_uri() . '/src/js/main.js', array(), '1.0', true);
+
+	// Enqueue main script
+	wp_enqueue_script('main-script');
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
+
+// Single filter to handle all module scripts
+add_filter('script_loader_tag', function ($tag, $handle, $src) {
+	// List all module script handles
+	$module_scripts = array(
+		'main-script'
+	);
+
+	// If the script handle is in the list, add type="module"
+	if (in_array($handle, $module_scripts)) {
+		$tag = '<script type="module" src="' . esc_url($src) . '"></script>';
+	}
+	return $tag;
+}, 10, 3);
+
+
+
+
+
+
+
+
 
 // Default functions with blankslate theme below
 add_action('after_setup_theme', 'blankslate_setup');
