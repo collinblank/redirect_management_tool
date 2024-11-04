@@ -48,7 +48,7 @@ if (isset($_GET['table_name']) && isset($_GET['item_id'])) {
             <input type="hidden" name="table_name" value="<?php echo $table_name ?>">
             <div class="form-checkbox">
                 <!-- change id and for -->
-                <input type="checkbox" id="disable-item-checkbox" name="confirm_disable" tabindex="1" required>
+                <input type="checkbox" id="disable-item-checkbox" name="confirm_disable" data-field-type="checkbox" tabindex="1" required>
                 <label for="disable-item-checkbox">Yes, I want to disable this <?php echo $item_type ?><?php echo $item_type == 'redirect' ? ' and rewrite the .htaccess file' : '' ?>.</label>
             </div>
             <div class="form-btns-container">

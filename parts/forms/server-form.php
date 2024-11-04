@@ -17,7 +17,7 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
     <div class="modal-header">
         <h3><?php echo ucfirst($action) . " Server" ?></h3>
     </div>
-    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-form">
+    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-form" id="server-form">
         <input type="hidden" name="action" value="server_form">
         <?php wp_nonce_field('server_form_nonce', 'server_form_nonce_field'); ?>
         <?php if ($item_id) : ?>
@@ -26,18 +26,16 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
         <ul class="form-items-list">
             <li class="form-item">
                 <label for="server-name" class="form-label">Server Name<span>*</span></label>
-                <input type="text" class="form-text-input" id="server-name" name="server_name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_to_edit['name'] ?? "" ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
-                <p class="form-validation-msg"></p>
+                <input type="text" class="form-text-input" id="server-name" name="server_name" data-field-type="name" placeholder="ex. Classical Conversations Production" value="<?php echo $server_to_edit['name'] ?? "" ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" required>
             </li>
             <li class="form-item">
                 <label for="server-domain" class="form-label">Server Domain<span>*</span></label>
-                <input type="url" class="form-text-input" id="server-domain" name="server_domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_to_edit['domain'] ?? "" ?>" tabindex="2" maxlength="100" pattern="^https?://.*$" required>
-                <p class="form-validation-msg"></p>
+                <input type="url" class="form-text-input" id="server-domain" name="server_domain" data-field-type="domain" placeholder="ex. https://classicalconversations.com:7080/login.php" value="<?php echo $server_to_edit['domain'] ?? "" ?>" tabindex="2" maxlength="100" pattern="^https?://.*$" required>
             </li>
         </ul>
         <div class="form-btns-container">
             <button type="button" class="btn cancel" id="modal-cancel-btn" tabindex="3">Cancel</button>
-            <input type="submit" id="server-form-submit-btn" class="btn green" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" disabled />
+            <input type="submit" class="btn green" value="<?php echo $action === 'edit' ? 'Done' : 'Create' ?>" tabindex="4" disabled />
         </div>
     </form>
 </div>

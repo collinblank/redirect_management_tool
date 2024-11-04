@@ -16,14 +16,14 @@ $form_success = $_SESSION['form_success'];
                 ?>
             </ul>
         </div>
-        <button class="icon-btn notice-banner__x-btn">
+        <button class="icon-btn notice-banner-x-btn">
             <i class="fa-solid fa-x"></i>
         </button>
     </div>
 <?php elseif (isset($form_success)) : ?>
     <div class="notice-banner success">
         <p><?php echo $form_success ?></p>
-        <button class="icon-btn notice-banner__x-btn">
+        <button class="icon-btn notice-banner-x-btn">
             <i class="fa-solid fa-x"></i>
         </button>
     </div>
