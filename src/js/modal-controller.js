@@ -9,7 +9,16 @@ const ModalController = {
   show(action, elem) {
     const mainContent = document.getElementById("content");
     const tableName = document.querySelector(".page-section").dataset.tableName;
-    const itemId = elem ? elem.closest(".table-row").dataset.itemId : "";
+    // const itemId = elem ? elem.closest(".table-row").dataset.itemId : "";
+    let itemId = "";
+    if (elem && (action === "edit" || action === "disable")) {
+      itemId = elem.closest(".table-row").dataset.itemId;
+    } else if (action === "upload") {
+      const urlParams = new URLSearchParams(window.location.search);
+      itemId = urlParams.get("website_id");
+      console.log(itemId);
+    }
+
     const params = `?action=${action}&table_name=${tableName}${
       itemId ? `&item_id=${itemId}` : ""
     }`;

@@ -1,15 +1,12 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
-// $modal_content_path = '';
-// $error_msg = '';
-
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
+    $modal_content_path = 'parts/forms/';
     switch ($action) {
         case 'add':
         case 'edit':
-            $modal_content_path = 'parts/forms/';
             if (isset($_GET['table_name'])) {
                 $table_name = $_GET['table_name'];
                 switch ($table_name) {
@@ -19,7 +16,6 @@ if (isset($_GET['action'])) {
                     case 'websites':
                         $modal_content_path .= 'website-form';
                         break;
-                        // below, not sure how these will be formatted yet, like with or without underscores
                     case 'redirect_rules':
                         $modal_content_path .= 'redirect-rule-form';
                         break;
@@ -32,10 +28,13 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'disable':
-            $modal_content_path = 'parts/forms/disable-item-form';
+            $modal_content_path .= 'disable-item-form';
+            break;
+        case 'upload':
+            $modal_content_path .= 'upload-rules-form';
             break;
         default:
-            $error_msg = "Unable to $action item.";
+            $error_msg = "Unable to perform action: $action.";
     }
 }
 ?>

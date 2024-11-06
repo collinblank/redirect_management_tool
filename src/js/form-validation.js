@@ -6,7 +6,7 @@ export class FormValidationController {
     this.submitBtn = this.form.querySelector('input[type="submit"]');
     this.fields = Array.from(
       this.form.querySelectorAll(
-        "input[type='text'], input[type='url'], input[type='checkbox'], textarea, select"
+        "input[type='text'], input[type='url'], input[type='checkbox'], input[type='file'], textarea, select"
       )
     );
     this.validationRules = {
@@ -25,6 +25,12 @@ export class FormValidationController {
         validate: (value) => value.length > 0,
         success: "An indescribably descriptive description.",
         error: "Please enter a value",
+      },
+      file: {
+        validate: (value) =>
+          value.length !== 0 && /^.*\.csv$/.test(value[0].name),
+        success: "Thank you!",
+        error: "Please upload a .csv file",
       },
     };
 
@@ -54,7 +60,11 @@ export class FormValidationController {
       type === "success" ? "valid" : "invalid"
     );
 
-    if (type === "success" && prevSuccessMessage) {
+    if (
+      type === "success" &&
+      prevSuccessMessage &&
+      field.dataset.fieldType !== "file"
+    ) {
       feedbackMessageEl.textContent = prevSuccessMessage;
     } else if (type === "success" && !message) {
       feedbackMessageEl.textContent =
@@ -88,11 +98,16 @@ export class FormValidationController {
   validateField(field) {
     const fieldType = field.dataset.fieldType;
     const rule = this.validationRules[fieldType];
-    const value = field.value.trim();
+    const value = fieldType === "file" ? field.files : field.value.trim();
+    console.log(value);
 
     // special case for checkboxes
     if (fieldType === "checkbox") {
       return true;
+    }
+
+    if (fieldType === "file") {
+      rule.success = `${value[0]?.name} uploaded. Thank you!`;
     }
 
     // check html validation first
@@ -100,6 +115,7 @@ export class FormValidationController {
       if (field.validity.valueMissing) {
         this.showFeedbackMessage(field, "error", "Please enter a value.");
       } else if (rule) {
+        console.log("here 1");
         this.showFeedbackMessage(field, "error", rule.error);
       } else {
         this.showFeedbackMessage(
@@ -123,6 +139,7 @@ export class FormValidationController {
         this.showFeedbackMessage(field, "success", rule.success);
         return true;
       } else {
+        if (fieldType === "file") field.value = "";
         this.showFeedbackMessage(field, "error", rule.error);
         return false;
       }
@@ -141,11 +158,30 @@ export class FormValidationController {
     );
   }
 
+  handleFileDrop(e, field) {
+    if (e) e.preventDefault();
+    const files = e.dataTransfer.files;
+
+    if (files.length > 0) {
+      field.files = files;
+    }
+  }
+
   initEvents() {
     this.fields.forEach((field) => {
       const fieldType = field.dataset.fieldType;
 
       if (fieldType === "checkbox") {
+        field.addEventListener("change", () => {
+          this.validateField(field);
+          this.validateSubmitBtn();
+        });
+      } else if (fieldType === "file") {
+        CustomEventListeners.addDropAreaEventListener(field, (e) => {
+          this.handleFileDrop(e, field);
+          this.validateField(field);
+          this.validateSubmitBtn();
+        });
         field.addEventListener("change", () => {
           this.validateField(field);
           this.validateSubmitBtn();

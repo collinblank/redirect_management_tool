@@ -140,6 +140,7 @@ button i {
   background-color: var(--green-dark);
 }
 
+/* same as dropdown btns  */
 .btn.cancel {
   color: var(--txt-color-light);
   border-color: transparent;
