@@ -1,4 +1,5 @@
 <?php
+function csv_parser () {
 global $wpdb;
 
 //$file_path = ABSPATH . 'wp-content/themes/redirect-management-tool/csv-parser/csv-files/Redirect-tests.csv';
@@ -93,4 +94,4 @@ try {
 }
 
 echo "<p>CSV processing complete!</p>";
-?>
+}
