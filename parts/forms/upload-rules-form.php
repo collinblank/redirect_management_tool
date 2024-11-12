@@ -1,12 +1,11 @@
 <?php
-// This may be what is slowing down the modal popup:
 require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
 // $action = $_GET['action'];
 // $table_name = $_GET['table_name'];
-$website_id = intval($_GET['item_id']) ?? null;
 
 global $wpdb;
+$website_id = intval($_GET['item_id']) ?? null;
 $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE id = %d", $website_id));
 ?>
 
@@ -15,7 +14,7 @@ $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE i
         <h3>Upload Rules to <?= $website_name ?></h3>
     </div>
     <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-form" id="upload-rules-form">
-        <input type="hidden" name="action" value="upload_rules_form">
+        <input type="hidden" name="action" value="upload_rules">
         <?php wp_nonce_field('upload_rules_form_nonce', 'upload_rules_form_nonce_field'); ?>
         <?php if ($website_id) : ?>
             <input type="hidden" name="website_id" value="<?php echo $website_id ?>">

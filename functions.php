@@ -281,6 +281,11 @@ require('functions/commit-rules-to-file.php');
 require('functions/form-handlers/commit-rules-form-submit.php');
 add_action('admin_post_commit_rules_to_file', 'handle_commit_rules_form_submission');
 
+// Uploading rules to database from csv file
+// Collin's parse function here
+require('functions/form-handlers/upload-rules-form-submit.php');
+add_action('admin_post_upload_rules', 'handle_upload_rules_form_submit');
+
 if (class_exists('Walker_Nav_Menu')) {
 	class Icon_Walker_Nav_Menu extends Walker_Nav_Menu
 	{
