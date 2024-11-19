@@ -2,16 +2,17 @@
 function csv_parser($website_id, $file_path)
 {
     global $wpdb;
-
-    //$file_path = ABSPATH . 'wp-content/themes/redirect-management-tool/csv-parser/csv-files/import_to_mysql-2024-11-12-06-59-17.csv';
+    $errors = [];
 
     if (!file_exists($file_path)) {
-        die("Error: File not found at " . $file_path);
+        $errors[] = "Error: File not found at $file_path";
+        // die("Error: File not found at " . $file_path);
     }
 
     $file = fopen($file_path, "r");
     if ($file === false) {
-        die("Error: Unable to open file");
+        $errors[] = "Error: Unable to open file";
+        // die("Error: Unable to open file");
     }
 
     try {
@@ -41,7 +42,7 @@ function csv_parser($website_id, $file_path)
                 );
 
                 if ($redirect_result === false) {
-                    throw new Exception(" Row {$row_number}: Error inserting redirect: " . $wpdb->last_error);
+                    throw new Exception("Row {$row_number}: Error inserting redirect: " . $wpdb->last_error);
                 }
 
                 $new_redirect_id = $wpdb->insert_id;
@@ -81,18 +82,23 @@ function csv_parser($website_id, $file_path)
                 $wpdb->query('COMMIT');
                 $redirect_inserts++;
             } catch (Exception $e) {
+                $errors[] = "Error processing row: " . $e->getMessage();
                 $wpdb->query('ROLLBACK');
-                echo "Error processing row: " . $e->getMessage() . "<br>";
+
+                // echo "Error processing row: " . $e->getMessage() . "<br>";
             }
         }
 
-        echo "<p>Successfully inserted " . $redirect_inserts . " redirects and " .
-            $flag_rule_inserts . " flag rules</p>";
+        // echo "<p>Successfully inserted " . $redirect_inserts . " redirects and " .
+        //     $flag_rule_inserts . " flag rules</p>";
     } catch (Exception $e) {
-        echo "Error reading CSV: " . $e->getMessage();
+        $errors[] = "Error reading CSV: " . $e->getMessage();
+        // echo "Error reading CSV: " . $e->getMessage();
     } finally {
         fclose($file);
     }
 
-    echo "<p>CSV processing complete!</p>";
+    return array("errors" => $errors, "redirect_inserts" => $redirect_inserts, "flag_rule_inserts" => $flag_rule_inserts);
+
+    // echo "<p>CSV processing complete!</p>";
 }
