@@ -13,7 +13,7 @@ $website_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM websites WHERE i
     <div class="modal-header">
         <h3>Upload Rules to <?= $website_name ?></h3>
     </div>
-    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-form" id="upload-rules-form">
+    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="modal-form" id="upload-rules-form" enctype="multipart/form-data">
         <input type="hidden" name="action" value="upload_rules">
         <?php wp_nonce_field('upload_rules_form_nonce', 'upload_rules_form_nonce_field'); ?>
         <?php if ($website_id) : ?>
