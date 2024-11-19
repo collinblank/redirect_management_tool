@@ -1,5 +1,5 @@
 <?php
-include get_template_directory() . '/functions/write-redirect-rules.php';
+include get_template_directory() . '/functions/commit-rules-to-file.php';
 
 function handle_form_submission($action, $table_name, $data, $errors = [], $item_id = null, $where = [])
 {
