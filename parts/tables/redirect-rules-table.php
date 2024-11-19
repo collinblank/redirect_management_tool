@@ -25,7 +25,7 @@ $results = $args['results'] ?? null;
                     $status = 'uncommitted';
                     $status_icon = '<i class="fa-solid fa-circle-exclamation"></i>';
                 } else {
-                    $status = 'active';
+                    $status = 'committed';
                     $status_icon = '<i class="fa-solid fa-circle-check"></i>';
                 }
                 ?>

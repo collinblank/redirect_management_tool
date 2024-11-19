@@ -45,7 +45,16 @@ $results = $wpdb->get_results($sql, ARRAY_A);
             </div>
             <?php if ($website_id) : ?>
                 <div class="btns-container">
-                    <button class="btn add-item-btn">Add Rule</button>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle-btn btn">
+                            Add Rules
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <button class="btn add-item-btn dropdown-menu-btn">New Rule</button>
+                            <button id="upload-rules-btn" class="btn dropdown-menu-btn">Upload Rules</button>
+                        </div>
+                    </div>
                     <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                         <input type="hidden" name="action" value="commit_rules_to_file">
                         <?php wp_nonce_field('commit_rules_form_nonce', 'commit_rules_form_nonce_field'); ?>

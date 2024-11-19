@@ -1,20 +1,20 @@
 const CustomEventListeners = {
-  addInputEventListener(field, validateFn) {
+  addInputEventListener(field, handler) {
     let blurredOnce = false;
 
     field.addEventListener("blur", () => {
-      validateFn();
+      handler();
       blurredOnce = true;
     });
 
     field.addEventListener("input", () => {
       if (blurredOnce) {
-        validateFn();
+        handler();
       }
     });
   },
 
-  addSelectEventListener(field, validateFn) {
+  addSelectEventListener(field, handler) {
     function resetStyles(field) {
       if (field.value) {
         field.classList.add("has-value");
@@ -25,7 +25,7 @@ const CustomEventListeners = {
     resetStyles(field);
 
     function selectEventHandler(field) {
-      validateFn();
+      handler();
       resetStyles(field);
     }
 
@@ -35,6 +35,34 @@ const CustomEventListeners = {
 
     field.addEventListener("change", () => {
       selectEventHandler(field);
+    });
+  },
+
+  addDropAreaEventListener(field, handler) {
+    const dropArea = field.previousElementSibling.classList.contains(
+      "upload-drop-area"
+    )
+      ? field.previousElementSibling
+      : null;
+    // util to prevent any default behaviors
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    dropArea.addEventListener("dragover", (e) => {
+      preventDefaults(e);
+      dropArea.classList.add("drag-over");
+    });
+    dropArea.addEventListener("dragenter", preventDefaults);
+    dropArea.addEventListener("dragleave", (e) => {
+      preventDefaults(e);
+      dropArea.classList.remove("drag-over");
+    });
+
+    dropArea.addEventListener("drop", (e) => {
+      dropArea.classList.remove('drag-over');
+      handler(e)
     });
   },
 };
