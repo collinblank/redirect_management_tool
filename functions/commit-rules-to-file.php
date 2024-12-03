@@ -12,7 +12,8 @@ function commit_rules_to_file($website_id)
 
     if (!empty($redirect_rules)) {
         if ($file) {
-            fwrite($file, "#Website: {$website_name}\n\n#Begin Rewrite Rules - DO NOT EDIT\n");
+            $current_timestamp = date('Y-m-d H:i:s');
+            fwrite($file, "#Website: {$website_name}\n#Time: {$current_timestamp}\n\n#Begin Rewrite Rules - DO NOT EDIT\n");
             foreach ($redirect_rules as $rule) {
                 $name_content = $rule['name'] ? "#{$rule['name']}\n" : '';
                 $rewrite_rule_content = "RewriteRule {$rule['from_url_regex']} {$rule['to_url']}\n";
