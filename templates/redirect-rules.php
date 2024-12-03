@@ -2,11 +2,10 @@
 
 <?php
 global $wpdb;
+$website_id = isset($_GET['website_id']) ? intval($_GET['website_id']) : null;
 
-if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['website_id'])) {
-    $website_id = intval($_GET['website_id']) ?? null;
+if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($website_id)) {
     $website = $wpdb->get_row($wpdb->prepare("SELECT * FROM websites WHERE id = %d", $website_id), ARRAY_A);
-
     $limit = 25;
     $page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1; // defaults to 1 one first page
     $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
@@ -34,8 +33,8 @@ $results = $wpdb->get_results($sql, ARRAY_A);
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="page-header">
             <div class="page-title">
-                <h1><?php echo $website ? "Redirects for {$website['name']}" : "Select Website" ?></h1>
-                <?php if ($website) : ?>
+                <h1><?php echo $website_id ? "Redirects for {$website['name']}" : "Select Website" ?></h1>
+                <?php if ($website_id) : ?>
                     <a href="<?= $website['domain'] ?>" class="website-domain" target="_blank" rel="noopener noreferrer"><?= $website['domain'] ?></a>
                 <?php endif; ?>
             </div>

@@ -9,6 +9,7 @@ if (isset($_GET['search_websites'])) {
 }
 
 $search_text = NULL;
+$where = '';
 $order = " ORDER BY name, is_prod";
 
 if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
