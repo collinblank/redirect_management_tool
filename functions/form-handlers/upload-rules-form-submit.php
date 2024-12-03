@@ -10,8 +10,6 @@ function handle_upload_rules_form_submit()
     } else {
         $website_id = intval($_POST['website_id']);
         $redirect_args = ['website_id' =>  $website_id];
-        // $rules_file_path = $_POST['rules_file'];
-
         $target_dir = get_template_directory() . '/uploads/';
         $target_file = $target_dir . basename($_FILES["rules_file"]["name"]);
 
@@ -21,8 +19,10 @@ function handle_upload_rules_form_submit()
             if (!empty($results["errors"])) {
                 $_SESSION['form_errors'] = $results["errors"];
                 $redirect_args["errors"] = count($results["errors"]);
-            } else {
-                $_SESSION['form_success'] = "Successfully uploaded {$results["redirect_inserts"]} redirects and {$results["flag_rule_inserts"]} flag rules.";
+            }
+
+            if ($results['redirect_inserts'] > 0) {
+                $_SESSION['form_success'] = "Successfully uploaded {$results["redirect_inserts"]} redirects and {$results["flag_rule_inserts"]} rule/flag connections.";
                 $redirect_args["redirect_inserts"] = $results["redirect_inserts"];
                 $redirect_args["flag_rule_inserts"] = $results["flag_rule_inserts"];
             }
