@@ -4,7 +4,7 @@ global $wpdb;
 
 $action = $_GET['action'];
 $table_name = $_GET['table_name'];
-$item_id = intval($_GET['item_id']) ?? null;
+$item_id = isset($_GET['item_id']) ? intval($_GET['item_id']) : null;
 
 $referer = $_SERVER['HTTP_REFERER'] ?? '';
 $refererParams = parse_url($referer, PHP_URL_QUERY);
