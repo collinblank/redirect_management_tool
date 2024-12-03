@@ -25,10 +25,6 @@ $results = $wpdb->get_results($sql, ARRAY_A);
 // if (isset($_GET['search_websites'])) {
 // $search_text = htmlspecialchars((trim($_GET['search_text'])));
 // }
-
-// session_start();
-// $form_errors = $_SESSION['form_errors'];
-// $form_success = $_SESSION['form_success'];
 ?>
 
 <?php get_header(); ?>

@@ -1,9 +1,5 @@
-<?php /* Template Name: Redirect Flags */ ?> 
-<?php 
-
-session_start();
-$form_errors = $_SESSION['form_errors'];
-$form_success = $_SESSION['form_success'];
+<?php /* Template Name: Redirect Flags */ ?>
+<?php
 
 global $wpdb;
 $results = $wpdb->get_results("SELECT * FROM redirect_flags", ARRAY_A);

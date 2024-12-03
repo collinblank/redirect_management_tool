@@ -8,10 +8,6 @@ if (isset($_GET['search_websites'])) {
     $search_text = htmlspecialchars((trim($_GET['search_text'])));
 }
 
-session_start();
-$form_errors = $_SESSION['form_errors'];
-$form_success = $_SESSION['form_success'];
-
 $search_text = NULL;
 $order = $wpdb->prepare(" ORDER BY name, is_prod");
 
