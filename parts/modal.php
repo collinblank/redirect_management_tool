@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
     $modal_content_path = 'parts/forms/';
+    $error_msg = '';
     switch ($action) {
         case 'add':
         case 'edit':

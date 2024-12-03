@@ -9,7 +9,7 @@ if (isset($_GET['search_websites'])) {
 }
 
 $search_text = NULL;
-$order = $wpdb->prepare(" ORDER BY name, is_prod");
+$order = " ORDER BY name, is_prod";
 
 if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
     // Search
