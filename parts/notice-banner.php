@@ -1,7 +1,7 @@
 <?php
 session_start();
-$form_errors = $_SESSION['form_errors'];
-$form_success = $_SESSION['form_success'];
+$form_errors = $_SESSION['form_errors'] ?? null;
+$form_success = $_SESSION['form_success'] ?? null;
 ?>
 
 <?php if (isset($form_success)) : ?>
@@ -19,7 +19,7 @@ $form_success = $_SESSION['form_success'];
             <ul class="notice-banner__msgs-list">
                 <?php
                 foreach ($form_errors as $error) {
-                    echo '<li>' . htmlspecialchars($error) . '</li>';
+                    echo '<li>' . esc_html($error) . '</li>';
                 }
                 ?>
             </ul>
