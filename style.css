@@ -2,7 +2,7 @@
 Theme Name: Redirect Manager
 Author: Grant Collins and Collin Blank
 Description: A custom theme built for the Classical Conversations Redirect Manager.
-Version: 2024.1.383
+Version: 2024.1.384
 Requires at least: 5.2
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -90,6 +90,7 @@ button i {
   border-radius: 4px;
   color: var(--txt-color-medium);
   background-color: var(--btn-bg-color);
+  white-space: nowrap;
 }
 
 .btn:hover {
@@ -842,4 +843,78 @@ input[type="checkbox"]:checked::before {
   background-color: #fff;
   border: 1px solid var(--border-color);
   border-radius: 4px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-toggle-btn i {
+  font-size: 1rem;
+}
+
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  position: absolute;
+  z-index: 3;
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+  top: 100%;
+  transform: translatey(4px);
+  right: 0;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
+    rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+}
+
+.dropdown-menu.active {
+  display: flex;
+}
+
+.dropdown-menu-btn {
+  color: var(--txt-color-light);
+  border-color: transparent;
+  background-color: transparent;
+}
+.dropdown-menu-btn:hover {
+  border-color: var(--btn-bg-color-hover);
+  background-color: var(--btn-bg-color-hover);
+}
+
+.upload-drop-area {
+  flex-grow: 1;
+  display: flex;
+  border: 2px dashed var(--border-color);
+  border-radius: 4px;
+  font-family: var(--sweet-sans);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.025rem;
+  background-color: var(--primary-bg-color);
+  color: var(--txt-color-light);
+  min-height: 320px;
+}
+
+.upload-drop-area label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.upload-drop-area:hover,
+.upload-drop-area.drag-over {
+  border-color: var(--btn-border-color-hover);
+  background-color: var(--btn-bg-color-hover);
+  color: var(--txt-color-dark);
 }
