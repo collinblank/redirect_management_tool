@@ -48,6 +48,14 @@ $results = $args['results'] ?? null;
                                 <?php else : ?>
                                     <button class="icon-btn disable-item-btn" title="Disable rule"><i class="fa-regular fa-circle-xmark"></i></button>
                                 <?php endif; ?>
+                                <?php if (!$item['committed']) : ?>
+                                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
+                                        <input type="hidden" name="action" value="commit_single_rule">
+                                        <?php wp_nonce_field('commit_single_rule_form_nonce', 'commit_single_rule_form_nonce_field'); ?>
+                                        <!-- <input type="hidden" name="website_id" value="<?php # echo $website_id ?>"> -->
+                                        <button type="submit" class="icon-btn enable-item-btn" title="Commit rule"><i class="fa-regular fa-circle-check"></i></button>
+                                    </form>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </td>
