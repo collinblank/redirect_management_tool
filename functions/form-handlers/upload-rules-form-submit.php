@@ -10,7 +10,7 @@ function handle_upload_rules_form_submit()
     } else {
         $website_id = intval($_POST['website_id']);
         $redirect_args = ['website_id' =>  $website_id];
-        $target_dir = get_template_directory() . '/uploads/';
+        $target_dir = get_template_directory() . '/storage/uploads/';
         $target_file = $target_dir . basename($_FILES["rules_file"]["name"]);
 
         if (move_uploaded_file($_FILES["rules_file"]["tmp_name"], $target_file)) {

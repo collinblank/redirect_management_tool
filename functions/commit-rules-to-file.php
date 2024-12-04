@@ -7,7 +7,7 @@ function commit_rules_to_file($website_id)
     $redirect_rules = $wpdb->get_results($wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d AND disabled != %d ORDER BY id", $website_id, 1), ARRAY_A);
 
     $hyphenated_website_name = implode("-", explode(" ", strtolower($website_name)));
-    $filepath = get_template_directory() . "/redirect-rules/{$hyphenated_website_name}.txt";
+    $filepath = get_template_directory() . "/storage/new-redirects/{$hyphenated_website_name}.txt";
     $file = fopen($filepath, "w");
 
     if (!empty($redirect_rules)) {
