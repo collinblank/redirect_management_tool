@@ -20,17 +20,21 @@ $results = $args['results'] ?? null;
                 <?php
                 if ($item['disabled']) {
                     $status = 'disabled';
-                    $status_icon = '<i class="fa-solid fa-circle-xmark"></i>';
+                    $flag_color = 'red';
                 } elseif (empty($item['committed'])) {
-                    $status = 'uncommitted';
-                    $status_icon = '<i class="fa-solid fa-circle-exclamation"></i>';
+                    $status = 'staged';
+                    $flag_color = 'yellow';
                 } else {
                     $status = 'committed';
-                    $status_icon = '<i class="fa-solid fa-circle-check"></i>';
+                    $flag_color = 'green';
                 }
                 ?>
                 <tr class="table-row <?= $status ?>" data-item-id=<?php echo $item['id']; ?>>
-                    <td class="table-cell status" title=<?= ucfirst($status) ?>><?= $status_icon ?></td>
+                    <td class="table-cell status">
+                        <span class="table-flag <?= $flag_color ?>">
+                            <?= $status ?>
+                        </span>
+                    </td>
                     <td class="table-cell"><?= $item['name'] ?></td>
                     <td class="table-cell"><?= '/' . get_from_path($item) ?></td>
                     <td class="table-cell"><?= $item['to_url'] ?></td>
@@ -52,7 +56,8 @@ $results = $args['results'] ?? null;
                                     <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                                         <input type="hidden" name="action" value="commit_single_rule">
                                         <?php wp_nonce_field('commit_single_rule_form_nonce', 'commit_single_rule_form_nonce_field'); ?>
-                                        <!-- <input type="hidden" name="website_id" value="<?php # echo $website_id ?>"> -->
+                                        <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
+                                        <input type="hidden" name="website_id" value="<?= $item['website_id'] ?>">
                                         <button type="submit" class="icon-btn enable-item-btn" title="Commit rule"><i class="fa-regular fa-circle-check"></i></button>
                                     </form>
                                 <?php endif; ?>

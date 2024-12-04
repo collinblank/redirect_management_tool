@@ -22,9 +22,9 @@ $is_redirects_page = $args['is_redirects_page'] ?? null;
                     <td class="table-cell"><?= $item['name'] ?></td>
                     <td class="table-cell"><?= $item['domain'] ?></td>
                     <td class="table-cell">
-                        <div class="table-flag <?= $item['is_prod'] ? 'green' : 'yellow' ?>">
+                        <span class="table-flag <?= $item['is_prod'] ? 'green' : 'yellow' ?>">
                             <?= $item['is_prod'] ? 'Production' : 'Test' ?>
-                        </div>
+                        </span>
                     </td>
                     <?php if (!$is_redirects_page) : ?>
                         <td class="table-cell"><?= format_date_to_est($item['last_modified_date']) ?></td>

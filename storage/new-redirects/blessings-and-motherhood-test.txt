@@ -1,17 +1,27 @@
 #Server: wpsandbox
 #Domain: blessingsandmotherhood.classicaltesting.net
-#Time: 2024-12-04 19:20:26
+#Time: 2024-12-04 22:27:39
 #Begin Rewrite Rules - DO NOT EDIT
-#test rule
-RewriteRule asdf domain.com
-#test rule again
-RewriteRule asdf asdf
-#once more
-RewriteRule asdgljag alsjhdasg
-#hmmd
-RewriteRule asdf asdf
-#again
-RewriteRule asdf asdf
+RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
+RewriteRule ^(?i)cc101.html/?$ /
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule asdf YouTube.com
+RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
+RewriteRule ^(?i)cc101.html/?$ /
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule asdf YouTube.com
+RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
+RewriteRule ^(?i)cc101.html/?$ /
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule asdf YouTube.com
+RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
+RewriteRule ^(?i)cc101.html/?$ /
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule asdf YouTube.com
 RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
 RewriteRule ^(?i)cc101.html/?$ /
 RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/

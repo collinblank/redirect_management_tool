@@ -703,24 +703,24 @@ input[type="checkbox"]:checked::before {
   border-color: var(--red);
 }
 
-.table-row.uncommitted .table-cell {
+.table-row.staged .table-cell {
   background-color: var(--yellow-medium);
 }
 
 .table-row .table-cell.status {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .table-row.committed .table-cell.status {
-  color: var(--green);
+  /* color: var(--green); */
 }
 
 .table-row.disabled .table-cell.status {
-  color: var(--red);
+  /* color: var(--red); */
 }
 
-.table-row.uncommitted .table-cell.status {
-  color: var(--yellow);
+.table-row.staged .table-cell.status {
+  /* color: var(--yellow); */
 }
 
 .table-cell {
@@ -765,29 +765,31 @@ input[type="checkbox"]:checked::before {
   width: fit-content;
   font-family: var(--sweet-sans);
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   padding: 4px 8px;
-  border: 1px solid;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   white-space: nowrap;
-  background-color: var(--primary-bg-color);
+  background-color: #fff;
+  color: var(--txt-color-light);
 }
 
 .table-flag.green {
-  background-color: var(--green-light);
+  border-color: var(--green);
   color: var(--green);
 }
+/*
 
 .table-flag.yellow {
-  background-color: var(--yellow-light);
-  color: var(--yellow);
+  background-color: #fff;
+  color: #fff;
+  background-color: var(--yellow);
 }
 
 .table-flag.red {
-  background-color: var(--red-light);
-  color: var(--red);
-}
+  background-color: var(--red);
+} */
 
 .table-actions {
   white-space: nowrap;
