@@ -7,10 +7,10 @@ $results = $args['results'] ?? null;
     <table class="data-table">
         <thead class="table-header">
             <tr class="table-row">
-                <th class="table-cell">Status</th>
                 <th class="table-cell">Name</th>
                 <th class="table-cell">From</th>
                 <th class="table-cell">To</th>
+                <th class="table-cell">Status</th>
                 <th class="table-cell">Last modified</th>
                 <th class="table-cell"></th>
             </tr>
@@ -30,14 +30,14 @@ $results = $args['results'] ?? null;
                 }
                 ?>
                 <tr class="table-row <?= $status ?>" data-item-id=<?php echo $item['id']; ?>>
+                    <td class="table-cell"><?= $item['name'] ?></td>
+                    <td class="table-cell"><?= '/' . get_from_path($item) ?></td>
+                    <td class="table-cell"><?= $item['to_url'] ?></td>
                     <td class="table-cell status">
                         <span class="table-flag <?= $flag_color ?>">
                             <?= $status ?>
                         </span>
                     </td>
-                    <td class="table-cell"><?= $item['name'] ?></td>
-                    <td class="table-cell"><?= '/' . get_from_path($item) ?></td>
-                    <td class="table-cell"><?= $item['to_url'] ?></td>
                     <td class="table-cell"><?= format_date_to_est($item['last_modified_date']) ?></td>
                     <td class="table-cell table-actions">
                         <button class="icon-btn more-actions-toggle"><i class="fa-solid fa-ellipsis"></i></button>
