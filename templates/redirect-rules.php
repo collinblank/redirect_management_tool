@@ -11,7 +11,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($website_id)) {
     $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
     $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d", $website_id));
     $total_pages = $count / $limit;
-    $sql = $wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
+    $sql = $wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d ORDER BY last_modified_date DESC, id DESC, committed LIMIT %d OFFSET %d", $website_id, $limit, $offset);
     $uncommitted_rules = $wpdb->get_results($wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d AND committed = %d AND disabled = %d", $website_id, 0, 0), ARRAY_A);
 } else {
     $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d ORDER BY name, is_prod", 1);

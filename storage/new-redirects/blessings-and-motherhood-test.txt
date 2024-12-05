@@ -1,6 +1,6 @@
 #Server: wpsandbox
 #Domain: blessingsandmotherhood.classicaltesting.net
-#Time: 2024-12-05 21:17:30
+#Time: 2024-12-05 21:26:27
 #Begin Rewrite Rules - DO NOT EDIT
 RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
 RewriteRule ^(?i)cc101.html/?$ /
@@ -14,6 +14,12 @@ RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blo
 RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
 RewriteRule ^(?i)cc101.html/?$ /
 RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule asdf YouTube.com
+RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
+RewriteRule ^(?i)cc101.html/?$ /
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
 RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
 RewriteRule asdf YouTube.com
+#newest rule
+RewriteRule wheredoesitgo whereohwhere
 #End Rewrite Rules - DO NOT EDIT
