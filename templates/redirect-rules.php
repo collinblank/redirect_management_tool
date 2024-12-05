@@ -17,6 +17,8 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($website_id)) {
     $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d ORDER BY name, is_prod", 1);
 }
 $results = $wpdb->get_results($sql, ARRAY_A);
+$staged_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d AND (committed = %d AND disabled = %d)", $website_id, 0, 0));
+$disabled_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d AND disabled = %d", $website_id, 1));
 
 
 
@@ -86,13 +88,44 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                 </ul>
             </form>
         </div> -->
-        <div class="table-container">
-            <?php if ($website_id) {
-                get_template_part('parts/tables/redirect-rules-table', null, array('results' => $results));
-            } else {
-                get_template_part('parts/tables/websites-table', null, array('results' => $results, 'is_redirects_page' => true));
-            } ?>
-        </div>
+        <?php if ($staged_rules_count > 0 || $disabled_rules_count > 0 || empty($results)) : ?>
+            <div class="results-notice-container">
+                <?php if ($staged_rules_count > 0) : ?>
+                    <div class="results-notice">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <div class="results-notice-form-paragraph">There are&nbsp<strong><?= $staged_rules_count ?>&nbspstaged rule(s)</strong>&nbsp;not committed to the .htaccess file for this website.&nbsp;
+                            <form method="GET">
+                                <input type="submit" class="form-submit-link" name="show_staged_rules" value="Show staged rules">
+                            </form>.
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ($disabled_rules_count > 0) : ?>
+                    <div class="results-notice">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <div class="results-notice-form-paragraph">There are&nbsp<strong><?= $disabled_rules_count ?>&nbspdisabled rule(s)</strong>&nbspfor this website.&nbsp;
+                            <form method="GET">
+                                <input type="submit" class="form-submit-link" name="show_disabled_rules" value="Show disabled rules">
+                            </form>.
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if (empty($results)) : ?>
+                    <div class="results-notice">
+                        <p>No redirect rules found.</p>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty($results)) : ?>
+            <div class="table-container">
+                <?php if ($website_id) {
+                    get_template_part('parts/tables/redirect-rules-table', null, array('results' => $results));
+                } else {
+                    get_template_part('parts/tables/websites-table', null, array('results' => $results, 'is_redirects_page' => true));
+                } ?>
+            </div>
+        <?php endif; ?>
         <ul class="page-numbers-list">
             <?php
             for ($i = 1; $i <= $total_pages; $i++) { ?>

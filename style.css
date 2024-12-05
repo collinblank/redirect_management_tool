@@ -704,7 +704,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .table-row.staged .table-cell {
-  background-color: var(--yellow-medium);
+  /* background-color: var(--yellow-medium); */
 }
 
 .table-row .table-cell.status {
@@ -778,6 +778,41 @@ input[type="checkbox"]:checked::before {
 .table-flag.green {
   border-color: var(--green);
   color: var(--green);
+  background-color: var(--green-light);
+}
+.table-flag.red {
+  border-color: var(--red);
+  color: var(--red);
+  background-color: var(--red-light);
+}
+.table-flag.yellow {
+  border-color: var(--yellow);
+  color: var(--yellow);
+  background-color: var(--yellow-light);
+}
+
+.results-notice-container {
+  padding: 4px 0px;
+}
+
+.results-notice {
+  padding: 4px 0px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  color: var(--txt-color-medium);
+}
+
+.results-notice .fa-triangle-exclamation {
+  color: var(--yellow);
+  margin-right: 4px;
+}
+
+.results-notice-form-paragraph {
+  display: flex;
+  flex-wrap: wrap;
+
+  /* float: right; */
 }
 /*
 

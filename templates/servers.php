@@ -15,9 +15,17 @@ $results = $wpdb->get_results("SELECT * FROM servers", ARRAY_A);
             <h1>Servers</h1>
             <button class="btn add-item-btn">Add Server</button>
         </div>
-        <div class="table-container">
-            <?php get_template_part('parts/tables/servers-table', null, array('results' => $results)); ?>
-        </div>
+        <?php if (empty($results)) : ?>
+            <div class="results-notice-container">
+                    <div class="results-notice">
+                        <p>No servers found.</p>
+                    </div>
+            </div>
+        <?php else: ?>
+            <div class="table-container">
+                <?php get_template_part('parts/tables/servers-table', null, array('results' => $results)); ?>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
 <?php get_footer(); ?>
