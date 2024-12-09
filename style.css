@@ -685,6 +685,10 @@ input[type="checkbox"]:checked::before {
   overflow: visible;
 }
 
+.table-body {
+  /* font-size: 0.9rem; */
+}
+
 .table-header .table-row {
   background-color: rgb(5, 31, 66);
   color: #fff;
@@ -731,6 +735,10 @@ input[type="checkbox"]:checked::before {
 
 .table-body .table-cell {
   word-break: break-word;
+}
+
+.table-body .table-cell:first-child {
+  text-wrap: nowrap;
 }
 
 .table-cell:nth-last-child(2) {
