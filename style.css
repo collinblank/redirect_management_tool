@@ -28,11 +28,11 @@ Text Domain: redirect-manager
   --red: rgb(193, 79, 60);
   --red-light: rgb(193, 79, 60, 0.25);
   --green: rgb(87, 171, 130);
-  --green-light: rgba(87, 171, 130, 0.04);
+  --green-light: rgba(87, 171, 130, 0.1);
   --green-dark: rgb(60, 119, 91);
   --yellow: rgb(243, 213, 78);
   --yellow-medium: rgba(243, 213, 78, 0.2);
-  --yellow-light: rgba(243, 213, 78, 0.04);
+  --yellow-light: rgba(243, 213, 78, 0.1);
   /* Buttons */
   --btn-border-color: rgba(0, 0, 0, 0.23);
   --btn-bg-color: rgb(251, 246, 242);
@@ -391,6 +391,9 @@ input[type="checkbox"]:checked::before {
   border-radius: 4px;
   padding: 12px 8px;
   margin-bottom: 8px;
+  border: 1px solid;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
 }
 
 .notice-banner__msgs-container {
@@ -416,12 +419,18 @@ input[type="checkbox"]:checked::before {
 
 .notice-banner.success {
   border-color: var(--green);
-  background-color: var(--green);
-  color: #fff;
+  /* background-color: var(--green);
+  color: #fff; */
+  background-color: var(--green-light);
+  color: var(--green);
 }
 
 .notice-banner.success .notice-banner-x-btn {
-  color: #fff;
+  color: var(--green);
+}
+
+.notice-banner.success .notice-banner-x-btn:hover {
+  color: var(--green-dark);
 }
 
 .notice-banner-x-btn {
@@ -454,6 +463,29 @@ input[type="checkbox"]:checked::before {
 .page-header .website-domain:hover {
   text-decoration: underline;
   color: var(--txt-color-dark);
+}
+
+.page-header .results-stats-container {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.page-header .results-stat-item {
+  font-size: 0.9rem;
+  color: var(--txt-color-light);
+}
+
+.page-header .results-stat-item + .results-stat-item:before {
+  content: "|";
+  margin-right: 4px;
+  color: var(--border-color);
+}
+
+.page-header .results-stat-item .fa-triangle-exclamation {
+  color: var(--yellow);
+  font-size: 0.9rem;
+  margin-right: 4px;
 }
 
 /* MODAL */

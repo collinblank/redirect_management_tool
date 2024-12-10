@@ -17,6 +17,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($website_id)) {
     $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d ORDER BY name, is_prod", 1);
 }
 $results = $wpdb->get_results($sql, ARRAY_A);
+$committed_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d AND committed = %d and disabled = %d", $website_id, 1, 0));
 $staged_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d AND (committed = %d AND disabled = %d)", $website_id, 0, 0));
 $disabled_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d AND disabled = %d", $website_id, 1));
 
@@ -34,10 +35,23 @@ $disabled_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redi
     <div class="container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="page-header">
-            <div class="page-title">
+            <div class="page-info">
                 <h1><?php echo $website_id ? "Redirects for {$website['name']}" : "Select Website" ?></h1>
                 <?php if ($website_id) : ?>
                     <a href="<?= $website['domain'] ?>" class="website-domain" target="_blank" rel="noopener noreferrer"><?= $website['domain'] ?></a>
+                <?php endif; ?>
+                <?php if (!empty($results)) : ?>
+                    <div class="results-stats-container">
+                        <?php if ($committed_rules_count > 0) : ?>
+                            <span class="results-stat-item"><?= $committed_rules_count ?> committed</span>
+                        <?php endif; ?>
+                        <?php if ($staged_rules_count > 0) : ?>
+                            <span class="results-stat-item"><i class="fa-solid fa-triangle-exclamation"></i><?= $staged_rules_count ?> staged</span>
+                        <?php endif; ?>
+                        <?php if ($disabled_rules_count > 0) : ?>
+                            <span class="results-stat-item"><i class="fa-solid fa-triangle-exclamation"></i><?= $disabled_rules_count ?> disabled</span>
+                        <?php endif; ?>
+                    </div>
                 <?php endif; ?>
             </div>
             <?php if ($website_id) : ?>
@@ -88,36 +102,9 @@ $disabled_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redi
                 </ul>
             </form>
         </div> -->
-        <?php if ($staged_rules_count > 0 || $disabled_rules_count > 0 || empty($results)) : ?>
-            <div class="results-notice-container">
-                <?php if ($staged_rules_count > 0) : ?>
-                    <div class="results-notice">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <div class="results-notice-form-paragraph">There are&nbsp<strong><?= $staged_rules_count ?>&nbspstaged rule(s)</strong>&nbsp;not committed to the .htaccess file for this website.&nbsp;
-                            <form method="GET">
-                                <input type="submit" class="form-submit-link" name="show_staged_rules" value="Show staged rules">
-                            </form>.
-                        </div>
-                    </div>
-                <?php endif; ?>
-                <?php if ($disabled_rules_count > 0) : ?>
-                    <div class="results-notice">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <div class="results-notice-form-paragraph">There are&nbsp<strong><?= $disabled_rules_count ?>&nbspdisabled rule(s)</strong>&nbspfor this website.&nbsp;
-                            <form method="GET">
-                                <input type="submit" class="form-submit-link" name="show_disabled_rules" value="Show disabled rules">
-                            </form>.
-                        </div>
-                    </div>
-                <?php endif; ?>
-                <?php if (empty($results)) : ?>
-                    <div class="results-notice">
-                        <p>No redirect rules found.</p>
-                    </div>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-        <?php if (!empty($results)) : ?>
+        <?php if (empty($results)) : ?>
+            <p>No redirect rules found.</p>
+        <?php else : ?>
             <div class="table-container">
                 <?php if ($website_id) {
                     get_template_part('parts/tables/redirect-rules-table', null, array('results' => $results));
