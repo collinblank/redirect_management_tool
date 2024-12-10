@@ -11,12 +11,15 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($website_id)) {
     $offset = ($page_number - 1) * $limit; // defaults to 0 on first page
     $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d", $website_id));
     $total_pages = $count / $limit;
-    $sql = $wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d LIMIT %d OFFSET %d", $website_id, $limit, $offset);
+    $sql = $wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d ORDER BY last_modified_date DESC, id DESC, committed LIMIT %d OFFSET %d", $website_id, $limit, $offset);
     $uncommitted_rules = $wpdb->get_results($wpdb->prepare("SELECT * FROM redirect_rules WHERE website_id = %d AND committed = %d AND disabled = %d", $website_id, 0, 0), ARRAY_A);
 } else {
     $sql = $wpdb->prepare("SELECT * FROM websites WHERE disabled != %d ORDER BY name, is_prod", 1);
 }
 $results = $wpdb->get_results($sql, ARRAY_A);
+$committed_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d AND committed = %d and disabled = %d", $website_id, 1, 0));
+$staged_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d AND (committed = %d AND disabled = %d)", $website_id, 0, 0));
+$disabled_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redirect_rules WHERE website_id = %d AND disabled = %d", $website_id, 1));
 
 
 
@@ -32,10 +35,23 @@ $results = $wpdb->get_results($sql, ARRAY_A);
     <div class="container">
         <?php get_template_part('parts/notice-banner', 'notice-banner'); ?>
         <div class="page-header">
-            <div class="page-title">
+            <div class="page-info">
                 <h1><?php echo $website_id ? "Redirects for {$website['name']}" : "Select Website" ?></h1>
                 <?php if ($website_id) : ?>
                     <a href="<?= $website['domain'] ?>" class="website-domain" target="_blank" rel="noopener noreferrer"><?= $website['domain'] ?></a>
+                <?php endif; ?>
+                <?php if (!empty($results)) : ?>
+                    <div class="results-stats-container">
+                        <?php if ($committed_rules_count > 0) : ?>
+                            <span class="results-stat-item"><?= $committed_rules_count ?> committed</span>
+                        <?php endif; ?>
+                        <?php if ($staged_rules_count > 0) : ?>
+                            <span class="results-stat-item"><i class="fa-solid fa-triangle-exclamation"></i><?= $staged_rules_count ?> staged</span>
+                        <?php endif; ?>
+                        <?php if ($disabled_rules_count > 0) : ?>
+                            <span class="results-stat-item"><i class="fa-solid fa-triangle-exclamation"></i><?= $disabled_rules_count ?> disabled</span>
+                        <?php endif; ?>
+                    </div>
                 <?php endif; ?>
             </div>
             <?php if ($website_id) : ?>
@@ -86,13 +102,17 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                 </ul>
             </form>
         </div> -->
-        <div class="table-container">
-            <?php if ($website_id) {
-                get_template_part('parts/tables/redirect-rules-table', null, array('results' => $results));
-            } else {
-                get_template_part('parts/tables/websites-table', null, array('results' => $results, 'is_redirects_page' => true));
-            } ?>
-        </div>
+        <?php if (empty($results)) : ?>
+            <p>No redirect rules found.</p>
+        <?php else : ?>
+            <div class="table-container">
+                <?php if ($website_id) {
+                    get_template_part('parts/tables/redirect-rules-table', null, array('results' => $results));
+                } else {
+                    get_template_part('parts/tables/websites-table', null, array('results' => $results, 'is_redirects_page' => true));
+                } ?>
+            </div>
+        <?php endif; ?>
         <ul class="page-numbers-list">
             <?php
             for ($i = 1; $i <= $total_pages; $i++) { ?>

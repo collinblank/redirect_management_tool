@@ -36,10 +36,6 @@ if ($action === 'edit' && isset($_GET['table_name']) && isset($item_id)) {
                 <input type="text" class="form-text-input" id="redirect-rule-name" name="redirect_rule_name" data-field-type="name" placeholder="ex. Pastor Appreciation" value="<?php echo $redirect_rule_to_edit['name'] ?? "" ?>" tabindex="1" minlength="4" maxlength="50" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$">
             </li>
             <li class="form-item">
-                <label for="redirect-rule-description" class="form-label">Description</label>
-                <textarea id="redirect-rule-description" class="form-textarea" name="redirect_rule_description" data-field-type="textarea" placeholder="ex. Redirect for churches and pastor appreciation week" tabindex="2"><?php echo $redirect_rule_to_edit['description'] ?? "" ?></textarea>
-            </li>
-            <li class="form-item">
                 <label for="redirect-rule-from-url-regex" class="form-label">From URL Regex<span>*</span></label>
                 <input type="text" class="form-text-input" id="redirect-rule-from-url-regex" name="redirect_rule_from_url_regex" data-field-type="fromURL" placeholder="ex. ^(?i)churches/?$" value="<?php echo $redirect_rule_to_edit['from_url_regex'] ?? "" ?>" tabindex="3" required>
             </li>

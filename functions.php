@@ -281,6 +281,10 @@ require('functions/commit-rules-to-file.php');
 require('functions/form-handlers/commit-rules-form-submit.php');
 add_action('admin_post_commit_rules_to_file', 'handle_commit_rules_form_submission');
 
+// Committing single rule to file
+require('functions/form-handlers/commit-single-rule-form-submit.php');
+add_action('admin_post_commit_single_rule', 'handle_commit_single_rule_form_submission');
+
 // Uploading rules to database from csv file
 // Collin's parse function here
 require('functions/form-handlers/upload-rules-form-submit.php');

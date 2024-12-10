@@ -106,9 +106,18 @@ $results = $wpdb->get_results($sql, ARRAY_A);
                 </form>
             </div>
         <?php endif; ?>
-        <div class="table-container">
-            <?php get_template_part('parts/tables/websites-table', null, array('results' => $results)); ?>
-        </div>
+        <?php if (empty($results) && empty($search_text)) : ?>
+            <div class="results-notice-container">
+                <div class="results-notice">
+                    <p>No websites found.</p>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty($results)) : ?>
+            <div class="table-container">
+                <?php get_template_part('parts/tables/websites-table', null, array('results' => $results)); ?>
+            </div>
+        <?php endif; ?>
         <ul class="page-numbers-list">
             <?php
             for ($i = 1; $i <= $total_pages; $i++) { ?>

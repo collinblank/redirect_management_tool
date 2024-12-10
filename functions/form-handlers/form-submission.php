@@ -4,11 +4,11 @@
 
 function handle_form_submission($action, $table_name, $data, $errors = [], $item_id = null, $where = [])
 {
-    unset($_SESSION['form_errors'], $_SESSION['form_success']);
+    unset($_SESSION['errors'], $_SESSION['success']);
     session_start();
 
     if (!empty($errors)) {
-        $_SESSION['form_errors'] = $errors;
+        $_SESSION['errors'] = $errors;
         $redirect_args = ['errors' => count($errors)];
     } else {
         global $wpdb;
@@ -20,16 +20,16 @@ function handle_form_submission($action, $table_name, $data, $errors = [], $item
             $result = $wpdb->update($table_name, $data, $where);
             if ($action == 'disable') {
                 $website_id = $wpdb->get_var($wpdb->prepare("SELECT website_id FROM $table_name WHERE id = %d", $item_id));
-                commit_rules_to_file($website_id);
+                commit_rules_to_file($website_id, $item_id);
                 // ? i don't know about this above, seems weird in this function. it does work here though...
             }
         }
 
         if ($wpdb->last_error) {
-            $_SESSION['form_errors'] = 'Database error: ' . $wpdb->last_error;
+            $_SESSION['errors'] = 'Database error: ' . $wpdb->last_error;
             $redirect_args = ['errors' =>  1];
         } else {
-            $_SESSION['form_success'] = "The item has been successfully {$action}" . ($action == 'disable' ? 'd' : 'ed') . ".";
+            $_SESSION['success'] = "The item has been successfully {$action}" . ($action == 'disable' ? 'd' : 'ed') . ".";
             $redirect_args = [$action => $item_id ?? $result];
         }
     }

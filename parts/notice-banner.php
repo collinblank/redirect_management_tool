@@ -1,24 +1,24 @@
 <?php
 session_start();
-$form_errors = $_SESSION['form_errors'] ?? null;
-$form_success = $_SESSION['form_success'] ?? null;
+$errors = $_SESSION['errors'] ?? null;
+$success = $_SESSION['success'] ?? null;
 ?>
 
-<?php if (isset($form_success)) : ?>
+<?php if (isset($success)) : ?>
     <div class="notice-banner success">
-        <p><?php echo $form_success ?></p>
+        <p><?php echo $success ?></p>
         <button class="icon-btn notice-banner-x-btn">
             <i class="fa-solid fa-x"></i>
         </button>
     </div>
 <?php endif; ?>
-<?php if (isset($form_errors) && !empty($form_errors)) : ?>
+<?php if (isset($errors) && !empty($errors)) : ?>
     <div class="notice-banner error">
         <div class="notice-banner__msgs-container">
             <p>Oh no! The following errors occurred:</p>
             <ul class="notice-banner__msgs-list">
                 <?php
-                foreach ($form_errors as $error) {
+                foreach ($errors as $error) {
                     echo '<li>' . esc_html($error) . '</li>';
                 }
                 ?>
@@ -29,4 +29,4 @@ $form_success = $_SESSION['form_success'] ?? null;
         </button>
     </div>
 <?php endif; ?>
-<?php unset($_SESSION['form_errors'], $_SESSION['form_success']); ?>
+<?php unset($_SESSION['errors'], $_SESSION['success']); ?>

@@ -1,17 +1,18 @@
 <?php
-// include get_template_directory() . '/functions/';
 
-function handle_commit_rules_form_submission()
+// can i combine this with the other function for all rules?
+function handle_commit_single_rule_form_submission()
 {
     unset($_SESSION['errors'], $_SESSION['success']);
     session_start();
 
-    if (!isset($_POST['commit_rules_form_nonce_field']) || !wp_verify_nonce($_POST['commit_rules_form_nonce_field'], 'commit_rules_form_nonce')) {
+    if (!isset($_POST['commit_single_rule_form_nonce_field']) || !wp_verify_nonce($_POST['commit_single_rule_form_nonce_field'], 'commit_single_rule_form_nonce')) {
         wp_die('Error: Unable to verify form nonce.');
     } else {
         $website_id = $_POST['website_id'];
+        $item_id = $_POST['item_id'];
 
-        $results = commit_rules_to_file($website_id);
+        $results = commit_rules_to_file($website_id, $item_id);
 
         $redirect_args = ["website_id" => $website_id];
         if (isset($results["committed"])) {
