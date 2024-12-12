@@ -21,7 +21,7 @@ function handle_commit_single_rule_form_submission()
         }
         if (isset($results["errors"])) {
             $_SESSION['errors'] = $results["errors"];
-            $redirect_args["errors"] = $results["errors"];
+            $redirect_args["errors"] = count($results["errors"]);
         }
 
         wp_safe_redirect(add_query_arg($redirect_args, home_url('/redirect-rules')), 303);

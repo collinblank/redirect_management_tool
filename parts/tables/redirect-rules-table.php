@@ -42,23 +42,22 @@ $results = $args['results'] ?? null;
                     <button class="icon-btn more-actions-toggle"><i class="fa-solid fa-ellipsis"></i></button>
                     <div class="more-actions-menu">
                         <div class="more-actions-btns">
-                            <?php if ($status == 'active') : ?>
+                            <?php if ($item['committed']) : ?>
                                 <a href="<?= get_full_from_url($item) ?>" class="icon-link" title="Test rule" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-flask"></i></a>
+                            <?php else : ?>
+                                <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
+                                    <input type="hidden" name="action" value="commit_single_rule">
+                                    <?php wp_nonce_field('commit_single_rule_form_nonce', 'commit_single_rule_form_nonce_field'); ?>
+                                    <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
+                                    <input type="hidden" name="website_id" value="<?= $item['website_id'] ?>">
+                                    <button type="submit" class="icon-btn commit-single-rule-btn" title="Commit rule"><i class="fa-solid fa-file-import"></i></button>
+                                </form>
                             <?php endif; ?>
                             <button class="icon-btn edit-item-btn" title="Edit rule"><i class="fa-regular fa-pen-to-square"></i></button>
                             <?php if ($item['disabled']) : ?>
                                 <button class="icon-btn enable-item-btn" title="Enable rule"><i class="fa-regular fa-circle-check"></i></button>
                             <?php else : ?>
                                 <button class="icon-btn disable-item-btn" title="Disable rule"><i class="fa-regular fa-circle-xmark"></i></button>
-                            <?php endif; ?>
-                            <?php if (!$item['committed']) : ?>
-                                <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
-                                    <input type="hidden" name="action" value="commit_single_rule">
-                                    <?php wp_nonce_field('commit_single_rule_form_nonce', 'commit_single_rule_form_nonce_field'); ?>
-                                    <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
-                                    <input type="hidden" name="website_id" value="<?= $item['website_id'] ?>">
-                                    <button type="submit" class="icon-btn enable-item-btn" title="Commit rule"><i class="fa-regular fa-circle-check"></i></button>
-                                </form>
                             <?php endif; ?>
                         </div>
                     </div>
