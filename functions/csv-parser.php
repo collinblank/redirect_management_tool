@@ -2,7 +2,7 @@
 function csv_parser($website_id, $file_path)
 {
     global $wpdb;
-    $errors = [];
+    $errors = ['Uh oh, ruh row! The following errors occurred:'];
     $redirect_inserts = 0;
     $flag_rule_inserts = 0;
 
@@ -100,7 +100,7 @@ function csv_parser($website_id, $file_path)
             }
         }
     } catch (Exception $e) {
-        $errors[] = "Error reading CSV: " . $e->getMessage();
+        $errors = ["Error reading CSV: " . $e->getMessage()];
     } finally {
         fclose($file);
     }

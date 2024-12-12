@@ -70,7 +70,10 @@ $disabled_rules_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM redi
                         <input type="hidden" name="action" value="commit_rules_to_file">
                         <?php wp_nonce_field('commit_rules_form_nonce', 'commit_rules_form_nonce_field'); ?>
                         <input type="hidden" name="website_id" value="<?php echo $website_id ?>">
-                        <input type="submit" class="btn green" value="Commit All" <?php echo empty($uncommitted_rules) ? 'disabled' : '' ?>>
+                        <button type="submit" class="btn green" <?php echo empty($uncommitted_rules) ? 'disabled' : '' ?> title="Commit all staged rules to this website's .htaccess file">
+                            Commit All
+                            <i class="fa-solid fa-file-import"></i>
+                        </button>
                     </form>
                 </div>
             <?php endif; ?>
