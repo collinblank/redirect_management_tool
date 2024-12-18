@@ -1,0 +1,17 @@
+ RewriteRule ^$ https://info.classicalconversations.com/scribblers-resource [R=301, L]|^(?i)bonus/?$|https://info.classicalconversations.com/bonus| [R=302, L]|
+ RewriteRule ^$ https://info.classicalconversations.com/scribblers-resource [R=301, L]|^(?i)practicum/?$|https://info.classicalconversations.com/practicum| [R=302, L]|
+ RewriteRule ^$ https://info.classicalconversations.com/scribblers-resource [R=301, L]|^(?i)more/?$|https://info.classicalconversations.com/more| [R=302, L]|
+ Need more type-able redirects made for the ads that are being run.|^(?i)momtomom/?$|https://info.classicalconversations.com/scribblers-momtomom| [R=302, L]|
+ Need more type-able redirects made for the ads that are being run.|^(?i)mom2mom/?$|https://info.classicalconversations.com/scribblers-momtomom| [R=302, L]|
+No description|^(?i)mess/?$|https://info.classicalconversations.com/scribblers-mess| [R=302, L]|
+No description|^(?i)dadtired/?$|https://info.classicalconversations.com/scribblers-dadtired| [R=302, L]|
+No description|^(?i)dadjourney/?$|https://info.classicalconversations.com/scribblers-dadjourney| [R=302, L]|
+No description|^(?i)arrows/?$|https://info.classicalconversations.com/scribblers-arrows| [R=302, L]|
+No description|^(?i)joe/?$|https://info.classicalconversations.com/scribblers-joe| [R=302, L]|
+No description|^(?i)durenda/?$|https://info.classicalconversations.com/scribblers-durenda| [R=302, L]|
+No description|^(?i)joy/?$|https://info.classicalconversations.com/scribblers-joy| [R=302, L]|
+No description|^(?i)comparedtowho/?$|https://info.classicalconversations.com/scribblers-comparedtowho| [R=302, L]|
+No description|^(?i)compared2who/?$|https://info.classicalconversations.com/scribblers-comparedtowho| [R=302, L]|
+No description|^(?i)faithfull/?$|https://info.classicalconversations.com/scribblers-faithfull| [R=302, L]|
+No description|^(?i)faithful/?$|https://info.classicalconversations.com/scribblers-faithfull| [R=302, L]|
+No description|^(?i)gracefilled/?$|https://info.classicalconversations.com/scribblers-gracefilled| [R=302, L]|

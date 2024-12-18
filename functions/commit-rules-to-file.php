@@ -6,6 +6,9 @@ function commit_rules_to_file($website_id, $item_id = null)
 
     try {
         $website = $wpdb->get_row($wpdb->prepare("SELECT * FROM websites WHERE id = %d", $website_id), ARRAY_A);
+        $base_domain = preg_replace("/^(https?:\/\/)?(www\.)?|\/$/", '', $website['domain']);
+        $server_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM servers WHERE id = %d", $website['server_id']));
+        $current_timestamp = date('Y-m-d H:i:s');
 
         if (!$website) {
             throw new Exception("Failed to find the website record in the database.");
@@ -20,17 +23,11 @@ function commit_rules_to_file($website_id, $item_id = null)
             throw new Exception("No redirect rules exist for this website.");
         }
 
-        $website_slug = sanitize_title($website['name']);
-        $current_timestamp = date('Y-m-d H:i:s');
-
-        $new_redirects_file = fopen(get_template_directory() . "/storage/new-redirects/{$website_slug}.txt", "w");
+        $new_redirects_file = fopen(get_template_directory() . "/storage/new-redirects/{$base_domain}.txt", "w");
 
         if ($new_redirects_file) {
             // write the file function
-            $server_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM servers WHERE id = %d", $website['server_id']));
-            $base_domain = preg_replace("/^(https?:\/\/)?(www\.)?|\/$/", '', $website['domain']);
-
-            $header_content = sprintf("#Server: %s\n#Domain: %s\n#Timestamp: %s\n#Begin Rewrite Rules - DO NOT EDIT\n", $server_name, $base_domain, $current_timestamp);
+            $header_content = sprintf("Server: %s\nDomain: %s\nTimestamp: %s\n#Begin Redirect Manager Rules - DO NOT EDIT\n", $server_name, $base_domain, $current_timestamp);
             fwrite($new_redirects_file, $header_content);
 
             foreach ($redirect_rules as $rule) {
@@ -38,7 +35,7 @@ function commit_rules_to_file($website_id, $item_id = null)
                 fwrite($new_redirects_file, $rule_content);
             }
 
-            fwrite($new_redirects_file, "#End Rewrite Rules - DO NOT EDIT\n");
+            fwrite($new_redirects_file, "#End Redirect Manager Rules - DO NOT EDIT\n");
             fclose($new_redirects_file);
 
 
@@ -60,14 +57,14 @@ function commit_rules_to_file($website_id, $item_id = null)
 
             // check status files function
             $status_files = [
-                'nack' => get_template_directory() . "/storage/status/{$website_slug}.txt.nack",
-                'ack' => get_template_directory() . "/storage/status/{$website_slug}.txt.ack"
+                'nack' => get_template_directory() . "/storage/status/{$base_domain}.txt.nack",
+                'ack' => get_template_directory() . "/storage/status/{$base_domain}.txt.ack"
             ];
 
             if (file_exists($status_files['nack'])) {
                 $nack_file = file($status_files['nack'], FILE_IGNORE_NEW_LINES);
                 $error = trim(str_replace("Error: ", "", $nack_file[1]));
-                rename($status_files['nack'], get_template_directory() . "/storage/status/history/{$website_slug}.txt.nack");
+                rename($status_files['nack'], get_template_directory() . "/storage/status/history/{$base_domain}.txt.nack");
                 throw new Exception($error ?? 'Unknown processing error.');
             }
 
@@ -76,7 +73,7 @@ function commit_rules_to_file($website_id, $item_id = null)
             }
 
             $wpdb->query('COMMIT');
-            rename($status_files['ack'], get_template_directory() . "/storage/status/history/{$website_slug}.txt.ack");
+            rename($status_files['ack'], get_template_directory() . "/storage/status/history/{$base_domain}.txt.ack");
             return ["committed" => $updated_rows];
         }
     } catch (Exception $e) {

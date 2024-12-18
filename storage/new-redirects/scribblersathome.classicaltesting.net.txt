@@ -1,0 +1,29 @@
+Server: wpsandbox
+Domain: scribblersathome.classicaltesting.net
+Timestamp: 2024-12-16 16:04:35
+#Begin Redirect Manager Rules - DO NOT EDIT
+#RewriteRule ^$ https://info.classicalconversations.com/scribblers-resource [R=301, L]
+RewriteRule ^(?i)bonus/?$ https://info.classicalconversations.com/bonus
+#RewriteRule ^$ https://info.classicalconversations.com/scribblers-resource [R=301, L]
+RewriteRule ^(?i)practicum/?$ https://info.classicalconversations.com/practicum
+#RewriteRule ^$ https://info.classicalconversations.com/scribblers-resource [R=301, L]
+RewriteRule ^(?i)more/?$ https://info.classicalconversations.com/more
+#Need more type-able redirects made for the ads that are being run.
+RewriteRule ^(?i)momtomom/?$ https://info.classicalconversations.com/scribblers-momtomom
+#Need more type-able redirects made for the ads that are being run.
+RewriteRule ^(?i)mom2mom/?$ https://info.classicalconversations.com/scribblers-momtomom
+RewriteRule ^(?i)mess/?$ https://info.classicalconversations.com/scribblers-mess
+RewriteRule ^(?i)dadtired/?$ https://info.classicalconversations.com/scribblers-dadtired
+RewriteRule ^(?i)dadjourney/?$ https://info.classicalconversations.com/scribblers-dadjourney
+RewriteRule ^(?i)arrows/?$ https://info.classicalconversations.com/scribblers-arrows
+RewriteRule ^(?i)joe/?$ https://info.classicalconversations.com/scribblers-joe
+RewriteRule ^(?i)durenda/?$ https://info.classicalconversations.com/scribblers-durenda
+RewriteRule ^(?i)joy/?$ https://info.classicalconversations.com/scribblers-joy
+RewriteRule ^(?i)comparedtowho/?$ https://info.classicalconversations.com/scribblers-comparedtowho
+RewriteRule ^(?i)compared2who/?$ https://info.classicalconversations.com/scribblers-comparedtowho
+RewriteRule ^(?i)faithfull/?$ https://info.classicalconversations.com/scribblers-faithfull
+RewriteRule ^(?i)faithful/?$ https://info.classicalconversations.com/scribblers-faithfull
+RewriteRule ^(?i)gracefilled/?$ https://info.classicalconversations.com/scribblers-gracefilled
+#Test rule
+RewriteRule testrule https://classicalconversations.com
+#End Redirect Manager Rules - DO NOT EDIT

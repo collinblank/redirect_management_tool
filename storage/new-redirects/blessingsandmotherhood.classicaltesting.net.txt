@@ -1,0 +1,21 @@
+Server: wpsandbox
+Domain: blessingsandmotherhood.classicaltesting.net
+Timestamp: 2024-12-12 21:15:50
+#Begin Redirect Manager Rules - DO NOT EDIT
+RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
+RewriteRule ^(?i)cc101.html/?$ /
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule asdf YouTube.com
+#staged two
+RewriteRule askdl;gj aslkdjf
+RewriteRule ^(?i)churches/?$ https://info.classicalconversations.com/churchesandpastorappreciation
+RewriteRule ^(?i)cc101.html/?$ /
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule ^(?i)cc-connected/guest/articles/349-creationsmodernbio.html/?$ /blog/
+RewriteRule asdf YouTube.com
+#stagedasdf
+RewriteRule asdf asdf
+#staasdf
+RewriteRule asdfasdf asdasdf
+#End Redirect Manager Rules - DO NOT EDIT
